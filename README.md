@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Root-Website-Frontend
+Dette er frontend aplikasjonen for [root nettsiden](https://rootlinjeforening.no/), laget med [nextjs](https://nextjs.org/).
 
-## Getting Started
+## Krav for frontend:
+Her er en liste med krav som skal oppfylles for denne nettsiden.
 
-First, run the development server:
+### Sider
+Hjemmeside
+- Oversikt over workshops / arrangement / bedpress
+  - Når man trykker på blir man sendt til egen side for arrangement
+  - Egen fargekode for hver type
+  - Tidspunkt for arrangement
+- Stillingsannonser
+- Mulighet til å melde seg på nyhetsbrev?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Oversikt over arrangement / workshops også videre
+- Kommende arrangement
+- Tidligere arrangement
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Side for hvert arrangement
+- Viser all info tilknyttet et arrangement
+- Tittel, bilde, info om arrangement, lenke til påmelding
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Om Root
+- Litt om linjeforeningen
+- Hvordan engasjere deg
+- Hvem sitter i styret
+- Våre samarbeidspartnere?
+- Om kodegruppa <PIN>
+  - våre prosjekter
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Kontakt oss
+- Skjema med navn, epost og melding
 
-## Learn More
+### Header
+- Nye Root logo
 
-To learn more about Next.js, take a look at the following resources:
+- Hjem
+- Om Root
+- Kontakt oss
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Footer
+Lenke til GitHub, Facebook og Instagram
