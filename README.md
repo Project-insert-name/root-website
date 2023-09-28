@@ -3,6 +3,7 @@ Dette er frontend aplikasjonen for [root nettsiden](https://rootlinjeforening.no
 
 ## Krav for frontend:
 Her er en liste med krav som skal oppfylles for denne nettsiden.
+Mer info om krav kan finnes i: [Krav til nettsiden](Krav%20til%20nettsiden.md)
 
 ### Sider
 Hjemmeside
