@@ -30,9 +30,6 @@ Om Root
 - Om kodegruppa <PIN>
   - våre prosjekter
 
-Kontakt oss
-- Skjema med navn, epost og melding
-
 ### Header
 - Nye Root logo
 
