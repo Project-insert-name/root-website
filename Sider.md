@@ -30,15 +30,11 @@ Om Root
 - Om kodegruppa <PIN>
   - våre prosjekter
 
-Kontakt oss
-- Skjema med navn, epost og melding
-
 ### Header
 - Nye Root logo
 
 - Hjem
 - Om Root
-- Kontakt oss
 
 ### Footer
 Lenke til GitHub, Facebook og Instagram
