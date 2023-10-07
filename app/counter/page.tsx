@@ -1,12 +1,12 @@
 // Sier at denne filen skal bruke client siden av next.js
 "use client";
 
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 /**
  * Definerer en Page component som inneholder en counter og en setState for å oppdatere den
  */
-const Counter = () => {
+const Counter: FC = () => {
 
     /**
      * count henter en state, mens setCount brukes for å oppdatere den
@@ -38,7 +38,7 @@ const Counter = () => {
             {/*Bruker en tertier if for å returnere html*/ }
             { count % 2 === 0 ? <p>Even</p> : <p>Odd</p> }
             {/*Ved å kalle setCount, oppdateres innholdet i count*/ }
-            <button className={ "rounded bg-blue-600 p-2" } onClick={ () => setCount(count + 1) }>
+            <button className={ "rounded bg-blue-500 text-white p-2" } onClick={ () => setCount(count + 1) }>
                 Increment
             </button>
         </div>
