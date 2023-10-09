@@ -19,10 +19,10 @@ export const metadata: Metadata = {
  */
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
     <html lang="nb">
-        <body className={ "overflow-hidden" }>
+        <body className="min-h-screen relative overflow-x-hidden">
             <Header />
             <br />
-            <main>{ children }</main>
+            <main className="pb-28">{children}</main>
             <Footer />
         </body>
     </html>

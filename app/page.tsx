@@ -48,7 +48,7 @@ const testData: Event[] = [ // TODO testdata skal slettes
 const testAds: Ad[] = [ // TODO testdata skal slettes
     {
         _id: "1",
-        title: "Sommenjobb hos Nav IT",
+        title: "Sommerjobb hos Nav IT",
         dueDate: "2023-09-21",
         thumbnail: "./next.svg",
     }
