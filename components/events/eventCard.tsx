@@ -1,4 +1,4 @@
-import InfoCard, { Divider } from "@/app/components/events/infoCard";
+import InfoCard, { Divider } from "@/components/events/infoCard";
 import { Event } from "@/app/page";
 import Image from "next/image";
 import Link from "next/link";

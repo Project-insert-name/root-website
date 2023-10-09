@@ -1,8 +1,8 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import type { FC, ReactNode } from "react";
-import Footer from "@/app/footer";
-import Header from "@/app/header";
+import Footer from "@/components/footer";
+import Header from "@/components/header";
 
 /**
  * Inneholder tittel som vises i fanen til nettleseren og beskrivelse som vises i søkeresultater.

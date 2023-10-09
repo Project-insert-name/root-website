@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import EventCard from "@/app/components/events/eventCard";
-import AdsCard from "@/app/components/events/adsCard";
+import EventCard from "@/components/events/eventCard";
+import AdsCard from "@/components/events/adsCard";
 
 export const metadata: Metadata = {
     title: 'Hjem | Root Linjeforening',
@@ -55,7 +55,8 @@ const testAds: Ad[] = [ // TODO testdata skal slettes
 ]
 
 
-const Home: Component = () => {
+const Home: Component = () => { // TODO
+
     return (
         <div>
             <h1>Root Linjeforening</h1>
