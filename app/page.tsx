@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import EventCard from "@/app/components/events/eventCard";
+import AdsCard from "@/app/components/events/adsCard";
 
 export const metadata: Metadata = {
     title: 'Hjem | Root Linjeforening',
@@ -14,6 +15,13 @@ export type Event = {
     time: string,
     thumbnail: string,
     type: string,
+}
+
+export type Ad = {
+    _id: string,
+    title: string,
+    dueDate: string,
+    thumbnail: string,
 }
 
 const testData: Event[] = [ // TODO testdata skal slettes
@@ -37,12 +45,25 @@ const testData: Event[] = [ // TODO testdata skal slettes
     }
 ]
 
+const testAds: Ad[] = [ // TODO testdata skal slettes
+    {
+        _id: "1",
+        title: "Sommenjobb hos Nav IT",
+        dueDate: "2023-09-21",
+        thumbnail: "./next.svg",
+    }
+]
+
+
 const Home: Component = () => {
     return (
         <div>
             <h1>Root Linjeforening</h1>
-            <EventCard eventTitle={ "Arrangementer" } events={ testData } showMoreUrl={ "/" }
-            className={"w-1/2"}/>
+            <div className={ "flex flex-wrap justify-around" }>
+                <EventCard eventTitle={ "Arrangementer" } events={ testData } showMoreUrl={ "/" }
+                           className={ "sm:w-[550px] mx-2" } />
+                <AdsCard className={ "sm:w-[550px] mx-2" } ads={ testAds } showMoreUrl={ "/" } />
+            </div>
         </div>
     )
 }
