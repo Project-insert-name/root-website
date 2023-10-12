@@ -25,8 +25,8 @@ const AdsCard: Component<AdsCardProps> = (
         <InfoCard eventTitle={ eventTitle }
                   showMoreUrl={ showMoreUrl } className={ className }>
             {
-                ads.slice(0, maxEvents).length > 0 ?
-                    ads.map((event, index) =>
+                ads.length > 0 ?
+                    ads.slice(0, maxEvents).map((event, index) =>
                         <div key={ event._id }>
                             { index !== 0 && <Divider /> }
                             <SingleAd { ...event } />

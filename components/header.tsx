@@ -4,16 +4,12 @@ import Image from "next/image";
 const Header: Component = () => (
     <header className={ `
         border w-full h-20 flex items-center justify-between overflow-hidden
-        bg-gradient-to-r from-rootBlue to-blue-500` }>
-        <div className={ "logo-backdrop" }>
-            <Link href={ "/" } title={ "Root linjeforening sin logo" } className={ "translate-y-5" }>
-                {/*TODO test med ulike mobiler*/}
-                <Image src={ "./Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 200 } height={ 100 }
-                       className={ "sm:block hidden" } />
-                <Image src={ "./Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 125 } height={ 50 }
-                       className={ "sm:hidden block" } />
-            </Link>
-        </div>
+        bg-gradient-to-r from-rootBlue to-blue-500 relative` }>
+        <div className={ "logo-backdrop z-10" } />
+        <Link href={ "/" } title={ "Root linjeforening sin logo" } className={ "z-20 sm:mx-5 mx-2 w-fit" }>
+            {/*TODO test med ulike mobiler*/ }
+            <Image src={ "./Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 200 } height={ 200 } />
+        </Link>
         <NavBar />
     </header>
 )

@@ -18,5 +18,7 @@ export interface RootEvent extends SanityDocument {
     }
     event_image: SanityImageSource,
     event_application_url: string,
-    event_slug: string,
+    event_slug: {
+        current: string,
+    },
 }

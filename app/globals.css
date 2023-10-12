@@ -6,17 +6,18 @@
     .debug {
         @apply border-2 border-red-500;
         @apply after:content-['debug'];
+        @apply after:absolute;
     }
 
     .logo-backdrop {
         height: calc(100% * 2);
-        @apply flex items-center justify-center rounded-full bg-white w-80;
-        @apply -translate-x-6 -translate-y-5;
+        @apply rounded-full bg-white sm:w-80 w-64;
+        @apply absolute -left-8 -top-16;
     }
 }
 
 :root {
-    @apply -m-0.5;
+    @apply -m-0.5 overflow-x-hidden;
 }
 
 h1 {

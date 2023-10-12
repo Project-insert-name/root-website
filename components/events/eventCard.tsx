@@ -2,6 +2,11 @@ import InfoCard, { Divider } from "@/components/events/infoCard";
 import Link from "next/link";
 import type { EventType, RootEvent } from "@/sanity/types";
 import SanityImage from "@/components/sanityImage";
+import { toFormatDateAndTime } from "@/utils/dateUtils";
+import { CalendarIcon, ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import { type ReactNode } from "react";
+
+const iconSize = 20;
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string,
@@ -11,8 +16,7 @@ interface EventCardProps extends DefaultProps {
     maxEvents?: number,
 }
 
-// TODO ikoner fra heroicons
-// TODO bedre mobil visning
+// TODO slå sammen fellestrekk i wide og narrow komponentene
 
 const EventCard: Component<EventCardProps> = (
     {
@@ -27,8 +31,8 @@ const EventCard: Component<EventCardProps> = (
               showMoreUrl={ showMoreUrl }
               className={ className }>
         {
-            events.slice(0, maxEvents).length > 0 ?
-                events.map((event, index) =>
+            events.length > 0 ?
+                events.slice(0, maxEvents).map((event, index) =>
                     <div key={ event._id }>
                         { index !== 0 && <Divider /> }
                         <SingleEventWide { ...event } className={ "sm:flex hidden" } />
@@ -47,58 +51,73 @@ export default EventCard;
  */
 const SingleEventWide: Component<RootEvent & DefaultProps> = (
     {
-        event_type, event_title, event_start_time, event_address_text, className, event_image
-    }) => (
-    <div className={ `gap-4 justify-between mx-2 my-5 ${ className }` }>
-        <div className={ "flex" }>
-            <EventMarker type={ event_type } />
-            <div>
-                <Link href={ "/" } className={ "hover:underline" }>
-                    <h6>{ event_title }</h6>
-                </Link>
-                <div className={ "flex sm:flex-row flex-col gap-2 text-gray-500" }>
-                    {/*TODO improve*/ }
-                    <p>{ new Date(event_start_time).toLocaleString("nb", {
-                        month: "long", day: "2-digit", weekday: "long"
-                    }) }</p>
-                    <p>{ new Date(event_start_time).toLocaleString("nb", {
-                        hour: "2-digit", minute: "2-digit"
-                    }) }</p>
-                    <p>{ event_address_text }</p>
+        className,
+        event_type,
+        event_title,
+        event_start_time,
+        event_address_text,
+        event_image,
+        event_slug
+    }) => {
+    const startTime = toFormatDateAndTime(event_start_time);
+    return (
+        <div className={ `gap-4 justify-between mx-2 my-5 ${ className }` }>
+            <div className={ "flex" }>
+                <EventMarker type={ event_type } />
+                <div>
+                    <Link href={ `arrangement/${ event_slug.current }` } className={ "hover:underline" }>
+                        <h6>{ event_title }</h6>
+                    </Link>
+                    <div className={ "flex sm:flex-row flex-col gap-2" }>
+                        { startTime && <>
+                            <PIcon icon={ <CalendarIcon width={ iconSize } /> }>{ startTime.date }</PIcon>
+                            <PIcon icon={ <ClockIcon width={ iconSize } /> }>{ startTime.time }</PIcon>
+                        </> }
+                    </div>
+                    <PIcon icon={ <MapPinIcon width={ iconSize } /> }>{ event_address_text }</PIcon>
                 </div>
             </div>
-        </div>
 
-        <SanityImage image={ event_image } width={ 150 } height={ 75 } className={ "rounded-xl" } alt={ "" } />
-    </div>
-)
+            <SanityImage image={ event_image } width={ 150 } height={ 75 } className={ "rounded-xl" } alt={ "" } />
+        </div>
+    );
+};
 
 /**
  * Et enkelt arrangement som vises på smale skjermer
  */
 const SingleEventNarrow: Component<RootEvent & DefaultProps> = (
     {
-        event_type, event_title, event_start_time, event_address_text, className, event_image
-    }) => (
-    <div className={ `flex-col gap-4 justify-between mx-2 my-5 ${ className }` }>
-        <Link href={ "/" } className={ "hover:underline" }>
-            <h6>{ event_title }</h6>
-        </Link>
-        <div className={ "inline-flex justify-between" }>
-            <EventMarker type={ event_type } />
-            <div className={ "inline-flex sm:flex-row flex-col gap-2 text-gray-500" }>
-                <p>{ new Date(event_start_time).toLocaleString("nb", {
-                    month: "long", day: "2-digit", weekday: "long"
-                }) }</p>
-                <p>{ new Date(event_start_time).toLocaleString("nb", {
-                    hour: "2-digit", minute: "2-digit"
-                }) }</p>
-                <p>{ event_address_text }</p>
+        className,
+        event_type,
+        event_title,
+        event_start_time,
+        event_address_text,
+        event_image,
+        event_slug
+    }) => {
+    const startTime = toFormatDateAndTime(event_start_time);
+    return (
+        <div className={ `mx-1 my-5 flex flex-col w-full ${ className }` }>
+            <Link href={ `arrangement/${ event_slug.current }` } className={ "hover:underline" }>
+                <h6>{ event_title }</h6>
+            </Link>
+            <div className={ "inline-flex justify-between" }>
+                <div className={ "inline-flex sm:flex-row flex-col flex-wrap" }>
+                    <EventMarker type={ event_type } />
+                    { startTime && <>
+                        <PIcon icon={ <CalendarIcon width={ iconSize } /> }>{ startTime.date }</PIcon>
+                        <PIcon icon={ <ClockIcon width={ iconSize } /> }>{ startTime.time }</PIcon>
+                    </> }
+                    <PIcon icon={ <MapPinIcon width={ iconSize } /> }>{ event_address_text }</PIcon>
+                </div>
+                {/*TODO alt*/ }
+                <SanityImage image={ event_image } width={ 100 } height={ 75 } className={ "rounded-xl" }
+                             alt={ "" } />
             </div>
-            <SanityImage image={ event_image } width={ 100 } height={ 75 } className={ "rounded-xl" } alt={ "" } />
         </div>
-    </div>
-)
+    );
+}
 
 const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     function getTypeColour() {
@@ -117,4 +136,8 @@ const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     return (
         <div className={ `w-2 h-full rounded-xl mr-2 ${ getTypeColour() }` } />
     )
+}
+
+const PIcon: Component<{ icon: ReactNode } & ChildProps> = ({ icon, children }) => {
+    return <p className={ "inline-flex text-gray-500 gap-1" }>{ icon }{ children }</p>
 }

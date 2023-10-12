@@ -30,9 +30,9 @@ const Home: ServerComponent = async () => { // TODO
     return (
         <div>
             <div className={ "flex flex-wrap justify-around" }>
-                <EventCard eventTitle={ "Arrangementer" } events={ events } showMoreUrl={ "/" }
-                           className={ "sm:w-[650px] mx-2" } />
-                <AdsCard className={ "sm:w-[650px] mx-2" } ads={ testAds } showMoreUrl={ "/" } />
+                <EventCard eventTitle={ "Arrangementer" } events={ events } showMoreUrl={ "arrangementer" }
+                           className={ "sm:w-[550px] w-full mx-2" } />
+                <AdsCard className={ "sm:w-[550px] mx-2" } ads={ testAds } showMoreUrl={ "stillingsannonser" } />
             </div>
         </div>
     )
