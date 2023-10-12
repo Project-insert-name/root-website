@@ -6,6 +6,7 @@
 Vite, React med TypeScript
 Tailwindcss
 
+backlog:
 - Mulighet for å melde seg på arrangement på nettsiden?
 
 Innlogging?
@@ -21,10 +22,13 @@ Java Spring Boot
 Forslag:
 
 Sanity for henting av data til bedpress og arrangement
-Postgres
+
+Postgres for påmelding
 
 ### Hosting
 Azure?
+
+Vercel har server i Stockholm?
 
 Bør være i Norge.
 
