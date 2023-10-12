@@ -2,11 +2,11 @@ import { client } from "@/sanity";
 import type { RootEvent } from "@/sanity/types";
 
 /**
- * Henter ut alle events fra sanity
+ * Henter ut alle events fra sanity, sortert etter starttidspunkt
  * @returns En liste med alle events
  */
 export async function getAllEvents(): Promise<ReadonlyArray<RootEvent>> {
-    return await client.fetch('*[_type == "event"]');
+    return await client.fetch('*[_type == "event"] | order(event_start_time asc)');
 }
 
 /**

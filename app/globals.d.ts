@@ -11,6 +11,13 @@ interface DefaultProps {
     title?: string,
 }
 
+interface ImageProps extends DefaultProps {
+    src?: string,
+    alt: string,
+    width?: number,
+    height?: number,
+}
+
 interface ChildProps extends DefaultProps {
     children?: React.ReactNode,
 }

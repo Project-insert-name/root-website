@@ -1,7 +1,7 @@
 import InfoCard, { Divider } from "@/components/events/infoCard";
 import Link from "next/link";
 import type { EventType, RootEvent } from "@/sanity/types";
-import { urlFor } from "@/sanity/utils";
+import SanityImage from "@/components/sanityImage";
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string,
@@ -69,8 +69,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = (
             </div>
         </div>
 
-        {/*TODO bytt til Image?*/}
-        <img src={ urlFor(event_image).width(150).height(75).url() } className={ "rounded-xl" } alt={ "" } />
+        <SanityImage image={ event_image } width={ 150 } height={ 75 } className={ "rounded-xl" } alt={ "" } />
     </div>
 )
 
@@ -96,7 +95,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = (
                 }) }</p>
                 <p>{ event_address_text }</p>
             </div>
-            <img src={ urlFor(event_image).width(75).height(50).url() } className={ "rounded-xl" } alt={ "" } />
+            <SanityImage image={ event_image } width={ 100 } height={ 75 } className={ "rounded-xl" } alt={ "" } />
         </div>
     </div>
 )

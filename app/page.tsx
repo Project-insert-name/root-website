@@ -29,11 +29,10 @@ const Home: ServerComponent = async () => { // TODO
     const events = await getAllEvents();
     return (
         <div>
-            <h1>Root Linjeforening</h1>
             <div className={ "flex flex-wrap justify-around" }>
                 <EventCard eventTitle={ "Arrangementer" } events={ events } showMoreUrl={ "/" }
-                           className={ "sm:w-[550px] mx-2" } />
-                <AdsCard className={ "sm:w-[550px] mx-2" } ads={ testAds } showMoreUrl={ "/" } />
+                           className={ "sm:w-[650px] mx-2" } />
+                <AdsCard className={ "sm:w-[650px] mx-2" } ads={ testAds } showMoreUrl={ "/" } />
             </div>
         </div>
     )
