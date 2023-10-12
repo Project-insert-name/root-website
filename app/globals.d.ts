@@ -2,6 +2,8 @@
 
 type Component<T = DefaultProps> = (props: T) => React.JSX.Element | null;
 
+type ServerComponent<T = DefaultProps> = (props: T) => Promise<React.JSX.Element | null>;
+
 interface DefaultProps {
     className?: string,
     style?: React.CSSProperties,

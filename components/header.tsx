@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const Header: Component = () => (
     <header className={ `
@@ -6,7 +7,11 @@ const Header: Component = () => (
         bg-gradient-to-r from-rootBlue to-blue-500` }>
         <div className={ "logo-backdrop" }>
             <Link href={ "/" } title={ "Root linjeforening sin logo" } className={ "translate-y-5" }>
-                <h1>🖥️</h1>
+                {/*TODO test med ulike mobiler*/}
+                <Image src={ "./Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 200 } height={ 100 }
+                       className={ "sm:block hidden" } />
+                <Image src={ "./Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 125 } height={ 50 }
+                       className={ "sm:hidden block" } />
             </Link>
         </div>
         <NavBar />

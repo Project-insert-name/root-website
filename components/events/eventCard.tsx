@@ -1,18 +1,17 @@
 import InfoCard, { Divider } from "@/components/events/infoCard";
-import { Event } from "@/app/page";
-import Image from "next/image";
 import Link from "next/link";
+import type { EventType, RootEvent } from "@/sanity/types";
+import { urlFor } from "@/sanity/utils";
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string,
-    events: ReadonlyArray<Event>,
+    events: ReadonlyArray<RootEvent>,
     showMoreUrl: string,
     emptyMessage?: string,
     maxEvents?: number,
 }
 
-// TODO tilpass typer fra Sanity
-// TODO ikoner fra et ikonbibliotek
+// TODO ikoner fra heroicons
 // TODO bedre mobil visning
 
 const EventCard: Component<EventCardProps> = (
@@ -32,48 +31,87 @@ const EventCard: Component<EventCardProps> = (
                 events.map((event, index) =>
                     <div key={ event._id }>
                         { index !== 0 && <Divider /> }
-                        <SingleEvent { ...event } />
+                        <SingleEventWide { ...event } className={ "sm:flex hidden" } />
+                        <SingleEventNarrow { ...event } className={ "sm:hidden flex" } />
                     </div>
                 )
-                : <p className={"text-center"}>{ emptyMessage }</p>
+                : <p className={ "text-center" }>{ emptyMessage }</p>
         }
     </InfoCard>
 )
 
 export default EventCard;
 
-const SingleEvent: Component<Event> = (
+/**
+ * Et enkelt arrangement som vises på brede skjermer
+ */
+const SingleEventWide: Component<RootEvent & DefaultProps> = (
     {
-        type, title, date, address, time, thumbnail
+        event_type, event_title, event_start_time, event_address_text, className, event_image
     }) => (
-    <div className={ "flex gap-4 justify-between mx-2 my-5" }>
+    <div className={ `gap-4 justify-between mx-2 my-5 ${ className }` }>
         <div className={ "flex" }>
-            <EventMarker type={ type } />
+            <EventMarker type={ event_type } />
             <div>
                 <Link href={ "/" } className={ "hover:underline" }>
-                    <h6>{ title }</h6>
+                    <h6>{ event_title }</h6>
                 </Link>
                 <div className={ "flex sm:flex-row flex-col gap-2 text-gray-500" }>
-                    <p>{ date }</p>
-                    <p>{ time }</p>
-                    <p>{ address }</p>
+                    {/*TODO improve*/ }
+                    <p>{ new Date(event_start_time).toLocaleString("nb", {
+                        month: "long", day: "2-digit", weekday: "long"
+                    }) }</p>
+                    <p>{ new Date(event_start_time).toLocaleString("nb", {
+                        hour: "2-digit", minute: "2-digit"
+                    }) }</p>
+                    <p>{ event_address_text }</p>
                 </div>
             </div>
         </div>
 
-        <Image src={ thumbnail } alt={ "Something" } width={ 125 } height={ 75 } />
+        {/*TODO bytt til Image?*/}
+        <img src={ urlFor(event_image).width(150).height(75).url() } className={ "rounded-xl" } alt={ "" } />
     </div>
 )
 
-const EventMarker: Component<{ type: string }> = ({ type }) => {
+/**
+ * Et enkelt arrangement som vises på smale skjermer
+ */
+const SingleEventNarrow: Component<RootEvent & DefaultProps> = (
+    {
+        event_type, event_title, event_start_time, event_address_text, className, event_image
+    }) => (
+    <div className={ `flex-col gap-4 justify-between mx-2 my-5 ${ className }` }>
+        <Link href={ "/" } className={ "hover:underline" }>
+            <h6>{ event_title }</h6>
+        </Link>
+        <div className={ "inline-flex justify-between" }>
+            <EventMarker type={ event_type } />
+            <div className={ "inline-flex sm:flex-row flex-col gap-2 text-gray-500" }>
+                <p>{ new Date(event_start_time).toLocaleString("nb", {
+                    month: "long", day: "2-digit", weekday: "long"
+                }) }</p>
+                <p>{ new Date(event_start_time).toLocaleString("nb", {
+                    hour: "2-digit", minute: "2-digit"
+                }) }</p>
+                <p>{ event_address_text }</p>
+            </div>
+            <img src={ urlFor(event_image).width(75).height(50).url() } className={ "rounded-xl" } alt={ "" } />
+        </div>
+    </div>
+)
+
+const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     function getTypeColour() {
         switch (type) {
-            case "bedriftspresentasjon":
+            case "bedpres":
                 return "bg-yellow-400"
-            case "sosialt":
+            case "social":
                 return "bg-blue-400"
             case "workshop":
                 return "bg-pink-400"
+            default:
+                return "bg-gray-400"
         }
     }
 
