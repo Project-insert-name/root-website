@@ -20,6 +20,10 @@
     @apply -m-0.5 overflow-x-hidden;
 }
 
+a {
+    @apply text-rootBlue hover:text-blue-600;
+}
+
 h1 {
     @apply text-4xl font-bold;
 }

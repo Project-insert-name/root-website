@@ -12,8 +12,8 @@ export async function getAllEvents(): Promise<ReadonlyArray<RootEvent>> {
 /**
  * Henter ut en specifikk event fra sanity basert på slug
  * @param slug Slug til eventen
- * @returns RootEvent Eventet med den spesifikke slugen
+ * @returns RootEvent Eventet med den spesifikke slugen, eller null om den ikke finnes
  */
-export async function getEvent(slug: string): Promise<RootEvent> {
-    return await client.fetch('*[_type == "event" && event_slug == $slug][0]', { slug });
+export async function getEventBySlug(slug: string): Promise<RootEvent | null> {
+    return await client.fetch('*[_type == "event" && event_slug.current == $slug][0]', { slug });
 }
