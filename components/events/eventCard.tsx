@@ -65,7 +65,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = (
             <div className={ "flex" }>
                 <EventMarker type={ event_type } />
                 <div>
-                    <Link href={ `arrangement/${ event_slug.current }` } className={ "hover:underline" }>
+                    <Link href={ `arrangement/${ event_slug?.current }` } className={ "hover:underline" }>
                         <h6>{ event_title }</h6>
                     </Link>
                     <div className={ "flex sm:flex-row flex-col gap-2" }>
@@ -78,7 +78,10 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = (
                 </div>
             </div>
 
-            <SanityImage image={ event_image } width={ 150 } height={ 75 } className={ "rounded-xl" } alt={ "" } />
+            { event_image &&
+                <SanityImage image={ event_image } width={ 150 } height={ 75 } className={ "rounded-xl" } alt={ "" } />
+            }
+
         </div>
     );
 };
@@ -99,7 +102,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = (
     const startTime = toFormatDateAndTime(event_start_time);
     return (
         <div className={ `mx-1 my-5 flex flex-col w-full ${ className }` }>
-            <Link href={ `arrangement/${ event_slug.current }` } className={ "hover:underline" }>
+            <Link href={ `arrangement/${ event_slug?.current }` } className={ "hover:underline" }>
                 <h6>{ event_title }</h6>
             </Link>
             <div className={ "inline-flex justify-between" }>
@@ -112,8 +115,10 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = (
                     <PIcon icon={ <MapPinIcon width={ iconSize } /> }>{ event_address_text }</PIcon>
                 </div>
                 {/*TODO alt*/ }
-                <SanityImage image={ event_image } width={ 100 } height={ 75 } className={ "rounded-xl" }
-                             alt={ "" } />
+                { event_image &&
+                    <SanityImage image={ event_image } width={ 100 } height={ 75 } className={ "rounded-xl" }
+                                 alt={ "" } />
+                }
             </div>
         </div>
     );

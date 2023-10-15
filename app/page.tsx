@@ -27,6 +27,7 @@ const testAds: Ad[] = [ // TODO testdata skal slettes
 
 const Home: ServerComponent = async () => { // TODO
     const events = await getAllEvents();
+    console.log(events)
     return (
         <div>
             <div className={ "flex flex-wrap justify-around" }>
