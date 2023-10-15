@@ -8,7 +8,7 @@ const Header: Component = () => (
         <div className={ "logo-backdrop z-10" } />
         <Link href={ "/" } title={ "Root linjeforening sin logo" } className={ "z-20 sm:mx-5 mx-2 w-fit" }>
             {/*TODO test med ulike mobiler*/ }
-            <Image src={ "./Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 200 } height={ 200 } />
+            <Image src={ "/Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 200 } height={ 200 } />
         </Link>
         <NavBar />
     </header>
