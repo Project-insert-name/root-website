@@ -6,6 +6,7 @@ import { LinkIcon } from "@heroicons/react/24/outline";
 import { ExternalLink } from "@/components/link";
 import Link from "next/link";
 import { Button } from "@/components/button";
+import { notFound } from "next/navigation";
 
 interface Params {
     slug: string,
@@ -19,7 +20,7 @@ const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
     const event = await getEventBySlug(params.slug);
 
     if (!event) {
-        return <EventNotFound />
+        return notFound();
     }
     return (
         <div className={ "container sm:w-[1000px] px-2 mx-auto " }>
@@ -44,17 +45,6 @@ const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
 };
 
 export default EventPage;
-
-const EventNotFound: Component = () => {
-    return (
-        <div className={ "flex flex-col justify-center items-center h-80 gap-5" }>
-            <h5 className={ "text-7xl" }>😕</h5>
-            <h6>Arrangementet finnes ikke</h6>
-            { /*TODO link til alle arrangementer siden?*/ }
-            <Link href={ "/" }>Hjem</Link>
-        </div>
-    );
-}
 
 const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => {
     const formatDateAndTime = toFormatDateAndTime(startTime);

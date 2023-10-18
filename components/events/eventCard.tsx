@@ -3,8 +3,7 @@ import Link from "next/link";
 import type { EventType, RootEvent } from "@/sanity/types";
 import SanityImage from "@/components/sanityImage";
 import { toFormatDateAndTime } from "@/utils/dateUtils";
-import { MapPinIcon } from "@heroicons/react/24/outline";
-import { DateIcon, defaultIconSize, MapIcon, PIcon, TimeIcon } from "@/components/icon";
+import { DateIcon, MapIcon, TimeIcon } from "@/components/icon";
 
 
 interface EventCardProps extends DefaultProps {
@@ -73,7 +72,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = (
                             <TimeIcon>{ startTime.time }</TimeIcon>
                         </> }
                     </div>
-                    <PIcon icon={ <MapPinIcon width={ defaultIconSize } /> }>{ event_address_text }</PIcon>
+                    <MapIcon>{ event_address_text }</MapIcon>
                 </div>
             </div>
 
