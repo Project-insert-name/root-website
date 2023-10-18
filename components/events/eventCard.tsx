@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { EventType, RootEvent } from "@/sanity/types";
 import SanityImage from "@/components/sanityImage";
 import { toFormatDateAndTime } from "@/utils/dateUtils";
-import { DateIcon, MapIcon, TimeIcon } from "@/components/icon";
+import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon";
 
 
 interface EventCardProps extends DefaultProps {

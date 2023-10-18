@@ -1,7 +1,7 @@
 import { getAllEvents, getEventBySlug } from "@/sanity/queries";
 import SanityImage from "@/components/sanityImage";
 import { toFormatDateAndTime } from "@/utils/dateUtils";
-import { AttendeesIcon, DateIcon, defaultIconSize, TimeIcon } from "@/components/icon";
+import { AttendeesIcon, DateIcon, defaultIconSize, TimeIcon } from "@/components/icons/icon";
 import { LinkIcon } from "@heroicons/react/24/outline";
 import { ExternalLink } from "@/components/link";
 import Link from "next/link";
@@ -14,6 +14,7 @@ interface Params {
 
 /**
  * Side for et enkelt arrangement. Siden er dynamisk basert på arrangementets slug variabel.
+ * Dersom slug ikke finnes, returneres en 404 side.
  * @param params Parametre fra URL
  */
 const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
@@ -62,8 +63,8 @@ const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => {
 
 const SignUpButton: Component<{ url?: string }> = ({ url }) =>
     <ExternalLink href={ url }>
-        <Button className={ "inline-flex gap-2" }>
-            <LinkIcon width={ defaultIconSize } />Meld meg på
+        <Button className={ "inline-flex gap-2 items-center" }>
+            <LinkIcon width={ defaultIconSize } /><span>Meld meg på</span>
         </Button>
     </ExternalLink>
 
