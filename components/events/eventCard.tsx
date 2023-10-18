@@ -3,10 +3,9 @@ import Link from "next/link";
 import type { EventType, RootEvent } from "@/sanity/types";
 import SanityImage from "@/components/sanityImage";
 import { toFormatDateAndTime } from "@/utils/dateUtils";
-import { CalendarIcon, ClockIcon, MapPinIcon } from "@heroicons/react/24/outline";
-import { type ReactNode } from "react";
+import { MapPinIcon } from "@heroicons/react/24/outline";
+import { DateIcon, defaultIconSize, MapIcon, PIcon, TimeIcon } from "@/components/icon";
 
-const iconSize = 20;
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string,
@@ -70,11 +69,11 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = (
                     </Link>
                     <div className={ "flex sm:flex-row flex-col gap-2" }>
                         { startTime && <>
-                            <PIcon icon={ <CalendarIcon width={ iconSize } /> }>{ startTime.date }</PIcon>
-                            <PIcon icon={ <ClockIcon width={ iconSize } /> }>{ startTime.time }</PIcon>
+                            <DateIcon>{ startTime.date }</DateIcon>
+                            <TimeIcon>{ startTime.time }</TimeIcon>
                         </> }
                     </div>
-                    <PIcon icon={ <MapPinIcon width={ iconSize } /> }>{ event_address_text }</PIcon>
+                    <PIcon icon={ <MapPinIcon width={ defaultIconSize } /> }>{ event_address_text }</PIcon>
                 </div>
             </div>
 
@@ -109,10 +108,10 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = (
                 <div className={ "inline-flex sm:flex-row flex-col flex-wrap" }>
                     <EventMarker type={ event_type } />
                     { startTime && <>
-                        <PIcon icon={ <CalendarIcon width={ iconSize } /> }>{ startTime.date }</PIcon>
-                        <PIcon icon={ <ClockIcon width={ iconSize } /> }>{ startTime.time }</PIcon>
+                        <DateIcon>{ startTime.date }</DateIcon>
+                        <TimeIcon>{ startTime.time }</TimeIcon>
                     </> }
-                    <PIcon icon={ <MapPinIcon width={ iconSize } /> }>{ event_address_text }</PIcon>
+                    <MapIcon>{ event_address_text }</MapIcon>
                 </div>
                 {/*TODO alt*/ }
                 { event_image &&
@@ -141,8 +140,4 @@ const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     return (
         <div className={ `w-2 h-full rounded-xl mr-2 ${ getTypeColour() }` } />
     )
-}
-
-const PIcon: Component<{ icon: ReactNode } & ChildProps> = ({ icon, children }) => {
-    return <p className={ "inline-flex text-gray-500 gap-1" }>{ icon }{ children }</p>
 }

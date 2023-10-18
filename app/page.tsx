@@ -20,7 +20,7 @@ const testAds: Ad[] = [ // TODO testdata skal slettes
         _id: "1",
         title: "Sommerjobb hos Nav IT",
         dueDate: "2023-09-21",
-        thumbnail: "./next.svg",
+        thumbnail: "/next.svg",
     }
 ]
 

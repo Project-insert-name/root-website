@@ -21,7 +21,7 @@
 }
 
 a {
-    @apply text-rootBlue hover:text-blue-600;
+    @apply text-rootBlue hover:text-blue-700 hover:underline;
 }
 
 h1 {

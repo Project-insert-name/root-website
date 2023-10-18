@@ -33,10 +33,10 @@ const paths = [
 
 const NavBar: Component = () => (
     <nav>
-        <ul className={ "flex gap-3 font-bold text-white mx-5" }>
+        <ul className={ "flex gap-3 font-bold mx-5" }>
             { paths.map(({ name, path }) =>
                 <li key={ path }>
-                    <Link href={ path } className={ "hover:underline" }>{ name }</Link>
+                    <Link href={ path } className={ "!text-white" }>{ name }</Link>
                 </li>) }
         </ul>
     </nav>

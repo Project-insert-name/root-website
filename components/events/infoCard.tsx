@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Button } from "@/components/button";
 
 interface EventCardProps extends ChildProps {
     eventTitle: string,
@@ -19,9 +20,9 @@ const InfoCard: Component<EventCardProps> = (
                 { children }
             </div>
 
-            <div className={ "mx-auto w-fit border py-1 px-4 bg-rootBlue rounded-2xl text-white my-2 font-bold" }>
-                <Link href={ showMoreUrl }>Vis mer</Link>
-            </div>
+            <Link href={ showMoreUrl } className={ "mx-auto" }>
+                <Button>Vis mer</Button>
+            </Link>
         </div>
     )
 }
