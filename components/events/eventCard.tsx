@@ -114,7 +114,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = (
                 </div>
                 {/*TODO alt*/ }
                 { event_image &&
-                    <SanityImage image={ event_image } width={ 100 } height={ 75 } className={ "rounded-xl" }
+                    <SanityImage image={ event_image } width={ 100 } height={ 75 } className={ "rounded-xl m-1" }
                                  alt={ "" } />
                 }
             </div>
