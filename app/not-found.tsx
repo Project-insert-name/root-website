@@ -10,7 +10,7 @@ export default function NotFound() {
                 <h2 className="text-4xl">Page Not Found</h2>
             </div>
             <p>Vi finner ikke siden</p>
-            <Link href={ "./" }>
+            <Link href={ "/" }>
                 <Button>Gå til framsiden</Button>
             </Link>
         </div>
