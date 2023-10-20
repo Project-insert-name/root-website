@@ -7,6 +7,8 @@ import { ExternalLink } from "@/components/link";
 import Link from "next/link";
 import { Button } from "@/components/button";
 import { notFound } from "next/navigation";
+import {remark} from "remark"
+import html from "remark-html"
 
 interface Params {
     slug: string,
@@ -19,10 +21,11 @@ interface Params {
  */
 const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
     const event = await getEventBySlug(params.slug);
+    
+    if (!event) return notFound();
 
-    if (!event) {
-        return notFound();
-    }
+    const event_description = (await remark().use(html).process(event.event_description)).toString();
+
     return (
         <div className={ "container sm:w-[1000px] px-2 mx-auto " }>
             <h1 className={ "text-center sm:text-4xl text-2xl mb-5" }>
@@ -36,7 +39,7 @@ const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
             { event.event_max_attendees &&
                 <AttendeesIcon>Arrangementet har plass til { event.event_max_attendees }.</AttendeesIcon>
             }
-            <p className={ "my-5" }>{ event.event_description }</p>
+            <div className={ "my-5" } dangerouslySetInnerHTML={{ __html: event_description }} />
 
             <div className={ "flex justify-center" }>
                 <SignUpButton url={ event.event_application_url } />
