@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Bars3Icon } from "@heroicons/react/24/outline";
 import HamburgerMenu from "@/components/header/hamburger";
 import paths from "@/components/header/paths";
 
@@ -12,8 +11,10 @@ const Header: Component = () => (
             {/*TODO test med ulike mobiler*/ }
             <Image src={ "/Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 200 } height={ 200 } />
         </Link>
-        <NavBar className={ "sm:block hidden" } />
-        <HamburgerMenu className={ "sm:hidden block z-30 mx-5" } />
+        <div>
+            <NavBar className={ "sm:inline-flex hidden" } />
+            <HamburgerMenu className={ "sm:hidden inline-flex z-30 mx-5" } />
+        </div>
     </header>
 )
 
