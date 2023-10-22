@@ -4,15 +4,17 @@ import HamburgerMenu from "@/components/header/hamburger";
 import paths from "@/components/header/paths";
 
 const Header: Component = () => (
-    <header className={ `
-        border w-full h-20 flex items-center justify-between bg-gradient-to-r from-rootBlue to-blue-500 relative` }>
-        <div className={ "logo-backdrop z-10" } />
-        <Link href={ "/" } title={ "Root linjeforening sin logo" } className={ "z-20 sm:mx-5 mx-2 w-fit" }>
-            {/*TODO test med ulike mobiler*/ }
-            <Image src={ "/Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 200 } height={ 200 } />
-        </Link>
+    <header
+        className={ `border w-full h-20 flex items-center justify-between bg-gradient-to-r from-rootBlue to-blue-500` }>
+        <div className={ "relative w-max h-full flex items-center" }>
+            <div className={ "logo-backdrop z-10" } />
+            <Link href={ "/" } title={ "Root linjeforening sin logo" } className={ "relative z-20 sm:mx-5 mx-2 w-fit" }>
+                {/*TODO test med ulike mobiler*/ }
+                <Image src={ "/Root-logo.svg" } alt={ "Logo for linjeforeningen root" } width={ 200 } height={ 200 } />
+            </Link>
+        </div>
         <div>
-            <NavBar className={ "sm:inline-flex hidden" } />
+            <NavBar className={ "sm:flex hidden w-fit" } />
             <HamburgerMenu className={ "sm:hidden inline-flex z-30 mx-5" } />
         </div>
     </header>
