@@ -11,11 +11,7 @@ export interface RootEvent extends SanityDocument {
     readonly event_max_attendees?: number,
     readonly event_registration_deadline?: string,
     readonly event_address_text?: string,
-    readonly event_address_geopoint?: {
-        readonly lat: number,
-        readonly lng: number,
-        readonly alt: number,
-    }
+    readonly event_address_url?: string,
     readonly event_image?: SanityImageSource,
     readonly event_application_url?: string,
     readonly event_slug: {
