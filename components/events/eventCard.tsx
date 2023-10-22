@@ -25,7 +25,7 @@ const EventCard: Component<EventCardProps> = (
         maxEvents = 4,
         className,
     }) => (
-    <InfoCard eventTitle={ eventTitle }
+    <InfoCard cardTitle={ eventTitle }
               showMoreUrl={ showMoreUrl }
               className={ className }>
         {
@@ -72,7 +72,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = (
                             <TimeIcon>{ startTime.time }</TimeIcon>
                         </> }
                     </div>
-                    <MapIcon>{ event_address_text }</MapIcon>
+                    { event_address_text && <MapIcon>{ event_address_text }</MapIcon> }
                 </div>
             </div>
 

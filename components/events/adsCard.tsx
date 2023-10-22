@@ -4,39 +4,37 @@ import Link from "next/link";
 import Image from "next/image";
 
 interface AdsCardProps extends DefaultProps {
-    eventTitle?: string,
+    cardTitle?: string,
     ads: ReadonlyArray<Ad>,
     showMoreUrl: string,
     emptyMessage?: string,
-    maxEvents?: number,
+    maxAds?: number,
 }
 
 const AdsCard: Component<AdsCardProps> = (
     {
-        eventTitle = "Stillingsannonser",
+        cardTitle = "Stillingsannonser",
         ads,
         emptyMessage = "Ingen stillingsannonser",
         showMoreUrl,
-        maxEvents = 4,
+        maxAds = 4,
         className
     }
-) => {
-    return (
-        <InfoCard eventTitle={ eventTitle }
-                  showMoreUrl={ showMoreUrl } className={ className }>
-            {
-                ads.length > 0 ?
-                    ads.slice(0, maxEvents).map((event, index) =>
-                        <div key={ event._id }>
-                            { index !== 0 && <Divider /> }
-                            <SingleAd { ...event } />
-                        </div>
-                    )
-                    : <p className={ "text-center" }>{ emptyMessage }</p>
-            }
-        </InfoCard>
-    )
-}
+) => (
+    <InfoCard cardTitle={ cardTitle }
+              showMoreUrl={ showMoreUrl } className={ className }>
+        {
+            ads.length > 0 ?
+                ads.slice(0, maxAds).map((ad, index) =>
+                    <div key={ ad._id }>
+                        { index !== 0 && <Divider /> }
+                        <SingleAd { ...ad } />
+                    </div>
+                )
+                : <p className={ "text-center" }>{ emptyMessage }</p>
+        }
+    </InfoCard>
+)
 
 export default AdsCard;
 

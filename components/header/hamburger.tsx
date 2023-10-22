@@ -14,7 +14,7 @@ const iconSize = 40;
  * @param className - css klassenavn for button
  * @param sliderClassName - css klassenavn for slider
  */
-const HamburgerMenu: Component<{ sliderClassName: string } & DefaultProps> = ({ className, sliderClassName }) => {
+const HamburgerMenu: Component<{ sliderClassName?: string } & DefaultProps> = ({ className, sliderClassName }) => {
     const [isOpen, setIsOpen] = useToggle(false);
     return (
         <>
