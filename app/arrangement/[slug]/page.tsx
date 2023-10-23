@@ -4,11 +4,9 @@ import { toFormatDateAndTime } from "@/utils/dateUtils";
 import { AttendeesIcon, DateIcon, defaultIconSize, TimeIcon } from "@/components/icons/icon";
 import { LinkIcon } from "@heroicons/react/24/outline";
 import { ExternalLink } from "@/components/link";
-import Link from "next/link";
 import { Button } from "@/components/button";
 import { notFound } from "next/navigation";
-import {remark} from "remark"
-import html from "remark-html"
+import { fromMarkdown } from "@/sanity/utils";
 
 interface Params {
     slug: string,
@@ -21,10 +19,10 @@ interface Params {
  */
 const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
     const event = await getEventBySlug(params.slug);
-    
+
     if (!event) return notFound();
 
-    const event_description = (await remark().use(html).process(event.event_description)).toString();
+    const event_description = await fromMarkdown(event.event_description);
 
     return (
         <div className={ "container sm:w-[1000px] px-2 mx-auto " }>
@@ -39,7 +37,7 @@ const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
             { event.event_max_attendees &&
                 <AttendeesIcon>Arrangementet har plass til { event.event_max_attendees }.</AttendeesIcon>
             }
-            <div className={ "my-5" } dangerouslySetInnerHTML={{ __html: event_description }} />
+            <div className={ "my-5" } dangerouslySetInnerHTML={ { __html: event_description } } />
 
             <div className={ "flex justify-center" }>
                 <SignUpButton url={ event.event_application_url } />

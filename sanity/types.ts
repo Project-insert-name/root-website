@@ -3,9 +3,14 @@ import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export type EventType = "bedpres" | "workshop" | "social" | "other";
 
+export type Markdown = string;
+
+/**
+ * Inneholder data knyttet til en Event, som bedriftspresentasjon, workshop, sosialt arrangement eller lignende.
+ */
 export interface RootEvent extends SanityDocument {
     readonly event_title: string,
-    readonly event_description?: string,
+    readonly event_description?: Markdown,
     readonly event_type: EventType,
     readonly event_start_time: string,
     readonly event_max_attendees?: number,
