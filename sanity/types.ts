@@ -1,5 +1,5 @@
-import { SanityDocument } from '@sanity/client'
-import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import type { SanityDocument } from '@sanity/client'
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export type EventType = "bedpres" | "workshop" | "social" | "other";
 

@@ -4,7 +4,7 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
 import { remark } from "remark";
 import html from "remark-html";
-import { Markdown } from "@/sanity/types";
+import type { Markdown } from "@/sanity/types";
 
 const builder = imageUrlBuilder(client)
 

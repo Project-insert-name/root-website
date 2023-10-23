@@ -1,7 +1,7 @@
 import { getAllEvents, getEventBySlug } from "@/sanity/queries";
 import SanityImage from "@/components/sanityImage";
 import { toFormatDateAndTime } from "@/utils/dateUtils";
-import { AttendeesIcon, DateIcon, defaultIconSize, TimeIcon } from "@/components/icons/icon";
+import { AttendeesIcon, DateIcon, defaultIconSize, MapIcon, TimeIcon } from "@/components/icons/icon";
 import { LinkIcon } from "@heroicons/react/24/outline";
 import { ExternalLink } from "@/components/link";
 import { Button } from "@/components/button";
@@ -22,7 +22,7 @@ const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
 
     if (!event) return notFound();
 
-    const event_description = await fromMarkdown(event.event_description);
+    const descriptionHTML = await fromMarkdown(event.event_description);
 
     return (
         <div className={ "container sm:w-[1000px] px-2 mx-auto " }>
@@ -33,11 +33,17 @@ const EventPage: AsyncComponent<{ params: Params; }> = async ({ params }) => {
                 <SanityImage className={ "mx-auto" } image={ event.event_image }
                              width={ 500 } height={ 500 } alt={ "" } />
             }
-            <TimeAndDate startTime={ event.event_start_time } />
-            { event.event_max_attendees &&
-                <AttendeesIcon>Arrangementet har plass til { event.event_max_attendees }.</AttendeesIcon>
-            }
-            <div className={ "my-5" } dangerouslySetInnerHTML={ { __html: event_description } } />
+            <div className={ "flex flex-wrap justify-between" }>
+                <div>
+                    <TimeAndDate startTime={ event.event_start_time } />
+                    { event.event_max_attendees &&
+                        <AttendeesIcon>Arrangementet har plass til { event.event_max_attendees }.</AttendeesIcon>
+                    }
+                </div>
+                <Address address={ event.event_address_text } url={ event.event_address_url } />
+            </div>
+
+            <div className={ "my-5" } dangerouslySetInnerHTML={ { __html: descriptionHTML } } />
 
             <div className={ "flex justify-center" }>
                 <SignUpButton url={ event.event_application_url } />
@@ -59,6 +65,17 @@ const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => {
             <DateIcon>{ date }</DateIcon>
             <TimeIcon>{ time }</TimeIcon>
         </div>
+    );
+}
+
+const Address: Component<{ address?: string, url?: string }> = ({ address, url }) => {
+    if (!address) {
+        return null;
+    }
+    return (
+        <MapIcon className={ "h-fit" }>
+            { url ? <ExternalLink href={ url }>{ address }</ExternalLink> : address }
+        </MapIcon>
     );
 }
 
