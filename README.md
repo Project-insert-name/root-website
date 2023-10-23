@@ -1,6 +1,6 @@
 # Root Hjemmeside
 
-Laget av P\<IN>
+Laget av PIN
 
 ## Stack
 
