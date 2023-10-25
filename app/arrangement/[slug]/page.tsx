@@ -1,4 +1,4 @@
-import { getAllEvents, getEventBySlug } from "@/sanity/queries";
+import { getAllEvents, getEventBySlug } from "@/sanity/queries/event";
 import SanityImage from "@/components/sanityImage";
 import { toFormatDateAndTime } from "@/utils/dateUtils";
 import { AttendeesIcon, DateIcon, defaultIconSize, MapIcon, TimeIcon } from "@/components/icons/icon";

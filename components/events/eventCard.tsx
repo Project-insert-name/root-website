@@ -4,45 +4,54 @@ import type { EventType, RootEvent } from "@/sanity/types";
 import SanityImage from "@/components/sanityImage";
 import { toFormatDateAndTime } from "@/utils/dateUtils";
 import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon";
+import { getNextEvents } from "@/sanity/queries/event";
+import { Suspense } from "react";
 
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string,
-    events: ReadonlyArray<RootEvent>,
     showMoreUrl: string,
     emptyMessage?: string,
-    maxEvents?: number,
 }
 
 // TODO slå sammen fellestrekk i wide og narrow komponentene
+// TODO bedre fallback for Suspense
 
 const EventCard: Component<EventCardProps> = (
     {
         eventTitle = "Arrangementer",
-        events,
         emptyMessage = "Ingen arrangementer",
         showMoreUrl,
-        maxEvents = 4,
         className,
     }) => (
     <InfoCard cardTitle={ eventTitle }
               showMoreUrl={ showMoreUrl }
               className={ className }>
-        {
-            events.length > 0 ?
-                events.slice(0, maxEvents).map((event, index) =>
-                    <div key={ event._id }>
-                        { index !== 0 && <Divider /> }
-                        <SingleEventWide { ...event } className={ "sm:flex hidden" } />
-                        <SingleEventNarrow { ...event } className={ "sm:hidden flex" } />
-                    </div>
-                )
-                : <p className={ "text-center" }>{ emptyMessage }</p>
-        }
+
+        <Suspense fallback={ "Laster inn" }>
+            <EventCardData emptyMessage={ emptyMessage } />
+        </Suspense>
+
     </InfoCard>
 )
 
 export default EventCard;
+
+const EventCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessage }) => {
+    const events = await getNextEvents();
+    return (<>
+        { events.length > 0 ?
+            events.map((event, index) =>
+                <div key={ event._id }>
+                    { index !== 0 && <Divider /> }
+                    <SingleEventWide { ...event } className={ "sm:flex hidden" } />
+                    <SingleEventNarrow { ...event } className={ "sm:hidden flex" } />
+                </div>
+            )
+            : <p className={ "text-center" }>{ emptyMessage }</p>
+        }
+    </>)
+}
 
 /**
  * Et enkelt arrangement som vises på brede skjermer
