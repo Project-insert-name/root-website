@@ -1,11 +1,14 @@
 import InfoCard, { Divider } from "@/components/events/infoCard";
-import type { Ad } from "@/app/page";
 import Link from "next/link";
-import Image from "next/image";
+import { getNextJobAdverts } from "@/sanity/queries/jobAdvert";
+import type { JobAdvert } from "@/sanity/types";
+import SanityImage from "@/components/sanityImage";
+import { toFormatDate } from "@/utils/dateUtils";
+import { DateIcon } from "@/components/icons/icon";
+import { Suspense } from "react";
 
 interface AdsCardProps extends DefaultProps {
     cardTitle?: string,
-    ads: ReadonlyArray<Ad>,
     showMoreUrl: string,
     emptyMessage?: string,
     maxAds?: number,
@@ -14,46 +17,63 @@ interface AdsCardProps extends DefaultProps {
 const AdsCard: Component<AdsCardProps> = (
     {
         cardTitle = "Stillingsannonser",
-        ads,
         emptyMessage = "Ingen stillingsannonser",
         showMoreUrl,
-        maxAds = 4,
         className
     }
 ) => (
     <InfoCard cardTitle={ cardTitle }
               showMoreUrl={ showMoreUrl } className={ className }>
-        {
-            ads.length > 0 ?
-                ads.slice(0, maxAds).map((ad, index) =>
-                    <div key={ ad._id }>
-                        { index !== 0 && <Divider /> }
-                        <SingleAd { ...ad } />
-                    </div>
-                )
-                : <p className={ "text-center" }>{ emptyMessage }</p>
-        }
+
+        <Suspense fallback={ "Laster inn" }>
+            <AdCardData emptyMessage={ emptyMessage } />
+        </Suspense>
+
     </InfoCard>
 )
 
 export default AdsCard;
 
-const SingleAd: Component<Ad> = (
+const AdCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessage }) => {
+    const adverts = await getNextJobAdverts();
+    return (<>
+        { adverts.length > 0 ?
+            adverts.map((ad, index) =>
+                <div key={ ad._id }>
+                    { index !== 0 && <Divider /> }
+                    <SingleAd { ...ad } />
+                </div>
+            )
+            : <p className={ "text-center" }>{ emptyMessage }</p>
+        }
+    </>)
+}
+
+const SingleAd: Component<JobAdvert> = (
     {
-        title, dueDate, thumbnail
+        title, deadline, image, image_alt, slug
     }) => (
     <div className={ "flex gap-4 justify-between mx-2 my-5" }>
         <div className={ "flex" }>
             <div>
-                <Link href={ "/" } className={ "hover:underline" }>
+                <Link href={ `stilling/${ slug.current }` } className={ "hover:underline" }>
                     <h6>{ title }</h6>
                 </Link>
-                <div className={ "flex sm:flex-row flex-col gap-2 text-gray-500" }>
-                    <p>Søknadsfrist { dueDate }</p>
-                </div>
+                { deadline && <DateIcon><Date deadline={ deadline } /></DateIcon> }
             </div>
         </div>
 
-        <Image src={ thumbnail } alt={ "Something" } width={ 125 } height={ 75 } />
+        { image &&
+            <SanityImage image={ image } alt={ image_alt ?? "Logo til: " + title } width={ 125 } height={ 75 } />
+        }
     </div>
 )
+
+const Date: Component<{ deadline: string }> = ({ deadline }) => {
+    const date = toFormatDate(deadline);
+    return (
+        <span className={ "flex sm:flex-row flex-col gap-2 text-gray-500" }>
+            Søknadsfrist { date }
+        </span>
+    )
+}
