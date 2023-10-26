@@ -21,3 +21,9 @@ interface ImageProps extends DefaultProps {
 interface ChildProps extends DefaultProps {
     children?: React.ReactNode,
 }
+
+interface ButtonProps extends ChildProps {
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    type?: "button" | "submit" | "reset",
+    disabled?: boolean,
+}
