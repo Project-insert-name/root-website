@@ -3,7 +3,7 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                hostname: 'cdn.sanity.io',
+                hostname: "cdn.sanity.io",
             },
         ],
         dangerouslyAllowSVG: true,

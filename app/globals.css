@@ -11,7 +11,7 @@
 
     .logo-backdrop {
         height: calc(100% * 2);
-        @apply rounded-full bg-white sm:w-80 w-64;
+        @apply w-64 rounded-full bg-white sm:w-80;
         @apply absolute -left-8 -top-16;
     }
 }

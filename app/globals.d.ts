@@ -1,29 +1,29 @@
 // Ikke bruke top-level import/export i denne filen, da typene ikke blir tilgjengelig i andre filer.
 
-type Component<T = DefaultProps> = (props: T) => React.JSX.Element | null;
+type Component<T = DefaultProps> = (props: T) => React.JSX.Element | null
 
-type AsyncComponent<T = DefaultProps> = (props: T) => Promise<React.JSX.Element | null>;
+type AsyncComponent<T = DefaultProps> = (props: T) => Promise<React.JSX.Element | null>
 
 interface DefaultProps {
-    className?: string,
-    style?: React.CSSProperties,
-    id?: string,
-    title?: string,
+    className?: string
+    style?: React.CSSProperties
+    id?: string
+    title?: string
 }
 
 interface ImageProps extends DefaultProps {
-    src?: string,
-    alt: string,
-    width?: number,
-    height?: number,
+    src?: string
+    alt: string
+    width?: number
+    height?: number
 }
 
 interface ChildProps extends DefaultProps {
-    children?: React.ReactNode,
+    children?: React.ReactNode
 }
 
 interface ButtonProps extends ChildProps {
-    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void,
-    type?: "button" | "submit" | "reset",
-    disabled?: boolean,
+    onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+    type?: "button" | "submit" | "reset"
+    disabled?: boolean
 }

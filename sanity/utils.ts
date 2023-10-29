@@ -1,10 +1,10 @@
-import { client } from "@/sanity";
-import imageUrlBuilder from '@sanity/image-url'
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder";
-import { remark } from "remark";
-import html from "remark-html";
-import type { Markdown } from "@/sanity/types";
+import { client } from "@/sanity"
+import imageUrlBuilder from "@sanity/image-url"
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { ImageUrlBuilder } from "@sanity/image-url/lib/types/builder"
+import { remark } from "remark"
+import html from "remark-html"
+import type { Markdown } from "@/sanity/types"
 
 const builder = imageUrlBuilder(client)
 
@@ -23,6 +23,6 @@ export function urlFor(source: SanityImageSource): ImageUrlBuilder {
  * @returns Html som er generert fra markdown. Kan settes direkte inn i en html-side med dangerouslySetInnerHTML.
  */
 export async function fromMarkdown(markdown?: Markdown): Promise<string> {
-    const file = await remark().use(html).process(markdown);
-    return file.toString();
+    const file = await remark().use(html).process(markdown)
+    return file.toString()
 }

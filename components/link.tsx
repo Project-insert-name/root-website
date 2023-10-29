@@ -6,16 +6,14 @@
  * @param className CSS-klassen til lenken
  * @param props Andre props som skal sendes til lenken
  */
-export const ExternalLink: Component<{ href?: string } & ChildProps> = (
-    {
-        href,
-        children,
-        className,
-        ...props
-    }) => (
-    <a href={ href } rel={ "noopener noreferrer" } className={ className }
-       target={ "_blank" } { ...props }>
-        { children }
+export const ExternalLink: Component<{ href?: string } & ChildProps> = ({
+    href,
+    children,
+    className,
+    ...props
+}) => (
+    <a href={href} rel={"noopener noreferrer"} className={className} target={"_blank"} {...props}>
+        {children}
     </a>
 )
 
@@ -25,9 +23,12 @@ export const ExternalLink: Component<{ href?: string } & ChildProps> = (
  * @param children Innholdet i lenken, vil typisk være en tekst. Dersom denne ikke er satt, vil e-postadressen vises.
  * @param props Andre props som skal sendes til lenken
  */
-export const MailLink: Component<{ mail?: string } & ChildProps> = (
-    {
-        mail,
-        children,
-        ...props
-    }) => <ExternalLink href={ `mailto:${ mail }` } { ...props }>{ children ? children : mail }</ExternalLink>
+export const MailLink: Component<{ mail?: string } & ChildProps> = ({
+    mail,
+    children,
+    ...props
+}) => (
+    <ExternalLink href={`mailto:${mail}`} {...props}>
+        {children ? children : mail}
+    </ExternalLink>
+)

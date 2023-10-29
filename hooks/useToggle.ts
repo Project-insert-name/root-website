@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from "react"
 
 /**
  * En custom hook for å bytte mellom to boolean verdier.
@@ -8,9 +8,9 @@ import { useState } from "react";
  * @returns [boolean, (value?: boolean) => void] - Et par med boolean verdien og en funksjon for å bytte mellom true og false
  */
 const useToggle = (initialValue: boolean): [boolean, (value?: boolean) => void] => {
-    const [value, setValue] = useState(initialValue);
-    const toggleValue = (newValue?: boolean) => setValue(newValue ? newValue : !value);
-    return [value, toggleValue];
+    const [value, setValue] = useState(initialValue)
+    const toggleValue = (newValue?: boolean) => setValue(newValue ? newValue : !value)
+    return [value, toggleValue]
 }
 
-export default useToggle;
+export default useToggle
