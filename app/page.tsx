@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 // TODO størrelser på kortene og plassering
 // TODO skal vi ha noe mer på forsiden? Velkomsttekst i toppen?
 
-const Home: Component = () => {
+const Home: Page = () => {
     return (
         <div className={"flex flex-wrap justify-around py-5"}>
             <EventCard

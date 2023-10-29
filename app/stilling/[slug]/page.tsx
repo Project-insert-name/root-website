@@ -15,8 +15,8 @@ interface Params {
  * Dersom slug ikke finnes, returneres en 404 side.
  * @param params Parametre fra URL
  */
-const JobAdvertPage: AsyncComponent<{ params: Params }> = async ({ params }) => {
-    const ad = await getJobAdvertBySlug(params.slug)
+const JobAdvertPage: AsyncPage<Params> = async ({ params }) => {
+    const ad = await getJobAdvertBySlug(params!.slug)
 
     if (!ad) return notFound()
 
@@ -30,7 +30,7 @@ const JobAdvertPage: AsyncComponent<{ params: Params }> = async ({ params }) => 
                     image={ad.image}
                     width={500}
                     height={500}
-                    alt={ad.image_alt ?? `Bilde for ${ad.title}`}
+                    alt={ad.image.alt ?? `Bilde for ${ad.title}`}
                 />
             )}
             <div className={"flex flex-wrap justify-between"}>

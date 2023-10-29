@@ -16,7 +16,7 @@ export async function getJobAdverts(): Promise<ReadonlyArray<JobAdvert>> {
  */
 export async function getNextJobAdverts(limit = 4): Promise<ReadonlyArray<JobAdvert>> {
     return await client.fetch(
-        `*[_type == "job_advert" && deadline > now()] | order(deadline asc)[0...$limit]`,
+        `*[_type == "job_advert" && (deadline > now() || deadline == null)] | order(deadline asc)[0...$limit]`,
         {
             limit,
         },

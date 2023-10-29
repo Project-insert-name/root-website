@@ -1,5 +1,6 @@
 import type { SanityDocument } from "@sanity/client"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { SanityImageAsset, SanityImageCrop, SanityImageHotspot } from "@sanity/asset-utils"
 
 export type EventType = "bedpres" | "workshop" | "social" | "other"
 
@@ -41,6 +42,10 @@ export interface JobAdvert extends SanityDocument {
     readonly description?: Markdown
     readonly deadline?: string
     readonly number_of_positions?: number
-    readonly image?: SanityImageSource
-    readonly image_alt?: string
+    readonly image?: {
+        readonly asset: SanityImageAsset
+        readonly crop?: SanityImageCrop
+        readonly hotspot?: SanityImageHotspot
+        readonly alt: string
+    }
 }

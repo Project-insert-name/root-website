@@ -16,7 +16,7 @@ interface Params {
  * Dersom slug ikke finnes, returneres en 404 side.
  * @param params Parametre fra URL
  */
-const EventPage: AsyncComponent<{ params: Params }> = async ({ params }) => {
+const EventPage: AsyncPage<Params> = async ({ params }) => {
     const event = await getEventBySlug(params.slug)
 
     if (!event) return notFound()
@@ -30,7 +30,7 @@ const EventPage: AsyncComponent<{ params: Params }> = async ({ params }) => {
                     image={event.event_image}
                     width={500}
                     height={500}
-                    alt={""}
+                    alt={"Bilde for " + event.event_title}
                 />
             )}
             <div className={"flex flex-wrap justify-between"}>

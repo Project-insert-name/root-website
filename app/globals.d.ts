@@ -1,8 +1,20 @@
 // Ikke bruke top-level import/export i denne filen, da typene ikke blir tilgjengelig i andre filer.
 
-type Component<T = DefaultProps> = (props: T) => React.JSX.Element | null
+interface PageProps<Params> {
+    params: Params
+    searchParams?: { [key: string]: string | string[] | undefined }
+}
 
-type AsyncComponent<T = DefaultProps> = (props: T) => Promise<React.JSX.Element | null>
+type Page<Params = never> = (props: PageProps<Params>) => React.JSX.Element | null
+
+type AsyncPage<Params = {}> = ({
+    params,
+    searchParams,
+}: PageProps<Params>) => Promise<React.JSX.Element | null>
+
+type Component<T = DefaultProps> = (params: T) => React.JSX.Element | null
+
+type AsyncComponent<T = DefaultProps> = (params: T) => Promise<React.JSX.Element | null>
 
 interface DefaultProps {
     className?: string
