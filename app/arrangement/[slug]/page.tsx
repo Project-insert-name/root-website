@@ -25,6 +25,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
         <div className={"container mx-auto px-2 sm:w-[1000px] "}>
             <h1 className={"mb-5 text-center text-2xl sm:text-4xl"}>{event.event_title}</h1>
             {event.event_image && (
+                /*TODO Sett kun høyde*/
                 <SanityImage
                     className={"mx-auto"}
                     image={event.event_image}

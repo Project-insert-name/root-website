@@ -5,7 +5,7 @@ import paths from "@/components/header/paths"
 
 const Header: Component = () => (
     <header
-        className={`flex h-20 w-full items-center justify-between border bg-gradient-to-r from-rootBlue to-blue-500`}>
+        className={`flex h-20 w-full items-center justify-between overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg`}>
         <div className={"relative flex h-full w-max items-center"}>
             <div className={"logo-backdrop z-10"} />
             <Link
