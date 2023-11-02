@@ -1,9 +1,11 @@
 import { defineType, defineField } from "sanity"
+import {CalendarIcon} from "@heroicons/react/24/outline";
 
 export default defineType({
 	name: "event",
 	type: "document",
 	title: "Event",
+	icon: CalendarIcon,
 	fields: [
 		defineField({
 			name: "event_title",
