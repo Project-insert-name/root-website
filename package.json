@@ -25,6 +25,7 @@
         "remark": "^15.0.1",
         "remark-html": "^16.0.1",
         "sanity": "3.18.1",
+        "sanity-plugin-markdown": "^4.1.0",
         "styled-components": "5.2"
     },
     "devDependencies": {
