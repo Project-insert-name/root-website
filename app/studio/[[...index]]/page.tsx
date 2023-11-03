@@ -12,6 +12,9 @@
 import { NextStudio } from "next-sanity/studio"
 import config from "../../../sanity.config"
 
-export default function StudioPage() {
+const StudioPage: Page = () => {
+    // @ts-ignore ikke støttet av @Sanity-typed
     return <NextStudio config={config} />
 }
+
+export default StudioPage
