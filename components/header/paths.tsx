@@ -1,13 +1,14 @@
 import { HomeIcon, PhotoIcon, UsersIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
+import { JSX } from "react"
 
 export interface Path {
     name: string
     path: string
-    icon?: Component
+    icon?: JSX.Element
 }
 
-const paths = [
+const paths: Path[] = [
     {
         name: "Hjem",
         path: "/",

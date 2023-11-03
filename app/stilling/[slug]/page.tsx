@@ -16,7 +16,7 @@ interface Params {
  * @param params Parametre fra URL
  */
 const JobAdvertPage: AsyncPage<Params> = async ({ params }) => {
-    const ad = await getJobAdvertBySlug(params!.slug)
+    const ad = await getJobAdvertBySlug(params.slug)
 
     if (!ad) return notFound()
 

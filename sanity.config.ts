@@ -3,7 +3,7 @@
  */
 
 import { visionTool } from "@sanity/vision"
-import { defineConfig } from "sanity"
+import { defineConfig } from "@sanity-typed/types"
 import { deskTool } from "sanity/desk"
 import { markdownSchema } from "sanity-plugin-markdown"
 
@@ -11,6 +11,13 @@ import { markdownSchema } from "sanity-plugin-markdown"
 import { apiVersion, dataset, projectId } from "./sanity/env"
 import { schema } from "./sanity/schema"
 
+/**
+ * Oppretter et config objekt som brukes til å konfigurere sanity studio
+ * basePath definerer hvor studio skal være tilgjengelig, i dette tilfellet /studio
+ * projectId og dataset er hentet fra sanity/env.ts
+ * schema er hentet fra sanity/schema.ts og inneholder alle schema til prosjektet
+ * plugins inneholder alle plugins som tilhører sanity studio
+ */
 export default defineConfig({
     basePath: "/studio",
     projectId,
