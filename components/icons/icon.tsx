@@ -3,42 +3,59 @@ import { CalendarIcon, ClockIcon, MapPinIcon, UsersIcon } from "@heroicons/react
 
 export const defaultIconSize = 20
 
+interface IconProps extends ChildProps {
+    width?: number
+}
+
 export const FlexIcon: Component<{ icon: ReactNode } & ChildProps> = ({
     icon,
     children,
     className,
     ...props
 }) => (
-    <div className={`inline-flex gap-1 text-gray-700 ${className}`} {...props}>
+    <div className={`flex items-center gap-1 text-gray-700 ${className}`} {...props}>
         {icon}
         {children}
     </div>
 )
 
-export const DateIcon: Component<ChildProps> = ({ children, title = "Dato", className }) => (
-    <FlexIcon className={className} icon={<CalendarIcon width={defaultIconSize} />} title={title}>
+export const DateIcon: Component<IconProps> = ({ children, title = "Dato", className, width }) => (
+    <FlexIcon
+        className={className}
+        icon={<CalendarIcon width={width || defaultIconSize} />}
+        title={title}>
         {children}
     </FlexIcon>
 )
 
-export const TimeIcon: Component<ChildProps> = ({ children, title = "Tid", className }) => (
-    <FlexIcon className={className} icon={<ClockIcon width={defaultIconSize} />} title={title}>
+export const TimeIcon: Component<IconProps> = ({ children, title = "Tid", className, width }) => (
+    <FlexIcon
+        className={className}
+        icon={<ClockIcon width={width || defaultIconSize} />}
+        title={title}>
         {children}
     </FlexIcon>
 )
 
-export const MapIcon: Component<ChildProps> = ({ children, title = "Sted", className }) => (
-    <FlexIcon className={className} icon={<MapPinIcon width={defaultIconSize} />} title={title}>
+export const MapIcon: Component<IconProps> = ({ children, title = "Sted", className, width }) => (
+    <FlexIcon
+        className={className}
+        icon={<MapPinIcon width={width || defaultIconSize} />}
+        title={title}>
         {children}
     </FlexIcon>
 )
 
-export const AttendeesIcon: Component<ChildProps> = ({
+export const AttendeesIcon: Component<IconProps> = ({
     children,
     title = "Antall plasser",
     className,
+    width,
 }) => (
-    <FlexIcon className={className} icon={<UsersIcon width={defaultIconSize} />} title={title}>
+    <FlexIcon
+        className={className}
+        icon={<UsersIcon width={width || defaultIconSize} />}
+        title={title}>
         {children}
     </FlexIcon>
 )
