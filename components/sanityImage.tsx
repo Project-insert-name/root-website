@@ -1,6 +1,6 @@
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import Image from "next/image"
-import { urlFor } from "@/sanity/utils"
+import { urlFor } from "@/sanity/lib/image"
 import { getImageDimensions } from "@sanity/asset-utils"
 
 interface SanityImageProps extends ImageProps {

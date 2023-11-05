@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "@sanity-typed/types"
-import { UsersIcon } from "@sanity/icons"
+import { UsersIcon } from "@heroicons/react/24/outline"
 
 export default defineType({
     name: "styrer",

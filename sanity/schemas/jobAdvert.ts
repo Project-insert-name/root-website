@@ -1,11 +1,11 @@
-import { defineArrayMember, defineField, defineType } from "@sanity-typed/types"
-import { CaseIcon } from "@sanity/icons"
+import { defineField, defineType } from "@sanity-typed/types"
+import { BriefcaseIcon } from "@heroicons/react/24/outline"
 
 export default defineType({
     name: "job_advert",
     type: "document",
     title: "Stillingsannonse",
-    icon: CaseIcon,
+    icon: BriefcaseIcon,
     fields: [
         defineField({
             name: "title",

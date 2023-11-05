@@ -1,5 +1,5 @@
-import { UserIcon, RobotIcon } from "@sanity/icons"
 import { defineArrayMember, defineField, defineType } from "@sanity-typed/types"
+import { UserIcon } from "@heroicons/react/24/outline"
 
 export default defineType({
     name: "styremedlem",
@@ -21,7 +21,6 @@ export default defineType({
             name: "rolle",
             type: "array",
             title: "Rolle",
-            icon: RobotIcon,
             of: [
                 defineArrayMember({
                     type: "reference",

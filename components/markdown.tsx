@@ -1,4 +1,4 @@
-import { fromMarkdown } from "@/sanity/utils"
+import { fromMarkdown } from "@/sanity/lib/utils"
 import type { Markdown } from "@/sanity/types"
 
 /**

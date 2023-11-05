@@ -1,17 +1,16 @@
-import { AddCircleIcon, RobotIcon } from "@sanity/icons"
 import { defineField, defineType } from "@sanity-typed/types"
+import { PlusCircleIcon } from "@heroicons/react/24/outline"
 
 export default defineType({
     name: "styre_roller",
     type: "document",
     title: "Roller i styret",
-    icon: AddCircleIcon,
+    icon: PlusCircleIcon,
     fields: [
         defineField({
             name: "name",
             type: "string",
             title: "Rolle i styret",
-            icon: RobotIcon,
             description: "Hvilken rolle kan medlemmer ha i styret f.eks leder",
         }),
     ],

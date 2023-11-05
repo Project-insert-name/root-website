@@ -1,5 +1,5 @@
 import type { JobAdvert } from "@/sanity/types"
-import { client } from "@/sanity"
+import { client } from "@/sanity/lib/client"
 
 /**
  * Henter ut alle stillingsannonser fra sanity
