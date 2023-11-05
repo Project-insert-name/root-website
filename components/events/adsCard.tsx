@@ -52,7 +52,7 @@ const SingleAd: Component<JobAdvert> = ({ title, deadline, image, slug }) => (
         <div className={"flex"}>
             <div>
                 <Link href={`stilling/${slug.current}`} className={"hover:underline"}>
-                    <h6>{title}</h6>
+                    <h6 className={"font-mono"}>{title}</h6>
                 </Link>
 
                 <DateIcon>

@@ -69,7 +69,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                 <EventMarker type={event_type} />
                 <div>
                     <Link href={`arrangement/${event_slug?.current}`} className={"hover:underline"}>
-                        <h6>{event_title}</h6>
+                        <h6 className={"font-mono"}>{event_title}</h6>
                     </Link>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
                         {startTime && (
@@ -144,11 +144,11 @@ const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     function getTypeColour() {
         switch (type) {
             case "bedpres":
-                return "bg-yellow-400"
+                return "bg-bedpress"
             case "social":
-                return "bg-blue-400"
+                return "bg-social"
             case "workshop":
-                return "bg-pink-400"
+                return "bg-workshop"
             default:
                 return "bg-gray-400"
         }
