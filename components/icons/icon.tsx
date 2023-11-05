@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import { CalendarIcon, ClockIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/outline"
 
 export const defaultIconSize = 20
+export const bigIconSize = 30
 
 interface IconProps extends ChildProps {
     width?: number

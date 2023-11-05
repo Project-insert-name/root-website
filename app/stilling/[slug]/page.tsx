@@ -1,10 +1,8 @@
 import { getJobAdvertBySlug, getJobAdverts } from "@/sanity/queries/jobAdvert"
-import SanityImage from "@/components/sanityImage"
 import { toFormatDate } from "@/utils/dateUtils"
-import { AttendeesIcon, DateIcon } from "@/components/icons/icon"
-import { ExternalLinkButton } from "@/components/button"
+import { bigIconSize, DateIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
-import Markdown from "@/components/markdown"
+import SingleInfoCard from "@/components/events/singleInfoCard"
 
 interface Params {
     slug: string
@@ -16,50 +14,44 @@ interface Params {
  * @param params Parametre fra URL
  */
 const JobAdvertPage: AsyncPage<Params> = async ({ params }) => {
-    const ad = await getJobAdvertBySlug(params!.slug)
+    const ad = await getJobAdvertBySlug(params.slug)
 
     if (!ad) return notFound()
 
     return (
-        <div className={"container mx-auto px-2 sm:w-[1000px]"}>
-            <h1 className={"mb-5 text-center text-2xl sm:text-4xl"}>{ad.title}</h1>
-            <h3 className={"text-center text-lg sm:text-2xl"}>{ad.company}</h3>
-            {ad.image && (
-                <SanityImage
-                    className={"mx-auto"}
-                    image={ad.image}
-                    width={500}
-                    height={500}
-                    alt={ad.image.alt ?? `Bilde for ${ad.title}`}
-                />
-            )}
-            <div className={"flex flex-wrap justify-between"}>
-                {ad.deadline && <Deadline deadline={ad.deadline}>Søknadsfrist:</Deadline>}
-                {ad.number_of_positions && (
-                    <AttendeesIcon title={`Antall stillinger er ${ad.number_of_positions}`}>
-                        Antall stillinger: {ad.number_of_positions}
-                    </AttendeesIcon>
-                )}
-            </div>
-
-            <Markdown className={"my-5"} markdown={ad.description} />
-
-            <div className={"flex justify-center"}>
-                <ExternalLinkButton href={ad.link}>Søk</ExternalLinkButton>
-            </div>
-        </div>
+        <SingleInfoCard
+            title={ad.title}
+            description={ad.description}
+            image={ad.image}
+            imageAlt={ad.image?.alt}
+            maxParticipants={
+                ad.number_of_positions
+                    ? `Antall stillinger er ${ad.number_of_positions}`
+                    : undefined
+            }
+            buttonText={"Søk"}
+            buttonUrl={ad.link}>
+            <Deadline deadline={ad.deadline}>Søknadsfrist:</Deadline>
+        </SingleInfoCard>
     )
 }
 
 export default JobAdvertPage
 
-const Deadline: Component<{ deadline: string } & ChildProps> = ({ deadline, children }) => {
+const Deadline: Component<{ deadline?: string } & ChildProps> = ({ deadline, children }) => {
+    if (!deadline) {
+        return (
+            <DateIcon title={`Søknadsfrist`} width={bigIconSize}>
+                Opptak skjer fortløpende
+            </DateIcon>
+        )
+    }
     const formatDate = toFormatDate(deadline)
     if (!formatDate) {
         return null
     }
     return (
-        <DateIcon title={`Søknadsfrist ${formatDate}`}>
+        <DateIcon title={`Søknadsfrist ${formatDate}`} width={bigIconSize}>
             {children} {formatDate}
         </DateIcon>
     )

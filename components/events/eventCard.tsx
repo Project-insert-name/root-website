@@ -64,7 +64,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
 }) => {
     const startTime = toFormatDateAndTime(event_start_time)
     return (
-        <div className={`mx-2 my-5 justify-between gap-4 ${className}`}>
+        <div className={`mx-2 my-5 justify-between gap-3 ${className}`}>
             <div className={"flex"}>
                 <EventMarker type={event_type} />
                 <div>
@@ -83,6 +83,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                 </div>
             </div>
 
+            {/*TODO alt*/}
             {event_image && (
                 <SanityImage
                     image={event_image}
