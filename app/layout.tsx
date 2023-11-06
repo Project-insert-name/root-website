@@ -19,7 +19,7 @@ export const metadata: Metadata = {
         "Informasjonsteknologi",
         "Dataingeniør",
     ],
-    themeColor: "#ffffff",
+    themeColor: "#F3F3F3",
 }
 
 /**
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
  */
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
     <html lang="nb">
-        <body className="relative min-h-screen">
+        <body className="bg-defaultBg relative min-h-screen">
             <Header />
             <br />
             <main className="pb-28">{children}</main>

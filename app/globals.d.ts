@@ -28,6 +28,7 @@ interface ImageProps extends DefaultProps {
     alt: string
     width?: number
     height?: number
+    objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down"
 }
 
 interface ChildProps extends DefaultProps {

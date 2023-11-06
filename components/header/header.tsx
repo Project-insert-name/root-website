@@ -14,7 +14,7 @@ const Header: Component = () => (
                 className={"relative z-20 mx-2 w-fit sm:mx-5"}>
                 {/*TODO test med ulike mobiler*/}
                 <Image
-                    src={"/Root-logo.svg"}
+                    src={"/root-logo.svg"}
                     alt={"Logo for linjeforeningen root"}
                     width={200}
                     height={200}

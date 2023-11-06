@@ -20,14 +20,18 @@ export const Button: Component<ButtonProps> = ({ children, className, ...props }
  * En stylet knapp i rootBlue farge og hvit tekst som åpner en ekstern lenke.
  * @param href Lenken som skal åpnes
  * @param children Innholdet i knappen
+ * @param className CSS-klassen til knappen
+ * @param iconWidth Bredde på lenke-ikonet
  */
-export const ExternalLinkButton: Component<{ href?: string } & ChildProps> = ({
+export const ExternalLinkButton: Component<{ href?: string; iconWidth?: number } & ChildProps> = ({
     href,
     children,
+    className,
+    iconWidth,
 }) => (
     <ExternalLink href={href}>
-        <Button className={"inline-flex items-center justify-center gap-2"}>
-            <LinkIcon width={defaultIconSize} />
+        <Button className={`flex items-center justify-center gap-2 ${className}`}>
+            <LinkIcon width={iconWidth || defaultIconSize} />
             {children}
         </Button>
     </ExternalLink>
