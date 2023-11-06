@@ -77,6 +77,17 @@ export default defineType({
             name: "event_image",
             type: "image",
             title: "Forsidebilde",
+            options: {
+                hotspot: true,
+            },
+            fields: [
+                defineField({
+                    name: "alt",
+                    type: "string",
+                    title: "Billdebeskrivelse",
+                    validation: Rule => Rule.required(),
+                }),
+            ],
         }),
         defineField({
             name: "event_application_url",

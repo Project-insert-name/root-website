@@ -83,14 +83,13 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                 </div>
             </div>
 
-            {/*TODO alt*/}
             {event_image && (
                 <SanityImage
                     image={event_image}
                     width={150}
                     height={75}
                     className={"rounded-xl"}
-                    alt={""}
+                    alt={event_image.alt}
                 />
             )}
         </div>
@@ -126,14 +125,13 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
                     )}
                     <MapIcon>{event_address_text}</MapIcon>
                 </div>
-                {/*TODO alt*/}
                 {event_image && (
                     <SanityImage
                         image={event_image}
                         width={100}
                         height={75}
                         className={"m-1 rounded-xl"}
-                        alt={""}
+                        alt={event_image.alt}
                     />
                 )}
             </div>

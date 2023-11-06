@@ -3,7 +3,7 @@ import type { DocumentValues, InferSchemaValues } from "@sanity-typed/types"
 
 export type EventType = "bedpres" | "workshop" | "social" | "other"
 
-export type Markdown = string
+export type MarkdownString = string
 
 /**
  * Inneholder alle typer tilknyttet sanity
@@ -15,18 +15,20 @@ export type SanityValues = InferSchemaValues<typeof config>
  */
 export type SanityDocuments = DocumentValues<SanityValues>
 
+export type SanityImageObject = SanityValues["event"]["event_image"]
+
 /**
  * Inneholder data knyttet til en Event, som bedriftspresentasjon, workshop, sosialt arrangement eller lignende.
  */
 export type RootEvent = SanityValues["event"] & {
-    event_description: Markdown
+    event_description: MarkdownString
 }
 
 /**
  * Inneholder data knyttet til en stillingsannonse.
  */
 export type JobAdvert = SanityValues["job_advert"] & {
-    description: Markdown
+    description: MarkdownString
 }
 
 export type Styrer = SanityValues["styrer"]
