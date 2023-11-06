@@ -1,6 +1,6 @@
 import SanityImage from "@/components/sanityImage"
 import { AttendeesIcon, bigIconSize, MapIcon } from "@/components/icons/icon"
-import { ExternalLinkButton } from "@/components/link"
+import { ExternalLinkButton } from "@/components/button"
 import Markdown from "@/components/markdown"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import { ExternalLink } from "@/components/link"
@@ -52,7 +52,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
                 {addressText && <Address address={addressText} url={addressUrl} />}
                 {children}
                 {maxParticipants && (
-                    <AttendeesIcon width={bigIconSize}>{maxParticipants}.</AttendeesIcon>
+                    <AttendeesIcon width={bigIconSize}>{maxParticipants}</AttendeesIcon>
                 )}
             </div>
 

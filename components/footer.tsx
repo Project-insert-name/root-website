@@ -10,13 +10,19 @@ const Footer: Component = ({ className, ...props }) => (
             <Divider />
 
             <div className={"my-3 flex gap-5"}>
-                <ExternalLink href={"https://www.facebook.com/RootLinjeforening"}>
+                <ExternalLink
+                    href={"https://www.facebook.com/RootLinjeforening"}
+                    aria-label={"Facebook"}>
                     <Facebook fill={"#0866FF"} width={iconSize} alt={"Facebook logo"} />
                 </ExternalLink>
-                <ExternalLink href={"https://www.instagram.com/linjeforeningenroot/"}>
+                <ExternalLink
+                    href={"https://www.instagram.com/linjeforeningenroot/"}
+                    aria-label={"Instagram"}>
                     <Instagram fill={"#E4405F"} width={iconSize} alt={"Instagram logo"} />
                 </ExternalLink>
-                <ExternalLink href={"https://github.com/Project-insert-name/root-website-frontend"}>
+                <ExternalLink
+                    href={"https://github.com/Project-insert-name/root-website-frontend"}
+                    aria-label={"GitHub"}>
                     <GitHub width={iconSize} alt={"GitHub logo"} />
                 </ExternalLink>
             </div>
