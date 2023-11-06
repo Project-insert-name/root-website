@@ -7,6 +7,7 @@ import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon"
 import { getNextEvents } from "@/sanity/queries/event"
 import { Suspense } from "react"
 import { Divider } from "@/components/divider"
+import { CircularProgressIndicator } from "@/components/suspense"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
@@ -15,7 +16,6 @@ interface EventCardProps extends DefaultProps {
 }
 
 // TODO slå sammen fellestrekk i wide og narrow komponentene
-// TODO bedre fallback for Suspense
 
 const EventCard: Component<EventCardProps> = ({
     eventTitle = "Arrangementer",
@@ -24,7 +24,7 @@ const EventCard: Component<EventCardProps> = ({
     className,
 }) => (
     <InfoCard cardTitle={eventTitle} showMoreUrl={showMoreUrl} className={className}>
-        <Suspense fallback={"Laster inn"}>
+        <Suspense fallback={<CircularProgressIndicator />}>
             <EventCardData emptyMessage={emptyMessage} />
         </Suspense>
     </InfoCard>
@@ -131,8 +131,8 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
                 {event_image && (
                     <SanityImage
                         image={event_image}
-                        width={100}
-                        height={75}
+                        width={130}
+                        height={65}
                         className={"m-1 rounded-xl"}
                         alt={""}
                     />

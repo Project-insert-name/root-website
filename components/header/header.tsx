@@ -13,9 +13,11 @@ import { useState } from "react"
 import Image from "next/image"
 import paths from "@/components/header/paths"
 import { Button } from "@/components/button"
+import { usePathname } from "next/navigation"
 
 const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const currentPath = usePathname()
     return (
         <Navbar
             onMenuOpenChange={setIsMenuOpen}
@@ -42,12 +44,12 @@ const Header: Component = () => {
                 {paths.map(item => (
                     <NavbarItem
                         key={item.path}
-                        isActive={item.path === "/"} // TODO marker aktiv side
+                        isActive={item.path === currentPath}
                         className={"text-white data-[active=true]:before:content-['/']"}>
                         <Link
                             className={"w-full text-inherit hover:text-white hover:underline"}
                             href={item.path}
-                            size="lg">
+                            size={"lg"}>
                             {item.name}
                         </Link>
                     </NavbarItem>
@@ -62,15 +64,14 @@ const Header: Component = () => {
             <NavbarMenu className={"flex h-3/4 flex-col justify-between py-20"}>
                 <div>
                     {paths.map((item, index) => (
-                        <NavbarMenuItem
-                            key={`${item}-${index}`}
-                            className={"mx-auto my-1 flex w-fit items-center gap-2"}>
-                            {item.icon}
+                        <NavbarMenuItem key={`${item}-${index}`} className={"mx-auto my-1  w-fit "}>
                             <Link
-                                color={index === 0 ? "primary" : "foreground"}
-                                className={"w-full text-2xl"}
+                                color={item.path === currentPath ? "primary" : "foreground"}
+                                className={"flex w-full items-center gap-2 text-2xl"}
                                 href={item.path}
                                 size={"lg"}>
+                                {item.icon}
+
                                 {item.name}
                             </Link>
                         </NavbarMenuItem>

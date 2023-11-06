@@ -1,7 +1,7 @@
 import { HomeIcon, PhotoIcon, UsersIcon } from "@heroicons/react/24/outline"
 import { type ReactNode } from "react"
 
-const defaultIconSize = 30
+const iconSize = 25
 
 export interface Path {
     name: string
@@ -13,17 +13,17 @@ const paths: Path[] = [
     {
         name: "Hjem",
         path: "/",
-        icon: <HomeIcon width={defaultIconSize} />,
+        icon: <HomeIcon width={iconSize} />,
     },
     {
         name: "Galleri",
         path: "/galleri",
-        icon: <PhotoIcon width={defaultIconSize} />,
+        icon: <PhotoIcon width={iconSize} />,
     },
     {
         name: "Om oss",
         path: "/om-oss",
-        icon: <UsersIcon width={defaultIconSize} />,
+        icon: <UsersIcon width={iconSize} />,
     },
 ]
 

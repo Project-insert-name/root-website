@@ -7,6 +7,7 @@ import { toFormatDate } from "@/utils/dateUtils"
 import { DateIcon } from "@/components/icons/icon"
 import { Suspense } from "react"
 import { Divider } from "@/components/divider"
+import { CircularProgressIndicator } from "@/components/suspense"
 
 interface AdsCardProps extends DefaultProps {
     cardTitle?: string
@@ -22,7 +23,7 @@ const AdsCard: Component<AdsCardProps> = ({
     className,
 }) => (
     <InfoCard cardTitle={cardTitle} showMoreUrl={showMoreUrl} className={className}>
-        <Suspense fallback={"Laster inn"}>
+        <Suspense fallback={<CircularProgressIndicator />}>
             <AdCardData emptyMessage={emptyMessage} />
         </Suspense>
     </InfoCard>
