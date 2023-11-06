@@ -1,14 +1,15 @@
 import { ExternalLink, MailLink } from "@/components/link"
 import { Facebook, GitHub, Instagram } from "@/components/icons/socials"
+import { Divider } from "@/components/divider"
 
 const iconSize = 30
 
 const Footer: Component = ({ className, ...props }) => (
     <footer className={`absolute bottom-0 min-h-[100px] w-full ${className}`} {...props}>
         <div className={"flex flex-col items-center justify-center"}>
-            <div className={"mx-auto my-3 w-3/4 border shadow-2xl shadow-black"} />
+            <Divider />
 
-            <div className={"mb-2 flex gap-5"}>
+            <div className={"my-3 flex gap-5"}>
                 <ExternalLink href={"https://www.facebook.com/RootLinjeforening"}>
                     <Facebook fill={"#0866FF"} width={iconSize} alt={"Facebook logo"} />
                 </ExternalLink>

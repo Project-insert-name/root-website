@@ -1,3 +1,7 @@
+import { Button } from "@/components/button"
+import { LinkIcon } from "@heroicons/react/24/outline"
+import { defaultIconSize } from "@/components/icons/icon"
+
 /**
  * En lenke til en ekstern nettside.
  * Nettsiden åpnes i et nytt vindu (target: _blank) uten tilgang til å endre foregående vindu (rel: noopener noreferrer).
@@ -30,5 +34,26 @@ export const MailLink: Component<{ mail?: string } & ChildProps> = ({
 }) => (
     <ExternalLink href={`mailto:${mail}`} {...props}>
         {children ? children : mail}
+    </ExternalLink>
+)
+
+/**
+ * En stylet knapp i rootBlue farge og hvit tekst som åpner en ekstern lenke.
+ * @param href Lenken som skal åpnes
+ * @param children Innholdet i knappen
+ * @param className CSS-klassen til knappen
+ * @param iconWidth Bredde på lenke-ikonet
+ */
+export const ExternalLinkButton: Component<{ href?: string; iconWidth?: number } & ChildProps> = ({
+    href,
+    children,
+    className,
+    iconWidth,
+}) => (
+    <ExternalLink href={href}>
+        <Button className={`flex items-center justify-center gap-2 ${className}`}>
+            <LinkIcon width={iconWidth || defaultIconSize} />
+            {children}
+        </Button>
     </ExternalLink>
 )

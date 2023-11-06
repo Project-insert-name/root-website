@@ -1,4 +1,4 @@
-import InfoCard, { Divider } from "@/components/events/infoCard"
+import InfoCard from "@/components/events/infoCard"
 import Link from "next/link"
 import type { EventType, RootEvent } from "@/sanity/types"
 import SanityImage from "@/components/sanityImage"
@@ -6,6 +6,7 @@ import { toFormatDateAndTime } from "@/utils/dateUtils"
 import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon"
 import { getNextEvents } from "@/sanity/queries/event"
 import { Suspense } from "react"
+import { Divider } from "@/components/divider"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
@@ -124,7 +125,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
                             <TimeIcon>{startTime.time}</TimeIcon>
                         </>
                     )}
-                    <MapIcon>{event_address_text}</MapIcon>
+                    {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
                 </div>
                 {/*TODO alt*/}
                 {event_image && (

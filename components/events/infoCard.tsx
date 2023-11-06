@@ -9,7 +9,7 @@ interface EventCardProps extends ChildProps {
 const InfoCard: Component<EventCardProps> = ({ cardTitle, showMoreUrl, className, children }) => (
     <div className={`grid content-between rounded-2xl border bg-white p-2 shadow-lg ${className}`}>
         <div>
-            <h2 className={"text-darkTitle my-2 text-center"}>{cardTitle}</h2>
+            <h2 className={"my-2 text-center text-darkTitle"}>{cardTitle}</h2>
             {children}
         </div>
 
@@ -20,5 +20,3 @@ const InfoCard: Component<EventCardProps> = ({ cardTitle, showMoreUrl, className
 )
 
 export default InfoCard
-
-export const Divider: Component = () => <div className={"mx-auto w-3/4 border-b"} />

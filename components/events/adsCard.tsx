@@ -1,4 +1,4 @@
-import InfoCard, { Divider } from "@/components/events/infoCard"
+import InfoCard from "@/components/events/infoCard"
 import Link from "next/link"
 import { getNextJobAdverts } from "@/sanity/queries/jobAdvert"
 import type { JobAdvert } from "@/sanity/types"
@@ -6,6 +6,7 @@ import SanityImage from "@/components/sanityImage"
 import { toFormatDate } from "@/utils/dateUtils"
 import { DateIcon } from "@/components/icons/icon"
 import { Suspense } from "react"
+import { Divider } from "@/components/divider"
 
 interface AdsCardProps extends DefaultProps {
     cardTitle?: string

@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import type { FC, ReactNode } from "react"
 import Footer from "@/components/footer"
 import Header from "@/components/header/header"
+import { Providers } from "@/app/providers"
 
 /**
  * Inneholder tittel som vises i fanen til nettleseren og beskrivelse som vises i søkeresultater.
@@ -29,11 +30,13 @@ export const metadata: Metadata = {
  */
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
     <html lang="nb">
-        <body className="bg-defaultBg relative min-h-screen">
-            <Header />
-            <br />
-            <main className="pb-28">{children}</main>
-            <Footer />
+        <body className="relative min-h-screen bg-defaultBg">
+            <Providers>
+                <Header />
+                <br />
+                <main className="pb-28">{children}</main>
+                <Footer />
+            </Providers>
         </body>
     </html>
 )

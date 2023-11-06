@@ -1,6 +1,6 @@
 import SanityImage from "@/components/sanityImage"
 import { AttendeesIcon, bigIconSize, MapIcon } from "@/components/icons/icon"
-import { ExternalLinkButton } from "@/components/button"
+import { ExternalLinkButton } from "@/components/link"
 import Markdown from "@/components/markdown"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import { ExternalLink } from "@/components/link"
@@ -46,7 +46,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
             </div>
         )}
 
-        <h1 className={"text-darkTitle my-5 text-center text-2xl sm:text-4xl"}>{title}</h1>
+        <h1 className={"my-5 text-center text-2xl text-darkTitle sm:text-4xl"}>{title}</h1>
         <div className={"px-32"}>
             <div className={"flex flex-wrap justify-center gap-5"}>
                 {addressText && <Address address={addressText} url={addressUrl} />}

@@ -1,45 +1,88 @@
-import Link from "next/link"
+"use client"
+import {
+    Navbar,
+    NavbarBrand,
+    NavbarContent,
+    NavbarItem,
+    Link,
+    NavbarMenuToggle,
+    NavbarMenu,
+    NavbarMenuItem,
+} from "@nextui-org/react"
+import { useState } from "react"
 import Image from "next/image"
-import HamburgerMenu from "@/components/header/hamburger"
 import paths from "@/components/header/paths"
+import { Button } from "@/components/button"
 
-const Header: Component = () => (
-    <header
-        className={`flex h-20 w-full items-center justify-between overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg`}>
-        <div className={"relative flex h-full w-max items-center"}>
-            <div className={"logo-backdrop z-10"} />
-            <Link
-                href={"/"}
-                title={"Root linjeforening sin logo"}
-                className={"relative z-20 mx-2 w-fit sm:mx-5"}>
-                {/*TODO test med ulike mobiler*/}
-                <Image
-                    src={"/root-logo.svg"}
-                    alt={"Logo for linjeforeningen root"}
-                    width={200}
-                    height={200}
+const Header: Component = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    return (
+        <Navbar
+            onMenuOpenChange={setIsMenuOpen}
+            isMenuOpen={isMenuOpen}
+            className={
+                "overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
+            }>
+            <NavbarBrand>
+                <div className={"logo-backdrop z-10"} />
+                <Link
+                    href={"/"}
+                    title={"Root linjeforening sin logo"}
+                    className={"relative z-20 w-fit"}>
+                    {/*TODO test med ulike mobiler*/}
+                    <Image
+                        src={"/root-logo.svg"}
+                        alt={"Logo for linjeforeningen root"}
+                        width={200}
+                        height={200}
+                    />
+                </Link>
+            </NavbarBrand>
+            <NavbarContent className={"hidden gap-4 sm:flex"} justify={"end"}>
+                {paths.map(item => (
+                    <NavbarItem
+                        key={item.path}
+                        isActive={item.path === "/"} // TODO marker aktiv side
+                        className={"text-white data-[active=true]:before:content-['/']"}>
+                        <Link
+                            className={"w-full text-inherit hover:text-white hover:underline"}
+                            href={item.path}
+                            size="lg">
+                            {item.name}
+                        </Link>
+                    </NavbarItem>
+                ))}
+            </NavbarContent>
+            <NavbarContent className={"sm:hidden"} justify={"end"}>
+                <NavbarMenuToggle
+                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                    className={"text-white"}
                 />
-            </Link>
-        </div>
-        <div>
-            <NavBar className={"hidden w-fit sm:flex"} />
-            <HamburgerMenu className={"z-30 mx-5 inline-flex sm:hidden"} />
-        </div>
-    </header>
-)
+            </NavbarContent>
+            <NavbarMenu className={"flex h-3/4 flex-col justify-between py-20"}>
+                <div>
+                    {paths.map((item, index) => (
+                        <NavbarMenuItem
+                            key={`${item}-${index}`}
+                            className={"mx-auto my-1 flex w-fit items-center gap-2"}>
+                            {item.icon}
+                            <Link
+                                color={index === 0 ? "primary" : "foreground"}
+                                className={"w-full text-2xl"}
+                                href={item.path}
+                                size={"lg"}>
+                                {item.name}
+                            </Link>
+                        </NavbarMenuItem>
+                    ))}
+                </div>
+
+                <Button className={"mx-auto w-fit"} onClick={() => setIsMenuOpen(false)}>
+                    Lukk vindu
+                </Button>
+            </NavbarMenu>
+        </Navbar>
+    )
+}
 
 export default Header
-
-const NavBar: Component = ({ className }) => (
-    <nav>
-        <ul className={`mx-5 flex gap-3 font-bold ${className}`}>
-            {paths.map(({ name, path }) => (
-                <li key={path}>
-                    <Link href={path} className={"!text-white"}>
-                        {name}
-                    </Link>
-                </li>
-            ))}
-        </ul>
-    </nav>
-)
