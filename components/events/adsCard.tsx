@@ -51,16 +51,12 @@ const AdCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessa
 
 const SingleAd: Component<JobAdvert> = ({ title, deadline, image, slug }) => (
     <div className={"mx-2 my-5 flex justify-between gap-3"}>
-        <div className={"flex"}>
-            <div>
-                <Link href={`stilling/${slug.current}`} className={"hover:underline"}>
-                    <h6 className={"font-mono"}>{title}</h6>
-                </Link>
+        <div>
+            <Link href={`stilling/${slug.current}`} className={"hover:underline"}>
+                <h6 className={"font-mono"}>{title}</h6>
+            </Link>
 
-                <DateIcon>
-                    {deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}
-                </DateIcon>
-            </div>
+            <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
         </div>
 
         {image && (
