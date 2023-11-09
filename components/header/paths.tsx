@@ -9,11 +9,17 @@ export interface Path {
     icon?: ReactNode
 }
 
+/**
+ * En liste over alle lenkene i header som vises kun i development-modus.
+ */
 const devPaths =
     process.env.NODE_ENV === "development"
-        ? [{ name: "Studio", path: "/studio", icon: <FilmIcon width={defaultIconSize} /> }]
+        ? [{ name: "Studio", path: "/studio", icon: <FilmIcon width={iconSize} /> }]
         : []
 
+/**
+ * En liste over alle lenkene i header, som alltid vises.
+ */
 const paths: Path[] = [
     {
         name: "Hjem",
