@@ -11,7 +11,7 @@ export default function OmOssPage() {
             </div>
 
             <div className={`pl-1 w-3/5 `}>
-                //TODO lage komponet til å vise innhold
+                {/*TODO lage komponet til å vise innhold*/}
                 <EventCard showMoreUrl={"https://www.tv2.no"}/>
             </div>
         </div>
