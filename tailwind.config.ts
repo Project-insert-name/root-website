@@ -12,6 +12,9 @@ const config: Config = {
                 social: "#09B5FF",
                 workshop: "#FF0961",
             },
+            maxWidth: {
+                'xxs': '260px'
+            }
         },
     },
     plugins: [],
