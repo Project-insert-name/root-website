@@ -1,9 +1,18 @@
 import React from "react"
+import SideMenu from "@/components/sideMenu";
+import EventCard from "@/components/events/eventCard";
 
 export default function OmOssPage() {
     return (
-        <div>
-            <header>Om Oss</header>
+        <div className={`flex flex-row  mt-2`}>
+
+            <div className={`pr-1`}>
+                <SideMenu/>
+            </div>
+
+            <div className={`a`}>
+                <EventCard showMoreUrl={"https://www.tv2.no"}/>
+            </div>
         </div>
     )
 }
