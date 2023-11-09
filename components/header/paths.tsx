@@ -1,4 +1,4 @@
-import { HomeIcon, PhotoIcon, UsersIcon } from "@heroicons/react/24/outline"
+import { FilmIcon, HomeIcon, PhotoIcon, UsersIcon } from "@heroicons/react/24/outline"
 import { type ReactNode } from "react"
 
 const iconSize = 25
@@ -8,6 +8,11 @@ export interface Path {
     path: string
     icon?: ReactNode
 }
+
+const devPaths =
+    process.env.NODE_ENV === "development"
+        ? [{ name: "Studio", path: "/studio", icon: <FilmIcon width={defaultIconSize} /> }]
+        : []
 
 const paths: Path[] = [
     {
@@ -25,6 +30,7 @@ const paths: Path[] = [
         path: "/om-oss",
         icon: <UsersIcon width={iconSize} />,
     },
+    ...devPaths,
 ]
 
 export default paths
