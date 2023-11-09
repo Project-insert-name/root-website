@@ -1,51 +1,38 @@
-import type { SanityDocument } from "@sanity/client"
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
-import { SanityImageAsset, SanityImageCrop, SanityImageHotspot } from "@sanity/asset-utils"
+import config from "@/sanity.config"
+import type { DocumentValues, InferSchemaValues } from "@sanity-typed/types"
 
 export type EventType = "bedpres" | "workshop" | "social" | "other"
 
-export type Markdown = string
+export type MarkdownString = string
 
 /**
- * Slug er en unik streng som definerer url-en på nettsiden.
- * current er den faktiske strengen som brukes i url-en.
+ * Inneholder alle typer tilknyttet sanity
  */
-export type Slug = {
-    readonly current: string
-}
+export type SanityValues = InferSchemaValues<typeof config>
+
+/**
+ * Inneholder alle schemas som er definert i sanity/schemas, som en union type.
+ */
+export type SanityDocuments = DocumentValues<SanityValues>
+
+export type SanityImageObject = SanityValues["event"]["event_image"]
 
 /**
  * Inneholder data knyttet til en Event, som bedriftspresentasjon, workshop, sosialt arrangement eller lignende.
  */
-export interface RootEvent extends SanityDocument {
-    readonly event_title: string
-    readonly event_description?: Markdown
-    readonly event_type: EventType
-    readonly event_start_time: string
-    readonly event_max_attendees?: number
-    readonly event_registration_deadline?: string
-    readonly event_address_text?: string
-    readonly event_address_url?: string
-    readonly event_image?: SanityImageSource
-    readonly event_application_url?: string
-    readonly event_slug: Slug
+export type RootEvent = SanityValues["event"] & {
+    event_description: MarkdownString
 }
 
 /**
  * Inneholder data knyttet til en stillingsannonse.
  */
-export interface JobAdvert extends SanityDocument {
-    readonly title: string
-    readonly company: string
-    readonly slug: Slug
-    readonly link: string
-    readonly description?: Markdown
-    readonly deadline?: string
-    readonly number_of_positions?: number
-    readonly image?: {
-        readonly asset: SanityImageAsset
-        readonly crop?: SanityImageCrop
-        readonly hotspot?: SanityImageHotspot
-        readonly alt: string
-    }
+export type JobAdvert = SanityValues["job_advert"] & {
+    description: MarkdownString
 }
+
+export type Styrer = SanityValues["styrer"]
+
+export type StyreMedlem = SanityValues["styremedlem"]
+
+export type StyreRoller = SanityValues["styre_roller"]
