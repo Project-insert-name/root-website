@@ -2,12 +2,12 @@ import InfoCard from "@/components/events/infoCard"
 import Link from "next/link"
 import { getNextJobAdverts } from "@/sanity/queries/jobAdvert"
 import type { JobAdvert } from "@/sanity/types"
-import SanityImage from "@/components/sanityImage"
 import { toFormatDate } from "@/utils/dateUtils"
 import { DateIcon } from "@/components/icons/icon"
 import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
+import Thumbnail from "@/components/events/thumbnail"
 
 interface AdsCardProps extends DefaultProps {
     cardTitle?: string
@@ -40,7 +40,8 @@ const AdCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessa
                 adverts.map((ad, index) => (
                     <div key={ad._id}>
                         {index !== 0 && <Divider />}
-                        <SingleAd {...ad} />
+                        <SingleAdWide {...ad} className={"hidden sm:flex"} />
+                        <SingleAdNarrow {...ad} className={"flex sm:hidden"} />
                     </div>
                 ))
             ) : (
@@ -50,8 +51,14 @@ const AdCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessa
     )
 }
 
-const SingleAd: Component<JobAdvert> = ({ title, deadline, image, slug }) => (
-    <div className={"mx-2 my-5 flex justify-between gap-3"}>
+const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
+    className,
+    title,
+    deadline,
+    image,
+    slug,
+}) => (
+    <div className={`mx-2 my-5 justify-between gap-3 ${className}`}>
         <div>
             <Link href={`stilling/${slug.current}`} className={"hover:underline"}>
                 <h6 className={"font-mono"}>{title}</h6>
@@ -60,11 +67,33 @@ const SingleAd: Component<JobAdvert> = ({ title, deadline, image, slug }) => (
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
         </div>
 
-        {image && <SanityImage image={image} alt={image.alt} width={125} height={75} />}
+        <Thumbnail image={image} />
+    </div>
+)
+
+const SingleAdNarrow: Component<JobAdvert & DefaultProps> = ({
+    className,
+    title,
+    deadline,
+    image,
+    slug,
+}) => (
+    <div className={`mx-1 my-5 w-full flex-col ${className}`}>
+        <Link href={`stilling/${slug.current}`} className={"hover:underline"}>
+            <h6 className={"font-mono"}>{title}</h6>
+        </Link>
+        <div className={"flex justify-between"}>
+            <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
+            <Thumbnail image={image} width={130} />
+        </div>
     </div>
 )
 
 const Date: Component<{ deadline: string }> = ({ deadline }) => {
     const date = toFormatDate(deadline)
-    return <span className={"flex flex-col gap-2 sm:flex-row"}>Søknadsfrist {date}</span>
+    return (
+        <div className={"flex flex-col sm:flex-row sm:gap-1"}>
+            <p>Søknadsfrist:</p> <p>{date}</p>
+        </div>
+    )
 }

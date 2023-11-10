@@ -22,6 +22,7 @@ const Header: Component = () => {
         <Navbar
             onMenuOpenChange={setIsMenuOpen}
             isMenuOpen={isMenuOpen}
+            shouldHideOnScroll={true}
             className={
                 "overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
             }>

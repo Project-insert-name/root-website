@@ -1,21 +1,19 @@
 import InfoCard from "@/components/events/infoCard"
 import Link from "next/link"
 import type { EventType, RootEvent } from "@/sanity/types"
-import SanityImage from "@/components/sanityImage"
 import { toFormatDateAndTime } from "@/utils/dateUtils"
 import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon"
 import { getNextEvents } from "@/sanity/queries/event"
 import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
+import Thumbnail from "@/components/events/thumbnail"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
     showMoreUrl: string
     emptyMessage?: string
 }
-
-// TODO slå sammen fellestrekk i wide og narrow komponentene
 
 const EventCard: Component<EventCardProps> = ({
     eventTitle = "Arrangementer",
@@ -84,15 +82,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                 </div>
             </div>
 
-            {event_image && (
-                <SanityImage
-                    image={event_image}
-                    width={150}
-                    height={75}
-                    className={"rounded-xl"}
-                    alt={event_image.alt}
-                />
-            )}
+            <Thumbnail image={event_image} />
         </div>
     )
 }
@@ -112,7 +102,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     const startTime = toFormatDateAndTime(event_start_time)
     return (
         <div className={`mx-1 my-5 flex w-full flex-col ${className}`}>
-            <Link href={`arrangement/${event_slug?.current}`} className={"hover:underline"}>
+            <Link href={`arrangement/${event_slug.current}`} className={"hover:underline"}>
                 <h6>{event_title}</h6>
             </Link>
             <div className={"inline-flex justify-between"}>
@@ -126,15 +116,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
                     )}
                     {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
                 </div>
-                {event_image && (
-                    <SanityImage
-                        image={event_image}
-                        width={130}
-                        height={65}
-                        className={"m-1 rounded-xl"}
-                        alt={event_image.alt}
-                    />
-                )}
+                <Thumbnail image={event_image} width={130} />
             </div>
         </div>
     )
@@ -154,5 +136,9 @@ const EventMarker: Component<{ type: EventType }> = ({ type }) => {
         }
     }
 
-    return <div className={`mr-2 h-full w-2 rounded-xl ${getTypeColour()}`} />
+    return (
+        <div>
+            <div className={`mr-2 h-full w-2 rounded-xl ${getTypeColour()}`} />
+        </div>
+    )
 }

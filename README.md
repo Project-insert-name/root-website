@@ -5,6 +5,7 @@ Laget av PIN
 ## Stack
 
 -   [Next.js](https://nextjs.org/)
+-   [NextUI](https://nextui.org/)
 -   [Tailwind CSS](https://tailwindcss.com/)
 -   [pnpm](https://pnpm.js.org/)
 -   [TypeScript](https://www.typescriptlang.org/)

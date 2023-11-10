@@ -8,6 +8,13 @@ interface IconProps extends ChildProps {
     width?: number
 }
 
+/**
+ * En generisk ikon som vises sammen med tekst
+ * @param icon Ikon som skal vises. Kan også være annen JSX
+ * @param children Tekst eller annen JSX som skal vises sammen med ikonet
+ * @param className CSS-klassenavn
+ * @param props Andre props som skal sendes til div-elementet
+ */
 export const FlexIcon: Component<{ icon: ReactNode } & ChildProps> = ({
     icon,
     children,
@@ -15,7 +22,7 @@ export const FlexIcon: Component<{ icon: ReactNode } & ChildProps> = ({
     ...props
 }) => (
     <div className={`flex items-center gap-1 text-gray-700 ${className}`} {...props}>
-        {icon}
+        <div>{icon}</div>
         {children}
     </div>
 )
