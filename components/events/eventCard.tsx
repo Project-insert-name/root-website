@@ -24,7 +24,7 @@ const EventCard: Component<EventCardProps> = ({
     className,
 }) => (
     <InfoCard cardTitle={eventTitle} showMoreUrl={showMoreUrl} className={className}>
-        <Suspense fallback={<CircularProgressIndicator />}>
+        <Suspense fallback={<CircularProgressIndicator aria-label={"Laster inn arrangementer"} />}>
             <EventCardData emptyMessage={emptyMessage} />
         </Suspense>
     </InfoCard>

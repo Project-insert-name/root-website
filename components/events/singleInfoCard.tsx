@@ -29,31 +29,33 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
     className,
     children,
 }) => (
-    <div
-        className={`container m-2 mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
-        {image && (
-            <div className={"relative h-[250px] w-full"}>
-                <SanityImage image={image} alt={`Bilde for ${image.alt}`} fill />
-            </div>
-        )}
+    <div className={"p-2"}>
+        <div
+            className={`container mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
+            {image && (
+                <div className={"relative h-[150px] w-full sm:h-[250px]"}>
+                    <SanityImage image={image} alt={image.alt} fill />
+                </div>
+            )}
 
-        <h1 className={"my-5 text-center text-2xl text-darkTitle sm:text-4xl"}>{title}</h1>
-        <div className={"px-5 sm:px-32"}>
-            <div className={"flex flex-wrap justify-center gap-5"}>
-                {addressText && <Address address={addressText} url={addressUrl} />}
-                {children}
-                {maxParticipants && (
-                    <AttendeesIcon width={bigIconSize}>{maxParticipants}</AttendeesIcon>
-                )}
-            </div>
+            <h1 className={"my-5 text-center text-2xl text-darkTitle sm:text-4xl"}>{title}</h1>
+            <div className={"px-5 sm:px-32"}>
+                <div className={"flex flex-wrap justify-center gap-5"}>
+                    {addressText && <Address address={addressText} url={addressUrl} />}
+                    {children}
+                    {maxParticipants && (
+                        <AttendeesIcon width={bigIconSize}>{maxParticipants}</AttendeesIcon>
+                    )}
+                </div>
 
-            <Markdown className={"my-5"} markdown={description} />
+                <Markdown className={"my-5"} markdown={description} />
+            </div>
+            {typeof buttonUrl != "undefined" && (
+                <div className={"flex justify-center"}>
+                    <ExternalLinkButton href={buttonUrl}>{buttonText}</ExternalLinkButton>
+                </div>
+            )}
         </div>
-        {typeof buttonUrl != "undefined" && (
-            <div className={"flex justify-center"}>
-                <ExternalLinkButton href={buttonUrl}>{buttonText}</ExternalLinkButton>
-            </div>
-        )}
     </div>
 )
 

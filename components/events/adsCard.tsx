@@ -23,7 +23,8 @@ const AdsCard: Component<AdsCardProps> = ({
     className,
 }) => (
     <InfoCard cardTitle={cardTitle} showMoreUrl={showMoreUrl} className={className}>
-        <Suspense fallback={<CircularProgressIndicator />}>
+        <Suspense
+            fallback={<CircularProgressIndicator aria-label={"Laster inn stillingsannonser"} />}>
             <AdCardData emptyMessage={emptyMessage} />
         </Suspense>
     </InfoCard>
@@ -59,14 +60,7 @@ const SingleAd: Component<JobAdvert> = ({ title, deadline, image, slug }) => (
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
         </div>
 
-        {image && (
-            <SanityImage
-                image={image}
-                alt={image.alt ?? "Logo til: " + title}
-                width={125}
-                height={75}
-            />
-        )}
+        {image && <SanityImage image={image} alt={image.alt} width={125} height={75} />}
     </div>
 )
 

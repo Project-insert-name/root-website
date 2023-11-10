@@ -30,7 +30,8 @@ const Header: Component = () => {
                 <Link
                     href={"/"}
                     title={"Root linjeforening sin logo"}
-                    className={"relative z-20 w-fit"}>
+                    className={"relative z-20 w-fit"}
+                    aria-label={"Root linjeforening sin logo"}>
                     {/*TODO test med ulike mobiler*/}
                     <Image
                         src={"/root-logo.svg"}
