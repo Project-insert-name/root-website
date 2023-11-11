@@ -14,19 +14,15 @@ const Thumbnail: Component<
         width?: number
         heightWidthRatio?: number
     }
-> = ({ className, image, width = 150, heightWidthRatio = 2 }) => {
-    if (image) {
-        return (
-            <SanityImage
-                image={image}
-                width={width}
-                height={width / heightWidthRatio}
-                className={`m-1 rounded-xl ${className}`}
-                alt={image.alt}
-            />
-        )
-    }
-    return null
-}
+> = ({ className, image, width = 150, heightWidthRatio = 2 }) =>
+    image ? (
+        <SanityImage
+            image={image}
+            width={width}
+            height={width / heightWidthRatio}
+            className={`rounded-xl ${className}`}
+            alt={image.alt}
+        />
+    ) : null
 
 export default Thumbnail
