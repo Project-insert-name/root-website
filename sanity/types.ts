@@ -23,6 +23,10 @@ export type SanityImageObject = SanityValues["event"]["event_image"]
 export type RootEvent = SanityValues["event"] & {
     event_description: MarkdownString
 }
+/**
+ * Inneholder data knyttet til et bildegalleri
+ */
+export type ImageGallery = SanityValues["image_gallery"]
 
 /**
  * Inneholder data knyttet til en stillingsannonse.
