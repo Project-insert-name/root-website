@@ -1,6 +1,28 @@
 # Root Hjemmeside
 
-Laget av PIN
+Laget av **PIN**
+
+---
+
+## Innhold
+
+-   [Stack](#stack)
+-   [Setup](#setup)
+
+    -   [Installere avhengigheter](#installere-avhengigheter)
+    -   [Prettier](#prettier)
+        -   [VSCode](#vscode)
+        -   [Intellij / Webstorm / Annen JetBrains IDE](#intellij--webstorm--annen-jetbrains-ide)
+    -   [Starte utviklingsserver](#starte-utviklingsserver)
+
+-   [Praktisk info](#praktisk-info)
+    -   [App router](#app-router)
+    -   [Mappestruktur](#mappestruktur)
+    -   [Server components](#server-components)
+    -   [PNPM](#pnpm)
+    -   [Sanity](#sanity)
+        -   [Sanity Studio](#sanity-studio)
+        -   [Sanity Typed](#sanity-typed)
 
 ## Stack
 
@@ -45,6 +67,14 @@ Slik at prettier formatterer koden din automatisk når du lagrer.
 Gå til "Language & Frameworks -> JavaScript -> Prettier", sett configuration til automatic og kryss av for "Run on
 save".
 
+### Starte utviklingsserver
+
+```bash
+pnpm dev
+# eller
+next dev
+```
+
 ## Praktisk info
 
 Se
@@ -64,14 +94,14 @@ Filer som heter `layout.tsx` blir automatisk wrappet rundt alle andre routes i s
 
 ### Mappestruktur
 
-| Mappe      | Beskrivelse                                                        |
-| ---------- | ------------------------------------------------------------------ |
-| app        | Filer knyttet til routes/pages                                     |
-| components | React komponenter som brukes av pages eller andre komponenter      |
-| hooks      | Custom hooks som kan brukes i client components på nettsiden       |
-| public     | Bilder, fonter og andre ikke-kode filer som skal vises i nettsiden |
-| sanity     | Filer knyttet til Sanity, som queries, typer og andre ting         |
-| utils      | Nyttige hjelpefunksjoner                                           |
+| Mappe      | Beskrivelse                                                         |
+| ---------- | ------------------------------------------------------------------- |
+| app        | Filer knyttet til routes/pages                                      |
+| components | React komponenter som brukes av pages eller andre komponenter       |
+| hooks      | Custom hooks som kan brukes i client components på nettsiden        |
+| public     | Bilder, fonter og andre ikke-kode filer som skal vises i nettsiden  |
+| sanity     | Filer knyttet til Sanity. Som schemas, queries, typer og andre ting |
+| utils      | Nyttige hjelpefunksjoner                                            |
 
 ### Server components
 
@@ -89,3 +119,43 @@ skrive "use client" i toppen av filen.
 Hvis du skal installere en ny pakke, bruk kommandoen `pnpm -w add din-pakke`.
 
 De fleste kommandoer fra **NPM** virker også med **PNPM**
+
+### Sanity
+
+**Sanity** er et headless CMS som brukes til å administrere innholdet på nettsiden.
+
+Innhold defineres ved hjelp av [schemas](https://www.sanity.io/docs/schema-types) som er laget i `.ts` filer.
+Schemas legges i `sanity/schemas`, og importeres inn i `sanity/schema.ts` og legges til i `types` listen.
+
+#### Sanity Studio
+
+[Studio](https://www.sanity.io/studio) er et webgrensesnitt som brukes til å administrere innholdet på nettsiden.
+Studioet er tilgjengelig på `/studio`.
+
+For å bruke studioet må du først ha fått tilgang til Sanity, via en invitasjon på epost.
+
+#### Sanity Typed
+
+[Sanity typed](https://www.sanity.io/plugins/sanity-typed) er en plugin som genererer TypeScript typer basert på Sanity
+schemas.
+
+For at typene skal genereres riktig, må imports for `defineType`, `defineField` og lignende være
+fra `@sanity-typed/types` ikke `sanity`.
+Referanser i schema må også markeres med `as const` for å ikke gi en feilmelding.
+
+For å lage en type for et schema, må det legges inn i `sanity/types.ts`
+
+```ts
+// Henter ut typene fra schema som heter "event"
+export type RootEvent = SanityValues["event"]
+```
+
+Merk at typer fra plugins blir ikke oppdaget av `sanity-typed` og de vil få typen `unknown`.
+De kan bli gitt en type explicit ved å legge det til i ts typen.
+
+```ts
+export type RootEvent = SanityValues["event"] & {
+    // Overskriver eksisterende type som er "unknown"
+    description: Markdown
+}
+```
