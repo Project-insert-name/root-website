@@ -1,5 +1,5 @@
 import SanityImage from "@/components/sanityImage"
-import type { SanityImageObject } from "@/sanity/types"
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 /**
  * En thumbnail som viser et bilde.
@@ -10,19 +10,22 @@ import type { SanityImageObject } from "@/sanity/types"
  */
 const Thumbnail: Component<
     DefaultProps & {
-        image?: SanityImageObject
+        image: SanityImageSource & { alt: string }
         width?: number
         heightWidthRatio?: number
     }
-> = ({ className, image, width = 150, heightWidthRatio = 2 }) =>
-    image ? (
+> = ({ className, image, width = 150, heightWidthRatio = 2 }) => (
+    <div
+        style={{ minWidth: width, height: width / heightWidthRatio }}
+        className={"relative flex items-center"}>
         <SanityImage
             image={image}
-            width={width}
-            height={width / heightWidthRatio}
-            className={`rounded-xl ${className}`}
             alt={image.alt}
+            className={`rounded-xl ${className}`}
+            fill
+            sizes={"33vw"}
         />
-    ) : null
+    </div>
+)
 
 export default Thumbnail

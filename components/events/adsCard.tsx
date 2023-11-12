@@ -67,7 +67,7 @@ const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
         </div>
 
-        <Thumbnail image={image} />
+        {image && <Thumbnail image={image} />}
     </div>
 )
 
@@ -84,7 +84,7 @@ const SingleAdNarrow: Component<JobAdvert & DefaultProps> = ({
         </Link>
         <div className={"flex justify-between"}>
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
-            <Thumbnail image={image} width={130} />
+            {image && <Thumbnail image={image} width={130} />}
         </div>
     </div>
 )

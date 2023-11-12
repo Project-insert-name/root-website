@@ -28,15 +28,13 @@ const Header: Component = () => {
             }>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
-                <Link
-                    href={"/"}
-                    title={"Root linjeforening sin logo"}
-                    className={"relative z-20 w-fit"}
-                    aria-label={"Root linjeforening sin logo"}>
+                <Link href={"/"} title={"Root linjeforening sin logo"} className={"relative z-20"}>
                     {/*TODO test med ulike mobiler*/}
                     <Image
                         src={"/root-logo.svg"}
                         alt={"Logo for linjeforeningen root"}
+                        /*Bredde og høyde må settes i className også, for å unngå advarsler*/
+                        className={"h-[200px] w-[200px]"}
                         width={200}
                         height={200}
                     />

@@ -82,7 +82,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                 </div>
             </div>
 
-            <Thumbnail image={event_image} />
+            {event_image && <Thumbnail image={event_image} />}
         </div>
     )
 }
@@ -116,7 +116,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
                     )}
                     {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
                 </div>
-                <Thumbnail image={event_image} width={130} />
+                {event_image && <Thumbnail image={event_image} width={130} />}
             </div>
         </div>
     )

@@ -23,7 +23,6 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
             title={event.event_title}
             description={event.event_description}
             image={event.event_image}
-            imageAlt={"Bilde for " + event.event_title}
             maxParticipants={
                 event.event_max_attendees
                     ? `Antall plasser er ${event.event_max_attendees}`

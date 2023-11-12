@@ -6,16 +6,20 @@ import { getImageDimensions } from "@sanity/asset-utils"
 interface SanityImageProps extends ImageProps {
     image: SanityImageSource
     fill?: boolean
+    sizes?: string
 }
 
 /**
- * Komponent for å vise bilder fra Sanity
+ * Komponent for å vise bilder fra Sanity. Basert på Next sin Image-komponent.
  * @param image Bildet som skal vises
  * @param alt Alt-tekst for bildet (for skjermlesere)
  * @param width Bredde på bildet
  * @param height Høyde på bildet
  * @param fill Om bildet skal fylle hele bredden. Hvis den er true, vil width og height bli ignorert
+ * @param sizes Størrelser som skal brukes for å laste inn bildet.
  * @param props Andre props som skal sendes til Image-komponenten
+ *
+ * @see https://nextjs.org/docs/app/api-reference/components/image
  */
 const SanityImage: Component<SanityImageProps> = ({
     image,
