@@ -1,27 +1,20 @@
-interface MenuItem {
-    title: string,
-    slug: string
-}
+import {InfoSider} from "@/sanity/types";
+import {getAllInfoPages} from "@/sanity/queries/omOss";
 
-interface SideMenu extends DefaultProps {
-    menuItems?: Array<MenuItem>
-    selectedItem?: MenuItem
-}
+const SideMenu: Component<SideMenuProps> = ({
+    selectedSlug,
+    className,
+}) => (
+    <SideMenuData emptyMessage={"tomt"} selectedSlug={selectedSlug} />
+)
 
-const SideMenu: Component<SideMenu> = ({
-                                           menuItems = [
-                                               {title: "Om Root", slug: "kommer"},
-                                               {title: "Styret", slug: "kommer"},
-                                               {title: "PIN kodegruppe", slug: "kommer"}
-
-                                           ],
-                                           selectedItem = menuItems[0]
-                                       }) => {
+const SideMenuData:AsyncComponent<{emptyMessage: string, selectedSlug: string}> = async ({emptyMessage, selectedSlug}) => {
+    const menuItems = await getAllInfoPages()
 
     const listItems = menuItems.map(item =>
         <div className={` text-start text-2xl p-2 hover:text-rootBlue `} >
-            {item === selectedItem? <div className={`text-rootBlue`}>{item.title}</div>:
-                item.title
+            {item.info_slug.current === selectedSlug? <div className={`text-rootBlue`}>{item.info_title}</div>:
+                item.info_title
             }
         </div>
 
@@ -30,7 +23,6 @@ const SideMenu: Component<SideMenu> = ({
 
 return (
     <div
-
         className={`flex flex-col divide-y pl-1 h-fit max-w-xxs w-full rounded-r-2xl border bg-white p-2 shadow-lg`}>
         {listItems}
     </div>

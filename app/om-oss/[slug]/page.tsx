@@ -7,7 +7,7 @@ export default function OmOssPage() {
         <div className={`flex flex-row mt-2`}>
 
             <div className={`w-1/5 pr-1`}>
-                <SideMenu/>
+                <SideMenu SelectedSlug={window.location.pathname.split('/').pop()} /> //TODO hmm.. hvordan får denne til  p fb
             </div>
 
             <div className={`pl-1 w-3/5 `}>
