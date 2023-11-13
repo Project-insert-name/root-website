@@ -1,4 +1,4 @@
-import { defineType, defineField } from "@sanity-typed/types"
+import { defineType, defineField, defineArrayMember } from "@sanity-typed/types"
 import { PhotoIcon } from "@heroicons/react/24/outline"
 
 export default defineType({
@@ -28,8 +28,9 @@ export default defineType({
             name: "images",
             type: "array",
             title: "Bilder",
+            validation: Rule => Rule.required(),
             of: [
-                {
+                defineArrayMember({
                     name: "image",
                     type: "image",
                     title: "Bilde",
@@ -37,13 +38,13 @@ export default defineType({
                         hotspot: true,
                     },
                     fields: [
-                        {
+                        defineField({
                             name: "alt_text",
                             type: "string",
                             title: "Alternativ bildetekst",
-                        },
+                        }),
                     ],
-                },
+                }),
             ],
             options: {
                 layout: "grid",

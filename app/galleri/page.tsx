@@ -1,15 +1,28 @@
-import { getAllEvents, getEventBySlug } from "@/sanity/queries/event"
-import { toFormatDateAndTime } from "@/utils/dateUtils"
-import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
-import { notFound } from "next/navigation"
+import Gallery from "@/components/imageGallery/gallery"
+import { getAllImageGalleries } from "@/sanity/queries/imageGallery"
+import SanityImage from "@/components/sanityImage"
+import Link from "next/link"
 
 /**
- * Side for et enkelt arrangement. Siden er dynamisk basert på arrangementets slug variabel.
- * Dersom slug ikke finnes, returneres en 404 side.
- * @param params Parametre fra URL
+ * Side for liste over alle gallerier
  */
 const ImageGalleryListPage: AsyncPage = async () => {
-    return <h1>Hei</h1>
-}
+    const galleries = await getAllImageGalleries()
 
+    return (
+        <Gallery heading="Bildegallerier">
+            {galleries.map(gallery => (
+                <Link href={`/galleri/${gallery.slug.current}`}>
+                    {/*//TODO Probably need to make some sort of image wrapper component*/}
+                    <SanityImage
+                        image={gallery.images?.[0]}
+                        title={gallery.title}
+                        alt={gallery.title}
+                        loading="lazy"
+                    />
+                </Link>
+            ))}
+        </Gallery>
+    )
+}
 export default ImageGalleryListPage

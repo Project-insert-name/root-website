@@ -6,7 +6,7 @@ import type { ImageGallery } from "@/sanity/types"
  * @returns En liste med alle events
  */
 export async function getAllImageGalleries(): Promise<ReadonlyArray<ImageGallery>> {
-    return await client.fetch('*[_type == "image_gallery | order(_createdAt)"]')
+    return await client.fetch('*[_type == "image_gallery"] | order(_createdAt desc)')
 }
 
 /**

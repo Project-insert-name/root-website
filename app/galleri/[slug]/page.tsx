@@ -1,9 +1,9 @@
-import { getImageGalleryBySlug } from "@/sanity/queries/imageGallery"
-import { toFormatDateAndTime } from "@/utils/dateUtils"
-import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
+import { getImageGalleryBySlug } from "@/sanity/queries/imageGallery"
 import Gallery from "@/components/imageGallery/gallery"
 import SanityImage from "@/components/sanityImage"
+import Link from "next/link"
+import { LeftArrowIcon } from "@/components/icons/icon"
 
 interface Params {
     slug: string
@@ -19,7 +19,23 @@ const GalleryPage: AsyncPage<Params> = async ({ params }) => {
 
     if (!imageGallery) return notFound()
 
-    return <Gallery heading={imageGallery.title}></Gallery>
+    return (
+        <Gallery heading={imageGallery.title}>
+            <Link
+                href={"/galleri/"}
+                className="flex items-center justify-center bg-slate-200"
+                title="Tilbake til galleri">
+                <LeftArrowIcon width={75}></LeftArrowIcon>
+            </Link>
+            {imageGallery.images?.map(image => (
+                <SanityImage
+                    image={image}
+                    alt={image.alt_text ? image.alt_text : ""}
+                    loading="lazy"
+                />
+            ))}
+        </Gallery>
+    )
 }
 
 export default GalleryPage

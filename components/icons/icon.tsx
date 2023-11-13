@@ -1,5 +1,11 @@
 import { ReactNode } from "react"
-import { CalendarIcon, ClockIcon, MapPinIcon, UsersIcon } from "@heroicons/react/24/outline"
+import {
+    CalendarIcon,
+    ClockIcon,
+    MapPinIcon,
+    UsersIcon,
+    ArrowLeftIcon,
+} from "@heroicons/react/24/outline"
 
 export const defaultIconSize = 20
 export const bigIconSize = 30
@@ -24,6 +30,15 @@ export const DateIcon: Component<IconProps> = ({ children, title = "Dato", class
     <FlexIcon
         className={className}
         icon={<CalendarIcon width={width || defaultIconSize} />}
+        title={title}>
+        {children}
+    </FlexIcon>
+)
+
+export const LeftArrowIcon: Component<IconProps> = ({ children, title, className, width }) => (
+    <FlexIcon
+        className={className}
+        icon={<ArrowLeftIcon width={width || defaultIconSize} />}
         title={title}>
         {children}
     </FlexIcon>
