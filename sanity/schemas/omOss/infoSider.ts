@@ -4,7 +4,7 @@ import {Rule} from "postcss";
 
 
 export default defineType({
-        name: "infoSider",
+        name: "info_sider",
         type: "document",
         title: "Info Sider",
         icon: ChatBubbleBottomCenterTextIcon,

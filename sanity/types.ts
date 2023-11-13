@@ -36,3 +36,5 @@ export type Styrer = SanityValues["styrer"]
 export type StyreMedlem = SanityValues["styremedlem"]
 
 export type StyreRoller = SanityValues["styre_roller"]
+
+export type InfoSider = SanityValues["info_sider"]
