@@ -39,7 +39,7 @@ Laget av **PIN**
 
 ### Installere avhengigheter
 
-Minimum **Node.js** versjon er `16.14.0`
+Minimum **Node.js** versjon er `18.17.0`
 
 ```bash
 pnpm install
