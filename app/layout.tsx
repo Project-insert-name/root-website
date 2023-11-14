@@ -21,6 +21,11 @@ export const metadata: Metadata = {
         "Dataingeniør",
     ],
 }
+// TODO: Fiks viewport
+// export const viewport = {
+//     width: "device-width",
+//     initialScale: 1.0,
+// }
 
 /**
  * RootLayout er en layout-komponent som brukes av alle sidene i nettsiden.

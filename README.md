@@ -84,7 +84,7 @@ og [info om de ulike sidene](https://github.com/Project-insert-name/root-website
 
 ### App router
 
-Applikasjonen bruker Next.js 13 sin nye [App router](https://nextjs.org/docs/app/building-your-application).
+Applikasjonen bruker Next.js 13+ sin nye [App router](https://nextjs.org/docs/app/building-your-application).
 Det vil si at alle filer knyttet til de ulike sidene skal ligge under app mappen, på følgende
 format. `app/navn-paa-path/page.tsx`
 
@@ -106,13 +106,13 @@ Filer som heter `layout.tsx` blir automatisk wrappet rundt alle andre routes i s
 
 ### Server components
 
-**Next.js 13** støtter
+**Next.js 13**+ støtter
 også [react server components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
 for å kjøre kode på en server før resultatet blir sendt til klienten.
 Det er noen begrensninger på server components, blant annet av [react hooks](https://react.dev/reference/react) ikke er
 støttet, da må man bruke client components.
 
-Alle komponenter i next.js 13 er server components som standard, man kan gjøre de om til client components ved å
+Alle komponenter i next.js 13+ er server components som standard, man kan gjøre de om til client components ved å
 skrive "use client" i toppen av filen.
 
 ### PNPM
