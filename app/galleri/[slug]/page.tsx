@@ -29,6 +29,7 @@ const GalleryPage: AsyncPage<Params> = async ({ params }) => {
             </Link>
             {imageGallery.images?.map(image => (
                 <SanityImage
+                    key={image._key}
                     image={image}
                     alt={image.alt_text ? image.alt_text : ""}
                     loading="lazy"

@@ -12,7 +12,7 @@ const ImageGalleryListPage: AsyncPage = async () => {
     return (
         <Gallery heading="Bildegallerier">
             {galleries.map(gallery => (
-                <Link href={`/galleri/${gallery.slug.current}`}>
+                <Link key={gallery._id} href={`/galleri/${gallery.slug.current}`}>
                     {/*//TODO Probably need to make some sort of image wrapper component*/}
                     <SanityImage
                         image={gallery.images?.[0]}
