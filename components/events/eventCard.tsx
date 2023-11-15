@@ -84,13 +84,15 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
             </div>
 
             {event_image && (
-                <SanityImage
-                    image={event_image}
-                    width={150}
-                    height={75}
-                    className={"rounded-xl"}
-                    alt={event_image.alt}
-                />
+                <Link href={`arrangement/${event_slug?.current}`}>
+                    <SanityImage
+                        image={event_image}
+                        width={150}
+                        height={75}
+                        className={"rounded-xl"}
+                        alt={event_image.alt}
+                    />
+                </Link>
             )}
         </div>
     )

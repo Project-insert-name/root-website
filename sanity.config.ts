@@ -19,6 +19,7 @@ import { schema } from "./sanity/schema"
  * plugins inneholder alle plugins som tilhører sanity studio
  */
 export default defineConfig({
+    title: `Root Studio (${dataset})`,
     basePath: "/studio",
     projectId,
     dataset,

@@ -74,6 +74,14 @@ export default defineType({
                 "Dette kan enten være en lenke til et sted på Google Maps, eller MazeMap hvis det tar plass på skolen.",
         }),
         defineField({
+            name: "gallery",
+            type: "reference",
+            title: "Bildegalleri",
+            description:
+                "Du kan enten legge til et eksisterende bildegalleri eller lage et nytt ett",
+            to: [{ type: "image_gallery" } as const], // This has to be type asserted as a const apparently
+        }),
+        defineField({
             name: "event_image",
             type: "image",
             title: "Forsidebilde",
