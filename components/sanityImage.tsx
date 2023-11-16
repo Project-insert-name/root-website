@@ -6,6 +6,7 @@ import { getImageDimensions } from "@sanity/asset-utils"
 interface SanityImageProps extends ImageProps {
     image: SanityImageSource
     fill?: boolean
+    loading?: "lazy" | "eager"
 }
 
 /**
@@ -15,13 +16,16 @@ interface SanityImageProps extends ImageProps {
  * @param width Bredde på bildet
  * @param height Høyde på bildet
  * @param fill Om bildet skal fylle hele bredden. Hvis den er true, vil width og height bli ignorert
+ * @param loading Modus for innlasting av bilde, eager om ikke spesifisert
  * @param props Andre props som skal sendes til Image-komponenten
  */
 const SanityImage: Component<SanityImageProps> = ({
     image,
     alt,
+    title,
     width,
     height,
+    loading = "eager",
     fill = false,
     ...props
 }) => {
@@ -33,8 +37,10 @@ const SanityImage: Component<SanityImageProps> = ({
         <Image
             src={imageBuilder.url()}
             alt={alt}
+            title={title}
             width={width || getImageDimensions(urlFor(image).url()).width}
             height={height || getImageDimensions(urlFor(image).url()).height}
+            loading={loading}
             {...props}
         />
     )
