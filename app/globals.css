@@ -25,7 +25,7 @@ header {
 }
 
 a {
-    @apply text-rootBlue hover:text-blue-700 hover:underline;
+    @apply text-rootBlue hover:text-rootBlueDark;
 }
 
 h1 {

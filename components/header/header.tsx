@@ -47,7 +47,7 @@ const Header: Component = () => {
                         isActive={item.path === currentPath}
                         className={"text-white data-[active=true]:before:content-['/']"}>
                         <Link
-                            className={"w-full text-inherit hover:text-white hover:underline"}
+                            className={"w-full text-inherit hover:text-white"}
                             href={item.path}
                             size={"lg"}>
                             {item.name}
@@ -61,7 +61,7 @@ const Header: Component = () => {
                     className={"text-white"}
                 />
             </NavbarContent>
-            <NavbarMenu className={"flex h-3/4 flex-col justify-between py-20"}>
+            <NavbarMenu className={"z-[101] flex h-3/4 flex-col justify-between py-20"}>
                 <div>
                     {paths.map((item, index) => (
                         <NavbarMenuItem key={`${item}-${index}`} className={"my-1 w-fit"}>

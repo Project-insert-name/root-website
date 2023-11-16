@@ -60,14 +60,18 @@ const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
 }) => (
     <div className={`mx-2 my-5 justify-between gap-3 ${className}`}>
         <div>
-            <Link href={`stilling/${slug.current}`} className={"hover:underline"}>
+            <Link href={`stilling/${slug.current}`}>
                 <h6 className={"font-mono"}>{title}</h6>
             </Link>
 
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
         </div>
 
-        {image && <Thumbnail image={image} />}
+        {image && (
+            <Link href={`stilling/${slug.current}`}>
+                <Thumbnail image={image} />
+            </Link>
+        )}
     </div>
 )
 

@@ -67,7 +67,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
             <div className={"flex"}>
                 <EventMarker type={event_type} />
                 <div>
-                    <Link href={`arrangement/${event_slug?.current}`} className={"hover:underline"}>
+                    <Link href={`arrangement/${event_slug.current}`}>
                         <h6 className={"font-mono"}>{event_title}</h6>
                     </Link>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
@@ -82,9 +82,11 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                 </div>
             </div>
 
-            {event_image && <Link href={`arrangement/${event_slug?.current}`}>
-                <Thumbnail image={event_image} />
-            </Link>}
+            {event_image && (
+                <Link href={`arrangement/${event_slug.current}`}>
+                    <Thumbnail image={event_image} />
+                </Link>
+            )}
         </div>
     )
 }

@@ -11,6 +11,7 @@ const config: Config = {
         extend: {
             colors: {
                 rootBlue: "#1480BF",
+                rootBlueDark: "#0B4B6A",
                 defaultBg: "#F3F3F3",
                 darkTitle: "#3E3E3E",
                 bedpress: "#FFBA09",
