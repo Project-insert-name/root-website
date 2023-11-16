@@ -82,7 +82,9 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                 </div>
             </div>
 
-            {event_image && <Thumbnail image={event_image} />}
+            {event_image && <Link href={`arrangement/${event_slug?.current}`}>
+                <Thumbnail image={event_image} />
+            </Link>}
         </div>
     )
 }
