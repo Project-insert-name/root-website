@@ -32,7 +32,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
         <div
             className={`container mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
             {image && (
-                <div className={"relative h-[150px] w-full sm:h-[250px]"}>
+                <div className={"relative aspect-[16/7] w-full "}>
                     <SanityImage image={image} alt={image.alt} fill />
                 </div>
             )}
