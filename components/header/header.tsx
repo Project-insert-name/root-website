@@ -23,6 +23,8 @@ const Header: Component = () => {
             onMenuOpenChange={setIsMenuOpen}
             isMenuOpen={isMenuOpen}
             shouldHideOnScroll={true}
+            // CSS for header komponenten
+            classNames={{ wrapper: ["pl-2 max-w-initial"] }}
             className={
                 "overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
             }>
@@ -33,7 +35,7 @@ const Header: Component = () => {
                     <Image
                         src={"/root-logo.svg"}
                         alt={"Logo for linjeforeningen root"}
-                        /*Bredde og høyde må settes i className også, for å unngå advarsler*/
+                        // Bredde og høyde må settes i className også, for å unngå advarsler
                         className={"h-[200px] w-[200px]"}
                         width={200}
                         height={200}

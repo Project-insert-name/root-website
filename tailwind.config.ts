@@ -18,6 +18,9 @@ const config: Config = {
                 social: "#09B5FF",
                 workshop: "#FF0961",
             },
+            maxWidth: {
+                initial: "initial",
+            },
         },
     },
     darkMode: "class",

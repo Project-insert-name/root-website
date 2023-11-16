@@ -20,10 +20,6 @@
     @apply overflow-x-hidden;
 }
 
-header {
-    max-width: initial !important;
-}
-
 a {
     @apply text-rootBlue hover:text-rootBlueDark;
 }
