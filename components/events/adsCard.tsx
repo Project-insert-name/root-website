@@ -83,7 +83,7 @@ const SingleAdNarrow: Component<JobAdvert & DefaultProps> = ({
     slug,
 }) => (
     <div className={`mx-1 my-5 w-full flex-col ${className}`}>
-        <Link href={`stilling/${slug.current}`} className={"hover:underline"}>
+        <Link href={`stilling/${slug.current}`}>
             <h6 className={"font-mono"}>{title}</h6>
         </Link>
         <div className={"flex justify-between"}>

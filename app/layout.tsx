@@ -38,8 +38,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
         <body className="relative min-h-screen bg-defaultBg">
             <Providers>
                 <Header />
-                <br />
-                <main className="pb-28">{children}</main>
+                <main className="pb-28 sm:pt-2">{children}</main>
                 <Footer />
             </Providers>
         </body>

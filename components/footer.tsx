@@ -1,8 +1,7 @@
 import { ExternalLink, MailLink } from "@/components/link"
 import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/socials"
 import { Divider } from "@/components/divider"
-
-const iconSize = 30
+import { bigIconSize } from "@/components/icons/icon"
 
 const linkClasses = "motion-safe:hover:animate-bounce"
 
@@ -16,28 +15,28 @@ const Footer: Component = ({ className, ...props }) => (
                     title={"Facebook"}
                     className={linkClasses}
                     href={"https://www.facebook.com/RootLinjeforening"}>
-                    <Facebook fill={"#0866FF"} width={iconSize} alt={"Facebook logo"} />
+                    <Facebook width={bigIconSize} />
                 </ExternalLink>
 
                 <ExternalLink
                     title={"Instagram"}
                     className={linkClasses}
                     href={"https://www.instagram.com/linjeforeningenroot/"}>
-                    <Instagram fill={"#E4405F"} width={iconSize} alt={"Instagram logo"} />
+                    <Instagram width={bigIconSize} />
                 </ExternalLink>
 
                 <ExternalLink
                     title={"LinkedIn"}
                     className={linkClasses}
                     href={"https://www.linkedin.com/company/root-linjeforening"}>
-                    <LinkedIn width={iconSize} alt={"LinkedIn logo"} />
+                    <LinkedIn width={bigIconSize} />
                 </ExternalLink>
 
                 <ExternalLink
                     title={"GitHub"}
                     className={linkClasses}
                     href={"https://github.com/Project-insert-name/root-website"}>
-                    <GitHub width={iconSize} alt={"GitHub logo"} />
+                    <GitHub width={bigIconSize} />
                 </ExternalLink>
             </div>
             <p>
