@@ -1,5 +1,5 @@
 import { ExternalLink, MailLink } from "@/components/link"
-import { Facebook, GitHub, Instagram } from "@/components/icons/socials"
+import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/socials"
 import { Divider } from "@/components/divider"
 
 const iconSize = 30
@@ -24,6 +24,13 @@ const Footer: Component = ({ className, ...props }) => (
                     className={linkClasses}
                     href={"https://www.instagram.com/linjeforeningenroot/"}>
                     <Instagram fill={"#E4405F"} width={iconSize} alt={"Instagram logo"} />
+                </ExternalLink>
+
+                <ExternalLink
+                    title={"LinkedIn"}
+                    className={linkClasses}
+                    href={"https://www.linkedin.com/company/root-linjeforening"}>
+                    <LinkedIn width={iconSize} alt={"LinkedIn logo"} />
                 </ExternalLink>
 
                 <ExternalLink
