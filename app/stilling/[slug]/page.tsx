@@ -23,7 +23,6 @@ const JobAdvertPage: AsyncPage<Params> = async ({ params }) => {
             title={ad.title}
             description={ad.description}
             image={ad.image}
-            imageAlt={ad.image?.alt}
             maxParticipants={
                 ad.number_of_positions
                     ? `Antall stillinger er ${ad.number_of_positions}`

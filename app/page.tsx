@@ -9,12 +9,11 @@ export const metadata: Metadata = {
 }
 
 // TODO InnleggKomponent (Må avklares hvilke innlegg som skal vises, eget schema eller hent fra facebook/instagram)
-// TODO størrelser på kortene og plassering
 // TODO skal vi ha noe mer på forsiden? Velkomsttekst i toppen?
 
 const Home: Page = () => {
     return (
-        <div className={"flex flex-wrap justify-center py-5"}>
+        <div className={"flex flex-wrap justify-center gap-5 py-5"}>
             <EventCard
                 eventTitle={"Arrangementer"}
                 showMoreUrl={"arrangementer"}

@@ -1,6 +1,7 @@
 import { FilmIcon, HomeIcon, PhotoIcon, UsersIcon } from "@heroicons/react/24/outline"
-import { defaultIconSize } from "@/components/icons/icon"
 import { type ReactNode } from "react"
+
+const iconSize = 25
 
 export interface Path {
     name: string
@@ -8,28 +9,33 @@ export interface Path {
     icon?: ReactNode
 }
 
+/**
+ * En liste over alle lenkene i header som vises kun i development-modus.
+ */
 const devPaths =
     process.env.NODE_ENV === "development"
-        ? [{ name: "Studio", path: "/studio", icon: <FilmIcon width={defaultIconSize} /> }]
+        ? [{ name: "Studio", path: "/studio", icon: <FilmIcon width={iconSize} /> }]
         : []
 
+/**
+ * En liste over alle lenkene i header, som alltid vises.
+ */
 const paths: Path[] = [
     {
         name: "Hjem",
         path: "/",
-        icon: <HomeIcon width={defaultIconSize} />,
+        icon: <HomeIcon width={iconSize} />,
     },
     {
         name: "Galleri",
         path: "/galleri",
-        icon: <PhotoIcon width={defaultIconSize} />,
+        icon: <PhotoIcon width={iconSize} />,
     },
     {
         name: "Om oss",
         path: "/om-oss",
-        icon: <UsersIcon width={defaultIconSize} />,
+        icon: <UsersIcon width={iconSize} />,
     },
-    // Viser studio lenken bare i development
     ...devPaths,
 ]
 

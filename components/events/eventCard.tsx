@@ -1,20 +1,19 @@
-import InfoCard, { Divider } from "@/components/events/infoCard"
+import InfoCard from "@/components/events/infoCard"
 import Link from "next/link"
 import type { EventType, RootEvent } from "@/sanity/types"
-import SanityImage from "@/components/sanityImage"
 import { toFormatDateAndTime } from "@/utils/dateUtils"
 import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon"
 import { getNextEvents } from "@/sanity/queries/event"
 import { Suspense } from "react"
+import { Divider } from "@/components/divider"
+import { CircularProgressIndicator } from "@/components/suspense"
+import Thumbnail from "@/components/events/thumbnail"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
     showMoreUrl: string
     emptyMessage?: string
 }
-
-// TODO slå sammen fellestrekk i wide og narrow komponentene
-// TODO bedre fallback for Suspense
 
 const EventCard: Component<EventCardProps> = ({
     eventTitle = "Arrangementer",
@@ -23,7 +22,7 @@ const EventCard: Component<EventCardProps> = ({
     className,
 }) => (
     <InfoCard cardTitle={eventTitle} showMoreUrl={showMoreUrl} className={className}>
-        <Suspense fallback={"Laster inn"}>
+        <Suspense fallback={<CircularProgressIndicator aria-label={"Laster inn arrangementer"} />}>
             <EventCardData emptyMessage={emptyMessage} />
         </Suspense>
     </InfoCard>
@@ -68,7 +67,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
             <div className={"flex"}>
                 <EventMarker type={event_type} />
                 <div>
-                    <Link href={`arrangement/${event_slug?.current}`} className={"hover:underline"}>
+                    <Link href={`arrangement/${event_slug.current}`}>
                         <h6 className={"font-mono"}>{event_title}</h6>
                     </Link>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
@@ -84,14 +83,8 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
             </div>
 
             {event_image && (
-                <Link href={`arrangement/${event_slug?.current}`}>
-                    <SanityImage
-                        image={event_image}
-                        width={150}
-                        height={75}
-                        className={"rounded-xl"}
-                        alt={event_image.alt}
-                    />
+                <Link href={`arrangement/${event_slug.current}`}>
+                    <Thumbnail image={event_image} />
                 </Link>
             )}
         </div>
@@ -113,7 +106,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     const startTime = toFormatDateAndTime(event_start_time)
     return (
         <div className={`mx-1 my-5 flex w-full flex-col ${className}`}>
-            <Link href={`arrangement/${event_slug?.current}`} className={"hover:underline"}>
+            <Link href={`arrangement/${event_slug.current}`} className={"hover:underline"}>
                 <h6>{event_title}</h6>
             </Link>
             <div className={"inline-flex justify-between"}>
@@ -125,17 +118,9 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
                             <TimeIcon>{startTime.time}</TimeIcon>
                         </>
                     )}
-                    <MapIcon>{event_address_text}</MapIcon>
+                    {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
                 </div>
-                {event_image && (
-                    <SanityImage
-                        image={event_image}
-                        width={100}
-                        height={75}
-                        className={"m-1 rounded-xl"}
-                        alt={event_image.alt}
-                    />
-                )}
+                {event_image && <Thumbnail image={event_image} width={130} />}
             </div>
         </div>
     )
@@ -155,5 +140,9 @@ const EventMarker: Component<{ type: EventType }> = ({ type }) => {
         }
     }
 
-    return <div className={`mr-2 h-full w-2 rounded-xl ${getTypeColour()}`} />
+    return (
+        <div>
+            <div className={`mr-2 h-full w-2 rounded-xl ${getTypeColour()}`} />
+        </div>
+    )
 }

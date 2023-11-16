@@ -21,6 +21,7 @@ interface DefaultProps {
     style?: React.CSSProperties
     id?: string
     title?: string
+    "aria-label"?: string
 }
 
 interface ImageProps extends DefaultProps {
