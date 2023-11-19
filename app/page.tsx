@@ -8,8 +8,14 @@ export const metadata: Metadata = {
     description: "Hjemmesiden til Root Linjeforening ved Høgskulen på Vestlandet (HVL)",
 }
 
-// TODO InnleggKomponent (Må avklares hvilke innlegg som skal vises, eget schema eller hent fra facebook/instagram)
-// TODO skal vi ha noe mer på forsiden? Velkomsttekst i toppen?
+// TODO InnleggKomponent hent data fra Facebook og Instagram
+
+/**
+ * Brukes for å tvinge Next.js til å oppdatere innholdet på siden.
+ * Skrur av all caching på siden, som gjør at nye innlegg vises med en gang.
+ * @see https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
+ */
+export const dynamic = "force-dynamic"
 
 const Home: Page = () => {
     return (
@@ -22,7 +28,7 @@ const Home: Page = () => {
             <div className={"flex w-full flex-col gap-5 sm:w-[550px]"}>
                 <AdsCard className={"mx-2"} showMoreUrl={"stillingsannonser"} />
                 {/*TODO dummy komponent*/}
-                <InfoCard className={"mx-2"} cardTitle={"Innlegg"} showMoreUrl={"/"}>
+                <InfoCard className={"mx-2"} cardTitle={"Innlegg"}>
                     <br />
                     <br />
                 </InfoCard>

@@ -8,6 +8,7 @@ import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
 import Thumbnail from "@/components/events/thumbnail"
+import { LinkButton } from "@/components/button"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
@@ -17,42 +18,54 @@ interface EventCardProps extends DefaultProps {
 
 const EventCard: Component<EventCardProps> = ({
     eventTitle = "Arrangementer",
-    emptyMessage = "Ingen arrangementer",
+    emptyMessage,
     showMoreUrl,
     className,
 }) => (
-    <InfoCard cardTitle={eventTitle} showMoreUrl={showMoreUrl} className={className}>
+    <InfoCard
+        cardTitle={eventTitle}
+        className={className}
+        bottom={
+            <LinkButton href={showMoreUrl} className={"mx-auto"}>
+                Vis mer
+            </LinkButton>
+        }>
         <Suspense fallback={<CircularProgressIndicator aria-label={"Laster inn arrangementer"} />}>
-            <EventCardData emptyMessage={emptyMessage} />
+            <NextEventsData emptyMessage={emptyMessage} />
         </Suspense>
     </InfoCard>
 )
 
 export default EventCard
 
-const EventCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessage }) => {
+const NextEventsData: AsyncComponent<{ emptyMessage?: string }> = async ({ emptyMessage }) => {
     const events = await getNextEvents()
-    return (
-        <>
-            {events.length > 0 ? (
-                events.map((event, index) => (
-                    <div key={event._id}>
-                        {index !== 0 && <Divider />}
-                        <SingleEventWide {...event} className={"hidden sm:flex"} />
-                        <SingleEventNarrow {...event} className={"flex sm:hidden"} />
-                    </div>
-                ))
-            ) : (
-                <p className={"text-center"}>{emptyMessage}</p>
-            )}
-        </>
-    )
+    return <EventContent events={events} emptyMessage={emptyMessage} />
 }
+
+export const EventContent: Component<{
+    events: ReadonlyArray<RootEvent>
+    emptyMessage?: string
+}> = ({ events, emptyMessage = "Ingen arrangementer" }) => (
+    <>
+        {events.length > 0 ? (
+            events.map((event, index) => (
+                <div key={event._id}>
+                    {index !== 0 && <Divider />}
+                    <SingleEventWide {...event} className={"hidden sm:flex"} />
+                    <SingleEventNarrow {...event} className={"flex sm:hidden"} />
+                </div>
+            ))
+        ) : (
+            <p className={"text-center"}>{emptyMessage}</p>
+        )}
+    </>
+)
 
 /**
  * Et enkelt arrangement som vises på brede skjermer
  */
-const SingleEventWide: Component<RootEvent & DefaultProps> = ({
+export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
     className,
     event_type,
     event_title,
@@ -60,6 +73,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
     event_address_text,
     event_image,
     event_slug,
+    gallery,
 }) => {
     const startTime = toFormatDateAndTime(event_start_time)
     return (
@@ -79,6 +93,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                         )}
                     </div>
                     {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
+                    {gallery && <Link href={`galleri/${gallery.slug.current}`}>Bildegalleri</Link>}
                 </div>
             </div>
 
@@ -94,7 +109,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
 /**
  * Et enkelt arrangement som vises på smale skjermer
  */
-const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
+export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     className,
     event_type,
     event_title,
@@ -126,7 +141,7 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     )
 }
 
-const EventMarker: Component<{ type: EventType }> = ({ type }) => {
+export const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     function getTypeColour() {
         switch (type) {
             case "bedpres":

@@ -1,9 +1,12 @@
 import config from "@/sanity.config"
 import type { DocumentValues, InferSchemaValues } from "@sanity-typed/types"
 
-export type EventType = "bedpres" | "workshop" | "social" | "other"
-
 export type MarkdownString = string
+
+export type SanitySlug = {
+    current: string
+    _type: "slug"
+}
 
 /**
  * Inneholder alle typer tilknyttet sanity
@@ -15,6 +18,9 @@ export type SanityValues = InferSchemaValues<typeof config>
  */
 export type SanityDocuments = DocumentValues<SanityValues>
 
+/**
+ * Et bildeobjekt som innholder data knyttet til et bilde. Samt alt tekst.
+ */
 export type SanityImageObject = SanityValues["event"]["event_image"]
 
 /**
@@ -22,7 +28,14 @@ export type SanityImageObject = SanityValues["event"]["event_image"]
  */
 export type RootEvent = SanityValues["event"] & {
     event_description: MarkdownString
+    // Må spesifiseres fordi den originale typen inneholder bare referansen til et bildegalleri, ikke selve galleriet.
+    gallery?: { slug: SanitySlug }
 }
+
+/**
+ * Type som beskriver hvilken type event det er.
+ */
+export type EventType = SanityValues["event"]["event_type"]
 
 /**
  * Inneholder data knyttet til et bildegalleri

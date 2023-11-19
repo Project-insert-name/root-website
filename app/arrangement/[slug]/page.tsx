@@ -8,6 +8,8 @@ interface Params {
     slug: string
 }
 
+export const dynamic = "force-dynamic"
+
 /**
  * Side for et enkelt arrangement. Siden er dynamisk basert på arrangementets slug variabel.
  * Dersom slug ikke finnes, returneres en 404 side.

@@ -1,49 +1,48 @@
-import { getAllEvents } from "@/sanity/queries/event"
-import InfoCard from "@/components/events/infoCard"
-import type { RootEvent } from "@/sanity/types"
+import {
+    getNextEventsPaginated,
+    getPreviousAndNextEvents,
+    getPreviousEventsPaginated,
+} from "@/sanity/queries/event"
+import EventCardPaginated from "@/app/arrangementer/eventCardPageinated"
 
 /**
- * Deler arrangementer i to lister, basert på om de er tidligere eller fremtidige.
- * @param events Liste med arrangementer
- * @returns Tuppel som inneholder tidligere arrangementer og fremtidige arrangementer
+ * Brukes for å tvinge Next.js til å oppdatere innholdet på siden.
  */
-function splitEvents(events: readonly RootEvent[]): readonly [RootEvent[], RootEvent[]] {
-    return [
-        events.filter(event => new Date(event.event_start_time) < new Date()),
-        events.filter(event => new Date(event.event_start_time) >= new Date()),
-    ] as const
-}
+export const dynamic = "force-dynamic"
+
+const nrOfEvents = 6
 
 /**
  * Viser en oversikt over alle arrangementer.
  * Både tidligere og fremtidige arrangementer vises.
  */
-// TODO
 const EventsPage: AsyncPage = async () => {
-    const events = await getAllEvents()
-    const [futureEvents, pastEvents] = splitEvents(events)
+    const { past, future } = await getPreviousAndNextEvents(nrOfEvents)
     return (
         <div>
-            <h1>Arrangementer</h1>
-            <div className={"flex"}>
-                <InfoCard cardTitle={"Neste arrangementer"} showMoreUrl={"TODO fjern meg"}>
-                    <>
-                        {pastEvents.map(event => (
-                            <div key={event._id}>
-                                <p>{event.event_title}</p>
-                            </div>
-                        ))}
-                    </>
-                </InfoCard>
-                <InfoCard cardTitle={"Tidlige arrangementer"} showMoreUrl={""}>
-                    <>
-                        {futureEvents.map(event => (
-                            <div key={event._id}>
-                                <p>{event.event_title}</p>
-                            </div>
-                        ))}
-                    </>
-                </InfoCard>
+            <br />
+            <div className={"flex flex-wrap justify-center gap-5"}>
+                <EventCardPaginated
+                    cardTitle={"Tidligere arrangementer"}
+                    className={"sm:w-[550px]"}
+                    initial={past}
+                    minEvents={nrOfEvents}
+                    fetchMore={async (from, to) => {
+                        // Spesifiserer at denne funksjonen skal kjøres på serveren, selv om den blir kalt fra klienten.
+                        "use server"
+                        return getPreviousEventsPaginated(from, to)
+                    }}
+                />
+                <EventCardPaginated
+                    cardTitle={"Neste arrangementer"}
+                    className={"sm:w-[550px]"}
+                    initial={future}
+                    minEvents={nrOfEvents}
+                    fetchMore={async (from, to) => {
+                        "use server"
+                        return getNextEventsPaginated(from, to)
+                    }}
+                />
             </div>
         </div>
     )

@@ -8,6 +8,7 @@ import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
 import Thumbnail from "@/components/events/thumbnail"
+import { LinkButton } from "@/components/button"
 
 interface AdsCardProps extends DefaultProps {
     cardTitle?: string
@@ -22,17 +23,24 @@ const AdsCard: Component<AdsCardProps> = ({
     showMoreUrl,
     className,
 }) => (
-    <InfoCard cardTitle={cardTitle} showMoreUrl={showMoreUrl} className={className}>
+    <InfoCard
+        cardTitle={cardTitle}
+        className={className}
+        bottom={
+            <LinkButton href={showMoreUrl} className={"mx-auto"}>
+                Vis mer
+            </LinkButton>
+        }>
         <Suspense
             fallback={<CircularProgressIndicator aria-label={"Laster inn stillingsannonser"} />}>
-            <AdCardData emptyMessage={emptyMessage} />
+            <NextAdsData emptyMessage={emptyMessage} />
         </Suspense>
     </InfoCard>
 )
 
 export default AdsCard
 
-const AdCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessage }) => {
+const NextAdsData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessage }) => {
     const adverts = await getNextJobAdverts()
     return (
         <>
@@ -51,7 +59,7 @@ const AdCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessa
     )
 }
 
-const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
+export const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
     className,
     title,
     deadline,
@@ -75,7 +83,7 @@ const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
     </div>
 )
 
-const SingleAdNarrow: Component<JobAdvert & DefaultProps> = ({
+export const SingleAdNarrow: Component<JobAdvert & DefaultProps> = ({
     className,
     title,
     deadline,
