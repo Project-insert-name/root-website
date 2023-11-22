@@ -17,7 +17,7 @@ const nrOfEvents = 6
 /**
  * Klassene for EventCardPaginated.
  */
-const className = "sm:w-[550px]"
+const className = "sm:w-[550px] w-full mx-1"
 
 /**
  * Viser en oversikt over alle arrangementer.
@@ -26,7 +26,7 @@ const className = "sm:w-[550px]"
 const EventsPage: AsyncPage = async () => {
     const { past, future } = await getPastAndFutureEvents(nrOfEvents)
     return (
-        <div className={"flex flex-wrap justify-center gap-5 pt-5"}>
+        <div className={"flex flex-wrap justify-center gap-5 pt-3 sm:p-5"}>
             <EventCardPaginated
                 cardTitle={"Tidligere arrangementer"}
                 className={className}

@@ -120,7 +120,7 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
 }) => {
     const startTime = toFormatDateAndTime(event_start_time)
     return (
-        <div className={`mx-1 my-5 flex w-full flex-col ${className}`}>
+        <div className={`mx-1 my-3 flex w-full flex-col ${className}`}>
             <Link href={`arrangement/${event_slug.current}`}>
                 <h6>{event_title}</h6>
             </Link>
