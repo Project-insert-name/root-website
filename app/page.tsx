@@ -26,7 +26,7 @@ const Home: Page = () => {
                 className={"mx-2 w-full sm:w-[550px]"}
             />
             <div className={"flex w-full flex-col gap-5 sm:w-[550px]"}>
-                <AdsCard className={"mx-2"} showMoreUrl={"stillingsannonser"} />
+                <AdsCard className={"mx-2"} />
                 {/*TODO dummy komponent*/}
                 <InfoCard className={"mx-2"} cardTitle={"Innlegg"}>
                     <br />

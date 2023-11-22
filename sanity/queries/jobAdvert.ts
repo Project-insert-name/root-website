@@ -1,4 +1,4 @@
-import type { JobAdvert } from "@/sanity/types"
+import type { JobAdvert, SanitySlug } from "@/sanity/types"
 import { client } from "@/sanity/lib/client"
 
 /**
@@ -7,6 +7,14 @@ import { client } from "@/sanity/lib/client"
  */
 export async function getJobAdverts(): Promise<ReadonlyArray<JobAdvert>> {
     return await client.fetch('*[_type == "job_advert"]')
+}
+
+/**
+ * Henter ut alle slugs som er tilknyttet stillingsannonser fra sanity
+ * @returns En liste med alle slugs
+ */
+export async function getAllJobAdvertSlugs(): Promise<ReadonlyArray<{ slug: SanitySlug }>> {
+    return await client.fetch('*[_type == "job_advert"]{slug}')
 }
 
 /**

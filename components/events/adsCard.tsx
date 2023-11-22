@@ -8,11 +8,9 @@ import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
 import Thumbnail from "@/components/events/thumbnail"
-import { LinkButton } from "@/components/button"
 
 interface AdsCardProps extends DefaultProps {
     cardTitle?: string
-    showMoreUrl: string
     emptyMessage?: string
     maxAds?: number
 }
@@ -20,17 +18,9 @@ interface AdsCardProps extends DefaultProps {
 const AdsCard: Component<AdsCardProps> = ({
     cardTitle = "Stillingsannonser",
     emptyMessage = "Ingen stillingsannonser",
-    showMoreUrl,
     className,
 }) => (
-    <InfoCard
-        cardTitle={cardTitle}
-        className={className}
-        bottom={
-            <LinkButton href={showMoreUrl} className={"mx-auto"}>
-                Vis mer
-            </LinkButton>
-        }>
+    <InfoCard cardTitle={cardTitle} className={className}>
         <Suspense
             fallback={<CircularProgressIndicator aria-label={"Laster inn stillingsannonser"} />}>
             <NextAdsData emptyMessage={emptyMessage} />

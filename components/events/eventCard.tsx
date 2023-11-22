@@ -3,7 +3,7 @@ import Link from "next/link"
 import type { EventType, RootEvent } from "@/sanity/types"
 import { toFormatDateAndTime } from "@/utils/dateUtils"
 import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon"
-import { getNextEvents } from "@/sanity/queries/event"
+import { getFutureEvents } from "@/sanity/queries/event"
 import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
@@ -39,7 +39,7 @@ const EventCard: Component<EventCardProps> = ({
 export default EventCard
 
 const NextEventsData: AsyncComponent<{ emptyMessage?: string }> = async ({ emptyMessage }) => {
-    const events = await getNextEvents()
+    const events = await getFutureEvents()
     return <EventContent events={events} emptyMessage={emptyMessage} />
 }
 
@@ -77,7 +77,7 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
 }) => {
     const startTime = toFormatDateAndTime(event_start_time)
     return (
-        <div className={`mx-2 my-5 justify-between gap-3 ${className}`}>
+        <div className={`mx-2 my-4 justify-between gap-3 ${className}`}>
             <div className={"flex"}>
                 <EventMarker type={event_type} />
                 <div>

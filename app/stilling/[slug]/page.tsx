@@ -1,8 +1,9 @@
-import { getJobAdvertBySlug, getJobAdverts } from "@/sanity/queries/jobAdvert"
+import { getAllJobAdvertSlugs, getJobAdvertBySlug } from "@/sanity/queries/jobAdvert"
 import { toFormatDate } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
 import SingleInfoCard from "@/components/events/singleInfoCard"
+import { type Metadata } from "next"
 
 interface Params {
     slug: string
@@ -63,9 +64,27 @@ const Deadline: Component<{ deadline?: string } & ChildProps> = ({ deadline, chi
  * @see https://nextjs.org/docs/app/api-reference/functions/generate-static-params
  */
 export const generateStaticParams = async (): Promise<Params[]> => {
-    const ads = await getJobAdverts()
+    const ads = await getAllJobAdvertSlugs()
 
     return ads.map(ad => ({
         slug: ad.slug.current,
     }))
+}
+
+/**
+ * Genererer metadata for en enkelt stillingsannonse.
+ * Kjøres ved bygging av nettsiden.
+ * @param props Props som sendes til siden
+ * @returns Metadata for siden
+ * @see https://nextjs.org/docs/app/building-your-application/optimizing/metadata#dynamic-metadata
+ */
+export async function generateMetadata(props: PageProps<Params>): Promise<Metadata> {
+    const ad = await getJobAdvertBySlug(props.params.slug)
+
+    if (!ad) return notFound()
+
+    return {
+        title: `${ad.title} | Root Linjeforening`,
+        description: ad.description.slice(0, 150),
+    }
 }

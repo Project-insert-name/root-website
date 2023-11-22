@@ -7,12 +7,12 @@ import InfoCard from "@/components/events/infoCard"
 import { useState } from "react"
 import { CircularProgressIndicator } from "@/components/suspense"
 
-interface EventContentDynamicProps extends DefaultProps {
+interface EventCardPaginatedProps extends DefaultProps {
     cardTitle: string
     initial: ReadonlyArray<RootEvent>
     minEvents: number
     emptyMessage?: string
-    fetchMore: (from: number, to: number) => Promise<ReadonlyArray<RootEvent>>
+    fetchMore: (limit: number, lastEventStartTime: string) => Promise<ReadonlyArray<RootEvent>>
     fetchNumber?: number
 }
 
@@ -27,7 +27,7 @@ interface EventContentDynamicProps extends DefaultProps {
  * @param fetchNumber Antall arrangementer som skal hentes hver gang.
  * @param props Andre props som kan sendes til infokortet.
  */
-const EventCardPaginated: Component<EventContentDynamicProps> = ({
+const EventCardPaginated: Component<EventCardPaginatedProps> = ({
     cardTitle,
     initial,
     minEvents,
@@ -47,7 +47,7 @@ const EventCardPaginated: Component<EventContentDynamicProps> = ({
     /**
      * Tilstand for om knappen for å laste inn flere arrangementer skal vises.
      * Den skal ikke vises hvis det ikke er flere arrangementer å hente.
-     * Merk at den kan vil vises dersom event.length == minEvents. Selv om det ikke er flere arrangementer å hente.
+     * Merk at den vil vises dersom event.length == minEvents. Selv om det ikke er flere arrangementer å hente.
      */
     const [showButton, setShowButton] = useState(events.length >= minEvents)
 
@@ -56,7 +56,7 @@ const EventCardPaginated: Component<EventContentDynamicProps> = ({
      */
     async function fetchMoreEvents() {
         setLoading(true)
-        const nextEvents = await fetchMore(events.length, events.length + fetchNumber)
+        const nextEvents = await fetchMore(fetchNumber, events[events.length - 1].event_start_time)
         if (nextEvents.length < fetchNumber) {
             setShowButton(false)
         }
@@ -85,7 +85,7 @@ const ButtonAndProgress: Component<{ loading: boolean; onClick: VoidFunction }> 
     onClick,
 }) => {
     if (loading) {
-        return <CircularProgressIndicator aria-label={"Laster inn flere arrangement"} />
+        return <CircularProgressIndicator aria-label={"Laster inn flere arrangementer"} />
     }
     return (
         <Button className={"mx-auto w-min"} onClick={onClick} disabled={loading}>
