@@ -77,8 +77,8 @@ export const generateStaticParams = async (): Promise<Params[]> => {
  * @returns Metadata for siden.
  * @see https://nextjs.org/docs/app/building-your-application/optimizing/metadata#dynamic-metadata
  */
-export async function generateMetadata(props: PageProps<Params>): Promise<Metadata> {
-    const event = await getEventBySlug(props.params.slug)
+export async function generateMetadata({ params }: PageProps<Params>): Promise<Metadata> {
+    const event = await getEventBySlug(params.slug)
 
     if (!event) return notFound()
 

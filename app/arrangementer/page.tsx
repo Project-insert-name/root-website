@@ -1,6 +1,6 @@
 import { getFutureEvents, getPastAndFutureEvents, getPastEvents } from "@/sanity/queries/event"
 import EventCardPaginated from "@/app/arrangementer/eventCardPageinated"
-import { Metadata } from "next"
+import { type Metadata } from "next"
 
 export const metadata: Metadata = {
     title: "Arrangementer | Root Linjeforening",
