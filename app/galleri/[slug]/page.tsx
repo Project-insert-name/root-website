@@ -10,7 +10,7 @@ interface Params {
 }
 
 /**
- * Side for et enkelt arrangement. Siden er dynamisk basert på arrangementets slug variabel.
+ * Side for et enkelt bildegalleri. Siden er dynamisk basert på arrangementets slug variabel.
  * Dersom slug ikke finnes, returneres en 404 side.
  * @param params Parametre fra URL
  */
