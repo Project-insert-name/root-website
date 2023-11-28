@@ -26,7 +26,7 @@ const paths: Path[] = [
     },
     {
         name: "Om oss",
-        path: "/om-oss/om-root",
+        path: "/om-oss",
         icon: <UsersIcon width={defaultIconSize} />,
     },
     // Viser studio lenken bare i development
