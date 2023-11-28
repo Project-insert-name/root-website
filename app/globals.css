@@ -12,16 +12,16 @@
     .logo-backdrop {
         height: calc(100% * 2);
         @apply w-64 rounded-r-full bg-white sm:w-80;
-        @apply absolute -left-8 -top-16;
+        @apply absolute -left-10 -top-14;
     }
 }
 
 :root {
-    @apply -m-0.5 overflow-x-hidden;
+    @apply overflow-x-hidden;
 }
 
 a {
-    @apply text-rootBlue hover:text-blue-700 hover:underline;
+    @apply text-rootBlue hover:text-rootBlueDark;
 }
 
 h1 {

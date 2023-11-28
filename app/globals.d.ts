@@ -1,26 +1,47 @@
 // Ikke bruke top-level import/export i denne filen, da typene ikke blir tilgjengelig i andre filer.
 
-interface PageProps<Params> {
-    params: Params
+/**
+ * Props som kan være tilgjengelig på alle sider
+ */
+interface PageProps<T> {
+    /**
+     * Parametere som blir sendt med til siden. For eksempel fra parametre i URLen.
+     * @see https://nextjs.org/docs/app/building-your-application/routing/dynamic-routes#convention
+     * @example /arrangement/[slug]
+     */
+    params: T
     searchParams?: { [key: string]: string | string[] | undefined }
 }
 
-type Page<Params = never> = (props: PageProps<Params>) => React.JSX.Element | null
+/**
+ * Definerer en standard synkron side. Brukes på default export i page.tsx
+ */
+type Page<T = never> = (params: PageProps<T>) => React.JSX.Element | null
 
-type AsyncPage<Params = {}> = ({
-    params,
-    searchParams,
-}: PageProps<Params>) => Promise<React.JSX.Element | null>
+/**
+ * Definerer en standard asynkron side. Brukes på default export i page.tsx
+ */
+type AsyncPage<T = {}> = (params: PageProps<T>) => Promise<React.JSX.Element | null>
 
-type Component<T = DefaultProps> = (params: T) => React.JSX.Element | null
+/**
+ * Definerer en standard komponent. Kan brukes på alle komponenter som ikke er sider.
+ */
+type Component<T = DefaultProps> = (props: T) => React.JSX.Element | null
 
-type AsyncComponent<T = DefaultProps> = (params: T) => Promise<React.JSX.Element | null>
+/**
+ * Definerer en standard asynkron komponent. Kan brukes på alle komponenter som ikke er sider.
+ */
+type AsyncComponent<T = DefaultProps> = (props: T) => Promise<React.JSX.Element | null>
 
+/**
+ * Generelle props som kan brukes på alle komponenter
+ */
 interface DefaultProps {
     className?: string
     style?: React.CSSProperties
     id?: string
     title?: string
+    "aria-label"?: string
 }
 
 interface ImageProps extends DefaultProps {
@@ -28,7 +49,6 @@ interface ImageProps extends DefaultProps {
     alt: string
     width?: number
     height?: number
-    objectFit?: "contain" | "cover" | "fill" | "none" | "scale-down"
 }
 
 interface ChildProps extends DefaultProps {

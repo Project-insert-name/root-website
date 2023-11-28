@@ -1,24 +1,20 @@
-import Link from "next/link"
-import { Button } from "@/components/button"
+import { type ReactNode } from "react"
 
 interface EventCardProps extends ChildProps {
     cardTitle: string
-    showMoreUrl: string
+    bottom?: ReactNode
 }
 
-const InfoCard: Component<EventCardProps> = ({ cardTitle, showMoreUrl, className, children }) => (
-    <div className={`grid content-between rounded-2xl border bg-white p-2 shadow-lg ${className}`}>
+const InfoCard: Component<EventCardProps> = ({ cardTitle, className, children, bottom }) => (
+    <div
+        className={`grid content-between rounded-2xl border bg-white px-2 pb-2 shadow-lg sm:py-2 ${className}`}>
         <div>
-            <h2 className={"text-darkTitle my-2 text-center"}>{cardTitle}</h2>
+            <h2 className={"my-1 text-center text-darkTitle sm:my-2"}>{cardTitle}</h2>
             {children}
         </div>
 
-        <Link href={showMoreUrl} className={"mx-auto"}>
-            <Button>Vis mer</Button>
-        </Link>
+        {bottom}
     </div>
 )
 
 export default InfoCard
-
-export const Divider: Component = () => <div className={"mx-auto w-3/4 border-b"} />

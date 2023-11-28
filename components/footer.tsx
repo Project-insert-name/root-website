@@ -1,22 +1,42 @@
 import { ExternalLink, MailLink } from "@/components/link"
-import { Facebook, GitHub, Instagram } from "@/components/icons/socials"
+import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/socials"
+import { Divider } from "@/components/divider"
+import { bigIconSize } from "@/components/icons/icon"
 
-const iconSize = 30
+const linkClasses = "motion-safe:hover:animate-bounce"
 
 const Footer: Component = ({ className, ...props }) => (
     <footer className={`absolute bottom-0 min-h-[100px] w-full ${className}`} {...props}>
         <div className={"flex flex-col items-center justify-center"}>
-            <div className={"mx-auto my-3 w-3/4 border shadow-2xl shadow-black"} />
+            <Divider />
 
-            <div className={"mb-2 flex gap-5"}>
-                <ExternalLink href={"https://www.facebook.com/RootLinjeforening"}>
-                    <Facebook fill={"#0866FF"} width={iconSize} alt={"Facebook logo"} />
+            <div className={"my-3 flex gap-5"}>
+                <ExternalLink
+                    title={"Facebook"}
+                    className={linkClasses}
+                    href={"https://www.facebook.com/RootLinjeforening"}>
+                    <Facebook width={bigIconSize} />
                 </ExternalLink>
-                <ExternalLink href={"https://www.instagram.com/linjeforeningenroot/"}>
-                    <Instagram fill={"#E4405F"} width={iconSize} alt={"Instagram logo"} />
+
+                <ExternalLink
+                    title={"Instagram"}
+                    className={linkClasses}
+                    href={"https://www.instagram.com/linjeforeningenroot/"}>
+                    <Instagram width={bigIconSize} />
                 </ExternalLink>
-                <ExternalLink href={"https://github.com/Project-insert-name/root-website-frontend"}>
-                    <GitHub width={iconSize} alt={"GitHub logo"} />
+
+                <ExternalLink
+                    title={"LinkedIn"}
+                    className={linkClasses}
+                    href={"https://www.linkedin.com/company/root-linjeforening"}>
+                    <LinkedIn width={bigIconSize} />
+                </ExternalLink>
+
+                <ExternalLink
+                    title={"GitHub"}
+                    className={linkClasses}
+                    href={"https://github.com/Project-insert-name/root-website"}>
+                    <GitHub width={bigIconSize} />
                 </ExternalLink>
             </div>
             <p>

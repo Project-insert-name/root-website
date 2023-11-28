@@ -1,11 +1,14 @@
-import InfoCard, { Divider } from "@/components/events/infoCard"
+import InfoCard from "@/components/events/infoCard"
 import Link from "next/link"
 import type { EventType, RootEvent } from "@/sanity/types"
-import SanityImage from "@/components/sanityImage"
 import { toFormatDateAndTime } from "@/utils/dateUtils"
 import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon"
-import { getNextEvents } from "@/sanity/queries/event"
+import { getFutureEvents } from "@/sanity/queries/event"
 import { Suspense } from "react"
+import { Divider } from "@/components/divider"
+import { CircularProgressIndicator } from "@/components/suspense"
+import Thumbnail from "@/components/events/thumbnail"
+import { LinkButton } from "@/components/button"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
@@ -13,47 +16,56 @@ interface EventCardProps extends DefaultProps {
     emptyMessage?: string
 }
 
-// TODO slå sammen fellestrekk i wide og narrow komponentene
-// TODO bedre fallback for Suspense
-
 const EventCard: Component<EventCardProps> = ({
     eventTitle = "Arrangementer",
-    emptyMessage = "Ingen arrangementer",
+    emptyMessage,
     showMoreUrl,
     className,
 }) => (
-    <InfoCard cardTitle={eventTitle} showMoreUrl={showMoreUrl} className={className}>
-        <Suspense fallback={"Laster inn"}>
-            <EventCardData emptyMessage={emptyMessage} />
+    <InfoCard
+        cardTitle={eventTitle}
+        className={className}
+        bottom={
+            <LinkButton href={showMoreUrl} className={"mx-auto"}>
+                Vis mer
+            </LinkButton>
+        }>
+        <Suspense fallback={<CircularProgressIndicator aria-label={"Laster inn arrangementer"} />}>
+            <NextEventsData emptyMessage={emptyMessage} />
         </Suspense>
     </InfoCard>
 )
 
 export default EventCard
 
-const EventCardData: AsyncComponent<{ emptyMessage: string }> = async ({ emptyMessage }) => {
-    const events = await getNextEvents()
-    return (
-        <>
-            {events.length > 0 ? (
-                events.map((event, index) => (
-                    <div key={event._id}>
-                        {index !== 0 && <Divider />}
-                        <SingleEventWide {...event} className={"hidden sm:flex"} />
-                        <SingleEventNarrow {...event} className={"flex sm:hidden"} />
-                    </div>
-                ))
-            ) : (
-                <p className={"text-center"}>{emptyMessage}</p>
-            )}
-        </>
-    )
+const NextEventsData: AsyncComponent<{ emptyMessage?: string }> = async ({ emptyMessage }) => {
+    const events = await getFutureEvents()
+    return <EventContent events={events} emptyMessage={emptyMessage} />
 }
+
+export const EventContent: Component<{
+    events: ReadonlyArray<RootEvent>
+    emptyMessage?: string
+}> = ({ events, emptyMessage = "Ingen arrangementer" }) => (
+    <>
+        {events.length > 0 ? (
+            events.map((event, index) => (
+                <div key={event._id}>
+                    {index !== 0 && <Divider />}
+                    <SingleEventWide {...event} className={"hidden sm:flex"} />
+                    <SingleEventNarrow {...event} className={"flex sm:hidden"} />
+                </div>
+            ))
+        ) : (
+            <p className={"text-center"}>{emptyMessage}</p>
+        )}
+    </>
+)
 
 /**
  * Et enkelt arrangement som vises på brede skjermer
  */
-const SingleEventWide: Component<RootEvent & DefaultProps> = ({
+export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
     className,
     event_type,
     event_title,
@@ -61,14 +73,15 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
     event_address_text,
     event_image,
     event_slug,
+    gallery,
 }) => {
     const startTime = toFormatDateAndTime(event_start_time)
     return (
-        <div className={`mx-2 my-5 justify-between gap-3 ${className}`}>
+        <div className={`mx-2 my-4 justify-between gap-3 ${className}`}>
             <div className={"flex"}>
                 <EventMarker type={event_type} />
                 <div>
-                    <Link href={`arrangement/${event_slug?.current}`} className={"hover:underline"}>
+                    <Link href={`arrangement/${event_slug.current}`}>
                         <h6 className={"font-mono"}>{event_title}</h6>
                     </Link>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
@@ -80,18 +93,13 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                         )}
                     </div>
                     {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
+                    {gallery && <Link href={`galleri/${gallery.slug.current}`}>Bildegalleri</Link>}
                 </div>
             </div>
 
             {event_image && (
-                <Link href={`arrangement/${event_slug?.current}`}>
-                    <SanityImage
-                        image={event_image}
-                        width={150}
-                        height={75}
-                        className={"rounded-xl"}
-                        alt={event_image.alt}
-                    />
+                <Link href={`arrangement/${event_slug.current}`}>
+                    <Thumbnail image={event_image} />
                 </Link>
             )}
         </div>
@@ -101,7 +109,7 @@ const SingleEventWide: Component<RootEvent & DefaultProps> = ({
 /**
  * Et enkelt arrangement som vises på smale skjermer
  */
-const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
+export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     className,
     event_type,
     event_title,
@@ -112,8 +120,8 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
 }) => {
     const startTime = toFormatDateAndTime(event_start_time)
     return (
-        <div className={`mx-1 my-5 flex w-full flex-col ${className}`}>
-            <Link href={`arrangement/${event_slug?.current}`} className={"hover:underline"}>
+        <div className={`mx-1 my-3 flex w-full flex-col ${className}`}>
+            <Link href={`arrangement/${event_slug.current}`}>
                 <h6>{event_title}</h6>
             </Link>
             <div className={"inline-flex justify-between"}>
@@ -125,23 +133,15 @@ const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
                             <TimeIcon>{startTime.time}</TimeIcon>
                         </>
                     )}
-                    <MapIcon>{event_address_text}</MapIcon>
+                    {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
                 </div>
-                {event_image && (
-                    <SanityImage
-                        image={event_image}
-                        width={100}
-                        height={75}
-                        className={"m-1 rounded-xl"}
-                        alt={event_image.alt}
-                    />
-                )}
+                {event_image && <Thumbnail image={event_image} width={130} />}
             </div>
         </div>
     )
 }
 
-const EventMarker: Component<{ type: EventType }> = ({ type }) => {
+export const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     function getTypeColour() {
         switch (type) {
             case "bedpres":
@@ -155,5 +155,9 @@ const EventMarker: Component<{ type: EventType }> = ({ type }) => {
         }
     }
 
-    return <div className={`mr-2 h-full w-2 rounded-xl ${getTypeColour()}`} />
+    return (
+        <div>
+            <div className={`mr-2 h-full w-2 rounded-xl ${getTypeColour()}`} />
+        </div>
+    )
 }
