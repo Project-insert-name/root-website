@@ -3,7 +3,7 @@ import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/social
 import { Divider } from "@/components/divider"
 import { bigIconSize } from "@/components/icons/icon"
 
-const linkClasses = "motion-safe:hover:animate-bounce"
+const linkClasses = "hover:brightness-75 transition-all duration-100"
 
 const Footer: Component = ({ className, ...props }) => (
     <footer className={`absolute bottom-0 min-h-[100px] w-full ${className}`} {...props}>
