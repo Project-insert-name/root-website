@@ -88,7 +88,7 @@ const ButtonAndProgress: Component<{ loading: boolean; onClick: VoidFunction }> 
         return <CircularProgressIndicator aria-label={"Laster inn flere arrangementer"} />
     }
     return (
-        <Button className={"mx-auto w-min"} onClick={onClick} disabled={loading}>
+        <Button className={"mx-auto w-min"} onClick={onClick}>
             Se mer
         </Button>
     )
