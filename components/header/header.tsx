@@ -32,7 +32,7 @@ const Header: Component = () => {
             // CSS for header komponenten
             classNames={{ wrapper: ["pl-2 max-w-initial"] }}
             className={
-                "z-101 overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
+                "z-101 overflow-hidden bg-gradient-to-r from-rootBlue via-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
             }>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
@@ -54,13 +54,11 @@ const Header: Component = () => {
             {/*Vanlig meny - Vises ikke på små skjermer*/}
             <NavbarContent className={"hidden gap-4 sm:flex"} justify={"end"}>
                 {paths.map(item => (
-                    <NavbarItem
-                        key={item.path}
-                        isActive={item.path === currentPath}
-                        className={"text-white data-[active=true]:before:content-['/']"}>
-                        {/*TODO for dårlig kontrast mellom tekst og bg*/}
+                    <NavbarItem key={item.path} isActive={item.path === currentPath}>
                         <Link
-                            className={"w-full text-inherit hover:text-white focus:border-rootBlue"}
+                            className={`${
+                                item.path === currentPath && "before:content-['/']"
+                            } w-full rounded-xl bg-gray-700/20 p-2 text-white hover:text-white focus:border-rootBlue`}
                             href={item.path}
                             size={"lg"}>
                             {item.name}
