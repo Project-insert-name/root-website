@@ -28,6 +28,9 @@ const config: Config = {
             maxWidth: {
                 initial: "initial",
             },
+            zIndex: {
+                "101": "101",
+            },
         },
     },
     darkMode: "class",

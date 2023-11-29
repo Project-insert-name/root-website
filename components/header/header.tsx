@@ -15,6 +15,12 @@ import paths from "@/components/header/paths"
 import { Button } from "@/components/button"
 import { usePathname } from "next/navigation"
 
+/**
+ * Headeren på nettsiden. Inneholder logo og navigasjonsmeny.
+ * Navignasjonsmenyen blir til en hamburgermeny på små skjermer.
+ * Bugget med NextUI sin Navbar.
+ * @see https://nextui.org/docs/components/navbar
+ */
 const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const currentPath = usePathname()
@@ -26,7 +32,7 @@ const Header: Component = () => {
             // CSS for header komponenten
             classNames={{ wrapper: ["pl-2 max-w-initial"] }}
             className={
-                "overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
+                "z-101 overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
             }>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
@@ -70,7 +76,7 @@ const Header: Component = () => {
                 />
             </NavbarContent>
             {/*Innholdet i hamburgermeny - Vises bare på små skjermer*/}
-            <NavbarMenu className={"z-[101] flex h-3/4 flex-col justify-between py-20"}>
+            <NavbarMenu className={"z-101 flex h-3/4 flex-col justify-between py-20"}>
                 <div>
                     {paths.map((item, index) => (
                         <NavbarMenuItem key={`${item}-${index}`} className={"my-1 w-fit"}>
