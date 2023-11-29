@@ -30,7 +30,10 @@ const Header: Component = () => {
             }>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
-                <Link href={"/"} title={"Root linjeforening sin logo"} className={"relative z-20"}>
+                <Link
+                    href={"/"}
+                    title={"Root linjeforening sin logo"}
+                    className={"relative z-20 focus:border-rootBlue"}>
                     {/*TODO test med ulike mobiler*/}
                     <Image
                         src={"/root-logo.svg"}
@@ -42,14 +45,16 @@ const Header: Component = () => {
                     />
                 </Link>
             </NavbarBrand>
+            {/*Vanlig meny - Vises ikke på små skjermer*/}
             <NavbarContent className={"hidden gap-4 sm:flex"} justify={"end"}>
                 {paths.map(item => (
                     <NavbarItem
                         key={item.path}
                         isActive={item.path === currentPath}
                         className={"text-white data-[active=true]:before:content-['/']"}>
+                        {/*TODO for dårlig kontrast mellom tekst og bg*/}
                         <Link
-                            className={"w-full text-inherit hover:text-white"}
+                            className={"w-full text-inherit hover:text-white focus:border-rootBlue"}
                             href={item.path}
                             size={"lg"}>
                             {item.name}
@@ -57,12 +62,14 @@ const Header: Component = () => {
                     </NavbarItem>
                 ))}
             </NavbarContent>
+            {/*Hamburgermeny - Vises bare på små skjermer*/}
             <NavbarContent className={"sm:hidden"} justify={"end"}>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className={"text-white"}
                 />
             </NavbarContent>
+            {/*Innholdet i hamburgermeny - Vises bare på små skjermer*/}
             <NavbarMenu className={"z-[101] flex h-3/4 flex-col justify-between py-20"}>
                 <div>
                     {paths.map((item, index) => (
