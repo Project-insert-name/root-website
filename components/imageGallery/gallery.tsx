@@ -1,7 +1,3 @@
-import { AttendeesIcon, bigIconSize, MapIcon } from "@/components/icons/icon"
-import { ExternalLinkButton } from "@/components/button"
-import { ExternalLink } from "@/components/link"
-
 interface GalleryProps extends ChildProps {
     heading: string
 }
@@ -17,5 +13,7 @@ const Gallery: Component<GalleryProps> = ({ heading, children }) => (
 export default Gallery
 
 export const GalleryItem: Component<ChildProps> = ({ children }) => (
-    <div className={"overflow-hidden rounded-2xl bg-slate-800"}>{children}</div>
+    <div className={"flex items-center justify-center overflow-hidden rounded-2xl bg-slate-200"}>
+        {children}
+    </div>
 )

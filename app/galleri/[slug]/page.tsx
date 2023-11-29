@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { getImageGalleryBySlug } from "@/sanity/queries/imageGallery"
-import Gallery from "@/components/imageGallery/gallery"
+import Gallery, { GalleryItem } from "@/components/imageGallery/gallery"
 import SanityImage from "@/components/sanityImage"
 import Link from "next/link"
 import { LeftArrowIcon } from "@/components/icons/icon"
@@ -21,19 +21,19 @@ const GalleryPage: AsyncPage<Params> = async ({ params }) => {
 
     return (
         <Gallery heading={imageGallery.title}>
-            <Link
-                href={"/galleri/"}
-                className="flex items-center justify-center bg-slate-200"
-                title="Tilbake til galleri">
-                <LeftArrowIcon width={75}></LeftArrowIcon>
-            </Link>
+            <GalleryItem>
+                <Link href={"/galleri/"} title="Tilbake til galleri">
+                    <LeftArrowIcon width={75}></LeftArrowIcon>
+                </Link>
+            </GalleryItem>
             {imageGallery.images?.map(image => (
-                <SanityImage
-                    key={image._key}
-                    image={image}
-                    alt={image.alt_text ? image.alt_text : ""}
-                    loading="lazy"
-                />
+                <GalleryItem key={image._key}>
+                    <SanityImage
+                        image={image}
+                        alt={image.alt_text ? image.alt_text : ""}
+                        loading="lazy"
+                    />
+                </GalleryItem>
             ))}
         </Gallery>
     )

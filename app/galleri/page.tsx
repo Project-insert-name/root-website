@@ -2,7 +2,6 @@ import Gallery, { GalleryItem } from "@/components/imageGallery/gallery"
 import { getAllImageGalleries } from "@/sanity/queries/imageGallery"
 import SanityImage from "@/components/sanityImage"
 import Link from "next/link"
-import { ImageGallery } from "@/sanity/types"
 
 /**
  * Side for liste over alle gallerier
