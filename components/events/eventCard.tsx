@@ -93,7 +93,9 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                         )}
                     </div>
                     {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
-                    {gallery && <Link href={`galleri/${gallery.slug.current}`}>Bildegalleri</Link>}
+                    {gallery?.slug && (
+                        <Link href={`galleri/${gallery.slug.current}`}>Bildegalleri</Link>
+                    )}
                 </div>
             </div>
 

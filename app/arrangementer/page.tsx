@@ -17,7 +17,7 @@ const nrOfEvents = 6
 /**
  * Klassene for EventCardPaginated.
  */
-const className = "sm:w-[550px] w-full mx-1"
+const className = "sm:w-[550px] w-full mx-1 h-min"
 
 /**
  * Viser en oversikt over alle arrangementer.
