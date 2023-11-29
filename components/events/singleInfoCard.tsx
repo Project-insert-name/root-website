@@ -7,7 +7,7 @@ import type { MarkdownString, SanityImageObject } from "@/sanity/types"
 
 interface SingleInfoCardProps extends ChildProps {
     image?: SanityImageObject
-    title: string
+    title?: string
     description?: MarkdownString
     addressText?: string
     addressUrl?: string

@@ -1,19 +1,11 @@
-import React from "react"
-import SideMenu from "@/components/sideMenu";
-import EventCard from "@/components/events/eventCard";
+import OmCard from "@/components/omOss/OmCard";
 
-export default function OmOssPage() {
+export const dynamic = "force-dynamic" //TODO Må den være her
+
+const OmOssPage = () => {
     return (
-        <div className={`flex flex-row mt-2`}>
-
-            <div className={`w-1/5 pr-1`}>
-                <SideMenu SelectedSlug={"om-root"} />
-            </div>
-
-            <div className={`pl-1 w-3/5 `}>
-                {/*TODO lage komponet til å vise innhold*/}
-                <EventCard showMoreUrl={"https://www.tv2.no"}/>
-            </div>
-        </div>
+        <OmCard emptyMessage={"Finner ikke info"}/>
     )
 }
+
+export default OmOssPage

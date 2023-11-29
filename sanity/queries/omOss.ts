@@ -1,6 +1,6 @@
 import {client} from "@/sanity/lib/client";
-import {InfoSider} from "@/sanity/types";
+import {InfoSide} from "@/sanity/types";
 
-export async function getAllInfoPages(): Promise<ReadonlyArray<InfoSider>>{
+export async function getAllInfoPages(): Promise<ReadonlyArray<InfoSide>>{
     return await client.fetch('*[_type == "info_sider"]')
 }
