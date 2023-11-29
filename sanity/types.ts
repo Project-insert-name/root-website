@@ -40,7 +40,9 @@ export type EventType = SanityValues["event"]["event_type"]
 /**
  * Inneholder data knyttet til et bildegalleri
  */
-export type ImageGallery = SanityValues["image_gallery"]
+export type ImageGallery = SanityValues["image_gallery"] & {
+    event?: { slug: SanitySlug }
+}
 
 /**
  * Inneholder data knyttet til en stillingsannonse.
