@@ -1,0 +1,18 @@
+version: "3"
+services:
+    # proxy:
+    #     build:
+    #         context: ./
+    #         dockerfile: nginx.Dockerfile
+    #     ports:
+    #         - 3000:3000
+    #     depends_on:
+    #         - root-website
+    #     volumes:
+    #         - ./nginx.conf:/etc/nginx/nginx.conf
+    root-website:
+        build:
+            context: ../../
+            dockerfile: ./Dockerfile
+        ports:
+            - 3000:3000
