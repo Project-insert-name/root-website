@@ -41,7 +41,7 @@ export type EventType = SanityValues["event"]["event_type"]
  * Inneholder data knyttet til et bildegalleri
  */
 export type ImageGallery = SanityValues["image_gallery"] & {
-    event?: { slug: SanitySlug }
+    event?: { event_slug: SanitySlug }
 }
 
 /**

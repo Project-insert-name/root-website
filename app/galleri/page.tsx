@@ -1,6 +1,5 @@
-import Gallery, { GalleryItem } from "@/components/imageGallery/gallery"
+import Gallery, { GalleryImage, GalleryItem } from "@/components/imageGallery/gallery"
 import { getAllImageGalleries } from "@/sanity/queries/imageGallery"
-import SanityImage from "@/components/sanityImage"
 import Link from "next/link"
 
 /**
@@ -13,13 +12,15 @@ const ImageGalleryListPage: AsyncPage = async () => {
         <Gallery heading="Bildegallerier">
             {galleries.map(gallery => (
                 <GalleryItem key={gallery._id}>
-                    <Link href={`/galleri/${gallery.slug.current}`}>
-                        <SanityImage
+                    <Link href={`/galleri/${gallery.slug.current}`} className={"h-full w-full"}>
+                        <GalleryImage
                             image={gallery.images?.[0]}
                             title={gallery.title}
-                            alt={gallery.title}
-                            loading="lazy"
+                            alt={gallery.images?.[0].alt}
                         />
+                        <div className="m-2 flex w-full justify-center text-black">
+                            <h3>{gallery.title}</h3>
+                        </div>
                     </Link>
                 </GalleryItem>
             ))}

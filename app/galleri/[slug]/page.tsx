@@ -1,9 +1,10 @@
 import { notFound } from "next/navigation"
 import { getImageGalleryBySlug } from "@/sanity/queries/imageGallery"
-import Gallery, { GalleryItem } from "@/components/imageGallery/gallery"
-import SanityImage from "@/components/sanityImage"
-import Link from "next/link"
-import { LeftArrowIcon } from "@/components/icons/icon"
+import Gallery, {
+    GalleryItem,
+    GalleryBackButton,
+    GalleryImage,
+} from "@/components/imageGallery/gallery"
 
 interface Params {
     slug: string
@@ -20,19 +21,11 @@ const GalleryPage: AsyncPage<Params> = async ({ params }) => {
     if (!imageGallery) return notFound()
 
     return (
-        <Gallery heading={imageGallery.title}>
-            <GalleryItem>
-                <Link href={"/galleri/"} title="Tilbake til galleri">
-                    <LeftArrowIcon width={75}></LeftArrowIcon>
-                </Link>
-            </GalleryItem>
+        <Gallery heading={imageGallery.title} event={imageGallery.event}>
+            <GalleryBackButton />
             {imageGallery.images?.map(image => (
                 <GalleryItem key={image._key}>
-                    <SanityImage
-                        image={image}
-                        alt={image.alt_text ? image.alt_text : ""}
-                        loading="lazy"
-                    />
+                    <GalleryImage image={image} alt={image.alt} />
                 </GalleryItem>
             ))}
         </Gallery>

@@ -32,7 +32,10 @@ export async function getNextEvents(limit = 4): Promise<ReadonlyArray<RootEvent>
  * @returns RootEvent Eventet med den spesifikke slugen, eller null om den ikke finnes
  */
 export async function getEventBySlug(slug: string): Promise<RootEvent | null> {
-    return client.fetch('*[_type == "event" && event_slug.current == $slug][0]', { slug })
+    return client.fetch(
+        '*[_type == "event" && event_slug.current == $slug][0]{..., gallery->{slug}}',
+        { slug },
+    )
 }
 
 interface PastAndFutureEvents {

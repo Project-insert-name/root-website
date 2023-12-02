@@ -49,7 +49,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
 
                 <Markdown className={"my-5"} markdown={description} />
             </div>
-            {typeof buttonUrl != "undefined" && (
+            {buttonUrl && (
                 <div className={"flex justify-center"}>
                     <ExternalLinkButton href={buttonUrl}>{buttonText}</ExternalLinkButton>
                 </div>

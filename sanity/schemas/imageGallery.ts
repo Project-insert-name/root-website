@@ -39,7 +39,7 @@ export default defineType({
                     },
                     fields: [
                         defineField({
-                            name: "alt_text",
+                            name: "alt",
                             type: "string",
                             title: "Alternativ bildetekst",
                         }),
