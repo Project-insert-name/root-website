@@ -1,5 +1,5 @@
 # Build based on the minimal alpine linux node image
-FROM node:16
+FROM node:20
 
 RUN npm install -g pnpm
 
