@@ -7,7 +7,7 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 interface GalleryProps extends ChildProps {
     heading: string
-    event?: { slug: SanitySlug }
+    event?: { event_slug: SanitySlug }
 }
 
 const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
