@@ -8,7 +8,7 @@ import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
 import Thumbnail from "@/components/events/thumbnail"
-import { LinkButton } from "@/components/button"
+import { LinkButton } from "@/components/buttons/button"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string

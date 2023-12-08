@@ -40,7 +40,7 @@ const Footer: Component = ({ className, ...props }) => (
                 </ExternalLink>
             </div>
             <p>
-                Kontakt oss: <MailLink mail={"linjeforening.root@hvl.no"} />
+                Kontakt oss: <MailLink mail={process.env.NEXT_PUBLIC_EMAIL} />
             </p>
         </div>
     </footer>

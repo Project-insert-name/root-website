@@ -1,6 +1,6 @@
 import SanityImage from "@/components/sanityImage"
 import { AttendeesIcon, bigIconSize, MapIcon } from "@/components/icons/icon"
-import { ExternalLinkButton } from "@/components/button"
+import { ExternalLinkButton } from "@/components/buttons/button"
 import Markdown from "@/components/markdown"
 import { ExternalLink } from "@/components/link"
 import type { MarkdownString, SanityImageObject } from "@/sanity/types"
@@ -14,6 +14,7 @@ interface SingleInfoCardProps extends ChildProps {
     maxParticipants?: string
     buttonText?: string
     buttonUrl?: string
+    ics?: string
 }
 
 const SingleInfoCard: Component<SingleInfoCardProps> = ({
@@ -39,12 +40,12 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
 
             <h1 className={"my-5 text-center text-2xl text-darkTitle sm:text-4xl"}>{title}</h1>
             <div className={"px-5 sm:px-32"}>
-                <div className={"flex flex-wrap justify-center gap-5"}>
+                <div className={"flex flex-wrap items-center justify-center gap-5"}>
                     {addressText && <Address address={addressText} url={addressUrl} />}
-                    {children}
                     {maxParticipants && (
                         <AttendeesIcon width={bigIconSize}>{maxParticipants}</AttendeesIcon>
                     )}
+                    {children}
                 </div>
 
                 <Markdown className={"my-5"} markdown={description} />

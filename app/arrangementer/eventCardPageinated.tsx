@@ -2,7 +2,7 @@
 
 import { EventContent } from "@/components/events/eventCard"
 import type { RootEvent } from "@/sanity/types"
-import { Button } from "@/components/button"
+import { Button } from "@/components/buttons/button"
 import InfoCard from "@/components/events/infoCard"
 import { useState } from "react"
 import { CircularProgressIndicator } from "@/components/suspense"

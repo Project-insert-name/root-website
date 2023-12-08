@@ -1,5 +1,5 @@
 import { SanitySlug } from "@/sanity/types"
-import { LinkButton } from "../button"
+import { LinkButton } from "../buttons/button"
 import Link from "next/link"
 import { LeftArrowIcon } from "../icons/icon"
 import SanityImage from "../sanityImage"

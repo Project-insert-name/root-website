@@ -12,7 +12,7 @@ import {
 import { useState } from "react"
 import Image from "next/image"
 import paths from "@/components/header/paths"
-import { Button } from "@/components/button"
+import { Button } from "@/components/buttons/button"
 import { usePathname } from "next/navigation"
 
 /**

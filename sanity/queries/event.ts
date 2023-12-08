@@ -69,7 +69,7 @@ export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEv
  * @example getFutureEvents(4, events[events.length - 1].event_start_time) // Henter de fire neste
  * @see https://www.sanity.io/docs/paginating-with-groq
  */
-export async function getFutureEvents(
+export async function getFutureEvents( // TODO edge case: hvis det er flere events med samme starttidspunkt, vil ikke alle bli hentet ut
     limit = 4,
     lastEventStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
