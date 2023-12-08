@@ -30,18 +30,18 @@ export const InfoSideContent: Component<{
 }> = ({ infoSider, emptyMessage = "Finner ikke info"}) => (
     <>
         {infoSider.length > 0 ? (
-            <div className={`flex flex-row mt-2`}>
-                <div className={`w-1/5 h-full pr-1 sticky top-2`}>
+            <div className={`flex flex-row`}>
+                <div className={`w-1/5 h-full pr-1 sticky top-36`}>
                     <SideMenu
                         infoSider={infoSider}
                         emptyMessage={emptyMessage}
                     />
                 </div>
 
-                <div className={`pl-1 w-3/5 `}>
+                <div className={`pl-1 w-3/5`}>
                     {infoSider.map((side: InfoSide) =>
-                        <div>
-                            <SingleInfoCard image={side.info_image} description={side.info}/>
+                        <div id={side._id} className={'scroll-mt-36'}>
+                            <SingleInfoCard  image={side.info_image} description={side.info}/>
                         </div>
                     )}
                 </div>

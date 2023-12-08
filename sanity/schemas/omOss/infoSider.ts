@@ -1,7 +1,5 @@
 import {defineField, defineType} from "@sanity-typed/types";
 import {ChatBubbleBottomCenterTextIcon} from "@heroicons/react/24/outline";
-import {Rule} from "postcss";
-
 
 export default defineType({
         name: "info_sider",
@@ -22,7 +20,7 @@ export default defineType({
                 description: "Dette er en unik streng som definerer url-en på nettsiden, bruk generate knappen for å lage",
                 validation: Rule => Rule.required(),
                 options: {
-                    source: "info_title"
+                    source: "info_title",
                 },
             }),
             defineField({

@@ -1,6 +1,7 @@
 import {InfoSide} from "@/sanity/types";
 import {getAllInfoPages} from "@/sanity/queries/omOss";
 import {Suspense} from "react";
+import Link from "next/link"
 
 interface SideMenuProps extends DefaultProps {
     selectedItem?: string,
@@ -16,11 +17,11 @@ const SideMenu: Component<SideMenuProps> = ({
     className,
 }) => {
     const listItems = infoSider.map(item =>
-        <div className={` text-start text-2xl p-2 hover:text-rootBlue `} >
+        <Link className={` text-start text-2xl p-2 hover:text-rootBlueDark`} href={`om-oss#${item._id}`} >
             {item.info_slug.current === selectedItem? <div className={`text-rootBlue`}>{item.info_title}</div>:
                 item.info_title
             }
-        </div>
+        </Link>
     )
     return (
         <div

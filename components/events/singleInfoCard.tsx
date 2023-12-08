@@ -28,7 +28,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
     className,
     children,
 }) => (
-    <div className={"p-2"}>
+    <div className={"mt-14"}>
         <div
             className={`container mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
             {image && (
