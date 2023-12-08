@@ -31,7 +31,7 @@ export const LinkButton: Component<{ href?: string } & ChildProps> = ({
 }) => (
     <_Button
         as={Link}
-        className={`flex items-center justify-center gap-2 hover:text-white ${buttonClassNames} ${className}`}
+        className={`flex items-center justify-center gap-2 hover:text-white focus:border-rootBlue ${buttonClassNames} ${className}`}
         {...props}>
         {children}
     </_Button>
@@ -53,7 +53,7 @@ export const ExternalLinkButton: Component<{ href?: string; iconWidth?: number }
 }) => (
     <_Button
         as={Link}
-        className={`flex items-center justify-center gap-2 hover:text-white ${buttonClassNames} ${className}`}
+        className={`flex items-center justify-center gap-2 hover:text-white focus:border-rootBlue ${buttonClassNames} ${className}`}
         isExternal
         showAnchorIcon
         anchorIcon={<LinkIcon width={iconWidth || defaultIconSize} />}

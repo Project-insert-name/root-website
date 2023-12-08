@@ -10,10 +10,13 @@ export async function getAllImageGalleries(): Promise<ReadonlyArray<ImageGallery
 }
 
 /**
- * Henter ut en specifikk galleri fra sanity basert på slug
+ * Henter ut en spesifikk galleri fra sanity basert på slug
  * @param slug Slug til galleriet
  * @returns Bildegalleri av typen ImageGallery, eller null om det ikke finnes
  */
 export async function getImageGalleryBySlug(slug: string): Promise<ImageGallery | null> {
-    return await client.fetch('*[_type == "image_gallery" && slug.current == $slug][0]', { slug })
+    return await client.fetch(
+        '*[_type == "image_gallery" && slug.current == $slug][0]{...,event->{event_slug}}',
+        { slug },
+    )
 }

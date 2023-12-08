@@ -3,7 +3,7 @@ import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/social
 import { Divider } from "@/components/divider"
 import { bigIconSize } from "@/components/icons/icon"
 
-const linkClasses = "motion-safe:hover:animate-bounce"
+const linkClasses = "hover:brightness-75 transition-all duration-100"
 
 const Footer: Component = ({ className, ...props }) => (
     <footer className={`absolute bottom-0 min-h-[100px] w-full ${className}`} {...props}>
@@ -40,7 +40,7 @@ const Footer: Component = ({ className, ...props }) => (
                 </ExternalLink>
             </div>
             <p>
-                Kontakt oss: <MailLink mail={"linjeforening.root@hvl.no"} />
+                Kontakt oss: <MailLink mail={process.env.NEXT_PUBLIC_EMAIL} />
             </p>
         </div>
     </footer>

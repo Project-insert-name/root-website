@@ -8,7 +8,7 @@ import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
 import Thumbnail from "@/components/events/thumbnail"
-import { LinkButton } from "@/components/button"
+import { LinkButton } from "@/components/buttons/button"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
@@ -93,7 +93,9 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                         )}
                     </div>
                     {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
-                    {gallery && <Link href={`galleri/${gallery.slug.current}`}>Bildegalleri</Link>}
+                    {gallery?.slug && (
+                        <Link href={`galleri/${gallery.slug.current}`}>Bildegalleri</Link>
+                    )}
                 </div>
             </div>
 

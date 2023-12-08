@@ -32,7 +32,10 @@ export async function getNextEvents(limit = 4): Promise<ReadonlyArray<RootEvent>
  * @returns RootEvent Eventet med den spesifikke slugen, eller null om den ikke finnes
  */
 export async function getEventBySlug(slug: string): Promise<RootEvent | null> {
-    return client.fetch('*[_type == "event" && event_slug.current == $slug][0]', { slug })
+    return client.fetch(
+        '*[_type == "event" && event_slug.current == $slug][0]{..., gallery->{slug}}',
+        { slug },
+    )
 }
 
 interface PastAndFutureEvents {
@@ -66,7 +69,7 @@ export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEv
  * @example getFutureEvents(4, events[events.length - 1].event_start_time) // Henter de fire neste
  * @see https://www.sanity.io/docs/paginating-with-groq
  */
-export async function getFutureEvents(
+export async function getFutureEvents( // TODO edge case: hvis det er flere events med samme starttidspunkt, vil ikke alle bli hentet ut
     limit = 4,
     lastEventStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {

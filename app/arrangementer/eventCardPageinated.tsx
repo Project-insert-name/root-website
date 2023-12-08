@@ -2,7 +2,7 @@
 
 import { EventContent } from "@/components/events/eventCard"
 import type { RootEvent } from "@/sanity/types"
-import { Button } from "@/components/button"
+import { Button } from "@/components/buttons/button"
 import InfoCard from "@/components/events/infoCard"
 import { useState } from "react"
 import { CircularProgressIndicator } from "@/components/suspense"
@@ -88,7 +88,7 @@ const ButtonAndProgress: Component<{ loading: boolean; onClick: VoidFunction }> 
         return <CircularProgressIndicator aria-label={"Laster inn flere arrangementer"} />
     }
     return (
-        <Button className={"mx-auto w-min"} onClick={onClick} disabled={loading}>
+        <Button className={"mx-auto w-min"} onClick={onClick}>
             Se mer
         </Button>
     )

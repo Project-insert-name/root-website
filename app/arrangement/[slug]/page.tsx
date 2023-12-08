@@ -1,9 +1,13 @@
 import { getAllEventSlugs, getEventBySlug } from "@/sanity/queries/event"
-import { toFormatDateAndTime } from "@/utils/dateUtils"
+import { isFuture, toDateTuple, toFormatDateAndTime } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
 import SingleInfoCard from "@/components/events/singleInfoCard"
 import { type Metadata } from "next"
+import { createEvent } from "ics"
+import { getEventTypeLabel } from "@/sanity/lib/utils"
+import { RootEvent } from "@/sanity/types"
+import IcsButton from "@/components/buttons/icsButton"
 
 interface Params {
     slug: string
@@ -21,6 +25,11 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
 
     if (!event) return notFound()
 
+    let icsEvent = undefined
+    if (isFuture(event.event_start_time)) {
+        icsEvent = createIcsEvent(event)
+    }
+
     return (
         <SingleInfoCard
             title={event.event_title}
@@ -35,7 +44,10 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
             addressUrl={event.event_address_url}
             buttonText={"Meld meg på"}
             buttonUrl={event.event_application_url}>
-            <TimeAndDate startTime={event.event_start_time} />
+            <>
+                <TimeAndDate startTime={event.event_start_time} />
+                {icsEvent && <IcsButton filename={event.event_title} data={icsEvent} />}
+            </>
         </SingleInfoCard>
     )
 }
@@ -84,6 +96,37 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
 
     return {
         title: `${event.event_title} | Root Linjeforening`,
-        description: event.event_description.slice(0, 150),
+        description: event.event_description.slice(0, 250),
     }
+}
+
+/**
+ * Lager en string på ics format basert på et arrangement.
+ * Siden vi ikke har informasjon om sluttidspunkt eller varighet, settes varigheten til 2 timer.
+ * @param event Arrangementet som skal konverteres til ics format
+ * @returns En string på ics format
+ * @see https://www.npmjs.com/package/ics
+ */
+function createIcsEvent(event: RootEvent): string | undefined {
+    let icsEvent: string | undefined = undefined
+    createEvent(
+        {
+            title: event.event_title,
+            description: event.event_description.slice(0, 250), // TODO ikke ideelt
+            location: event.event_address_text,
+            start: toDateTuple(event.event_start_time),
+            duration: { hours: 2 },
+            url: `${process.env.NEXT_PUBLIC_BASE_URL}/arrangement/${event.event_slug.current}`,
+            organizer: { name: "Root Linjeforening", email: process.env.NEXT_PUBLIC_EMAIL },
+            categories: ["Root Linjeforening", "Arrangement", getEventTypeLabel(event.event_type)],
+        },
+        (error, value) => {
+            if (error) {
+                console.error(error)
+            } else {
+                icsEvent = value
+            }
+        },
+    )
+    return icsEvent
 }

@@ -12,9 +12,15 @@ import {
 import { useState } from "react"
 import Image from "next/image"
 import paths from "@/components/header/paths"
-import { Button } from "@/components/button"
+import { Button } from "@/components/buttons/button"
 import { usePathname } from "next/navigation"
 
+/**
+ * Headeren på nettsiden. Inneholder logo og navigasjonsmeny.
+ * Navignasjonsmenyen blir til en hamburgermeny på små skjermer.
+ * Bugget med NextUI sin Navbar.
+ * @see https://nextui.org/docs/components/navbar
+ */
 const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const currentPath = usePathname()
@@ -26,11 +32,14 @@ const Header: Component = () => {
             // CSS for header komponenten
             classNames={{ wrapper: ["pl-2 max-w-initial"] }}
             className={
-                "overflow-hidden bg-gradient-to-r from-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
+                "z-101 overflow-hidden bg-gradient-to-r from-rootBlue via-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
             }>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
-                <Link href={"/"} title={"Root linjeforening sin logo"} className={"relative z-20"}>
+                <Link
+                    href={"/"}
+                    title={"Root linjeforening sin logo"}
+                    className={"relative z-20 focus:border-rootBlue"}>
                     {/*TODO test med ulike mobiler*/}
                     <Image
                         src={"/root-logo.svg"}
@@ -42,14 +51,14 @@ const Header: Component = () => {
                     />
                 </Link>
             </NavbarBrand>
+            {/*Vanlig meny - Vises ikke på små skjermer*/}
             <NavbarContent className={"hidden gap-4 sm:flex"} justify={"end"}>
                 {paths.map(item => (
-                    <NavbarItem
-                        key={item.path}
-                        isActive={item.path === currentPath}
-                        className={"text-white data-[active=true]:before:content-['/']"}>
+                    <NavbarItem key={item.path} isActive={item.path === currentPath}>
                         <Link
-                            className={"w-full text-inherit hover:text-white"}
+                            className={`${
+                                item.path === currentPath && "before:content-['/']"
+                            } w-full rounded-xl bg-gray-700/20 p-2 text-white hover:text-white focus:border-rootBlue`}
                             href={item.path}
                             size={"lg"}>
                             {item.name}
@@ -57,13 +66,15 @@ const Header: Component = () => {
                     </NavbarItem>
                 ))}
             </NavbarContent>
+            {/*Hamburgermeny - Vises bare på små skjermer*/}
             <NavbarContent className={"sm:hidden"} justify={"end"}>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className={"text-white"}
                 />
             </NavbarContent>
-            <NavbarMenu className={"z-[101] flex h-3/4 flex-col justify-between py-20"}>
+            {/*Innholdet i hamburgermeny - Vises bare på små skjermer*/}
+            <NavbarMenu className={"z-101 flex h-3/4 flex-col justify-between py-20"}>
                 <div>
                     {paths.map((item, index) => (
                         <NavbarMenuItem key={`${item}-${index}`} className={"my-1 w-fit"}>

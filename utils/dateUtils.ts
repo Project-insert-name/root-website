@@ -44,3 +44,36 @@ export function toFormatDate(date: string): string | null {
     date = date[0].toUpperCase() + date.slice(1)
     return date
 }
+
+/**
+ * Konverterer en String dato til en tuppel med dato og tid
+ * Dato og tid er i formatet [År, Måned, Dag, Time, Minutt]
+ * @param date Datoen som skal konverteres
+ * @returns En tuppel med dato og tid
+ * @throws Error om datoen er ugyldig
+ */
+export function toDateTuple(date: string): [number, number, number, number, number] {
+    const dateObj = new Date(date)
+
+    if (isNaN(dateObj.valueOf())) {
+        throw new Error("Invalid date")
+    }
+
+    return [
+        dateObj.getFullYear(),
+        dateObj.getMonth() + 1,
+        dateObj.getDate(),
+        dateObj.getHours(),
+        dateObj.getMinutes(),
+    ]
+}
+
+/**
+ * Sjekker om en dato er i fremtiden
+ * @param date Datoen som skal sjekkes
+ * @returns True om datoen er i fremtiden, false ellers
+ */
+export function isFuture(date: string): boolean {
+    const dateObj = new Date(date)
+    return dateObj.valueOf() >= Date.now()
+}
