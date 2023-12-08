@@ -31,8 +31,7 @@ export const InfoSideContent: Component<{
     <>
         {infoSider.length > 0 ? (
             <div className={`flex flex-row mt-2`}>
-
-                <div className={`w-1/5 pr-1`}>
+                <div className={`w-1/5 h-full pr-1 sticky top-2`}>
                     <SideMenu
                         infoSider={infoSider}
                         emptyMessage={emptyMessage}
