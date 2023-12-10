@@ -40,7 +40,7 @@ export const InfoSideContent: Component<{
 
                 <div className={`pl-1 w-3/5`}>
                     {infoSider.map((side: InfoSide) =>
-                        <div id={side._id} className={'scroll-mt-36'}>
+                        <div id={side._id} key={side._id} className={'scroll-mt-36'}>
                             <SingleInfoCard  image={side.info_image} description={side.info}/>
                         </div>
                     )}

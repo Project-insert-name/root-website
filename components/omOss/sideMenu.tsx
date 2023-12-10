@@ -17,7 +17,7 @@ const SideMenu: Component<SideMenuProps> = ({
     className,
 }) => {
     const listItems = infoSider.map(item =>
-        <Link className={` text-start text-2xl p-2 hover:text-rootBlueDark`} href={`om-oss#${item._id}`} >
+        <Link key={item._id} className={` text-start text-2xl p-2 hover:text-rootBlueDark`} href={`om-oss#${item._id}`} >
             {item.info_slug.current === selectedItem? <div className={`text-rootBlue`}>{item.info_title}</div>:
                 item.info_title
             }
