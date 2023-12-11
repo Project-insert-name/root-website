@@ -1,5 +1,5 @@
 import { getFutureEvents, getPastAndFutureEvents, getPastEvents } from "@/sanity/queries/event"
-import EventCardPaginated from "@/app/arrangementer/eventCardPageinated"
+import EventCardPaginated from "@/app/arrangement/eventCardPageinated"
 import { type Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -26,26 +26,26 @@ const className = "sm:w-[550px] w-full mx-1 h-min"
 const EventsPage: AsyncPage = async () => {
     const { past, future } = await getPastAndFutureEvents(nrOfEvents)
     return (
-        <div className={"flex flex-wrap-reverse items-baseline justify-center gap-5 pt-3 sm:p-5"}>
-            <EventCardPaginated
-                cardTitle={"Tidligere arrangementer"}
-                className={className}
-                initial={past}
-                minEvents={nrOfEvents}
-                fetchMore={async (limit, lastEventStartTime) => {
-                    // Spesifiserer at denne funksjonen skal kjøres på serveren, selv om den blir kalt fra klienten.
-                    "use server"
-                    return getPastEvents(limit, lastEventStartTime)
-                }}
-            />
+        <div className={"flex flex-wrap items-baseline justify-center gap-5 pt-3 sm:p-5"}>
             <EventCardPaginated
                 cardTitle={"Neste arrangementer"}
                 className={className}
                 initial={future}
                 minEvents={nrOfEvents}
                 fetchMore={async (limit, lastEventStartTime) => {
+                    // Spesifiserer at denne funksjonen skal kjøres på serveren, selv om den blir kalt fra klienten.
                     "use server"
                     return getFutureEvents(limit, lastEventStartTime)
+                }}
+            />
+            <EventCardPaginated
+                cardTitle={"Tidligere arrangementer"}
+                className={className}
+                initial={past}
+                minEvents={nrOfEvents}
+                fetchMore={async (limit, lastEventStartTime) => {
+                    "use server"
+                    return getPastEvents(limit, lastEventStartTime)
                 }}
             />
         </div>
