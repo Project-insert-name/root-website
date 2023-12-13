@@ -14,7 +14,6 @@ interface SingleInfoCardProps extends ChildProps {
     maxParticipants?: string
     buttonText?: string
     buttonUrl?: string
-    ics?: string
 }
 
 const SingleInfoCard: Component<SingleInfoCardProps> = ({

@@ -1,8 +1,11 @@
 import Link from "next/link"
-import React from "react"
 import { Button } from "@/components/buttons/button"
 
-export default function NotFound() {
+/**
+ * Side som vises når brukeren går til en side som ikke finnes.
+ * @see https://nextjs.org/docs/app/api-reference/file-conventions/not-found
+ */
+const NotFound = () => {
     return (
         <div className="flex flex-col place-items-center gap-2">
             <div className="text-center font-bold">
@@ -16,3 +19,5 @@ export default function NotFound() {
         </div>
     )
 }
+
+export default NotFound

@@ -3,7 +3,7 @@ import type { Metadata, Viewport } from "next"
 import type { FC, ReactNode } from "react"
 import Footer from "@/components/footer"
 import Header from "@/components/header/header"
-import { Providers } from "@/app/providers"
+import { Providers } from "@/app/(root)/providers"
 
 /**
  * Inneholder tittel som vises i fanen til nettleseren og beskrivelse som vises i søkeresultater.
