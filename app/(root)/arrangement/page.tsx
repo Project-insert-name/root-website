@@ -1,5 +1,5 @@
 import { getFutureEvents, getPastAndFutureEvents, getPastEvents } from "@/sanity/queries/event"
-import EventCardPaginated from "@/app/arrangement/eventCardPageinated"
+import EventCardPaginated from "@/app/(root)/arrangement/eventCardPageinated"
 import { type Metadata } from "next"
 
 export const metadata: Metadata = {
