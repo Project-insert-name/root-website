@@ -22,7 +22,7 @@ const Home: Page = () => {
         <div className={"flex flex-wrap justify-center gap-5 py-5"}>
             <EventCard
                 eventTitle={"Arrangementer"}
-                showMoreUrl={"arrangementer"}
+                showMoreUrl={"arrangement"}
                 className={"mx-2 w-full sm:w-[550px]"}
             />
             <div className={"flex w-full flex-col gap-5 sm:w-[550px]"}>
