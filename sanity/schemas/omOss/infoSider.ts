@@ -8,23 +8,20 @@ export default defineType({
         icon: ChatBubbleBottomCenterTextIcon,
         fields: [
             defineField( {
-                name: "info_title",
+                name: "title",
                 type: "string",
                 title: "Info side om hva",
                 validation: Rule => Rule.required(),
             }),
             defineField({
-                name: "info_slug",
-                type: "slug",
-                title: "Lenke slug",
-                description: "Dette er en unik streng som definerer url-en på nettsiden, bruk generate knappen for å lage",
+                name: "priority",
+                type: "number",
+                title: "Prioritet",
+                description: "Laveste tall blir prioritert først hvis noen har samme tall blir det sortet på alfabetisk rekkefølge",
                 validation: Rule => Rule.required(),
-                options: {
-                    source: "info_title",
-                },
             }),
             defineField({
-                name: "info_image",
+                name: "image",
                 type: "image",
                 title: "Forsidebilde",
                 options: {

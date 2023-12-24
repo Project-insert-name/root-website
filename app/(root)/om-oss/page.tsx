@@ -4,7 +4,7 @@ export const dynamic = "force-dynamic" //TODO Må den være her
 
 const OmOssPage = () => {
     return (
-        <OmCard emptyMessage={"Finner ikke info"}/>
+        <OmCard emptyMessage={"Finner ikke noe info"}/>
     )
 }
 

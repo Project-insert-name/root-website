@@ -27,7 +27,7 @@ const InfoSiderData: AsyncComponent<{emptyMessage?: string}> = async ({ emptyMes
 export const InfoSideContent: Component<{
     infoSider: ReadonlyArray<InfoSide>
     emptyMessage?: string
-}> = ({ infoSider, emptyMessage = "Finner ikke info"}) => (
+}> = ({ infoSider, emptyMessage = "Finner ikke noen info"}) => (
     <>
         {infoSider.length > 0 ? (
             <div className={`flex flex-row`}>
@@ -40,9 +40,9 @@ export const InfoSideContent: Component<{
 
                 <div className={`pl-1 w-3/5`}>
                     {infoSider.map((side: InfoSide) =>
-                        <div id={side._id} key={side._id} className={'scroll-mt-36'}>
-                            <SingleInfoCard  image={side.info_image} description={side.info}/>
-                        </div>
+                        <section id={side._id} key={side._id} className={'scroll-mt-36'}>
+                            <SingleInfoCard  image={side.image} description={side.info}/>
+                        </section>
                     )}
                 </div>
             </div>
