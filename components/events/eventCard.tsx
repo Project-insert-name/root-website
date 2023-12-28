@@ -67,22 +67,22 @@ export const EventContent: Component<{
  */
 export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
     className,
-    event_type,
-    event_title,
-    event_start_time,
-    event_address_text,
-    event_image,
-    event_slug,
+    type,
+    title,
+    start_time,
+    address_text,
+    hero_image,
+    slug,
     gallery,
 }) => {
-    const startTime = toFormatDateAndTime(event_start_time)
+    const startTime = toFormatDateAndTime(start_time)
     return (
         <div className={`mx-2 my-4 justify-between gap-3 ${className}`}>
             <div className={"flex"}>
-                <EventMarker type={event_type} />
+                <EventMarker type={type} />
                 <div>
-                    <Link href={`arrangement/${event_slug.current}`}>
-                        <h6 className={"font-mono"}>{event_title}</h6>
+                    <Link href={`arrangement/${slug.current}`}>
+                        <h6 className={"font-mono"}>{title}</h6>
                     </Link>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
                         {startTime && (
@@ -92,16 +92,16 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                             </>
                         )}
                     </div>
-                    {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
+                    {address_text && <MapIcon>{address_text}</MapIcon>}
                     {gallery?.slug && (
                         <Link href={`galleri/${gallery.slug.current}`}>Bildegalleri</Link>
                     )}
                 </div>
             </div>
 
-            {event_image && (
-                <Link href={`arrangement/${event_slug.current}`}>
-                    <Thumbnail image={event_image} />
+            {hero_image && (
+                <Link href={`arrangement/${slug.current}`}>
+                    <Thumbnail image={hero_image} />
                 </Link>
             )}
         </div>
@@ -113,31 +113,31 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
  */
 export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     className,
-    event_type,
-    event_title,
-    event_start_time,
-    event_address_text,
-    event_image,
-    event_slug,
+    type,
+    title,
+    start_time,
+    address_text,
+    hero_image,
+    slug,
 }) => {
-    const startTime = toFormatDateAndTime(event_start_time)
+    const startTime = toFormatDateAndTime(start_time)
     return (
         <div className={`mx-1 my-3 flex w-full flex-col ${className}`}>
-            <Link href={`arrangement/${event_slug.current}`}>
-                <h6>{event_title}</h6>
+            <Link href={`arrangement/${slug.current}`}>
+                <h6>{title}</h6>
             </Link>
             <div className={"inline-flex justify-between"}>
                 <div className={"inline-flex flex-col flex-wrap sm:flex-row"}>
-                    <EventMarker type={event_type} />
+                    <EventMarker type={type} />
                     {startTime && (
                         <>
                             <DateIcon>{startTime.date}</DateIcon>
                             <TimeIcon>{startTime.time}</TimeIcon>
                         </>
                     )}
-                    {event_address_text && <MapIcon>{event_address_text}</MapIcon>}
+                    {address_text && <MapIcon>{address_text}</MapIcon>}
                 </div>
-                {event_image && <Thumbnail image={event_image} width={130} />}
+                {hero_image && <Thumbnail image={hero_image} width={130} />}
             </div>
         </div>
     )

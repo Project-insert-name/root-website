@@ -21,7 +21,7 @@ export type SanityDocuments = DocumentValues<SanityValues>
 /**
  * Et bildeobjekt som innholder data knyttet til et bilde. Samt alt tekst.
  */
-export type SanityImageObject = SanityValues["event"]["event_image"]
+export type SanityImageObject = SanityValues["event"]["hero_image"]
 
 /**
  * Inneholder data knyttet til en Event, som bedriftspresentasjon, workshop, sosialt arrangement eller lignende.
@@ -35,7 +35,7 @@ export type RootEvent = SanityValues["event"] & {
 /**
  * Type som beskriver hvilken type event det er.
  */
-export type EventType = SanityValues["event"]["event_type"]
+export type EventType = SanityValues["event"]["type"]
 
 /**
  * Inneholder data knyttet til et bildegalleri
