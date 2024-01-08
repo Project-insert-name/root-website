@@ -81,7 +81,7 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
             <div className={"flex"}>
                 <EventMarker type={type} />
                 <div>
-                    <Link href={`arrangement/${slug.current}`}>
+                    <Link href={`arrangement/${slug?.current}`}>
                         <h6 className={"font-mono"}>{title}</h6>
                     </Link>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
@@ -123,7 +123,7 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     const startTime = toFormatDateAndTime(start_time)
     return (
         <div className={`mx-1 my-3 flex w-full flex-col ${className}`}>
-            <Link href={`arrangement/${slug.current}`}>
+            <Link href={`arrangement/${slug?.current}`}>
                 <h6>{title}</h6>
             </Link>
             <div className={"inline-flex justify-between"}>

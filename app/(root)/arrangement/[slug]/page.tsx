@@ -33,7 +33,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
     return (
         <SingleInfoCard
             title={event.title}
-            description={event.event_description}
+            description={event.description}
             image={event.hero_image}
             maxParticipants={
                 event.max_participants ? `Antall plasser er ${event.max_participants}` : undefined
@@ -76,7 +76,7 @@ export const generateStaticParams = async (): Promise<Params[]> => {
     const events = await getAllEventSlugs()
 
     return events.map(event => ({
-        slug: event.event_slug.current,
+        slug: event.slug?.current, // TODO temp ?, til alle events har fått slug
     }))
 }
 
@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
 
     return {
         title: `${event.title} | Root Linjeforening`,
-        description: event.event_description.slice(0, 250),
+        description: event.description.slice(0, 250),
     }
 }
 
@@ -110,7 +110,7 @@ function createIcsEvent(event: RootEvent): string | undefined {
     createEvent(
         {
             title: event.title,
-            description: event.event_description.slice(0, 250), // TODO ikke ideelt
+            description: event.description.slice(0, 250), // TODO ikke ideelt
             location: event.address_text,
             start: toDateTuple(event.start_time),
             duration: { hours: 2 },

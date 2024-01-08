@@ -18,7 +18,7 @@ export default defineType({
             type: "slug",
             title: "Lenke slug",
             description:
-                "En unik streng som definerer url-en på nettsiden, bruk generate knappen for å lage",
+                "En unik streng som definerer url-en på nettsiden, bruk 'generate' knappen for å lage",
             validation: Rule => Rule.required(),
             options: {
                 source: "title",
@@ -72,7 +72,7 @@ export default defineType({
         defineField({
             name: "address_url",
             type: "url",
-            title: "Kart lokasjon",
+            title: "Lenke til lokasjon",
             description:
                 "En lenke til et sted på Google Maps, eller MazeMap hvis det tar plass på skolen.",
         }),
@@ -88,7 +88,8 @@ export default defineType({
             name: "hero_image",
             type: "image",
             title: "Forsidebilde",
-            description: "Vises i toppen av arrangementet, og som en thumbnail. Bør være 16/9",
+            description:
+                "Vises i toppen av arrangementet, og som en thumbnail. Bør være omtrent 16/7.",
             options: {
                 hotspot: true,
             },
