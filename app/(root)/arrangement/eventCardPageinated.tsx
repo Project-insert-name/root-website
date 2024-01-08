@@ -56,7 +56,7 @@ const EventCardPaginated: Component<EventCardPaginatedProps> = ({
      */
     async function fetchMoreEvents() {
         setLoading(true)
-        const nextEvents = await fetchMore(fetchNumber, events[events.length - 1].event_start_time)
+        const nextEvents = await fetchMore(fetchNumber, events[events.length - 1].start_time)
         if (nextEvents.length < fetchNumber) {
             setShowButton(false)
         }

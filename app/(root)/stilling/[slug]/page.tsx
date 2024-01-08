@@ -85,6 +85,6 @@ export async function generateMetadata(props: PageProps<Params>): Promise<Metada
 
     return {
         title: `${ad.title} | Root Linjeforening`,
-        description: ad.description.slice(0, 150),
+        description: ad.description.slice(0, 150), // TODO ikke ideelt
     }
 }
