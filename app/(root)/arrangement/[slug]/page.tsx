@@ -6,7 +6,7 @@ import SingleInfoCard from "@/components/events/singleInfoCard"
 import { type Metadata } from "next"
 import { createEvent } from "ics"
 import { getEventTypeLabel } from "@/sanity/lib/utils"
-import { RootEvent } from "@/sanity/types"
+import type { RootEvent } from "@/sanity/types"
 import IcsButton from "@/components/buttons/icsButton"
 
 interface Params {
@@ -76,7 +76,7 @@ export const generateStaticParams = async (): Promise<Params[]> => {
     const events = await getAllEventSlugs()
 
     return events.map(event => ({
-        slug: event.slug?.current, // TODO temp ?, til alle events har fått slug
+        slug: event.slug.current,
     }))
 }
 
