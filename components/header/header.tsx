@@ -40,7 +40,6 @@ const Header: Component = () => {
                     href={"/"}
                     title={"Root linjeforening sin logo"}
                     className={"relative z-20 focus:border-rootBlue"}>
-                    {/*TODO test med ulike mobiler*/}
                     <Image
                         src={"/root-logo.svg"}
                         alt={"Logo for linjeforeningen root"}
@@ -92,7 +91,7 @@ const Header: Component = () => {
                 </div>
 
                 <Button className={"mx-auto w-fit"} onClick={() => setIsMenuOpen(false)}>
-                    Lukk vindu
+                    Lukk
                 </Button>
             </NavbarMenu>
         </Navbar>

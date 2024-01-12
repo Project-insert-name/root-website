@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 /**
  * Brukes for å tvinge Next.js til å oppdatere innholdet på siden.
  */
-export const dynamic = "force-dynamic"
+export const dynamic: Dynamic = "force-dynamic"
 
 const nrOfEvents = 6
 
@@ -28,7 +28,7 @@ const EventsPage: AsyncPage = async () => {
     return (
         <div className={"flex flex-wrap items-baseline justify-center gap-5 pt-3 sm:p-5"}>
             <EventCardPaginated
-                cardTitle={"Neste arrangementer"}
+                cardTitle={"Kommende arrangementer"}
                 className={className}
                 initial={future}
                 minEvents={nrOfEvents}
