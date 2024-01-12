@@ -6,15 +6,15 @@ import type { RootEvent, SanitySlug } from "@/sanity/types"
  * @returns En liste med alle events
  */
 export async function getAllEvents(): Promise<ReadonlyArray<RootEvent>> {
-    return client.fetch('*[_type == "event"] | order(event_start_time asc)')
+    return client.fetch('*[_type == "event"] | order(start_time asc)')
 }
 
 /**
  * Henter ut alle slugs som er tilknyttet events fra sanity
  * @returns En liste med alle slugs
  */
-export async function getAllEventSlugs(): Promise<ReadonlyArray<{ event_slug: SanitySlug }>> {
-    return client.fetch('*[_type == "event"]{event_slug}')
+export async function getAllEventSlugs(): Promise<ReadonlyArray<{ slug: SanitySlug }>> {
+    return client.fetch('*[_type == "event"]{slug}')
 }
 
 /**
@@ -32,10 +32,9 @@ export async function getNextEvents(limit = 4): Promise<ReadonlyArray<RootEvent>
  * @returns RootEvent Eventet med den spesifikke slugen, eller null om den ikke finnes
  */
 export async function getEventBySlug(slug: string): Promise<RootEvent | null> {
-    return client.fetch(
-        '*[_type == "event" && event_slug.current == $slug][0]{..., gallery->{slug}}',
-        { slug },
-    )
+    return client.fetch('*[_type == "event" && slug.current == $slug][0]{..., gallery->{slug}}', {
+        slug,
+    })
 }
 
 interface PastAndFutureEvents {
@@ -52,8 +51,8 @@ export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEv
     return client.fetch(
         `
         {
-            "past": *[_type == "event" && event_start_time < now()] | order(event_start_time desc)[0...$limit]{..., gallery->{slug}},
-            "future": *[_type == "event" && event_start_time >= now()] | order(event_start_time asc)[0...$limit]
+            "past": *[_type == "event" && start_time < now()] | order(start_time desc)[0...$limit]{..., gallery->{slug}},
+            "future": *[_type == "event" && start_time >= now()] | order(start_time asc)[0...$limit]
         }
     `,
         { limit },
@@ -62,44 +61,44 @@ export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEv
 
 /**
  * Henter ut de neste eventene fra sanity, sortert etter starttidspunkt.
- * Ved å spesifisere lastEventStartTime så vil tidligere eventer bli filtrert bort.
+ * Ved å spesifisere lastStartTime så vil tidligere eventer bli filtrert bort.
  * @param limit Antall elementer som skal hentes ut
- * @param lastEventStartTime Tidspunktet til det siste eventet som ble hentet ut. Ved å la denne være tom vil alle neste eventer bli hentet ut fram til limit.
+ * @param lastStartTime Tidspunktet til det siste eventet som ble hentet ut. Ved å la denne være tom vil alle neste eventer bli hentet ut fram til limit.
  * @returns En liste med de neste eventene. Hvis ingen ble funnet, returneres en tom liste.
- * @example getFutureEvents(4, events[events.length - 1].event_start_time) // Henter de fire neste
+ * @example getFutureEvents(4, events[events.length - 1].start_time) // Henter de fire neste
  * @see https://www.sanity.io/docs/paginating-with-groq
  */
 export async function getFutureEvents( // TODO edge case: hvis det er flere events med samme starttidspunkt, vil ikke alle bli hentet ut
     limit = 4,
-    lastEventStartTime = "",
+    lastStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
     return client.fetch(
-        '*[_type == "event" && event_start_time >= now() && event_start_time > $last_start_time] | order(event_start_time asc)[0...$limit]',
+        '*[_type == "event" && start_time >= now() && start_time > $last_start_time] | order(start_time asc)[0...$limit]',
         {
             limit,
-            last_start_time: lastEventStartTime,
+            last_start_time: lastStartTime,
         },
     )
 }
 
 /**
  * Henter ut de forrige eventene fra sanity, sortert etter starttidspunkt.
- * Ved å spesifisere lastEventStartTime så vil senere eventer bli filtrert bort.
+ * Ved å spesifisere lastStartTime så vil senere eventer bli filtrert bort.
  * @param limit Antall elementer som skal hentes ut
- * @param lastEventStartTime Tidspunktet til det siste eventet som ble hentet ut. Ved å la denne være tom vil alle tidligere eventer bli hentet ut fram til limit.
+ * @param lastStartTime Tidspunktet til det siste eventet som ble hentet ut. Ved å la denne være tom vil alle tidligere eventer bli hentet ut fram til limit.
  * @returns En liste med de forrige eventene. Hvis ingen ble funnet, returneres en tom liste.
  * @example getPastEvents(4, events[events.length - 1].event_start_time) // Henter de fire neste
  * @see https://www.sanity.io/docs/paginating-with-groq
  */
 export async function getPastEvents(
     limit = 4,
-    lastEventStartTime = "",
+    lastStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
     return client.fetch(
-        '*[_type == "event" && event_start_time < now() && event_start_time < $last_start_time] | order(event_start_time desc)[0...$limit]',
+        '*[_type == "event" && start_time < now() && start_time < $last_start_time] | order(start_time desc)[0...$limit]',
         {
             limit,
-            last_start_time: lastEventStartTime,
+            last_start_time: lastStartTime,
         },
     )
 }
