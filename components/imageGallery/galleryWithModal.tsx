@@ -22,6 +22,7 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     const { replace } = useRouter()
     const pathname = usePathname()
 
+    const highestImageIndex = imageGallery.images.length - 1
     const initialImageIndex = parseInt(searchParams.get("bilde")!)
     const imageIsSet = Number.isInteger(initialImageIndex)
 
@@ -52,15 +53,36 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
         setIsOpen(false)
     }
 
+    /**
+     * Paginerer mellom hvilket bilde som er aktivt i Modal
+     * @param sign Enten +1 eller -1
+     */
+    const paginate = (sign: number) => {
+        let index = activeImageIndex
+        switch (sign) {
+            case +1:
+                index >= highestImageIndex ? (index = 0) : index++
+                break
+            case -1:
+                index <= 0 ? (index = highestImageIndex) : index--
+                break
+        }
+        replace(`${pathname}?bilde=${index}`)
+        setActiveImage(imageGallery.images[index])
+        setActiveImageIndex(index)
+    }
+
     useEffect(() => {
         document.addEventListener("keydown", event => {
-            switch (event.key) {
-                case "ArrowLeft":
-                    console.log(event.key)
-                    break
-                case "ArrowRight":
-                    console.log(event.key)
-                    break
+            if (isOpen) {
+                switch (event.key) {
+                    case "ArrowLeft":
+                        paginate(-1)
+                        break
+                    case "ArrowRight":
+                        paginate(+1)
+                        break
+                }
             }
         })
     })
