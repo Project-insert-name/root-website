@@ -2,7 +2,8 @@
 
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react"
 import { ImageGallery } from "@/sanity/types"
-import { useCallback, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+import { useSearchParams, useRouter, usePathname } from "next/navigation"
 
 import Gallery, {
     GalleryItem,
@@ -11,7 +12,6 @@ import Gallery, {
 } from "@/components/imageGallery/gallery"
 import { Link } from "@nextui-org/react"
 import SanityImage from "../sanityImage"
-import { useSearchParams } from "next/navigation"
 
 interface GalleryModalProps extends ChildProps {
     imageGallery: ImageGallery
@@ -19,26 +19,36 @@ interface GalleryModalProps extends ChildProps {
 
 const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     const searchParams = useSearchParams()
-    const initialImageIndex = searchParams.has("bilde")
-        ? parseInt(searchParams.get("bilde")!)
-        : undefined
+    const { replace } = useRouter()
+    const pathname = usePathname()
 
-    const [isOpen, setIsOpen] = useState(initialImageIndex ? true : false)
-    const [activeImageIndex, setActiveImageIndex] = useState<undefined | number>(
-        initialImageIndex ? initialImageIndex : undefined,
-    )
-    const [activeImage, setActiveImage] = useState<undefined | any>( //This should have a proper type
-        initialImageIndex ? imageGallery.images[initialImageIndex] : undefined,
-    )
-    console.log(initialImageIndex, activeImageIndex, activeImage)
+    const initialImageIndex = parseInt(searchParams.get("bilde")!)
+    const imageIsSet = Number.isInteger(initialImageIndex)
 
+    let [isOpen, setIsOpen] = useState(imageIsSet)
+    let [activeImageIndex, setActiveImageIndex] = useState(imageIsSet ? initialImageIndex : 0)
+    let [activeImage, setActiveImage] = useState(
+        imageIsSet ? imageGallery.images[initialImageIndex] : undefined,
+    )
+
+    /**
+     * Dette er en 'handler' funksjon for on-click eventet til hvert enkelt gallery image
+     * Den opdaterer staten til å representere det bildet som skal vises
+     * @param index er indeksen til bildet som skal vises
+     */
     const handleImageClick = (index: number) => {
+        replace(`${pathname}?bilde=${index}`)
         setActiveImageIndex(index)
         setActiveImage(imageGallery.images[index])
         setIsOpen(true)
     }
 
+    /**
+     * Denne funksjonen er bundet til onClose parameteren til Modal komponenten
+     * Dette betyr at når Modal blir lukket vil funksjonen kjøre
+     */
     const onClose = () => {
+        replace(pathname)
         setIsOpen(false)
     }
 
