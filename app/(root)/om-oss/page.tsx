@@ -7,7 +7,7 @@ export const dynamic = "force-dynamic" //TODO Må den være her
 
 const emptyMessage = "Finner ikke noe info"
 
-const OmOssPage: AsyncComponent = async () => {
+const OmOssPage: AsyncPage = async () => {
     const infoSider = await getAllInfoPages()
     return (
         <>
