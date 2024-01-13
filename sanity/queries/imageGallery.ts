@@ -16,7 +16,7 @@ export async function getAllImageGalleries(): Promise<ReadonlyArray<ImageGallery
  */
 export async function getImageGalleryBySlug(slug: string): Promise<ImageGallery | null> {
     return await client.fetch(
-        '*[_type == "image_gallery" && slug.current == $slug][0]{...,event->{event_slug}}',
+        '*[_type == "image_gallery" && slug.current == $slug][0]{...,event->{slug}}',
         { slug },
     )
 }

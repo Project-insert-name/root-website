@@ -8,32 +8,32 @@ export default defineType({
     icon: CalendarIcon,
     fields: [
         defineField({
-            name: "event_title",
+            name: "title",
             type: "string",
-            title: "Event navn",
+            title: "Tittel på arrangementet",
             validation: Rule => Rule.required(),
         }),
         defineField({
-            name: "event_slug",
+            name: "slug",
             type: "slug",
             title: "Lenke slug",
             description:
-                "Dette er en unik streng som definerer url-en på nettsiden, bruk generate knappen for å lage",
+                "En unik streng som definerer url-en på nettsiden, bruk 'generate' knappen for å lage",
             validation: Rule => Rule.required(),
             options: {
-                source: "event_title",
+                source: "title",
             },
         }),
         defineField({
-            name: "event_description",
+            name: "description",
             type: "markdown",
             title: "Fullstendig beskrivelse",
             description: "Inkluder brødtekst med utdypende informasjon om eventet",
         }),
         defineField({
-            name: "event_type",
+            name: "type",
             type: "string",
-            title: "Type event",
+            title: "Type arrangement",
             validation: Rule => Rule.required(),
             options: {
                 list: [
@@ -46,32 +46,35 @@ export default defineType({
             },
         }),
         defineField({
-            name: "event_start_time",
+            name: "start_time",
             type: "datetime",
             title: "Tidspunkt",
             validation: Rule => Rule.required(),
         }),
         defineField({
-            name: "event_max_attendees",
+            name: "max_participants",
             type: "number",
-            title: "Maks antall deltakere",
+            title: "Maks antall deltakere. La stå tom for ubegrenset",
         }),
         defineField({
-            name: "event_registration_deadline",
+            name: "registration_deadline",
             type: "datetime",
             title: "Påmeldingsfrist",
+            description: "Påmeldingsfrist for arrangementet. La stå tom for ingen frist",
         }),
         defineField({
-            name: "event_address_text",
+            name: "address_text",
             type: "string",
-            title: "Adresse",
+            title: "Adresse / Lokasjon",
+            description:
+                "En tekstlig beskrivelse av hvor arrangementet finner sted. Kan være en adresse.",
         }),
         defineField({
-            name: "event_address_url",
+            name: "address_url",
             type: "url",
-            title: "Kart lokasjon",
+            title: "Lenke til lokasjon",
             description:
-                "Dette kan enten være en lenke til et sted på Google Maps, eller MazeMap hvis det tar plass på skolen.",
+                "En lenke til et sted på Google Maps, eller MazeMap hvis det tar plass på skolen.",
         }),
         defineField({
             name: "gallery",
@@ -79,12 +82,14 @@ export default defineType({
             title: "Bildegalleri",
             description:
                 "Du kan enten legge til et eksisterende bildegalleri eller lage et nytt ett",
-            to: [{ type: "image_gallery" } as const], // This has to be type asserted as a const apparently
+            to: [{ type: "image_gallery" } as const],
         }),
         defineField({
-            name: "event_image",
+            name: "hero_image",
             type: "image",
             title: "Forsidebilde",
+            description:
+                "Vises i toppen av arrangementet, og som en thumbnail. Bør være omtrent 16/7.",
             options: {
                 hotspot: true,
             },
@@ -98,9 +103,9 @@ export default defineType({
             ],
         }),
         defineField({
-            name: "event_application_url",
+            name: "registration_url",
             type: "url",
-            title: "Lenke til påmelding",
+            title: "Lenke for påmelding",
             description: "Her kan du legge inn en lenke til påmeldingsskjemas",
         }),
     ],
