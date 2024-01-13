@@ -1,16 +1,16 @@
 import {InfoSide} from "@/sanity/types";
-import {getAllInfoPages} from "@/sanity/queries/omOss";
-import {Suspense} from "react";
 import Link from "next/link"
 
-interface SideMenuProps extends DefaultProps {
+//TODO rewrite to not be type specific
+
+interface SideNavigatorProps extends DefaultProps {
     selectedItem?: string,
     infoSider: ReadonlyArray<InfoSide>,
     emptyMessage?: string,
     className?: string,
 }
 
-const SideMenu: Component<SideMenuProps> = ({
+const SideNavigator: Component<SideNavigatorProps> = ({
     selectedItem,
     infoSider,
     emptyMessage,
@@ -25,10 +25,10 @@ const SideMenu: Component<SideMenuProps> = ({
     )
     return (
         <div
-            className={`flex flex-col divide-y pl-1 h-fit max-w-xxs w-full rounded-r-2xl border bg-white p-2 shadow-lg`}>
+            className={`flex flex-col divide-y pl-1 h-fit max-w-xxs w-full rounded-r-2xl border bg-white p-2 shadow-lg ${className}`}>
             {listItems.length > 0 ? listItems : emptyMessage}
         </div>
     )
 }
 
-export default SideMenu
+export default SideNavigator
