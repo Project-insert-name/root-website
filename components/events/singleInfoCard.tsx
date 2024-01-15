@@ -28,32 +28,32 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
     className,
     children,
 }) => (
-        <div
-            className={`container mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
-            {image && (
-                <div className={"relative aspect-[16/7] w-full"}>
-                    <SanityImage image={image} alt={image.alt} fill />
-                </div>
-            )}
-
-            <h1 className={"my-5 text-center text-2xl text-darkTitle sm:text-4xl"}>{title}</h1>
-            <div className={"px-5 sm:px-32"}>
-                <div className={"flex flex-wrap items-center justify-center gap-5"}>
-                    {addressText && <Address address={addressText} url={addressUrl} />}
-                    {maxParticipants && (
-                        <AttendeesIcon width={bigIconSize}>{maxParticipants}</AttendeesIcon>
-                    )}
-                    {children}
-                </div>
-
-                <Markdown className={"my-5"} markdown={description} />
+    <div
+        className={`container mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
+        {image && (
+            <div className={"relative aspect-[16/7] w-full"}>
+                <SanityImage image={image} alt={image.alt} fill />
             </div>
-            {buttonUrl && (
-                <div className={"flex justify-center"}>
-                    <ExternalLinkButton href={buttonUrl}>{buttonText}</ExternalLinkButton>
-                </div>
-            )}
+        )}
+
+        <h1 className={"my-5 text-center text-2xl text-darkTitle sm:text-4xl"}>{title}</h1>
+        <div className={"px-5 sm:px-32"}>
+            <div className={"flex flex-wrap items-center justify-center gap-5"}>
+                {addressText && <Address address={addressText} url={addressUrl} />}
+                {maxParticipants && (
+                    <AttendeesIcon width={bigIconSize}>{maxParticipants}</AttendeesIcon>
+                )}
+                {children}
+            </div>
+
+            <Markdown className={"my-5"} markdown={description} />
         </div>
+        {buttonUrl && (
+            <div className={"flex justify-center"}>
+                <ExternalLinkButton href={buttonUrl}>{buttonText}</ExternalLinkButton>
+            </div>
+        )}
+    </div>
 )
 
 export default SingleInfoCard

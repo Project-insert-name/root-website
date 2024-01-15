@@ -1,7 +1,7 @@
 import event from "./schemas/event"
 import jobAdvert from "./schemas/jobAdvert"
 import imageGallery from "@/sanity/schemas/imageGallery"
-import infoSider from "@/sanity/schemas/omOss/infoSider";
+import infoSider from "@/sanity/schemas/omOss/infoSider"
 
 /**
  * Innheolder en liste av alle schemas som tilhører prosjektet
