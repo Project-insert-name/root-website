@@ -4,7 +4,7 @@ import {ChatBubbleBottomCenterTextIcon} from "@heroicons/react/24/outline";
 export default defineType({
         name: "info_sider",
         type: "document",
-        title: "Info Sider",
+        title: "Infosider",
         icon: ChatBubbleBottomCenterTextIcon,
         fields: [
             defineField( {

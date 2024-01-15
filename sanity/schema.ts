@@ -1,8 +1,5 @@
 import event from "./schemas/event"
 import jobAdvert from "./schemas/jobAdvert"
-import styrer from "@/sanity/schemas/omOss/Styre/styrer"
-import styreMedlem from "@/sanity/schemas/omOss/Styre/styreMedlem"
-import styreRoller from "@/sanity/schemas/omOss/Styre/styreRoller"
 import imageGallery from "@/sanity/schemas/imageGallery"
 import infoSider from "@/sanity/schemas/omOss/infoSider";
 
@@ -13,5 +10,5 @@ import infoSider from "@/sanity/schemas/omOss/infoSider";
  * @see https://www.sanity.io/docs/schema-types
  */
 export const schema = {
-    types: [event, jobAdvert, styrer, styreMedlem, styreRoller, infoSider, imageGallery],
+    types: [event, jobAdvert, infoSider, imageGallery],
 }
