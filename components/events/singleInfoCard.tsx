@@ -28,7 +28,6 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
     className,
     children,
 }) => (
-    <div className={"mt-14"}>
         <div
             className={`container mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
             {image && (
@@ -55,7 +54,6 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
                 </div>
             )}
         </div>
-    </div>
 )
 
 export default SingleInfoCard

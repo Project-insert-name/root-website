@@ -17,7 +17,7 @@ const SideNavigator: Component<SideNavigatorProps> = ({
     className,
 }) => {
     const listItems = infoSider.map(infoPage =>
-        <Link key={infoPage._id} className={` text-start text-2xl p-2 hover:text-rootBlueDark`} href={`om-oss#${infoPage._id}`} >
+        <Link key={infoPage._id} className={`text-start text-2xl p-2 hover:text-rootBlueDark`} href={`om-oss#${infoPage._id}`} >
             {infoPage.title === selectedItem? <div className={`text-rootBlue`}>{infoPage.title}</div>:
                 infoPage.title
             }
@@ -25,7 +25,7 @@ const SideNavigator: Component<SideNavigatorProps> = ({
     )
     return (
         <div
-            className={`flex flex-col divide-y pl-1 h-fit max-w-xxs w-full rounded-r-2xl border bg-white p-2 shadow-lg ${className}`}>
+            className={`flex flex-col divide-y pl-1 h-fit max-w-xxs w-full rounded-r-2xl bg-white p-2 shadow-lg ${className}`}>
             {listItems.length > 0 ? listItems : emptyMessage}
         </div>
     )
