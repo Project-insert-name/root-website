@@ -9,6 +9,7 @@ import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
 import Thumbnail from "@/components/events/thumbnail"
 import { LinkButton } from "@/components/buttons/button"
+import { getEventTypeLabel } from "@/sanity/lib/utils"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
@@ -84,6 +85,7 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                     <Link href={`arrangement/${slug.current}`}>
                         <h6 className={"font-mono"}>{title}</h6>
                     </Link>
+                    <p>{getEventTypeLabel(type)}</p>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
                         {startTime && (
                             <>
@@ -126,9 +128,9 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
             <Link href={`arrangement/${slug.current}`}>
                 <h6>{title}</h6>
             </Link>
+            <p>{getEventTypeLabel(type)}</p>
             <div className={"inline-flex justify-between"}>
                 <div className={"inline-flex flex-col flex-wrap sm:flex-row"}>
-                    <EventMarker type={type} />
                     {startTime && (
                         <>
                             <DateIcon>{startTime.date}</DateIcon>
@@ -143,6 +145,11 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     )
 }
 
+/**
+ * En farget stripe som viser hvilken type arrangement det er.
+ * Brukes i EventCard.
+ * @param type Typen arrangement
+ */
 export const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     function getTypeColour() {
         switch (type) {
@@ -158,7 +165,7 @@ export const EventMarker: Component<{ type: EventType }> = ({ type }) => {
     }
 
     return (
-        <div>
+        <div title={getEventTypeLabel(type)}>
             <div className={`mr-2 h-full w-2 rounded-xl ${getTypeColour()}`} />
         </div>
     )
