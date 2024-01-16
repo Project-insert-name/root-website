@@ -1,9 +1,15 @@
-import React from "react"
+import InfoPageContent from "@/components/omOss/InfoPageContent"
+import { getAllInfoPages } from "@/sanity/queries/omOss"
 
-export default function OmOssPage() {
+const emptyMessage = "Finner ikke noe info"
+
+const OmOssPage: AsyncPage = async () => {
+    const infoSider = await getAllInfoPages()
     return (
-        <div>
-            <header>Om Oss</header>
-        </div>
+        <>
+            <InfoPageContent infoSider={infoSider} emptyMessage={emptyMessage} />
+        </>
     )
 }
+
+export default OmOssPage

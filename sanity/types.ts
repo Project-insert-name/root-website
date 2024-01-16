@@ -51,8 +51,12 @@ export type JobAdvert = SanityValues["job_advert"] & {
     description: MarkdownString
 }
 
-export type Styrer = SanityValues["styrer"]
+//export type Styre = SanityValues["styrer"]
 
-export type StyreMedlem = SanityValues["styremedlem"]
+//export type StyreMedlem = SanityValues["styremedlem"]
 
-export type StyreRoller = SanityValues["styre_roller"]
+//export type StyreRoller = SanityValues["styre_roller"]
+
+export type InfoSide = SanityValues["info_sider"] & {
+    info: MarkdownString
+}
