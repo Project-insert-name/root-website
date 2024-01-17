@@ -94,7 +94,7 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
 
     return {
         title: `${event.title} | Root Linjeforening`,
-        description: event.description.slice(0, 250),
+        description: event.description?.slice(0, 250),
     }
 }
 
@@ -110,7 +110,7 @@ function createIcsEvent(event: RootEvent): string | undefined {
     createEvent(
         {
             title: event.title,
-            description: event.description.slice(0, 250), // TODO ikke ideelt
+            description: event.description?.slice(0, 250), // TODO ikke ideelt
             location: event.address_text,
             start: toDateTuple(event.start_time),
             duration: { hours: 2 },
