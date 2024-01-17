@@ -85,6 +85,7 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                     <Link href={`arrangement/${slug.current}`}>
                         <h6 className={"font-mono"}>{title}</h6>
                     </Link>
+                    <p>{getEventTypeLabel(type)}</p>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
                         {startTime && (
                             <>
@@ -127,9 +128,9 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
             <Link href={`arrangement/${slug.current}`}>
                 <h6>{title}</h6>
             </Link>
+            <p>{getEventTypeLabel(type)}</p>
             <div className={"inline-flex justify-between"}>
                 <div className={"inline-flex flex-col flex-wrap sm:flex-row"}>
-                    <EventMarker type={type} />
                     {startTime && (
                         <>
                             <DateIcon>{startTime.date}</DateIcon>
