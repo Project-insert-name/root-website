@@ -2,7 +2,8 @@
 
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react"
 import { ImageGallery } from "@/sanity/types"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
+import type { KeyboardEventHandler } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 
 import Gallery, {
@@ -28,9 +29,6 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
 
     let [isOpen, setIsOpen] = useState(imageIsSet)
     let [activeImageIndex, setActiveImageIndex] = useState(imageIsSet ? initialImageIndex : 0)
-    let [activeImage, setActiveImage] = useState(
-        imageIsSet ? imageGallery.images[initialImageIndex] : undefined,
-    )
 
     /**
      * Dette er en 'handler' funksjon for on-click eventet til hvert enkelt gallery image
@@ -40,7 +38,6 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     const handleImageClick = (index: number) => {
         replace(`${pathname}?bilde=${index}`)
         setActiveImageIndex(index)
-        setActiveImage(imageGallery.images[index])
         setIsOpen(true)
     }
 
@@ -51,6 +48,38 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     const onClose = () => {
         replace(pathname)
         setIsOpen(false)
+    }
+
+    /**
+     * Denne useffecten opretter event listeners for hele vinduet
+     * Vi velger å ignorere warnings her fordi de er dumme og ingen liker dem
+     */
+    useEffect(() => {
+        //@ts-ignore
+        window.addEventListener("keyup", handleKeyPress)
+        return () => {
+            //@ts-ignore
+            window.removeEventListener("keyup", handleKeyPress)
+        }
+        //eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeImageIndex]) // Når vi paginerer vil activeImageIndex endres og den er derfor en depencency av useeffecten
+
+    /**
+     * En handler funksjon for key event listener i useeffect
+     * @param event
+     */
+    const handleKeyPress: KeyboardEventHandler = evt => {
+        // Modal må være åpen for at vi skal ha muligheten til å paginere
+        if (isOpen) {
+            switch (evt.key) {
+                case "ArrowLeft":
+                    paginate(-1)
+                    break
+                case "ArrowRight":
+                    paginate(+1)
+                    break
+            }
+        }
     }
 
     /**
@@ -68,49 +97,31 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
                 break
         }
         replace(`${pathname}?bilde=${index}`)
-        setActiveImage(imageGallery.images[index])
         setActiveImageIndex(index)
     }
 
-    useEffect(() => {
-        document.addEventListener("keydown", event => {
-            if (isOpen) {
-                switch (event.key) {
-                    case "ArrowLeft":
-                        paginate(-1)
-                        break
-                    case "ArrowRight":
-                        paginate(+1)
-                        break
-                }
-            }
-        })
-    })
-
     return (
         <>
-            {activeImage && (
-                <Modal
-                    size="lg"
-                    placement="top-center"
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    className={"sm:min-h-min sm:max-w-[1000px]"}>
-                    <ModalContent>
-                        <ModalHeader>
-                            <h2>{activeImage.alt}</h2>
-                        </ModalHeader>
-                        <ModalBody>
-                            <div className="m-5 flex justify-center">
-                                <SanityImage
-                                    image={activeImage}
-                                    alt={activeImage.alt ? activeImage.alt : ""}
-                                />
-                            </div>
-                        </ModalBody>
-                    </ModalContent>
-                </Modal>
-            )}
+            <Modal
+                size="lg"
+                placement="top-center"
+                isOpen={isOpen}
+                onClose={onClose}
+                className={"sm:min-h-min sm:max-w-[1000px]"}>
+                <ModalContent>
+                    <ModalHeader>
+                        <h2>{imageGallery.images[activeImageIndex].alt}</h2>
+                    </ModalHeader>
+                    <ModalBody>
+                        <div className="m-5 flex justify-center">
+                            <SanityImage
+                                image={imageGallery.images[activeImageIndex]}
+                                alt={imageGallery.images[activeImageIndex].alt ?? ""}
+                            />
+                        </div>
+                    </ModalBody>
+                </ModalContent>
+            </Modal>
             <Gallery heading={imageGallery.title} event={imageGallery.event}>
                 <GalleryBackButton />
                 {imageGallery.images?.map((image, index) => (
