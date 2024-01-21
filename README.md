@@ -104,6 +104,10 @@ Filer som heter `layout.tsx` blir automatisk wrappet rundt alle andre routes i s
 | sanity     | Filer knyttet til Sanity. Som schemas, queries, typer og andre ting |
 | utils      | Nyttige hjelpefunksjoner                                            |
 
+Merk at `app` mappen er delt inn i to ulike grupper, `(root)` og `(sanity)`. Hvor filene kun eksisterer i den gruppen de er definert i.
+Hvis de er definert utenfor en gruppe, vil de eksistere i alle grupper.
+(sanity) mappen brukes bare for studio, siden studioet bruker en egen stil og trenger ikke samme layout som resten av nettsiden.
+
 ### Server components
 
 **Next.js 13**+ støtter

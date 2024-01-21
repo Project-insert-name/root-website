@@ -7,7 +7,7 @@ import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 
 interface GalleryProps extends ChildProps {
     heading: string
-    event?: { event_slug: SanitySlug }
+    event?: { slug: SanitySlug }
 }
 
 const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
@@ -15,9 +15,7 @@ const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
         <div className="mx-5 flex flex-row justify-center gap-5">
             <h1>{heading}</h1>
             {event && (
-                <LinkButton
-                    href={`/arrangement/${event.event_slug.current}`}
-                    title="Se tilhørende event">
+                <LinkButton href={`/arrangement/${event.slug.current}`} title="Se tilhørende event">
                     Se event
                 </LinkButton>
             )}

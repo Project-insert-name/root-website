@@ -40,7 +40,6 @@ const Header: Component = () => {
                     href={"/"}
                     title={"Root linjeforening sin logo"}
                     className={"relative z-20 focus:border-rootBlue"}>
-                    {/*TODO test med ulike mobiler*/}
                     <Image
                         src={"/root-logo.svg"}
                         alt={"Logo for linjeforeningen root"}
@@ -52,7 +51,7 @@ const Header: Component = () => {
                 </Link>
             </NavbarBrand>
             {/*Vanlig meny - Vises ikke på små skjermer*/}
-            <NavbarContent className={"hidden gap-4 sm:flex"} justify={"end"}>
+            <NavbarContent className={"hidden gap-4 md:flex"} justify={"end"}>
                 {paths.map(item => (
                     <NavbarItem key={item.path} isActive={item.path === currentPath}>
                         <Link
@@ -67,7 +66,7 @@ const Header: Component = () => {
                 ))}
             </NavbarContent>
             {/*Hamburgermeny - Vises bare på små skjermer*/}
-            <NavbarContent className={"sm:hidden"} justify={"end"}>
+            <NavbarContent className={"md:hidden"} justify={"end"}>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className={"text-white"}
@@ -92,7 +91,7 @@ const Header: Component = () => {
                 </div>
 
                 <Button className={"mx-auto w-fit"} onClick={() => setIsMenuOpen(false)}>
-                    Lukk vindu
+                    Lukk
                 </Button>
             </NavbarMenu>
         </Navbar>

@@ -1,3 +1,5 @@
+import { type DateArray } from "ics"
+
 /**
  * Konverterer en dato til et objekt med dato og tid som er formatert til norsk
  * @param date Datoen som skal konverteres
@@ -52,7 +54,7 @@ export function toFormatDate(date: string): string | null {
  * @returns En tuppel med dato og tid
  * @throws Error om datoen er ugyldig
  */
-export function toDateTuple(date: string): [number, number, number, number, number] {
+export function toDateTuple(date: string): DateArray {
     const dateObj = new Date(date)
 
     if (isNaN(dateObj.valueOf())) {

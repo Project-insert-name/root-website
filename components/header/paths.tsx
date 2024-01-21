@@ -1,4 +1,10 @@
-import { FilmIcon, HomeIcon, PhotoIcon, UsersIcon } from "@heroicons/react/24/outline"
+import {
+    CalendarDaysIcon,
+    FilmIcon,
+    HomeIcon,
+    PhotoIcon,
+    UsersIcon,
+} from "@heroicons/react/24/outline"
 import { type ReactNode } from "react"
 
 const iconSize = 25
@@ -25,6 +31,11 @@ const paths: Path[] = [
         name: "Hjem",
         path: "/",
         icon: <HomeIcon width={iconSize} />,
+    },
+    {
+        name: "Arrangementer",
+        path: "/arrangement",
+        icon: <CalendarDaysIcon width={iconSize} />,
     },
     {
         name: "Galleri",

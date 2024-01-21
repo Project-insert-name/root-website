@@ -6,14 +6,14 @@ import SingleInfoCard from "@/components/events/singleInfoCard"
 import { type Metadata } from "next"
 import { createEvent } from "ics"
 import { getEventTypeLabel } from "@/sanity/lib/utils"
-import { RootEvent } from "@/sanity/types"
+import type { RootEvent } from "@/sanity/types"
 import IcsButton from "@/components/buttons/icsButton"
 
 interface Params {
     slug: string
 }
 
-export const dynamic = "force-dynamic"
+export const dynamic: Dynamic = "force-dynamic"
 
 /**
  * Side for et enkelt arrangement. Siden er dynamisk basert på arrangementets slug variabel.
@@ -26,27 +26,25 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
     if (!event) return notFound()
 
     let icsEvent = undefined
-    if (isFuture(event.event_start_time)) {
+    if (isFuture(event.start_time)) {
         icsEvent = createIcsEvent(event)
     }
 
     return (
         <SingleInfoCard
-            title={event.event_title}
-            description={event.event_description}
-            image={event.event_image}
+            title={event.title}
+            description={event.description}
+            image={event.hero_image}
             maxParticipants={
-                event.event_max_attendees
-                    ? `Antall plasser er ${event.event_max_attendees}`
-                    : undefined
+                event.max_participants ? `Antall plasser er ${event.max_participants}` : undefined
             }
-            addressText={event.event_address_text}
-            addressUrl={event.event_address_url}
+            addressText={event.address_text}
+            addressUrl={event.address_url}
             buttonText={"Meld meg på"}
-            buttonUrl={event.event_application_url}>
+            buttonUrl={event.registration_url}>
             <>
-                <TimeAndDate startTime={event.event_start_time} />
-                {icsEvent && <IcsButton filename={event.event_title} data={icsEvent} />}
+                <TimeAndDate startTime={event.start_time} />
+                {icsEvent && <IcsButton filename={event.title} data={icsEvent} />}
             </>
         </SingleInfoCard>
     )
@@ -78,7 +76,7 @@ export const generateStaticParams = async (): Promise<Params[]> => {
     const events = await getAllEventSlugs()
 
     return events.map(event => ({
-        slug: event.event_slug.current,
+        slug: event.slug.current,
     }))
 }
 
@@ -95,8 +93,8 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
     if (!event) return notFound()
 
     return {
-        title: `${event.event_title} | Root Linjeforening`,
-        description: event.event_description.slice(0, 250),
+        title: `${event.title} | Root Linjeforening`,
+        description: event.description?.slice(0, 250),
     }
 }
 
@@ -111,14 +109,14 @@ function createIcsEvent(event: RootEvent): string | undefined {
     let icsEvent: string | undefined = undefined
     createEvent(
         {
-            title: event.event_title,
-            description: event.event_description.slice(0, 250), // TODO ikke ideelt
-            location: event.event_address_text,
-            start: toDateTuple(event.event_start_time),
+            title: event.title,
+            description: event.description?.slice(0, 250), // TODO ikke ideelt
+            location: event.address_text,
+            start: toDateTuple(event.start_time),
             duration: { hours: 2 },
-            url: `${process.env.NEXT_PUBLIC_BASE_URL}/arrangement/${event.event_slug.current}`,
+            url: `${process.env.NEXT_PUBLIC_BASE_URL}/arrangement/${event.slug.current}`,
             organizer: { name: "Root Linjeforening", email: process.env.NEXT_PUBLIC_EMAIL },
-            categories: ["Root Linjeforening", "Arrangement", getEventTypeLabel(event.event_type)],
+            categories: ["Root Linjeforening", "Arrangement", getEventTypeLabel(event.type)],
         },
         (error, value) => {
             if (error) {

@@ -34,6 +34,14 @@ type Component<T = DefaultProps> = (props: T) => React.JSX.Element | null
 type AsyncComponent<T = DefaultProps> = (props: T) => Promise<React.JSX.Element | null>
 
 /**
+ * Dynamic typen kan brukes for å velge mengden caching som skal brukes på en komponent.
+ * Kan kun brukes på en server-side rendret side.
+ * @example export const dynamic = "force-dynamic"
+ * @see https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
+ */
+type Dynamic = "auto" | "force-dynamic" | "error" | "force-static"
+
+/**
  * Generelle props som kan brukes på alle komponenter
  */
 interface DefaultProps {
