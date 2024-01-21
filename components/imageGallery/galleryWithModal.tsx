@@ -104,16 +104,17 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
         <>
             <Modal
                 size="lg"
-                placement="top-center"
+                placement="center"
                 isOpen={isOpen}
                 onClose={onClose}
-                className={"sm:min-h-min sm:max-w-[1000px]"}>
+                //Margin top i desktop view her pga offset fra Header
+                className={"sm:mt-20 sm:min-h-min sm:max-w-[1000px]"}>
                 <ModalContent>
                     <ModalHeader>
                         <h2>{imageGallery.images[activeImageIndex].alt}</h2>
                     </ModalHeader>
-                    <ModalBody>
-                        <div className="m-5 flex justify-center">
+                    <ModalBody className="border-b-1 px-2 py-2">
+                        <div className="flex justify-center sm:m-5">
                             <SanityImage
                                 image={imageGallery.images[activeImageIndex]}
                                 alt={imageGallery.images[activeImageIndex].alt ?? ""}
