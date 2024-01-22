@@ -10,6 +10,7 @@ import { CircularProgressIndicator } from "@/components/suspense"
 import Thumbnail from "@/components/events/thumbnail"
 import { LinkButton } from "@/components/buttons/button"
 import { getEventTypeLabel } from "@/sanity/lib/utils"
+import { Date, Time } from "@/components/date"
 
 interface EventCardProps extends DefaultProps {
     eventTitle?: string
@@ -122,7 +123,6 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
     hero_image,
     slug,
 }) => {
-    const startTime = toFormatDateAndTime(start_time)
     return (
         <div className={`mx-1 my-3 flex w-full flex-col ${className}`}>
             <Link href={`arrangement/${slug.current}`}>
@@ -131,12 +131,12 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
             <p>{getEventTypeLabel(type)}</p>
             <div className={"inline-flex justify-between"}>
                 <div className={"inline-flex flex-col flex-wrap sm:flex-row"}>
-                    {startTime && (
-                        <>
-                            <DateIcon>{startTime.date}</DateIcon>
-                            <TimeIcon>{startTime.time}</TimeIcon>
-                        </>
-                    )}
+                    <DateIcon>
+                        <Date date={start_time} />
+                    </DateIcon>
+                    <TimeIcon>
+                        <Time date={start_time} />
+                    </TimeIcon>
                     {address_text && <MapIcon>{address_text}</MapIcon>}
                 </div>
                 {hero_image && <Thumbnail image={hero_image} width={130} />}

@@ -47,6 +47,20 @@ export function toFormatDate(date: string): string | null {
     return date
 }
 
+export function toFormatTime(date: string): string | null {
+    const dateObj = new Date(date)
+
+    if (isNaN(dateObj.valueOf())) {
+        return null
+    }
+
+    const time = dateObj.toLocaleString("nb", {
+        hour: "2-digit",
+        minute: "2-digit",
+    })
+    return time
+}
+
 /**
  * Konverterer en String dato til en tuppel med dato og tid
  * Dato og tid er i formatet [År, Måned, Dag, Time, Minutt]
