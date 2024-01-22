@@ -5,6 +5,12 @@ import Gallery, {
     GalleryBackButton,
     GalleryImage,
 } from "@/components/imageGallery/gallery"
+import { type Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Galleri | Root Linjeforening",
+    description: "Bilder fra tidligere arrangementer i Root Linjeforening",
+}
 
 interface Params {
     slug: string

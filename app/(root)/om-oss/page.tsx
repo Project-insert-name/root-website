@@ -1,5 +1,11 @@
 import InfoPageContent from "@/components/omOss/InfoPageContent"
 import { getAllInfoPages } from "@/sanity/queries/omOss"
+import { type Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Om oss | Root Linjeforening",
+    description: "Informasjon om Root Linjeforening",
+}
 
 const emptyMessage = "Finner ikke noe info"
 
