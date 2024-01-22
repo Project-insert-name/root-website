@@ -16,24 +16,22 @@ export const metadata: Metadata = {
  */
 export const dynamic: Dynamic = "force-dynamic"
 
-const Home: Page = () => {
-    return (
-        <div className={"flex flex-wrap justify-center gap-5 py-5"}>
-            <EventCard
-                eventTitle={"Arrangementer"}
-                showMoreUrl={"arrangement"}
-                className={"mx-2 w-full sm:w-[550px]"}
-            />
-            <div className={"flex w-full flex-col gap-5 sm:w-[550px]"}>
-                <AdsCard className={"mx-2"} />
-                {/*TODO dummy komponent*/}
-                {/*<InfoCard className={"mx-2"} cardTitle={"Innlegg"}>*/}
-                {/*    <br />*/}
-                {/*    <br />*/}
-                {/*</InfoCard>*/}
-            </div>
+const Home: Page = () => (
+    <div className={"flex flex-wrap justify-center gap-5 py-5"}>
+        <EventCard
+            eventTitle={"Arrangementer"}
+            showMoreUrl={"arrangement"}
+            className={"mx-2 w-full sm:w-[550px]"}
+        />
+        <div className={"flex w-full flex-col gap-5 sm:w-[550px]"}>
+            <AdsCard className={"mx-2"} />
+            {/*TODO dummy komponent*/}
+            {/*<InfoCard className={"mx-2"} cardTitle={"Innlegg"}>*/}
+            {/*    <br />*/}
+            {/*    <br />*/}
+            {/*</InfoCard>*/}
         </div>
-    )
-}
+    </div>
+)
 
 export default Home
