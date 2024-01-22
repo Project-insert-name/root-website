@@ -13,11 +13,7 @@ export const dynamic = "force-dynamic"
 
 const OmOssPage: AsyncPage = async () => {
     const infoSider = await getAllInfoPages()
-    return (
-        <>
-            <InfoPageContent infoSider={infoSider} emptyMessage={emptyMessage} />
-        </>
-    )
+    return <InfoPageContent infoSider={infoSider} emptyMessage={emptyMessage} />
 }
 
 export default OmOssPage
