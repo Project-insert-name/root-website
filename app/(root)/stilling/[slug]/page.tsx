@@ -1,9 +1,9 @@
 import { getAllJobAdvertSlugs, getJobAdvertBySlug } from "@/sanity/queries/jobAdvert"
-import { toFormatDate } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
 import SingleInfoCard from "@/components/events/singleInfoCard"
 import { type Metadata } from "next"
+import { Date } from "@/components/date"
 
 interface Params {
     slug: string
@@ -46,13 +46,9 @@ const Deadline: Component<{ deadline?: string } & ChildProps> = ({ deadline, chi
             </DateIcon>
         )
     }
-    const formatDate = toFormatDate(deadline)
-    if (!formatDate) {
-        return null
-    }
     return (
-        <DateIcon title={`Søknadsfrist ${formatDate}`} width={bigIconSize}>
-            {children} {formatDate}
+        <DateIcon title={`Søknadsfrist ${deadline}`} width={bigIconSize}>
+            {children} <Date date={deadline} />
         </DateIcon>
     )
 }

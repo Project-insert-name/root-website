@@ -1,7 +1,6 @@
 import InfoCard from "@/components/events/infoCard"
 import Link from "next/link"
 import type { EventType, RootEvent } from "@/sanity/types"
-import { toFormatDateAndTime } from "@/utils/dateUtils"
 import { DateIcon, MapIcon, TimeIcon } from "@/components/icons/icon"
 import { getFutureEvents } from "@/sanity/queries/event"
 import { Suspense } from "react"
@@ -77,7 +76,6 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
     slug,
     gallery,
 }) => {
-    const startTime = toFormatDateAndTime(start_time)
     return (
         <div className={`mx-2 my-4 justify-between gap-3 ${className}`}>
             <div className={"flex"}>
@@ -88,12 +86,7 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
                     </Link>
                     <p>{getEventTypeLabel(type)}</p>
                     <div className={"flex flex-col gap-2 sm:flex-row"}>
-                        {startTime && (
-                            <>
-                                <DateIcon>{startTime.date}</DateIcon>
-                                <TimeIcon>{startTime.time}</TimeIcon>
-                            </>
-                        )}
+                        <TimeAndDate startTime={start_time} />
                     </div>
                     {address_text && <MapIcon>{address_text}</MapIcon>}
                     {gallery?.slug && (
@@ -131,12 +124,7 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
             <p>{getEventTypeLabel(type)}</p>
             <div className={"inline-flex justify-between"}>
                 <div className={"inline-flex flex-col flex-wrap sm:flex-row"}>
-                    <DateIcon>
-                        <Date date={start_time} />
-                    </DateIcon>
-                    <TimeIcon>
-                        <Time time={start_time} />
-                    </TimeIcon>
+                    <TimeAndDate startTime={start_time} />
                     {address_text && <MapIcon>{address_text}</MapIcon>}
                 </div>
                 {hero_image && <Thumbnail image={hero_image} width={130} />}
@@ -144,6 +132,17 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
         </div>
     )
 }
+
+const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => (
+    <>
+        <DateIcon>
+            <Date date={startTime} />
+        </DateIcon>
+        <TimeIcon>
+            <Time time={startTime} />
+        </TimeIcon>
+    </>
+)
 
 /**
  * En farget stripe som viser hvilken type arrangement det er.
