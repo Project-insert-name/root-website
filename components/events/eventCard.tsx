@@ -135,7 +135,7 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
                         <Date date={start_time} />
                     </DateIcon>
                     <TimeIcon>
-                        <Time date={start_time} />
+                        <Time time={start_time} />
                     </TimeIcon>
                     {address_text && <MapIcon>{address_text}</MapIcon>}
                 </div>
