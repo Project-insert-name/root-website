@@ -27,7 +27,7 @@ const EventCard: Component<EventCardProps> = ({
         cardTitle={eventTitle}
         className={className}
         bottom={
-            <LinkButton href={showMoreUrl} className={"mx-auto"}>
+            <LinkButton href={showMoreUrl} className={"mx-auto w-fit"}>
                 Vis mer
             </LinkButton>
         }>

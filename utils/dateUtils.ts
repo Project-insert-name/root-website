@@ -47,6 +47,11 @@ export function toFormatDate(date: string): string | null {
     return date
 }
 
+/**
+ * Konverterer en tid til et format som er lettere å lese
+ * @param date Tiden som skal konverteres
+ * @returns En streng med datoen i et lettere leselig format, eller null om datoen er ugyldig
+ */
 export function toFormatTime(date: string): string | null {
     const dateObj = new Date(date)
 
@@ -54,11 +59,10 @@ export function toFormatTime(date: string): string | null {
         return null
     }
 
-    const time = dateObj.toLocaleString("nb", {
+    return dateObj.toLocaleString("nb", {
         hour: "2-digit",
         minute: "2-digit",
     })
-    return time
 }
 
 /**
