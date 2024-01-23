@@ -1,8 +1,8 @@
 "use client"
 
-import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react"
+import { Modal, ModalContent, ModalHeader, ModalBody, Link } from "@nextui-org/react"
 import type { ImageGallery } from "@/sanity/types"
-import React, { useState } from "react"
+import { useState } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import useKeypress from "react-use-keypress"
 
@@ -11,7 +11,6 @@ import Gallery, {
     GalleryBackButton,
     GalleryImage,
 } from "@/components/imageGallery/gallery"
-import { Link } from "@nextui-org/react"
 import SanityImage from "../sanityImage"
 
 interface GalleryModalProps extends ChildProps {
@@ -124,7 +123,7 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
                     <GalleryItem key={image._key}>
                         <Link
                             onClick={() => handleImageClick(index)}
-                            className="h-full w-full cursor-pointer">
+                            className="h-full w-full cursor-pointer focus:outline-rootBlue">
                             <GalleryImage image={image} alt={image.alt} />
                         </Link>
                     </GalleryItem>

@@ -1,7 +1,13 @@
-import { notFound, useSearchParams } from "next/navigation"
+import { notFound } from "next/navigation"
 import { getImageGalleryBySlug } from "@/sanity/queries/imageGallery"
 
 import GalleryModal from "@/components/imageGallery/galleryWithModal"
+import { type Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Galleri | Root Linjeforening",
+    description: "Bilder fra tidligere arrangementer i Root Linjeforening",
+}
 
 interface Params {
     slug: string
@@ -18,7 +24,7 @@ const GalleryPage: AsyncPage<Params> = async ({ params }) => {
 
     if (!imageGallery) return notFound()
 
-    return <GalleryModal imageGallery={imageGallery}></GalleryModal>
+    return <GalleryModal imageGallery={imageGallery} />
 }
 
 export default GalleryPage
