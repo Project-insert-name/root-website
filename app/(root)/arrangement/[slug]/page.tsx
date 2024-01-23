@@ -1,5 +1,5 @@
 import { getAllEventSlugs, getEventBySlug } from "@/sanity/queries/event"
-import { isFuture, toDateTuple, toFormatDateAndTime } from "@/utils/dateUtils"
+import { isFuture, toDateTuple } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
 import SingleInfoCard from "@/components/events/singleInfoCard"
@@ -8,6 +8,7 @@ import { createEvent } from "ics"
 import { getEventTypeLabel } from "@/sanity/lib/utils"
 import type { RootEvent } from "@/sanity/types"
 import IcsButton from "@/components/buttons/icsButton"
+import { Date, Time } from "@/components/date"
 
 interface Params {
     slug: string
@@ -52,19 +53,16 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
 
 export default EventPage
 
-const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => {
-    const formatDateAndTime = toFormatDateAndTime(startTime)
-    if (!formatDateAndTime) {
-        return null
-    }
-    const { date, time } = formatDateAndTime
-    return (
-        <div className={"flex gap-2"}>
-            <DateIcon width={bigIconSize}>{date}</DateIcon>
-            <TimeIcon width={bigIconSize}>{time}</TimeIcon>
-        </div>
-    )
-}
+const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => (
+    <div className={"flex gap-2"}>
+        <DateIcon width={bigIconSize}>
+            <Date date={startTime} />
+        </DateIcon>
+        <TimeIcon width={bigIconSize}>
+            <Time time={startTime} />
+        </TimeIcon>
+    </div>
+)
 
 /**
  * Genererer statiske paths for alle arrangementer.

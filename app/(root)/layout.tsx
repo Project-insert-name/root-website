@@ -48,6 +48,12 @@ export const viewport: Viewport = {
  */
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
     <html lang="nb">
+        <head>
+            <meta
+                name="google-site-verification"
+                content="ff3j07lovsouc9oLEt871sodlGdi8VtTUeiitYbQs2Q"
+            />
+        </head>
         <body className="relative min-h-screen bg-defaultBg">
             <Providers>
                 <Header />

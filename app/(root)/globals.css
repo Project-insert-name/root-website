@@ -24,6 +24,18 @@ a {
     @apply text-rootBlue hover:text-rootBlueDark;
 }
 
+ul {
+    @apply list-disc pl-3.5;
+}
+
+ol {
+    @apply list-decimal pl-3.5;
+}
+
+br {
+    @apply block my-2;
+}
+
 h1 {
     @apply text-4xl font-bold;
 }
