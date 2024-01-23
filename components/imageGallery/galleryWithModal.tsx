@@ -1,10 +1,10 @@
 "use client"
 
 import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react"
-import { ImageGallery } from "@/sanity/types"
+import type { ImageGallery } from "@/sanity/types"
 import React, { useState } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
-import useKeypress from 'react-use-keypress';
+import useKeypress from "react-use-keypress"
 
 import Gallery, {
     GalleryItem,
@@ -27,8 +27,42 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     const initialImageIndex = parseInt(searchParams.get("bilde")!)
     const imageIsSet = Number.isInteger(initialImageIndex)
 
-    let [isOpen, setIsOpen] = useState(imageIsSet)
-    let [activeImageIndex, setActiveImageIndex] = useState(imageIsSet ? initialImageIndex : 0)
+    const [isOpen, setIsOpen] = useState(imageIsSet)
+    const [activeImageIndex, setActiveImageIndex] = useState(imageIsSet ? initialImageIndex : 0)
+
+    /**
+     * Lytter på venstre piltast for å navigere til forrige bilde.
+     * Navigerer til neste bilde kun når Modal er åpen
+     */
+    useKeypress("ArrowLeft", () => {
+        if (isOpen) {
+            paginate(-1)
+        }
+    })
+
+    /**
+     * Lytter på høyre piltast for å navigere til neste bilde.
+     * Navigerer til neste bilde kun når Modal er åpen
+     */
+    useKeypress("ArrowRight", () => {
+        if (isOpen) {
+            paginate(+1)
+        }
+    })
+
+    /**
+     * Lytter på Escape tasten for å lukke Modal
+     */
+    useKeypress("Escape", onClose)
+
+    /**
+     * Denne funksjonen er bundet til onClose parameteren til Modal komponenten
+     * Dette betyr at når Modal blir lukket vil funksjonen kjøre
+     */
+    function onClose() {
+        replace(pathname)
+        setIsOpen(false)
+    }
 
     /**
      * Dette er en 'handler' funksjon for on-click eventet til hvert enkelt gallery image
@@ -42,35 +76,10 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     }
 
     /**
-     * Denne funksjonen er bundet til onClose parameteren til Modal komponenten
-     * Dette betyr at når Modal blir lukket vil funksjonen kjøre
-     */
-    const onClose = () => {
-        replace(pathname)
-        setIsOpen(false)
-    }
-
-    useKeypress("ArrowLeft", () => {
-        if(isOpen){
-        paginate(-1)
-        }
-    })
-
-    useKeypress("ArrowRight", () => {
-        if(isOpen){
-        paginate(-1)
-        }
-    })
-
-    useKeypress("Escape", () => {
-        onClose()
-    })
-
-    /**
      * Paginerer mellom hvilket bilde som er aktivt i Modal
      * @param sign Enten +1 eller -1
      */
-    const paginate = (sign: number) => {
+    const paginate = (sign: 1 | -1) => {
         let index = activeImageIndex
         switch (sign) {
             case +1:
@@ -91,7 +100,9 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
                 placement="center"
                 isOpen={isOpen}
                 onClose={onClose}
-                //Margin top i desktop view her pga offset fra Header
+                // CSS for Modal komponenten og dens backdrop
+                classNames={{ wrapper: ["z-[150]"], backdrop: ["z-[150]"] }}
+                // Margin top i desktop view her pga offset fra Header
                 className={"sm:mt-20 sm:min-h-min sm:max-w-[1000px]"}>
                 <ModalContent>
                     <ModalHeader>
