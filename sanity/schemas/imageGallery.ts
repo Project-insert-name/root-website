@@ -42,6 +42,7 @@ export default defineType({
                             name: "alt",
                             type: "string",
                             title: "Alternativ bildetekst",
+                            validation: Rule => Rule.required(),
                         }),
                     ],
                 }),
