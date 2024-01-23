@@ -37,11 +37,11 @@ const paths: Path[] = [
         path: "/arrangement",
         icon: <CalendarDaysIcon width={iconSize} />,
     },
-    // { TODO
-    //     name: "Galleri",
-    //     path: "/galleri",
-    //     icon: <PhotoIcon width={iconSize} />,
-    // },
+    {
+        name: "Galleri",
+        path: "/galleri",
+        icon: <PhotoIcon width={iconSize} />,
+    },
     {
         name: "Om oss",
         path: "/om-oss",
