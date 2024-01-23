@@ -5,6 +5,7 @@ import { ImageGallery } from "@/sanity/types"
 import React, { useEffect, useState } from "react"
 import type { KeyboardEventHandler } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
+import useKeypress from 'react-use-keypress';
 
 import Gallery, {
     GalleryItem,
@@ -50,37 +51,21 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
         setIsOpen(false)
     }
 
-    /**
-     * Denne useffecten opretter event listeners for hele vinduet
-     * Vi velger å ignorere warnings her fordi de er dumme og ingen liker dem
-     */
-    useEffect(() => {
-        //@ts-ignore
-        window.addEventListener("keyup", handleKeyPress)
-        return () => {
-            //@ts-ignore
-            window.removeEventListener("keyup", handleKeyPress)
+    useKeypress("ArrowLeft", () => {
+        if(isOpen){
+        paginate(-1)
         }
-        //eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeImageIndex]) // Når vi paginerer vil activeImageIndex endres og den er derfor en depencency av useeffecten
+    })
 
-    /**
-     * En handler funksjon for key event listener i useeffect
-     * @param event
-     */
-    const handleKeyPress: KeyboardEventHandler = evt => {
-        // Modal må være åpen for at vi skal ha muligheten til å paginere
-        if (isOpen) {
-            switch (evt.key) {
-                case "ArrowLeft":
-                    paginate(-1)
-                    break
-                case "ArrowRight":
-                    paginate(+1)
-                    break
-            }
+    useKeypress("ArrowRight", () => {
+        if(isOpen){
+        paginate(-1)
         }
-    }
+    })
+
+    useKeypress("Escape", () => {
+        onClose()
+    })
 
     /**
      * Paginerer mellom hvilket bilde som er aktivt i Modal
