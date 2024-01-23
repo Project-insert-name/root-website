@@ -1,9 +1,8 @@
 "use client"
 
-import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@nextui-org/react"
+import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react"
 import { ImageGallery } from "@/sanity/types"
-import React, { useEffect, useState } from "react"
-import type { KeyboardEventHandler } from "react"
+import React, { useState } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import useKeypress from 'react-use-keypress';
 
