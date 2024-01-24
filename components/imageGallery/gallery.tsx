@@ -13,7 +13,7 @@ interface GalleryProps extends ChildProps {
 const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
     <div className={"mx-auto flex flex-col justify-center rounded-2xl bg-white py-5 sm:w-[1100px]"}>
         <div className="mx-5 flex flex-row justify-center gap-5">
-            <h1>{heading}</h1>
+            <h1 className={"text-darkTitle"}>{heading}</h1>
             {event && (
                 <LinkButton href={`/arrangement/${event.slug.current}`} title="Se tilhørende event">
                     Se event

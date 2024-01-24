@@ -105,7 +105,9 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
                 className={"sm:mt-20 sm:min-h-min sm:max-w-[1000px]"}>
                 <ModalContent>
                     <ModalHeader>
-                        <h2>{imageGallery.images[activeImageIndex].alt}</h2>
+                        <h2 className={"text-darkTitle"}>
+                            {imageGallery.images[activeImageIndex].alt}
+                        </h2>
                     </ModalHeader>
                     <ModalBody className="border-b-1 px-2 py-2">
                         <div className="flex justify-center sm:m-5">
