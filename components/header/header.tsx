@@ -76,7 +76,7 @@ const Header: Component = () => {
             <NavbarMenu className={"z-101 flex h-3/4 flex-col justify-between py-20"}>
                 <div>
                     {paths.map((item, index) => (
-                        <NavbarMenuItem key={`${item}-${index}`} className={"my-1 w-fit"}>
+                        <NavbarMenuItem key={`${item}-${index}`} className={"my-1 w-fit list-none"}>
                             <Link
                                 color={item.path === currentPath ? "primary" : "foreground"}
                                 className={"flex w-full items-center gap-2 text-2xl"}
