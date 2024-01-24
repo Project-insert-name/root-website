@@ -18,7 +18,7 @@ import { usePathname } from "next/navigation"
 /**
  * Headeren på nettsiden. Inneholder logo og navigasjonsmeny.
  * Navignasjonsmenyen blir til en hamburgermeny på små skjermer.
- * Bugget med NextUI sin Navbar.
+ * Bygget med NextUI sin Navbar.
  * @see https://nextui.org/docs/components/navbar
  */
 const Header: Component = () => {
@@ -41,6 +41,7 @@ const Header: Component = () => {
                     title={"Root linjeforening sin logo"}
                     className={"relative z-20 focus:border-rootBlue"}>
                     <Image
+                        priority={true}
                         src={"/root-logo.svg"}
                         alt={"Logo for linjeforeningen root"}
                         // Bredde og høyde må settes i className også, for å unngå advarsler
