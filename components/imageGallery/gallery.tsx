@@ -1,9 +1,9 @@
-import { SanitySlug } from "@/sanity/types"
-import { LinkButton } from "../buttons/button"
+import type { SanitySlug } from "@/sanity/types"
 import Link from "next/link"
 import { LeftArrowIcon } from "../icons/icon"
 import SanityImage from "../sanityImage"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { LinkButton } from "@/components/buttons/button"
 
 interface GalleryProps extends ChildProps {
     heading: string
@@ -13,7 +13,7 @@ interface GalleryProps extends ChildProps {
 const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
     <div className={"mx-auto flex flex-col justify-center rounded-2xl bg-white py-5 sm:w-[1100px]"}>
         <div className="mx-5 flex flex-row justify-center gap-5">
-            <h1>{heading}</h1>
+            <h1 className={"text-darkTitle"}>{heading}</h1>
             {event && (
                 <LinkButton href={`/arrangement/${event.slug.current}`} title="Se tilhørende event">
                     Se event
@@ -35,8 +35,10 @@ export const GalleryBackButton: Component = () => (
         <Link
             href={"/galleri/"}
             title="Tilbake til gallerisamling"
-            className={"flex h-full w-full justify-center bg-slate-100"}>
-            <LeftArrowIcon width={75}></LeftArrowIcon>
+            className={
+                "flex aspect-square h-full w-full justify-center bg-slate-100 focus:outline-rootBlue"
+            }>
+            <LeftArrowIcon width={75} />
         </Link>
     </GalleryItem>
 )
@@ -48,8 +50,8 @@ export const GalleryImage: Component<{
 }> = ({ image, alt, title }) => (
     <SanityImage
         image={image}
-        alt={alt ? alt : ""}
-        title={title ? title : ""}
+        alt={alt ?? ""}
+        title={title ?? ""}
         loading="lazy"
         className={"aspect-square w-full object-cover object-center"}
     />

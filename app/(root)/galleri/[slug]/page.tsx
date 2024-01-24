@@ -1,10 +1,7 @@
 import { notFound } from "next/navigation"
 import { getImageGalleryBySlug } from "@/sanity/queries/imageGallery"
-import Gallery, {
-    GalleryItem,
-    GalleryBackButton,
-    GalleryImage,
-} from "@/components/imageGallery/gallery"
+
+import GalleryModal from "@/components/imageGallery/galleryWithModal"
 import { type Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -19,6 +16,7 @@ interface Params {
 /**
  * Side for et enkelt bildegalleri. Siden er dynamisk basert på arrangementets slug variabel.
  * Dersom slug ikke finnes, returneres en 404 side.
+ * Denne siden returnerer en egen komponent siden state ikke kan håndteres av server-side komponenter
  * @param params Parametre fra URL
  */
 const GalleryPage: AsyncPage<Params> = async ({ params }) => {
@@ -26,16 +24,7 @@ const GalleryPage: AsyncPage<Params> = async ({ params }) => {
 
     if (!imageGallery) return notFound()
 
-    return (
-        <Gallery heading={imageGallery.title} event={imageGallery.event}>
-            <GalleryBackButton />
-            {imageGallery.images?.map(image => (
-                <GalleryItem key={image._key}>
-                    <GalleryImage image={image} alt={image.alt} />
-                </GalleryItem>
-            ))}
-        </Gallery>
-    )
+    return <GalleryModal imageGallery={imageGallery} />
 }
 
 export default GalleryPage

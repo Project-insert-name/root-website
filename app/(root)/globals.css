@@ -33,7 +33,7 @@ ol {
 }
 
 br {
-    @apply block my-2;
+    @apply my-2 block;
 }
 
 h1 {
