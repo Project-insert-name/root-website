@@ -2,8 +2,8 @@ import { ExternalLink, MailLink } from "@/components/link"
 import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/socials"
 import { Divider } from "@/components/divider"
 import { bigIconSize, defaultIconSize, FlexIcon } from "@/components/icons/icon"
-import { BugAntIcon, ChatBubbleLeftEllipsisIcon } from "@heroicons/react/24/outline"
-import { type ReactNode } from "react"
+import { BugAntIcon, ChatBubbleLeftEllipsisIcon, LinkIcon } from "@heroicons/react/24/outline"
+import { ReactNode } from "react"
 
 /**
  * Footeren som vises på bunnen av nettsiden.
@@ -26,7 +26,13 @@ const Footer: Component = ({ className, ...props }) => (
                 <MailLink mail={process.env.NEXT_PUBLIC_EMAIL} />
                 <Socials className={"transition-all duration-100 hover:brightness-75"} />
             </FooterSection>
-            <FooterSection titleNode={"<div />"} className={"sm:items-end"}>
+            <FooterSection
+                titleNode={
+                    <FlexIcon icon={<LinkIcon width={defaultIconSize} />}>
+                        <h4>Lenker</h4>
+                    </FlexIcon>
+                }
+                className={"sm:items-end"}>
                 <ExternalLink href={"/studio"}>Sanity Studio</ExternalLink>
                 <ExternalLink
                     href={`${process.env.NEXT_PUBLIC_GITHUB_URL}/issues`}
