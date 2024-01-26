@@ -36,7 +36,7 @@ export const GalleryBackButton: Component = () => (
             href={"/galleri/"}
             title="Tilbake til gallerisamling"
             className={
-                "flex aspect-square h-full w-full justify-center bg-slate-100 focus:outline-rootBlue"
+                "flex h-full w-full justify-center bg-slate-100 focus:outline-rootBlue sm:aspect-square"
             }>
             <LeftArrowIcon width={75} />
         </Link>
