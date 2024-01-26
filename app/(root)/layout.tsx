@@ -57,7 +57,9 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
         <body className="relative bg-defaultBg">
             <Providers>
                 <div className={"flex h-screen flex-col"}>
-                    <Header />
+                    <div>
+                        <Header />
+                    </div>
                     <main className="flex-grow sm:pt-2">{children}</main>
                     <Footer />
                 </div>
