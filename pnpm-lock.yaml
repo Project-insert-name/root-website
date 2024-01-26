@@ -63,7 +63,7 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(easymde@2.18.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(sanity@3.19.2)(styled-components@5.3.11)
       sharp:
-        specifier: ^0.32.6
+        specifier: 0.32.6
         version: 0.32.6
       styled-components:
         specifier: ^5.3.11
