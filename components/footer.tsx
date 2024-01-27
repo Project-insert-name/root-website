@@ -3,7 +3,7 @@ import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/social
 import { Divider } from "@/components/divider"
 import { bigIconSize, defaultIconSize, FlexIcon } from "@/components/icons/icon"
 import { BugAntIcon, ChatBubbleLeftEllipsisIcon, LinkIcon } from "@heroicons/react/24/outline"
-import { ReactNode } from "react"
+import { type ReactNode } from "react"
 
 /**
  * Footeren som vises på bunnen av nettsiden.

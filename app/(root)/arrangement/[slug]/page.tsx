@@ -2,10 +2,10 @@ import { getAllEventSlugs, getEventBySlug } from "@/sanity/queries/event"
 import { isFuture, toDateTuple } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
-import SingleInfoCard from "@/components/events/singleInfoCard"
+import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
 import { createEvent } from "ics"
-import { getEventTypeLabel } from "@/sanity/lib/utils"
+import { getEventTypeLabel, markdownToText } from "@/sanity/lib/utils"
 import type { RootEvent } from "@/sanity/types"
 import IcsButton from "@/components/buttons/icsButton"
 import { Date, Time } from "@/components/date"
@@ -14,6 +14,10 @@ interface Params {
     slug: string
 }
 
+/**
+ * Skrur av caching fra Next.js for denne siden.
+ * For å sikre at innholdet oppdateres ved endringer i Sanity.
+ */
 export const dynamic: Dynamic = "force-dynamic"
 
 /**
@@ -28,7 +32,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
 
     let icsEvent = undefined
     if (isFuture(event.start_time)) {
-        icsEvent = createIcsEvent(event)
+        icsEvent = await createIcsEvent(event)
     }
 
     return (
@@ -45,7 +49,13 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
             buttonUrl={event.registration_url}>
             <>
                 <TimeAndDate startTime={event.start_time} />
-                {icsEvent && <IcsButton filename={event.title} data={icsEvent} />}
+                {icsEvent && (
+                    <IcsButton
+                        filename={event.title}
+                        data={icsEvent}
+                        aria-label={"Legg til arrangement i kalender"}
+                    />
+                )}
             </>
         </SingleInfoCard>
     )
@@ -92,7 +102,7 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
 
     return {
         title: `${event.title} | Root Linjeforening`,
-        description: event.description?.slice(0, 250),
+        description: await markdownToText(event.description),
     }
 }
 
@@ -103,12 +113,12 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
  * @returns En string på ics format
  * @see https://www.npmjs.com/package/ics
  */
-function createIcsEvent(event: RootEvent): string | undefined {
+async function createIcsEvent(event: RootEvent): Promise<string | undefined> {
     let icsEvent: string | undefined = undefined
     createEvent(
         {
             title: event.title,
-            description: event.description?.slice(0, 250), // TODO ikke ideelt
+            description: await markdownToText(event.description),
             location: event.address_text,
             start: toDateTuple(event.start_time),
             duration: { hours: 2 },

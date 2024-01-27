@@ -3,25 +3,58 @@
 @tailwind utilities;
 
 @layer utilities {
+    /*
+     * Kan brukes for å debugge layout
+     */
     .debug {
         @apply border-2 border-red-500;
         @apply after:content-['debug'];
         @apply after:absolute;
     }
 
+    .flex-row-center {
+        @apply flex flex-row items-center;
+    }
+
+    .flex-center {
+        @apply flex items-center justify-center;
+    }
+}
+
+@layer components {
+    /*
+     * Den hvite bakgrunnen på logoen i header
+     */
     .logo-backdrop {
         height: calc(100% * 2);
         @apply w-64 rounded-r-full bg-white sm:w-80;
         @apply absolute -left-10 -top-14;
     }
+
+    .header-gradient {
+        @apply from-root-primary via-root-primary to-root-secondary bg-gradient-to-r;
+    }
+
+    .button-with-icon {
+        @apply flex-row-center justify-center gap-2;
+    }
 }
 
+/*
+ * CSS for hele dokumentet
+ */
 :root {
     @apply overflow-x-hidden;
+    scroll-behavior: smooth !important;
+}
+
+button,
+a[role="button"] {
+    @apply focus:border-root-primary focus:border;
 }
 
 a {
-    @apply text-rootBlue hover:text-rootBlueDark;
+    @apply text-root-primary hover:text-root-primary-dark;
 }
 
 ul {
@@ -37,29 +70,25 @@ br {
 }
 
 h1 {
-    @apply text-4xl font-bold;
+    @apply text-dark-title text-4xl font-bold;
 }
 
 h2 {
-    @apply text-3xl font-bold;
+    @apply text-dark-title text-3xl font-bold;
 }
 
 h3 {
-    @apply text-2xl font-bold;
+    @apply text-dark-title text-2xl font-bold;
 }
 
 h4 {
-    @apply text-xl font-bold;
+    @apply text-dark-title text-xl font-bold;
 }
 
 h5 {
-    @apply text-lg font-bold;
+    @apply text-dark-title text-lg font-bold;
 }
 
 h6 {
-    @apply text-base font-bold;
-}
-
-html {
-    scroll-behavior: smooth !important;
+    @apply text-dark-title text-base font-bold;
 }

@@ -1,5 +1,6 @@
 import type { Config } from "tailwindcss"
 import { nextui } from "@nextui-org/react"
+import colors from "tailwindcss/colors"
 
 /**
  * Definerer configurasjoner for TailwindCSS.
@@ -17,13 +18,23 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
+                // @depricated
                 rootBlue: "#1370a6",
+                // @depricated
                 rootBlueDark: "#0B4B6A",
+                "root-primary": "#1370A6",
+                "root-primary-dark": "#0B4B6A",
+                "root-secondary": colors.blue[500],
+                // @depricated
                 defaultBg: "#F3F3F3",
+                "default-background": "#F3F3F3",
+                // @depricated
                 darkTitle: "#3E3E3E",
+                "dark-title": "#3E3E3E",
                 bedpress: "#FFBA09",
                 social: "#09B5FF",
                 workshop: "#FF0961",
+                other: colors.gray[400],
             },
             maxWidth: {
                 initial: "initial",

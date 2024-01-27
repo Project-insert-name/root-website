@@ -16,6 +16,19 @@ interface SingleInfoCardProps extends ChildProps {
     buttonUrl?: string
 }
 
+/**
+ * En komponent som viser et enkelt arrangement, stillingsannonse eller innlegg.
+ * @param image Bildet som vises på toppen av kortet. Bør være i 16:7 format. Hvis ikke vil bildet bli beskåret i høyden. Dersom bildet er for lavt kan det bli beskåret i bredden.
+ * @param title Tittelen på kortet
+ * @param description Beskrivelsen på kortet i Markdown format
+ * @param addressText Teksten som vises for adressen. Dersom denne ikke er satt vil ikke adressekomponenten vises.
+ * @param addressUrl URLen til adressen. Dersom den er satt vil adressen bli en lenke.
+ * @param maxParticipants Maks antall deltakere på arrangementet. Dersom denne ikke er satt vil ikke deltakerkomponenten vises.
+ * @param buttonText Teksten som vises på knappen i bunnen av kortet.
+ * @param buttonUrl URLen til knappen i bunnen av kortet. Dersom den ikke er satt vil ikke knappen vises.
+ * @param className CSS klassenavn
+ * @param children Komponenter som vises i midten av kortet. Blir lagt til i raden sammen med adresse og deltakerkomponenten.
+ */
 const SingleInfoCard: Component<SingleInfoCardProps> = ({
     image,
     title,
@@ -36,9 +49,11 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
             </div>
         )}
 
-        <h1 className={"my-5 text-center text-2xl text-darkTitle sm:text-4xl"}>{title}</h1>
+        {title && (
+            <h1 className={"text-dark-title my-5 text-center text-2xl sm:text-4xl"}>{title}</h1>
+        )}
         <div className={"px-5 sm:px-32"}>
-            <div className={"flex flex-wrap items-center justify-center gap-5"}>
+            <div className={"flex-row-center flex-wrap justify-center gap-5"}>
                 {addressText && <Address address={addressText} url={addressUrl} />}
                 {maxParticipants && (
                     <AttendeesIcon width={bigIconSize}>{maxParticipants}</AttendeesIcon>
@@ -50,7 +65,9 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
         </div>
         {buttonUrl && (
             <div className={"flex justify-center"}>
-                <ExternalLinkButton href={buttonUrl}>{buttonText}</ExternalLinkButton>
+                <ExternalLinkButton href={buttonUrl} aria-label={`Ekstern lenke til ${buttonUrl}`}>
+                    {buttonText}
+                </ExternalLinkButton>
             </div>
         )}
     </div>

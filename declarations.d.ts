@@ -8,6 +8,6 @@ declare module "react-use-keypress" {
      * @param handler Funksjon som skal kjøres når tasten trykkes
      * @see https://www.npmjs.com/package/react-use-keypress
      */
-    function useKeyPress(targetKey: string, handler: VoidFunction): boolean
+    function useKeyPress(targetKey: string | string[], handler: VoidFunction): boolean
     export = useKeyPress
 }

@@ -3,7 +3,7 @@ import { Button as _Button, Link } from "@nextui-org/react"
 import { LinkIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
 
-const buttonClassNames = "min-w-[100px] rounded-2xl bg-rootBlue p-3 text-white"
+const buttonClassNames = "min-w-[100px] rounded-2xl bg-root-primary p-3 text-white"
 
 /**
  * En stylet knapp i rootBlue farge og hvit tekst.
@@ -31,7 +31,7 @@ export const LinkButton: Component<{ href?: string } & ChildProps> = ({
 }) => (
     <_Button
         as={Link}
-        className={`flex items-center justify-center gap-2 hover:text-white focus:border-rootBlue ${buttonClassNames} ${className}`}
+        className={`flex-center gap-2 hover:text-white ${buttonClassNames} ${className}`}
         {...props}>
         {children}
     </_Button>
@@ -53,7 +53,7 @@ export const ExternalLinkButton: Component<{ href?: string; iconWidth?: number }
 }) => (
     <_Button
         as={Link}
-        className={`flex items-center justify-center gap-2 hover:text-white focus:border-rootBlue ${buttonClassNames} ${className}`}
+        className={`button-with-icon hover:text-white ${buttonClassNames} ${className}`}
         isExternal
         showAnchorIcon
         anchorIcon={<LinkIcon width={iconWidth || defaultIconSize} />}

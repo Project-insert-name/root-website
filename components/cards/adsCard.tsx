@@ -1,4 +1,4 @@
-import InfoCard from "@/components/events/infoCard"
+import InfoCard from "@/components/cards/infoCard"
 import Link from "next/link"
 import { getNextJobAdverts } from "@/sanity/queries/jobAdvert"
 import type { JobAdvert } from "@/sanity/types"
@@ -7,7 +7,7 @@ import { DateIcon } from "@/components/icons/icon"
 import { Suspense } from "react"
 import { Divider } from "@/components/divider"
 import { CircularProgressIndicator } from "@/components/suspense"
-import Thumbnail from "@/components/events/thumbnail"
+import Thumbnail from "@/components/cards/thumbnail"
 
 interface AdsCardProps extends DefaultProps {
     cardTitle?: string
@@ -59,7 +59,7 @@ export const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
     <div className={`mx-2 my-5 justify-between gap-3 ${className}`}>
         <div>
             <Link href={`stilling/${slug.current}`}>
-                <h6 className={"font-mono"}>{title}</h6>
+                <h6 className={"text-root-primary font-mono"}>{title}</h6>
             </Link>
 
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
@@ -82,7 +82,7 @@ export const SingleAdNarrow: Component<JobAdvert & DefaultProps> = ({
 }) => (
     <div className={`mx-1 my-5 w-full flex-col ${className}`}>
         <Link href={`stilling/${slug.current}`}>
-            <h6 className={"font-mono"}>{title}</h6>
+            <h6 className={"text-root-primary font-mono"}>{title}</h6>
         </Link>
         <div className={"flex justify-between"}>
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>

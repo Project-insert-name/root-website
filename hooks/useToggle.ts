@@ -7,9 +7,9 @@ import { useState } from "react"
  * @param initialValue - Initial verdi til boolean
  * @returns [boolean, (value?: boolean) => void] - Et par med boolean verdien og en funksjon for å bytte mellom true og false
  */
-const useToggle = (initialValue: boolean): [boolean, (value?: boolean) => void] => {
+const useToggle = (initialValue = false): [boolean, (value?: boolean) => void] => {
     const [value, setValue] = useState(initialValue)
-    const toggleValue = (newValue?: boolean) => setValue(newValue ? newValue : !value)
+    const toggleValue = (newValue?: boolean) => setValue(newValue !== undefined ? newValue : !value)
     return [value, toggleValue]
 }
 

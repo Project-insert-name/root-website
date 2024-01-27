@@ -1,9 +1,10 @@
 import { getAllJobAdvertSlugs, getJobAdvertBySlug } from "@/sanity/queries/jobAdvert"
 import { bigIconSize, DateIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
-import SingleInfoCard from "@/components/events/singleInfoCard"
+import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
 import { Date } from "@/components/date"
+import { markdownToText } from "@/sanity/lib/utils"
 
 interface Params {
     slug: string
@@ -81,6 +82,6 @@ export async function generateMetadata(props: PageProps<Params>): Promise<Metada
 
     return {
         title: `${ad.title} | Root Linjeforening`,
-        description: ad.description?.slice(0, 150), // TODO ikke ideelt
+        description: await markdownToText(ad.description),
     }
 }

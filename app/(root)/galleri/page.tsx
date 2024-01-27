@@ -1,9 +1,17 @@
 import Gallery, { GalleryImage, GalleryItem } from "@/components/imageGallery/gallery"
 import { getAllImageGalleries } from "@/sanity/queries/imageGallery"
 import Link from "next/link"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+    title: "Bildegalleri | Root Linjeforening",
+    description: "Bilder fra tidligere arrangementer i Root Linjeforening",
+}
+
+export const dynamic: Dynamic = "force-dynamic"
 
 /**
- * Side for liste over alle gallerier
+ * Viser alle tilgjengelige bildegallerier
  */
 const ImageGalleryListPage: AsyncPage = async () => {
     const galleries = await getAllImageGalleries()
@@ -12,10 +20,10 @@ const ImageGalleryListPage: AsyncPage = async () => {
         <>
             <Gallery heading="Bildegallerier">
                 {galleries.map(gallery => (
-                    <GalleryItem key={gallery._id}>
-                        <Link
-                            href={`/galleri/${gallery.slug.current}`}
-                            className={"h-full w-full focus:outline-rootBlue"}>
+                    <Link
+                        href={`/galleri/${gallery.slug.current}`}
+                        className={"focus:outline-root-primary flex focus:outline"}>
+                        <GalleryItem key={gallery._id}>
                             <GalleryImage
                                 image={gallery.images?.[0]}
                                 title={gallery.title}
@@ -24,8 +32,8 @@ const ImageGalleryListPage: AsyncPage = async () => {
                             <div className="m-2 flex w-full justify-center text-black">
                                 <h3>{gallery.title}</h3>
                             </div>
-                        </Link>
-                    </GalleryItem>
+                        </GalleryItem>
+                    </Link>
                 ))}
             </Gallery>
             {galleries.length === 0 && (

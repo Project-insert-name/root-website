@@ -1,4 +1,4 @@
-import { fromMarkdown } from "@/sanity/lib/utils"
+import { markdownToHTML } from "@/sanity/lib/utils"
 import type { MarkdownString } from "@/sanity/types"
 
 /**
@@ -10,7 +10,7 @@ const Markdown: AsyncComponent<{ markdown?: MarkdownString } & DefaultProps> = a
     markdown,
     ...props
 }) => {
-    const html = await fromMarkdown(markdown)
+    const html = await markdownToHTML(markdown)
     return <div dangerouslySetInnerHTML={{ __html: html }} {...props} />
 }
 
