@@ -118,7 +118,7 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
 }) => (
     <div className={`mx-1 my-3 flex w-full flex-col ${className}`}>
         <Link href={`arrangement/${slug.current}`}>
-            <h6 className={"text-root-primary font-mono"}>{title}</h6>
+            <h6 className={"font-mono text-inherit"}>{title}</h6>
         </Link>
         <p>{getEventTypeLabel(type)}</p>
         <div className={"inline-flex justify-between"}>

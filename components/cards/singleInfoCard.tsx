@@ -53,7 +53,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
             <h1 className={"text-dark-title my-5 text-center text-2xl sm:text-4xl"}>{title}</h1>
         )}
         <div className={"px-5 sm:px-32"}>
-            <div className={"flex-row-center flex-wrap justify-center gap-5"}>
+            <div className={"flex-center flex-wrap gap-5"}>
                 {addressText && <Address address={addressText} url={addressUrl} />}
                 {maxParticipants && (
                     <AttendeesIcon width={bigIconSize}>{maxParticipants}</AttendeesIcon>

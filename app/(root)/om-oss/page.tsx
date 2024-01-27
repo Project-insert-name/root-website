@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     description: "Informasjon om Root Linjeforening",
 }
 
-export const dynamic: Dynamic = "force-dynamic"
+export const revalidate = 1800 // 30 min
 
 /**
  * Viser diverse informasjon om Root Linjeforeningen. Samt anne informasjon som er relevant for linjeforeningen.

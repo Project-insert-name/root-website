@@ -1,4 +1,4 @@
-import { getAllEventSlugs, getEventBySlug } from "@/sanity/queries/event"
+import { getEventBySlug } from "@/sanity/queries/event"
 import { isFuture, toDateTuple } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
@@ -14,11 +14,7 @@ interface Params {
     slug: string
 }
 
-/**
- * Skrur av caching fra Next.js for denne siden.
- * For å sikre at innholdet oppdateres ved endringer i Sanity.
- */
-export const dynamic: Dynamic = "force-dynamic"
+export const revalidate = 30 // 30 sek
 
 /**
  * Side for et enkelt arrangement. Siden er dynamisk basert på arrangementets slug variabel.
@@ -73,20 +69,6 @@ const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => (
         </TimeIcon>
     </div>
 )
-
-/**
- * Genererer statiske paths for alle arrangementer.
- * Kjøres ved bygging av nettsiden.
- * @returns Liste med statiske paths
- * @see https://nextjs.org/docs/app/api-reference/functions/generate-static-params
- */
-export const generateStaticParams = async (): Promise<Params[]> => {
-    const events = await getAllEventSlugs()
-
-    return events.map(event => ({
-        slug: event.slug.current,
-    }))
-}
 
 /**
  * Genererer metadata for en side. Bruker tittel og deler av beskrivelsen fra arrangementet.

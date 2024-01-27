@@ -10,11 +10,10 @@ export const metadata: Metadata = {
 // TODO InnleggKomponent hent data fra Facebook og Instagram
 
 /**
- * Brukes for å tvinge Next.js til å oppdatere innholdet på siden.
- * Skrur av all caching fra Next.js, som gjør at nye innlegg og endringer vises med en gang.
- * @see https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#dynamic
+ * Definerer hvor ofte cache skal slettes.
+ * @https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config#revalidate
  */
-export const dynamic: Dynamic = "force-dynamic"
+export const revalidate = 30 // 30 sek
 
 const Home: Page = () => (
     <div className={"flex flex-wrap justify-center gap-5 py-5"}>

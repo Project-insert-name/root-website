@@ -34,10 +34,6 @@
     .header-gradient {
         @apply from-root-primary via-root-primary to-root-secondary bg-gradient-to-r;
     }
-
-    .button-with-icon {
-        @apply flex-row-center justify-center gap-2;
-    }
 }
 
 /*

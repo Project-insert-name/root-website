@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     description: "Bilder fra tidligere arrangementer i Root Linjeforening",
 }
 
-export const dynamic: Dynamic = "force-dynamic"
+export const revalidate = 1800 // 30 min
 
 /**
  * Viser alle tilgjengelige bildegallerier

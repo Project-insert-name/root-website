@@ -82,7 +82,7 @@ export const SingleAdNarrow: Component<JobAdvert & DefaultProps> = ({
 }) => (
     <div className={`mx-1 my-5 w-full flex-col ${className}`}>
         <Link href={`stilling/${slug.current}`}>
-            <h6 className={"text-root-primary font-mono"}>{title}</h6>
+            <h6 className={"font-mono text-inherit"}>{title}</h6>
         </Link>
         <div className={"flex justify-between"}>
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>

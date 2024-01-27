@@ -1,13 +1,5 @@
 import type { JobAdvert } from "@/sanity/types"
-import { client } from "@/sanity/lib/client"
-
-/**
- * Henter ut alle slugs som er tilknyttet stillingsannonser fra sanity
- * @returns En liste med alle slugs
- */
-export async function getAllJobAdvertSlugs(): Promise<ReadonlyArray<Pick<JobAdvert, "slug">>> {
-    return client.fetch('*[_type == "job_advert"]{slug}')
-}
+import { cdnClient } from "@/sanity/lib/client"
 
 /**
  * Henter ut de neste stillingsannonsene fra sanity, sortert etter søknadsfrist
@@ -15,7 +7,7 @@ export async function getAllJobAdvertSlugs(): Promise<ReadonlyArray<Pick<JobAdve
  * @returns En liste med de neste stillingsannonsene
  */
 export async function getNextJobAdverts(limit = 4): Promise<ReadonlyArray<JobAdvert>> {
-    return client.fetch(
+    return cdnClient.fetch(
         `*[_type == "job_advert" && (deadline > now() || deadline == null)] | order(deadline asc)[0...$limit]`,
         {
             limit,
@@ -29,5 +21,5 @@ export async function getNextJobAdverts(limit = 4): Promise<ReadonlyArray<JobAdv
  * @returns JobAdvert Stillingsannonsen med den spesifikke slugen, eller null om den ikke finnes
  */
 export async function getJobAdvertBySlug(slug: string): Promise<Readonly<JobAdvert> | null> {
-    return client.fetch('*[_type == "job_advert" && slug.current == $slug][0]', { slug })
+    return cdnClient.fetch('*[_type == "job_advert" && slug.current == $slug][0]', { slug })
 }

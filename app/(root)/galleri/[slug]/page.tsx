@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { getAllImageGallerySlugs, getImageGalleryBySlug } from "@/sanity/queries/imageGallery"
+import { getImageGalleryBySlug } from "@/sanity/queries/imageGallery"
 
 import GalleryModal from "@/components/imageGallery/galleryWithModal"
 import { type Metadata } from "next"
@@ -8,7 +8,7 @@ interface Params {
     slug: string
 }
 
-export const dynamic: Dynamic = "force-dynamic"
+export const revalidate = 1800 // 30 min
 
 /**
  * Side for et enkelt bildegalleri. Siden er dynamisk basert på arrangementets slug variabel.
@@ -25,20 +25,6 @@ const GalleryPage: AsyncPage<Params> = async ({ params }) => {
 }
 
 export default GalleryPage
-
-/**
- * Genererer statiske paths for alle bildegallerier.
- * Kjøres ved bygging av nettsiden.
- * @returns Liste med statiske paths
- * @see https://nextjs.org/docs/app/api-reference/functions/generate-static-params
- */
-export const generateStaticParams = async (): Promise<Params[]> => {
-    const galleries = await getAllImageGallerySlugs()
-
-    return galleries.map(gallery => ({
-        slug: gallery.slug.current,
-    }))
-}
 
 /**
  * Genererer metadata for en side. Bruker tittel fra bildegalleriet og en standard beskrivelse.
