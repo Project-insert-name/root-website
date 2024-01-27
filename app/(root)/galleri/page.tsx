@@ -21,9 +21,10 @@ const ImageGalleryListPage: AsyncPage = async () => {
             <Gallery heading="Bildegallerier">
                 {galleries.map(gallery => (
                     <Link
+                        key={gallery._id}
                         href={`/galleri/${gallery.slug.current}`}
                         className={"focus:outline-root-primary flex focus:outline"}>
-                        <GalleryItem key={gallery._id}>
+                        <GalleryItem>
                             <GalleryImage
                                 image={gallery.images?.[0]}
                                 title={gallery.title}
