@@ -30,14 +30,14 @@ const Header: Component = () => {
             isMenuOpen={isMenuOpen}
             shouldHideOnScroll={true}
             // CSS for header komponenten
-            classNames={{ wrapper: ["pl-2 max-w-initial"] }}
+            classNames={{ wrapper: ["pl-0 max-w-initial"] }}
             className={"header-gradient z-101 overflow-hidden drop-shadow-lg sm:h-20"}>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
                 <Link
                     href={"/"}
                     title={"Root linjeforening sin logo"}
-                    className={"focus:outline-root-primary relative z-20 focus:outline"}>
+                    className={"relative z-20 pl-2 focus:outline focus:outline-root-primary"}>
                     <Image
                         priority={true}
                         src={"/root-logo.svg"}
