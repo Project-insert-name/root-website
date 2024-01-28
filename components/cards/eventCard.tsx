@@ -82,7 +82,7 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
             <EventMarker type={type} />
             <div>
                 <Link href={`arrangement/${slug.current}`}>
-                    <h6 className={"text-root-primary font-mono"}>{title}</h6>
+                    <h6 className={"font-mono text-root-primary"}>{title}</h6>
                 </Link>
                 <p>{getEventTypeLabel(type)}</p>
                 <div className={"flex flex-col gap-2 sm:flex-row"}>
@@ -120,11 +120,13 @@ export const SingleEventNarrow: Component<RootEvent & DefaultProps> = ({
         <Link href={`arrangement/${slug.current}`}>
             <h6 className={"font-mono text-inherit"}>{title}</h6>
         </Link>
-        <p>{getEventTypeLabel(type)}</p>
         <div className={"inline-flex justify-between"}>
-            <div className={"inline-flex flex-col flex-wrap sm:flex-row"}>
-                <TimeAndDate startTime={start_time} />
-                {address_text && <MapIcon>{address_text}</MapIcon>}
+            <div>
+                <p>{getEventTypeLabel(type)}</p>
+                <div className={"inline-flex flex-col flex-wrap sm:flex-row"}>
+                    <TimeAndDate startTime={start_time} />
+                    {address_text && <MapIcon>{address_text}</MapIcon>}
+                </div>
             </div>
             {hero_image && <Thumbnail image={hero_image} width={130} />}
         </div>
