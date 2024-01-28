@@ -23,7 +23,7 @@ const ImageGalleryListPage: AsyncPage = async () => {
                     <Link
                         key={gallery._id}
                         href={`/galleri/${gallery.slug.current}`}
-                        className={"focus:outline-root-primary flex focus:outline"}>
+                        className={"flex rounded-2xl focus:outline focus:outline-root-primary"}>
                         <GalleryItem>
                             <GalleryImage
                                 image={gallery.images?.[0]}
