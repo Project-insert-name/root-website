@@ -8,7 +8,7 @@ import { CircularProgress } from "@nextui-org/react"
  * @param props Andre props som skal brukes på komponenten
  */
 export const CircularProgressIndicator: Component = ({ className, ...props }) => (
-    <div className={`flex h-full items-center justify-center ${className}`} {...props}>
+    <div className={`flex-center h-full ${className}`} {...props}>
         <CircularProgress aria-label={props["aria-label"]} />
     </div>
 )

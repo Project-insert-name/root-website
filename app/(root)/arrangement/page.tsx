@@ -7,10 +7,7 @@ export const metadata: Metadata = {
     description: "Oversikt over tidligere og planlagte arrangementer hos Root Linjeforening",
 }
 
-/**
- * Brukes for å tvinge Next.js til å oppdatere innholdet på siden.
- */
-export const dynamic: Dynamic = "force-dynamic"
+export const revalidate = 30 // 30 sek
 
 const nrOfEvents = 6
 

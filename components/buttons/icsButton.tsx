@@ -2,6 +2,7 @@
 import { Button } from "@/components/buttons/button"
 import { ArrowDownOnSquareIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
+import { downloadFile } from "@/utils/downloadUtils"
 
 interface IcsButtonProps extends DefaultProps {
     /**
@@ -25,12 +26,7 @@ const IcsButton: Component<IcsButtonProps> = ({
      */
     function download(): void {
         const blob = new Blob([data], { type: "text/calendar" })
-        const url = URL.createObjectURL(blob)
-        const link = document.createElement("a")
-        link.download = `${filename}.ics`
-        link.href = url
-        link.click()
-        link.remove()
+        downloadFile(blob, `${filename}.ics`)
     }
 
     return (

@@ -1,8 +1,8 @@
 "use client"
 
-import { Modal, ModalContent, ModalHeader, ModalBody, Link } from "@nextui-org/react"
+import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react"
 import type { ImageGallery } from "@/sanity/types"
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"
 import useKeypress from "react-use-keypress"
 
@@ -12,10 +12,13 @@ import Gallery, {
     GalleryImage,
 } from "@/components/imageGallery/gallery"
 import SanityImage from "../sanityImage"
+import useToggle from "@/hooks/useToggle"
 
 interface GalleryModalProps extends ChildProps {
-    imageGallery: ImageGallery
+    readonly imageGallery: ImageGallery
 }
+
+const param = "bilde"
 
 const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     const searchParams = useSearchParams()
@@ -23,10 +26,10 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     const pathname = usePathname()
 
     const highestImageIndex = imageGallery.images.length - 1
-    const initialImageIndex = parseInt(searchParams.get("bilde")!)
+    const initialImageIndex = parseInt(searchParams.get(param)!)
     const imageIsSet = Number.isInteger(initialImageIndex)
 
-    const [isOpen, setIsOpen] = useState(imageIsSet)
+    const [isOpen, toggleIsOpen] = useToggle(imageIsSet)
     const [activeImageIndex, setActiveImageIndex] = useState(imageIsSet ? initialImageIndex : 0)
 
     /**
@@ -55,12 +58,19 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
     useKeypress("Escape", onClose)
 
     /**
+     * Henter det aktive bildet fra imageGallery basert på indeksen til bildet
+     */
+    const currentImage = useMemo(() => {
+        return imageGallery.images[activeImageIndex]
+    }, [imageGallery.images, activeImageIndex])
+
+    /**
      * Denne funksjonen er bundet til onClose parameteren til Modal komponenten
      * Dette betyr at når Modal blir lukket vil funksjonen kjøre
      */
     function onClose() {
         replace(pathname)
-        setIsOpen(false)
+        toggleIsOpen(false)
     }
 
     /**
@@ -69,9 +79,13 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
      * @param index er indeksen til bildet som skal vises
      */
     const handleImageClick = (index: number) => {
-        replace(`${pathname}?bilde=${index}`)
+        updateActiveImage(index)
+        toggleIsOpen()
+    }
+
+    function updateActiveImage(index: number) {
+        replace(`${pathname}?${param}=${index}`)
         setActiveImageIndex(index)
-        setIsOpen(true)
     }
 
     /**
@@ -88,8 +102,7 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
                 index <= 0 ? (index = highestImageIndex) : index--
                 break
         }
-        replace(`${pathname}?bilde=${index}`)
-        setActiveImageIndex(index)
+        updateActiveImage(index)
     }
 
     return (
@@ -105,16 +118,11 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
                 className={"sm:mt-20 sm:min-h-min sm:max-w-[1000px]"}>
                 <ModalContent>
                     <ModalHeader>
-                        <h2 className={"text-darkTitle"}>
-                            {imageGallery.images[activeImageIndex].alt}
-                        </h2>
+                        <h2>{currentImage.alt}</h2>
                     </ModalHeader>
                     <ModalBody className="border-b-1 px-2 py-2">
                         <div className="flex justify-center sm:m-5">
-                            <SanityImage
-                                image={imageGallery.images[activeImageIndex]}
-                                alt={imageGallery.images[activeImageIndex].alt ?? ""}
-                            />
+                            <SanityImage image={currentImage} alt={currentImage.alt} />
                         </div>
                     </ModalBody>
                 </ModalContent>
@@ -122,13 +130,16 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
             <Gallery heading={imageGallery.title} event={imageGallery.event}>
                 <GalleryBackButton />
                 {imageGallery.images?.map((image, index) => (
-                    <GalleryItem key={image._key}>
-                        <Link
-                            onClick={() => handleImageClick(index)}
-                            className="h-full w-full cursor-pointer focus:outline-rootBlue">
+                    <button
+                        key={image._key}
+                        onClick={() => handleImageClick(index)}
+                        className={
+                            "focus:outline-root-primary h-full w-full cursor-pointer rounded-2xl focus:outline"
+                        }>
+                        <GalleryItem>
                             <GalleryImage image={image} alt={image.alt} />
-                        </Link>
-                    </GalleryItem>
+                        </GalleryItem>
+                    </button>
                 ))}
             </Gallery>
         </>

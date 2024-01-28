@@ -1,5 +1,6 @@
 import { remark } from "remark"
 import html from "remark-html"
+import strip from "strip-markdown"
 import type { EventType, MarkdownString } from "@/sanity/types"
 
 /**
@@ -7,8 +8,18 @@ import type { EventType, MarkdownString } from "@/sanity/types"
  * @param markdown Markdown som skal konverteres
  * @returns Html som er generert fra markdown. Kan settes direkte inn i en html-side med dangerouslySetInnerHTML.
  */
-export async function fromMarkdown(markdown?: MarkdownString): Promise<string> {
+export async function markdownToHTML(markdown?: MarkdownString): Promise<string> {
     const file = await remark().use(html).process(markdown)
+    return file.toString()
+}
+
+/**
+ * Konverterer markdown til ren tekst. Fjerner alle html tags og markdown formatering. Samt bilde og link tags.
+ * @param markdown Markdown som skal konverteres
+ * @returns Ren tekst uten formatering
+ */
+export async function markdownToText(markdown?: MarkdownString): Promise<string> {
+    const file = await remark().use(strip).process(markdown)
     return file.toString()
 }
 

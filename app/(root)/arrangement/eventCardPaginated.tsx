@@ -1,9 +1,9 @@
 "use client"
 
-import { EventContent } from "@/components/events/eventCard"
+import { EventContent } from "@/components/cards/eventCard"
 import type { RootEvent } from "@/sanity/types"
 import { Button } from "@/components/buttons/button"
-import InfoCard from "@/components/events/infoCard"
+import InfoCard from "@/components/cards/infoCard"
 import { useState } from "react"
 import { CircularProgressIndicator } from "@/components/suspense"
 
