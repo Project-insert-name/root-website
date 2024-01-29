@@ -4,6 +4,9 @@ Laget av **PIN**
 
 ---
 
+> [!NOTE]
+> For bugs eller forslag til forbedringer, opprett en issue i [issues](https://github.com/Project-insert-name/root-website/issues).
+
 ## Innhold
 
 -   [Stack](#stack)
@@ -14,6 +17,7 @@ Laget av **PIN**
         -   [VSCode](#vscode)
         -   [Intellij / Webstorm / Annen JetBrains IDE](#intellij--webstorm--annen-jetbrains-ide)
     -   [Starte utviklingsserver](#starte-utviklingsserver)
+    -   [Starte produksjonsserver](#starte-produksjonsserver)
 
 -   [Praktisk info](#praktisk-info)
     -   [App router](#app-router)
@@ -70,10 +74,22 @@ save".
 
 ### Starte utviklingsserver
 
+Kjører i development mode på [http://localhost:3000](http://localhost:3000).
+
+Bruker dev datasettet fra Sanity.
+
 ```bash
 pnpm dev
-# eller
-next dev
+```
+
+### Starte produksjonsserver
+
+Kjører i production mode på [http://localhost:3000](http://localhost:3000).
+
+Bruker production datasettet fra Sanity.
+
+```bash
+pnpm build && pnpm start
 ```
 
 ## Praktisk info
@@ -95,14 +111,24 @@ Filer som heter `layout.tsx` blir automatisk wrappet rundt alle andre routes i s
 
 ### Mappestruktur
 
-| Mappe      | Beskrivelse                                                         |
-| ---------- | ------------------------------------------------------------------- |
-| app        | Filer knyttet til routes/pages                                      |
-| components | React komponenter som brukes av pages eller andre komponenter       |
-| hooks      | Custom hooks som kan brukes i client components på nettsiden        |
-| public     | Bilder, fonter og andre ikke-kode filer som skal vises i nettsiden  |
-| sanity     | Filer knyttet til Sanity. Som schemas, queries, typer og andre ting |
-| utils      | Nyttige hjelpefunksjoner                                            |
+-   [.github](/.github) (GitHub actions, dependabot og templates)
+-   [app](/app) (Filer knyttet til routes/pages)
+    -   [(root)](</app/(root)>) (Hovedmappen for alle ruter som ikke tilhører sanity)
+    -   [(sanity)](</app/(sanity)>) (Hovedmappen for alle ruter som tilhører sanity)
+-   [components](/components) (React komponenter som brukes av pages eller andre komponenter)
+    -   [buttons](/components/buttons) (Diverse knapper)
+    -   [cards](/components/cards) (Kort som brukes for å vise innhold, som arrangementer, nyheter og lignende)
+    -   [header](/components/header) (Mavigasjonsbaren med lenkene)
+    -   [icons](/components/icons) (Komponenter som bygger rundt heroicons og SVG ikoner)
+    -   [imageGallery](/components/imageGallery) (Komponenter for bildegalleriet)
+    -   [omOss](/components/omOss) (Komponenter for om oss siden)
+-   [hooks](/hooks) (Custom hooks som kan brukes i client components på nettsiden)
+-   [public](/public) (Bilder, fonter og andre ikke-kode filer som skal vises i nettsiden)
+-   [sanity](/sanity) (Filer knyttet til Sanity. Som schemas, queries, typer og andre ting)
+    -   [lib](/sanity/lib) (Sanity relaterte funksjoner)
+    -   [queries](/sanity/queries) (Spørringer mot sanity)
+    -   [schemas](/sanity/schemas) (Sanity schemas)
+-   [utils](/utils) (Nyttige hjelpefunksjoner)
 
 Merk at `app` mappen er delt inn i to ulike grupper, `(root)` og `(sanity)`. Hvor filene kun eksisterer i den gruppen de er definert i.
 Hvis de er definert utenfor en gruppe, vil de eksistere i alle grupper.
@@ -118,6 +144,9 @@ støttet, da må man bruke client components.
 
 Alle komponenter i next.js 13+ er server components som standard, man kan gjøre de om til client components ved å
 skrive "use client" i toppen av filen.
+
+`page.tsx` filer i `app` bør bruke server components.
+Dersom det er nødvendig å bruke hooks, bør den logikken ligge i en egen fil, markert med "use client".
 
 ### PNPM
 
