@@ -25,15 +25,6 @@ export default defineType({
             },
         }),
         defineField({
-            name: "description",
-            type: "markdown",
-            title: "Fullstendig beskrivelse",
-            description: "Inkluder brødtekst med utdypende informasjon om eventet",
-            deprecated: {
-                reason: "Bruk 'block' istedenfor",
-            },
-        }),
-        defineField({
             name: "description_block",
             title: "Fullstendig beskrivelse",
             description: "Inkluder brødtekst med utdypende informasjon om eventet",
@@ -117,6 +108,15 @@ export default defineType({
             type: "url",
             title: "Lenke for påmelding",
             description: "Her kan du legge inn en lenke til påmeldingsskjemas",
+        }),
+        defineField({
+            name: "description",
+            type: "markdown",
+            title: "Fullstendig beskrivelse",
+            description: "Inkluder brødtekst med utdypende informasjon om eventet",
+            deprecated: {
+                reason: "Bruk 'Fullstendig beskrivelse' over istedenfor",
+            },
         }),
     ],
 })

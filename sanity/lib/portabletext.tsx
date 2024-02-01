@@ -14,4 +14,12 @@ export const components: PortableTextComponents = {
             </ExternalLink>
         ),
     },
+    block: {
+        h1: ({ children }) => <h1 className={"text-dark-title"}>{children}</h1>,
+        h2: ({ children }) => <h2 className={"text-dark-title"}>{children}</h2>,
+        h3: ({ children }) => <h3 className={"text-dark-title"}>{children}</h3>,
+        h4: ({ children }) => <h4 className={"text-dark-title"}>{children}</h4>,
+        h5: ({ children }) => <h5 className={"text-dark-title"}>{children}</h5>,
+        h6: ({ children }) => <h6 className={"text-dark-title"}>{children}</h6>,
+    },
 }

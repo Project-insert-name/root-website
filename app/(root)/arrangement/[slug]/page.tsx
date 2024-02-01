@@ -5,7 +5,7 @@ import { notFound } from "next/navigation"
 import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
 import { createEvent } from "ics"
-import { getEventTypeLabel, markdownToText } from "@/sanity/lib/utils"
+import { getDescription, getEventTypeLabel } from "@/sanity/lib/utils"
 import type { RootEvent } from "@/sanity/types"
 import IcsButton from "@/components/buttons/icsButton"
 import { Date, Time } from "@/components/date"
@@ -85,7 +85,7 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
 
     return {
         title: `${event.title} | Root Linjeforening`,
-        description: await markdownToText(event.description),
+        description: await getDescription(event),
     }
 }
 
@@ -98,10 +98,11 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
  */
 async function createIcsEvent(event: RootEvent): Promise<string | undefined> {
     let icsEvent: string | undefined = undefined
+
     createEvent(
         {
             title: event.title,
-            description: await markdownToText(event.description),
+            description: await getDescription(event),
             location: event.address_text,
             start: toDateTuple(event.start_time),
             duration: { hours: 2 },

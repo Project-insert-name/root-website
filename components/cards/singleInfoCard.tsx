@@ -5,8 +5,8 @@ import Markdown from "@/components/markdown"
 import { ExternalLink } from "@/components/link"
 import type { MarkdownString, SanityImageObject } from "@/sanity/types"
 import { PortableText } from "@portabletext/react"
-import { type TypedObject } from "sanity"
 import { components } from "@/sanity/lib/portabletext"
+import type { TypedObject } from "sanity"
 
 interface SingleInfoCardProps extends ChildProps {
     image?: SanityImageObject
