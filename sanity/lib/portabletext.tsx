@@ -1,5 +1,6 @@
 import { type PortableTextComponents } from "@portabletext/react"
 import { ExternalLink } from "@/components/link"
+import { Code } from "@nextui-org/code"
 
 /**
  * Definerer custom styling for komponenter generert av PortableText.
@@ -12,6 +13,9 @@ export const components: PortableTextComponents = {
             <ExternalLink href={value?.href} className={"link"}>
                 {children}
             </ExternalLink>
+        ),
+        code: ({ children }) => (
+            <Code className={"before:content-[''] after:content-['']"}>{children}</Code>
         ),
     },
     block: {
