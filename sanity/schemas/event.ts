@@ -1,4 +1,4 @@
-import { defineType, defineField } from "@sanity-typed/types"
+import { defineType, defineField, defineArrayMember } from "@sanity-typed/types"
 import { CalendarIcon } from "@heroicons/react/24/outline"
 
 export default defineType({
@@ -29,6 +29,16 @@ export default defineType({
             type: "markdown",
             title: "Fullstendig beskrivelse",
             description: "Inkluder brødtekst med utdypende informasjon om eventet",
+            deprecated: {
+                reason: "Bruk 'block' istedenfor",
+            },
+        }),
+        defineField({
+            name: "description_block",
+            title: "Fullstendig beskrivelse",
+            description: "Inkluder brødtekst med utdypende informasjon om eventet",
+            type: "array",
+            of: [defineArrayMember({ type: "block" })],
         }),
         defineField({
             name: "type",

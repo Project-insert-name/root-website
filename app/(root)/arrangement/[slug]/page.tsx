@@ -35,6 +35,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
         <SingleInfoCard
             title={event.title}
             description={event.description}
+            descriptionBlock={event.description_block}
             image={event.hero_image}
             maxParticipants={
                 event.max_participants ? `Antall plasser er ${event.max_participants}` : undefined
