@@ -6,6 +6,7 @@ import { ExternalLink } from "@/components/link"
 import type { MarkdownString, SanityImageObject } from "@/sanity/types"
 import { PortableText } from "@portabletext/react"
 import { type TypedObject } from "sanity"
+import { components } from "@/sanity/lib/portabletext"
 
 interface SingleInfoCardProps extends ChildProps {
     image?: SanityImageObject
@@ -37,6 +38,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
     image,
     title,
     description,
+    descriptionBlock,
     addressText,
     addressUrl,
     maxParticipants,
@@ -65,8 +67,13 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
                 {children}
             </div>
 
-            {descriptionBlock && <PortableText value={descriptionBlock} />}
-            <Markdown className={"prose my-5 max-w-none"} markdown={description} />
+            {descriptionBlock ? (
+                <div className={"prose"}>
+                    <PortableText value={descriptionBlock} components={components} />
+                </div>
+            ) : (
+                <Markdown className={"prose my-5 max-w-none"} markdown={description} />
+            )}
         </div>
         {buttonUrl && (
             <div className={"flex justify-center"}>

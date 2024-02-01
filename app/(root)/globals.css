@@ -53,6 +53,10 @@ a {
     @apply text-root-primary hover:text-root-primary-dark;
 }
 
+p {
+    @apply min-h-[1px];
+}
+
 ul {
     @apply list-disc pl-3.5;
 }
