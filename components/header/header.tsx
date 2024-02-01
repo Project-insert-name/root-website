@@ -66,7 +66,7 @@ const Header: Component = () => {
                 ))}
             </NavbarContent>
             {/*Hamburgermeny - Vises bare på små skjermer*/}
-            <NavbarContent className={"md:hidden"} justify={"end"}>
+            <NavbarContent className={"md:hidden"} justify={"end"} as={"div"}>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className={"text-white"}
