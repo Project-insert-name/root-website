@@ -1,9 +1,17 @@
-import { PortableTextComponents } from "@portabletext/react"
+import { type PortableTextComponents } from "@portabletext/react"
+import { ExternalLink } from "@/components/link"
 
-// TODO
+/**
+ * Definerer custom styling for komponenter generert av PortableText.
+ * Brukes av PortableText komponenten, for å style tekst og komponenter.
+ * @see https://www.npmjs.com/package/@portabletext/react#available-components
+ */
 export const components: PortableTextComponents = {
     marks: {
-        p: ({ children }) => <p>{children}</p>,
-        li: ({ children }) => <li className={"text-black"}>{children}</li>,
+        link: ({ value, children }) => (
+            <ExternalLink href={value?.href} className={"link"}>
+                {children}
+            </ExternalLink>
+        ),
     },
 }

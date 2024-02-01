@@ -68,7 +68,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
             </div>
 
             {descriptionBlock ? (
-                <div className={"prose"}>
+                <div className={"prose my-5 max-w-none"}>
                     <PortableText value={descriptionBlock} components={components} />
                 </div>
             ) : (

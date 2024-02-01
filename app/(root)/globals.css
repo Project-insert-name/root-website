@@ -32,7 +32,7 @@
     }
 
     .header-gradient {
-        @apply from-root-primary via-root-primary to-root-secondary bg-gradient-to-r;
+        @apply bg-gradient-to-r from-root-primary via-root-primary to-root-secondary;
     }
 }
 
@@ -46,14 +46,19 @@
 
 button,
 a[role="button"] {
-    @apply focus:border-root-primary focus:border;
+    @apply focus:border focus:border-root-primary;
 }
 
+.link,
 a {
-    @apply text-root-primary hover:text-root-primary-dark;
+    @apply text-root-primary no-underline hover:text-root-primary-dark;
 }
 
-p {
+/*
+    Gjør at man kan bruke flere tomme p-tagger for å lage luft.
+    Nyttig sammen med PortableText
+*/
+p:empty + p:empty {
     @apply min-h-[1px];
 }
 
@@ -70,25 +75,25 @@ br {
 }
 
 h1 {
-    @apply text-dark-title text-4xl font-bold;
+    @apply text-4xl font-bold text-dark-title;
 }
 
 h2 {
-    @apply text-dark-title text-3xl font-bold;
+    @apply text-3xl font-bold text-dark-title;
 }
 
 h3 {
-    @apply text-dark-title text-2xl font-bold;
+    @apply text-2xl font-bold text-dark-title;
 }
 
 h4 {
-    @apply text-dark-title text-xl font-bold;
+    @apply text-xl font-bold text-dark-title;
 }
 
 h5 {
-    @apply text-dark-title text-lg font-bold;
+    @apply text-lg font-bold text-dark-title;
 }
 
 h6 {
-    @apply text-dark-title text-base font-bold;
+    @apply text-base font-bold text-dark-title;
 }
