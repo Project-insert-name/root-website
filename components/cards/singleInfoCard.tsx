@@ -37,7 +37,6 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
     image,
     title,
     description,
-    descriptionBlock,
     addressText,
     addressUrl,
     maxParticipants,
@@ -67,7 +66,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
             </div>
 
             {descriptionBlock && <PortableText value={descriptionBlock} />}
-            <Markdown className={"my-5"} markdown={description} />
+            <Markdown className={"prose my-5 max-w-none"} markdown={description} />
         </div>
         {buttonUrl && (
             <div className={"flex justify-center"}>
