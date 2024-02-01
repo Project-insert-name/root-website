@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss"
 import { nextui } from "@nextui-org/react"
 import colors from "tailwindcss/colors"
+import typography from "@tailwindcss/typography"
 
 /**
  * Definerer configurasjoner for TailwindCSS.
@@ -37,6 +38,6 @@ const config: Config = {
         },
     },
     darkMode: "class",
-    plugins: [nextui()],
+    plugins: [nextui(), typography()],
 }
 export default config

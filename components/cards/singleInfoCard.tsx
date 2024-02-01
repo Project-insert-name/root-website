@@ -50,7 +50,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
         )}
 
         {title && (
-            <h1 className={"text-dark-title my-5 text-center text-2xl sm:text-4xl"}>{title}</h1>
+            <h1 className={"my-5 text-center text-2xl text-dark-title sm:text-4xl"}>{title}</h1>
         )}
         <div className={"px-5 sm:px-32"}>
             <div className={"flex-center flex-wrap gap-5"}>
@@ -61,7 +61,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
                 {children}
             </div>
 
-            <Markdown className={"my-5"} markdown={description} />
+            <Markdown className={"prose my-5 max-w-none"} markdown={description} />
         </div>
         {buttonUrl && (
             <div className={"flex justify-center"}>
