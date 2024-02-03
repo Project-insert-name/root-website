@@ -29,8 +29,8 @@ export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEv
     return cdnClient.fetch(
         `
         {
-            "past": *[_type == "event" && start_time < now()] | order(start_time desc)[0...$limit]{..., gallery->{slug}},
-            "future": *[_type == "event" && start_time >= now()] | order(start_time asc)[0...$limit]
+            "past": *[_type == "event" && (defined(end_time) && end_time < now() || !defined(end_time) && start_time < now())] | order(start_time desc)[0...$limit]{..., gallery->{slug}},
+            "future": *[_type == "event" && (defined(end_time) && end_time >= now() || start_time >= now())] | order(start_time asc)[0...$limit]
         }
     `,
         { limit },
@@ -51,7 +51,7 @@ export async function getFutureEvents( // TODO edge case: hvis det er flere even
     lastStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
     return cdnClient.fetch(
-        '*[_type == "event" && start_time >= now() && start_time > $last_start_time] | order(start_time asc)[0...$limit]',
+        '*[_type == "event" && (defined(end_time) && end_time >= now() || start_time >= now()) && start_time > $last_start_time] | order(start_time asc)[0...$limit]',
         {
             limit,
             last_start_time: lastStartTime,
@@ -73,7 +73,7 @@ export async function getPastEvents(
     lastStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
     return cdnClient.fetch(
-        '*[_type == "event" && start_time < now() && start_time < $last_start_time] | order(start_time desc)[0...$limit]',
+        '*[_type == "event" && (defined(end_time) && end_time < now() || !defined(end_time) && start_time < now()) && start_time < $last_start_time] | order(start_time desc)[0...$limit]',
         {
             limit,
             last_start_time: lastStartTime,
