@@ -4,7 +4,6 @@ import type { FC, ReactNode } from "react"
 import Footer from "@/components/footer"
 import Header from "@/components/header/header"
 import { Providers } from "@/app/(root)/providers"
-import Head from "next/head"
 
 /**
  * Inneholder tittel som vises i fanen til nettleseren og beskrivelse som vises i søkeresultater.
@@ -49,14 +48,14 @@ export const viewport: Viewport = {
  */
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
     <html lang="nb">
-        <Head>
+        <head>
             {/*Gir tilgang til Google Search Console*/}
             <meta
                 name="google-site-verification"
                 content="ff3j07lovsouc9oLEt871sodlGdi8VtTUeiitYbQs2Q"
             />
-        </Head>
-        <body className="bg-default-background relative">
+        </head>
+        <body className="relative bg-default-background">
             <Providers>
                 <div className={"flex min-h-screen flex-col"}>
                     <div>

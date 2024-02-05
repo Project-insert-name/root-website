@@ -16,11 +16,13 @@ export function toFormatDateAndTime(date: string): { date: string; time: string 
         month: "long",
         day: "numeric",
         weekday: "short",
+        timeZone: "Europe/Oslo",
     })
     date = date[0].toUpperCase() + date.slice(1)
     const time = dateObj.toLocaleString("nb", {
         hour: "2-digit",
         minute: "2-digit",
+        timeZone: "Europe/Oslo",
     })
     return { date, time }
 }
@@ -42,6 +44,7 @@ export function toFormatDate(date: string): string | null {
         day: "numeric",
         weekday: "short",
         year: "numeric",
+        timeZone: "Europe/Oslo",
     })
     date = date[0].toUpperCase() + date.slice(1)
     return date
