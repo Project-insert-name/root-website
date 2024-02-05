@@ -65,6 +65,7 @@ export function toFormatTime(date: string): string | null {
     return dateObj.toLocaleString("nb", {
         hour: "2-digit",
         minute: "2-digit",
+        timeZone: "Europe/Oslo",
     })
 }
 
