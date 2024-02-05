@@ -55,7 +55,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
                 content="ff3j07lovsouc9oLEt871sodlGdi8VtTUeiitYbQs2Q"
             />
         </head>
-        <body className="bg-default-background relative">
+        <body className="relative bg-default-background">
             <Providers>
                 <div className={"flex min-h-screen flex-col"}>
                     <div>
