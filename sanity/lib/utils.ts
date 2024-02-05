@@ -2,6 +2,8 @@ import { remark } from "remark"
 import html from "remark-html"
 import strip from "strip-markdown"
 import type { EventType, MarkdownString } from "@/sanity/types"
+import { toPlainText } from "@portabletext/react"
+import { PortableTextBlock } from "sanity"
 
 /**
  * Konverterer markdown til html
@@ -21,6 +23,24 @@ export async function markdownToHTML(markdown?: MarkdownString): Promise<string>
 export async function markdownToText(markdown?: MarkdownString): Promise<string> {
     const file = await remark().use(strip).process(markdown)
     return file.toString()
+}
+
+/**
+ * Henter ut beskrivelsen på block format om den finnes, ellers henter den ut beskrivelsen på markdown format og konverterer den til ren tekst.
+ * @param event Eventet som beskrivelsen skal hentes fra
+ * @returns Beskrivelsen på ren tekst format. Dersom begge er undefined returneres en tom streng.
+ */
+export async function getDescription(event: {
+    description?: MarkdownString
+    description_block?: PortableTextBlock[]
+}): Promise<string> {
+    let description: string
+    if (event.description_block) {
+        description = toPlainText(event.description_block)
+    } else {
+        description = await markdownToText(event.description)
+    }
+    return description
 }
 
 /**
