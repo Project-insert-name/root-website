@@ -7,13 +7,14 @@ export const metadata: Metadata = {
     description: "Informasjon om Root Linjeforening",
 }
 
-const emptyMessage = "Finner ikke noe info"
+export const revalidate = 1800 // 30 min
 
-export const dynamic = "force-dynamic"
-
+/**
+ * Viser diverse informasjon om Root Linjeforeningen. Samt anne informasjon som er relevant for linjeforeningen.
+ */
 const OmOssPage: AsyncPage = async () => {
     const infoSider = await getAllInfoPages()
-    return <InfoPageContent infoSider={infoSider} emptyMessage={emptyMessage} />
+    return <InfoPageContent infoSider={infoSider} />
 }
 
 export default OmOssPage

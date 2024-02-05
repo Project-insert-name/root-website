@@ -1,12 +1,12 @@
-import { client } from "@/sanity/lib/client"
+import { cdnClient } from "@/sanity/lib/client"
 import type { ImageGallery } from "@/sanity/types"
 
 /**
- * Henter ut alle events fra sanity, sortert etter starttidspunkt
- * @returns En liste med alle events
+ * Henter ut alle gallerier fra sanity, sortert etter starttidspunkt
+ * @returns En liste med alle gallerier
  */
 export async function getAllImageGalleries(): Promise<ReadonlyArray<ImageGallery>> {
-    return await client.fetch('*[_type == "image_gallery"] | order(_createdAt desc)')
+    return cdnClient.fetch('*[_type == "image_gallery"] | order(_createdAt desc)')
 }
 
 /**
@@ -14,8 +14,8 @@ export async function getAllImageGalleries(): Promise<ReadonlyArray<ImageGallery
  * @param slug Slug til galleriet
  * @returns Bildegalleri av typen ImageGallery, eller null om det ikke finnes
  */
-export async function getImageGalleryBySlug(slug: string): Promise<ImageGallery | null> {
-    return await client.fetch(
+export async function getImageGalleryBySlug(slug: string): Promise<Readonly<ImageGallery> | null> {
+    return cdnClient.fetch(
         '*[_type == "image_gallery" && slug.current == $slug][0]{...,event->{slug}}',
         { slug },
     )

@@ -1,49 +1,95 @@
 import { ExternalLink, MailLink } from "@/components/link"
 import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/socials"
 import { Divider } from "@/components/divider"
-import { bigIconSize } from "@/components/icons/icon"
+import { bigIconSize, defaultIconSize, FlexIcon } from "@/components/icons/icon"
+import { BugAntIcon, ChatBubbleLeftEllipsisIcon, LinkIcon } from "@heroicons/react/24/outline"
+import { type ReactNode } from "react"
 
-const linkClasses = "hover:brightness-75 transition-all duration-100"
-
+/**
+ * Footeren som vises på bunnen av nettsiden.
+ * @param className - CSS klassenavn som skal legges til.
+ * @param props - Props som skal sendes til <footer> taggen.
+ */
 const Footer: Component = ({ className, ...props }) => (
-    <footer className={`absolute bottom-0 min-h-[100px] w-full ${className}`} {...props}>
-        <div className={"flex flex-col items-center justify-center"}>
-            <Divider />
-
-            <div className={"my-3 flex gap-5"}>
+    <footer className={`flex min-h-[100px] w-full flex-col ${className}`} {...props}>
+        <Divider className={"mt-5"} />
+        <div
+            className={
+                "m-2 flex flex-col-reverse justify-center gap-3 sm:flex-row sm:justify-around"
+            }>
+            <FooterSection
+                titleNode={
+                    <FlexIcon icon={<ChatBubbleLeftEllipsisIcon width={defaultIconSize} />}>
+                        <h4>Kontakt oss</h4>
+                    </FlexIcon>
+                }>
+                <MailLink mail={process.env.NEXT_PUBLIC_EMAIL} />
+                <Socials className={"transition-all duration-100 hover:brightness-75"} />
+            </FooterSection>
+            <FooterSection
+                titleNode={
+                    <FlexIcon icon={<LinkIcon width={defaultIconSize} />}>
+                        <h4>Lenker</h4>
+                    </FlexIcon>
+                }
+                className={"sm:items-end"}>
+                <ExternalLink href={"/studio"}>Sanity Studio</ExternalLink>
                 <ExternalLink
-                    title={"Facebook"}
-                    className={linkClasses}
-                    href={"https://www.facebook.com/RootLinjeforening"}>
-                    <Facebook width={bigIconSize} />
+                    href={`${process.env.NEXT_PUBLIC_GITHUB_URL}/issues`}
+                    className={"w-min"}>
+                    <FlexIcon
+                        icon={<BugAntIcon width={defaultIconSize} />}
+                        className={"text-inherit"}>
+                        Tilbakemeldinger
+                    </FlexIcon>
                 </ExternalLink>
-
-                <ExternalLink
-                    title={"Instagram"}
-                    className={linkClasses}
-                    href={"https://www.instagram.com/linjeforeningenroot/"}>
-                    <Instagram width={bigIconSize} />
-                </ExternalLink>
-
-                <ExternalLink
-                    title={"LinkedIn"}
-                    className={linkClasses}
-                    href={"https://www.linkedin.com/company/root-linjeforening"}>
-                    <LinkedIn width={bigIconSize} />
-                </ExternalLink>
-
-                <ExternalLink
-                    title={"GitHub"}
-                    className={linkClasses}
-                    href={"https://github.com/Project-insert-name/root-website"}>
-                    <GitHub width={bigIconSize} />
-                </ExternalLink>
-            </div>
-            <p>
-                Kontakt oss: <MailLink mail={process.env.NEXT_PUBLIC_EMAIL} />
-            </p>
+            </FooterSection>
         </div>
     </footer>
 )
 
 export default Footer
+
+interface FooterSectionProps extends ChildProps {
+    titleNode: ReactNode
+}
+
+const FooterSection: Component<FooterSectionProps> = ({ titleNode, children, className }) => (
+    <section
+        className={`mx-auto flex w-fit min-w-[200px] flex-col items-center sm:items-start ${className}`}>
+        <h4 className={"text-darkTitle"}>{titleNode}</h4>
+        {children}
+    </section>
+)
+
+const Socials: Component = ({ className }) => (
+    <div className={"my-3 flex gap-5"}>
+        <ExternalLink
+            title={"Facebook"}
+            className={className}
+            href={"https://www.facebook.com/RootLinjeforening"}>
+            <Facebook width={bigIconSize} />
+        </ExternalLink>
+
+        <ExternalLink
+            title={"Instagram"}
+            className={className}
+            href={"https://www.instagram.com/linjeforeningenroot/"}>
+            <Instagram width={bigIconSize} />
+        </ExternalLink>
+
+        <ExternalLink
+            title={"LinkedIn"}
+            className={className}
+            href={"https://www.linkedin.com/company/root-linjeforening"}>
+            <LinkedIn width={bigIconSize} />
+        </ExternalLink>
+
+        <ExternalLink
+            title={"GitHub"}
+            className={className}
+            href={process.env.NEXT_PUBLIC_GITHUB_URL}>
+            <GitHub width={bigIconSize} />
+        </ExternalLink>
+    </div>
+)
