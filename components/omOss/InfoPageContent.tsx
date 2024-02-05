@@ -24,7 +24,11 @@ export const InfoPageContent: Component<{
             <div>
                 {infoSider.map((side: InfoSide) => (
                     <section id={side._id} key={side._id} className={"mb-16 scroll-mt-44"}>
-                        <SingleInfoCard image={side.image} description={side.info} />
+                        <SingleInfoCard
+                            image={side.image}
+                            description={side.info}
+                            descriptionBlock={side.info_block}
+                        />
                     </section>
                 ))}
             </div>

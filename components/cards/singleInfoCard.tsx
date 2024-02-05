@@ -4,11 +4,15 @@ import { ExternalLinkButton } from "@/components/buttons/button"
 import Markdown from "@/components/markdown"
 import { ExternalLink } from "@/components/link"
 import type { MarkdownString, SanityImageObject } from "@/sanity/types"
+import { PortableText } from "@portabletext/react"
+import { components } from "@/sanity/lib/portabletext"
+import type { TypedObject } from "sanity"
 
 interface SingleInfoCardProps extends ChildProps {
     image?: SanityImageObject
     title?: string
     description?: MarkdownString
+    descriptionBlock?: TypedObject | TypedObject[]
     addressText?: string
     addressUrl?: string
     maxParticipants?: string
@@ -21,6 +25,7 @@ interface SingleInfoCardProps extends ChildProps {
  * @param image Bildet som vises på toppen av kortet. Bør være i 16:7 format. Hvis ikke vil bildet bli beskåret i høyden. Dersom bildet er for lavt kan det bli beskåret i bredden.
  * @param title Tittelen på kortet
  * @param description Beskrivelsen på kortet i Markdown format
+ * @param descriptionBlock Beskrivelsen på kortet i PortableText format
  * @param addressText Teksten som vises for adressen. Dersom denne ikke er satt vil ikke adressekomponenten vises.
  * @param addressUrl URLen til adressen. Dersom den er satt vil adressen bli en lenke.
  * @param maxParticipants Maks antall deltakere på arrangementet. Dersom denne ikke er satt vil ikke deltakerkomponenten vises.
@@ -33,6 +38,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
     image,
     title,
     description,
+    descriptionBlock,
     addressText,
     addressUrl,
     maxParticipants,
@@ -50,7 +56,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
         )}
 
         {title && (
-            <h1 className={"text-dark-title my-5 text-center text-2xl sm:text-4xl"}>{title}</h1>
+            <h1 className={"my-5 text-center text-2xl text-dark-title sm:text-4xl"}>{title}</h1>
         )}
         <div className={"px-5 sm:px-32"}>
             <div className={"flex-center flex-wrap gap-5"}>
@@ -61,7 +67,13 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
                 {children}
             </div>
 
-            <Markdown className={"my-5"} markdown={description} />
+            {descriptionBlock ? (
+                <div className={"prose my-5 max-w-none"}>
+                    <PortableText value={descriptionBlock} components={components} />
+                </div>
+            ) : (
+                <Markdown className={"prose my-5 max-w-none"} markdown={description} />
+            )}
         </div>
         {buttonUrl && (
             <div className={"flex justify-center"}>
