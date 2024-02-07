@@ -21,7 +21,7 @@ const Thumbnail: Component<
         <SanityImage
             image={image}
             alt={image.alt}
-            className={`rounded-xl object-cover ${className}`}
+            className={`rounded-xl object-contain ${className}`}
             fill
             sizes={"33vw"}
         />
