@@ -10,10 +10,16 @@ interface GalleryProps extends ChildProps {
     event?: { slug: SanitySlug }
 }
 
+/**
+ * Representerer en samling av bilder eller bildegallerier
+ * @param heading Tittelen på galleriet
+ * @param event Tilhørende event hvis det finnes
+ * @param children Innholdet i galleriet
+ */
 const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
     <div className={"mx-auto flex flex-col justify-center rounded-2xl bg-white py-5 sm:w-[1100px]"}>
         <div className="mx-5 flex flex-row justify-center gap-5">
-            <h1 className={"text-darkTitle"}>{heading}</h1>
+            <h1>{heading}</h1>
             {event && (
                 <LinkButton href={`/arrangement/${event.slug.current}`} title="Se tilhørende event">
                     Se event
@@ -26,21 +32,26 @@ const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
 
 export default Gallery
 
-export const GalleryItem: Component<ChildProps> = ({ children }) => (
-    <div className="flex overflow-hidden rounded-2xl shadow-md">{children}</div>
+/**
+ * Representerer et bildegalleri eller et enkelt bilde
+ * @param children Innholdet i galleriet
+ * @param className CSS-klassene til galleriet
+ */
+export const GalleryItem: Component<ChildProps> = ({ children, className }) => (
+    <div className={`${className} h-full w-full overflow-hidden rounded-2xl shadow-md`}>
+        {children}
+    </div>
 )
 
 export const GalleryBackButton: Component = () => (
-    <GalleryItem>
-        <Link
-            href={"/galleri/"}
-            title="Tilbake til gallerisamling"
-            className={
-                "flex h-full w-full justify-center bg-slate-100 focus:outline-rootBlue sm:aspect-square"
-            }>
+    <Link
+        href={"/galleri"}
+        title="Tilbake til gallerisamling"
+        className={"focus:!outline-root-primary rounded-2xl focus:outline sm:aspect-square"}>
+        <GalleryItem className={"flex-center bg-slate-100"}>
             <LeftArrowIcon width={75} />
-        </Link>
-    </GalleryItem>
+        </GalleryItem>
+    </Link>
 )
 
 export const GalleryImage: Component<{
@@ -50,8 +61,8 @@ export const GalleryImage: Component<{
 }> = ({ image, alt, title }) => (
     <SanityImage
         image={image}
-        alt={alt ?? ""}
-        title={title ?? ""}
+        alt={alt ?? "Bilde fra et av Root sine arrangementer"}
+        title={title}
         loading="lazy"
         className={"aspect-square w-full object-cover object-center"}
     />

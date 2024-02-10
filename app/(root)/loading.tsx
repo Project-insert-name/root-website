@@ -5,7 +5,7 @@ import { CircularProgressIndicator } from "@/components/suspense"
  * @see https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming
  */
 const Loading: Component = () => (
-    <div className={"flex items-center justify-center"}>
+    <div className={"flex-center"}>
         <CircularProgressIndicator aria-label={"Loading data"} />
     </div>
 )

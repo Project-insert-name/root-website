@@ -1,4 +1,4 @@
-import { ReactNode } from "react"
+import { type ReactNode } from "react"
 import {
     CalendarIcon,
     ClockIcon,
@@ -27,7 +27,7 @@ export const FlexIcon: Component<{ icon: ReactNode } & ChildProps> = ({
     className,
     ...props
 }) => (
-    <div className={`flex items-center gap-1 text-gray-700 ${className}`} {...props}>
+    <div className={`flex-row-center gap-1 text-gray-700 ${className}`} {...props}>
         <div>{icon}</div>
         {children}
     </div>

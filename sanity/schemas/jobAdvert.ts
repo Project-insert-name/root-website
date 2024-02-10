@@ -1,4 +1,4 @@
-import { defineField, defineType } from "@sanity-typed/types"
+import { defineArrayMember, defineField, defineType } from "@sanity-typed/types"
 import { BriefcaseIcon } from "@heroicons/react/24/outline"
 
 export default defineType({
@@ -38,10 +38,11 @@ export default defineType({
             validation: Rule => Rule.required(),
         }),
         defineField({
-            name: "description",
-            type: "markdown",
-            title: "Beskrivelse",
-            description: "Inkluder brødtekst med utdypende informasjon om stillingen",
+            name: "description_block",
+            title: "Fullstendig beskrivelse",
+            description: "Inkluder brødtekst med utdypende informasjon om eventet",
+            type: "array",
+            of: [defineArrayMember({ type: "block" })],
         }),
         defineField({
             name: "deadline",
@@ -70,6 +71,15 @@ export default defineType({
                     validation: Rule => Rule.required(),
                 }),
             ],
+        }),
+        defineField({
+            name: "description",
+            type: "markdown",
+            title: "Beskrivelse",
+            description: "Inkluder brødtekst med utdypende informasjon om stillingen",
+            deprecated: {
+                reason: "Bruk 'Fullstendig beskrivelse' over i stedet",
+            },
         }),
     ],
 })

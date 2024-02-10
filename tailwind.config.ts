@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss"
 import { nextui } from "@nextui-org/react"
+import colors from "tailwindcss/colors"
+import typography from "@tailwindcss/typography"
 
 /**
  * Definerer configurasjoner for TailwindCSS.
@@ -17,13 +19,15 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                rootBlue: "#1370a6",
-                rootBlueDark: "#0B4B6A",
-                defaultBg: "#F3F3F3",
-                darkTitle: "#3E3E3E",
+                "root-primary": "#1370A6",
+                "root-primary-dark": "#0B4B6A",
+                "root-secondary": colors.blue[500],
+                "default-background": "#F3F3F3",
+                "dark-title": "#3E3E3E",
                 bedpress: "#FFBA09",
                 social: "#09B5FF",
                 workshop: "#FF0961",
+                other: colors.gray[400],
             },
             maxWidth: {
                 initial: "initial",
@@ -34,6 +38,6 @@ const config: Config = {
         },
     },
     darkMode: "class",
-    plugins: [nextui()],
+    plugins: [nextui(), typography()],
 }
 export default config

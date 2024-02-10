@@ -1,40 +1,18 @@
-import { client } from "@/sanity/lib/client"
-import type { RootEvent, SanitySlug } from "@/sanity/types"
-
-/**
- * Henter ut alle events fra sanity, sortert etter starttidspunkt
- * @returns En liste med alle events
- */
-export async function getAllEvents(): Promise<ReadonlyArray<RootEvent>> {
-    return client.fetch('*[_type == "event"] | order(start_time asc)')
-}
-
-/**
- * Henter ut alle slugs som er tilknyttet events fra sanity
- * @returns En liste med alle slugs
- */
-export async function getAllEventSlugs(): Promise<ReadonlyArray<{ slug: SanitySlug }>> {
-    return client.fetch('*[_type == "event"]{slug}')
-}
-
-/**
- * Henter ut de neste eventene fra sanity, sortert etter starttidspunkt
- * @param limit Maks antall events som skal hentes ut
- * @returns En liste med de neste eventene
- */
-export async function getNextEvents(limit = 4): Promise<ReadonlyArray<RootEvent>> {
-    return getFutureEvents(limit)
-}
+import { cdnClient } from "@/sanity/lib/client"
+import type { RootEvent } from "@/sanity/types"
 
 /**
  * Henter ut en specifikk event fra sanity basert på slug
  * @param slug Slug til eventen
  * @returns RootEvent Eventet med den spesifikke slugen, eller null om den ikke finnes
  */
-export async function getEventBySlug(slug: string): Promise<RootEvent | null> {
-    return client.fetch('*[_type == "event" && slug.current == $slug][0]{..., gallery->{slug}}', {
-        slug,
-    })
+export async function getEventBySlug(slug: string): Promise<Readonly<RootEvent> | null> {
+    return cdnClient.fetch(
+        '*[_type == "event" && slug.current == $slug][0]{..., gallery->{slug}}',
+        {
+            slug,
+        },
+    )
 }
 
 interface PastAndFutureEvents {
@@ -48,7 +26,7 @@ interface PastAndFutureEvents {
  * @returns Et objekt som inneholder to lister, en med tidligere events og en med framtidige events
  */
 export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEvents> {
-    return client.fetch(
+    return cdnClient.fetch(
         `
         {
             "past": *[_type == "event" && start_time < now()] | order(start_time desc)[0...$limit]{..., gallery->{slug}},
@@ -72,7 +50,7 @@ export async function getFutureEvents( // TODO edge case: hvis det er flere even
     limit = 4,
     lastStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
-    return client.fetch(
+    return cdnClient.fetch(
         '*[_type == "event" && start_time >= now() && start_time > $last_start_time] | order(start_time asc)[0...$limit]',
         {
             limit,
@@ -94,7 +72,7 @@ export async function getPastEvents(
     limit = 4,
     lastStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
-    return client.fetch(
+    return cdnClient.fetch(
         '*[_type == "event" && start_time < now() && start_time < $last_start_time] | order(start_time desc)[0...$limit]',
         {
             limit,

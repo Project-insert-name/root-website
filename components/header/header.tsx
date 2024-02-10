@@ -18,7 +18,7 @@ import { usePathname } from "next/navigation"
 /**
  * Headeren på nettsiden. Inneholder logo og navigasjonsmeny.
  * Navignasjonsmenyen blir til en hamburgermeny på små skjermer.
- * Bugget med NextUI sin Navbar.
+ * Bygget med NextUI sin Navbar.
  * @see https://nextui.org/docs/components/navbar
  */
 const Header: Component = () => {
@@ -30,17 +30,16 @@ const Header: Component = () => {
             isMenuOpen={isMenuOpen}
             shouldHideOnScroll={true}
             // CSS for header komponenten
-            classNames={{ wrapper: ["pl-2 max-w-initial"] }}
-            className={
-                "z-101 overflow-hidden bg-gradient-to-r from-rootBlue via-rootBlue to-blue-500 drop-shadow-lg sm:h-20"
-            }>
+            classNames={{ wrapper: ["pl-0 max-w-initial"] }}
+            className={"header-gradient z-101 overflow-hidden drop-shadow-lg sm:h-20"}>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
                 <Link
                     href={"/"}
                     title={"Root linjeforening sin logo"}
-                    className={"relative z-20 focus:border-rootBlue"}>
+                    className={"relative z-20 pl-2 focus:outline focus:outline-root-primary"}>
                     <Image
+                        priority={true}
                         src={"/root-logo.svg"}
                         alt={"Logo for linjeforeningen root"}
                         // Bredde og høyde må settes i className også, for å unngå advarsler
@@ -57,7 +56,7 @@ const Header: Component = () => {
                         <Link
                             className={`${
                                 item.path === currentPath && "before:content-['/']"
-                            } w-full rounded-xl bg-gray-700/20 p-2 text-white hover:text-white focus:border-rootBlue`}
+                            } w-full rounded-xl bg-gray-700/20 p-2 text-white hover:text-white focus:!outline-white`}
                             href={item.path}
                             size={"lg"}>
                             {item.name}
@@ -66,7 +65,7 @@ const Header: Component = () => {
                 ))}
             </NavbarContent>
             {/*Hamburgermeny - Vises bare på små skjermer*/}
-            <NavbarContent className={"md:hidden"} justify={"end"}>
+            <NavbarContent className={"md:hidden"} justify={"end"} as={"div"}>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className={"text-white"}

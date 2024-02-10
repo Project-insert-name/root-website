@@ -49,16 +49,21 @@ export const viewport: Viewport = {
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
     <html lang="nb">
         <head>
+            {/*Gir tilgang til Google Search Console*/}
             <meta
                 name="google-site-verification"
                 content="ff3j07lovsouc9oLEt871sodlGdi8VtTUeiitYbQs2Q"
             />
         </head>
-        <body className="relative min-h-screen bg-defaultBg">
+        <body className="relative bg-default-background">
             <Providers>
-                <Header />
-                <main className="pb-28 sm:pt-2">{children}</main>
-                <Footer />
+                <div className={"flex min-h-screen flex-col"}>
+                    <div>
+                        <Header />
+                    </div>
+                    <main className="flex-grow sm:pt-2">{children}</main>
+                    <Footer />
+                </div>
             </Providers>
         </body>
     </html>
