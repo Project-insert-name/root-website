@@ -134,7 +134,7 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
                         key={image._key}
                         onClick={() => handleImageClick(index)}
                         className={
-                            "focus:outline-root-primary h-full w-full cursor-pointer rounded-2xl focus:outline"
+                            "h-full w-full cursor-pointer rounded-2xl focus:outline focus:outline-root-primary"
                         }>
                         <GalleryItem>
                             <GalleryImage image={image} alt={image.alt} />

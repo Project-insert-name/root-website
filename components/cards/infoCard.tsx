@@ -25,7 +25,7 @@ const InfoCard: Component<EventCardProps> = ({
         className={`grid content-between rounded-2xl border bg-white px-2 pb-2 shadow-lg sm:py-2 ${className}`}
         {...props}>
         <div>
-            <h2 className={"my-1 text-center text-darkTitle sm:my-2"}>{cardTitle}</h2>
+            <h2 className={"my-1 text-center text-dark-title sm:my-2"}>{cardTitle}</h2>
             <div>{children}</div>
         </div>
 
