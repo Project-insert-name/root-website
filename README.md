@@ -94,7 +94,7 @@ Se
 også [Krav til nettsiden](https://github.com/Project-insert-name/root-website-frontend/blob/main/Krav%20til%20nettsiden.md).
 
 > [!NOTE]
-> For mer info om Next.js og Sanity, se wiki eller dokumentasjonen til de respektive rammeverkene.
+> For mer info om Next.js og Sanity, se [wiki](https://github.com/Project-insert-name/root-website/wiki) eller dokumentasjonen til de respektive rammeverkene.
 
 ### Mappestruktur
 
