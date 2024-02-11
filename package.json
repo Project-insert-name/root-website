@@ -19,7 +19,7 @@
         "@sanity/client": "^6.8.0",
         "@sanity/image-url": "^1.0.2",
         "@sanity/vision": "^3.19.2",
-        "framer-motion": "^10.16.4",
+        "framer-motion": "^11.0.3",
         "groq": "^3.19.2",
         "ics": "^3.5.0",
         "next": "^14.1.0",
