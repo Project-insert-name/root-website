@@ -21,7 +21,7 @@
         "@sanity/vision": "^3.19.2",
         "framer-motion": "^11.0.3",
         "groq": "^3.19.2",
-        "ics": "^3.5.0",
+        "ics": "^3.7.2",
         "next": "^14.1.0",
         "next-sanity": "^6.0.1",
         "react": "^18.2.0",
