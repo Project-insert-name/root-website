@@ -47,7 +47,7 @@ export const GalleryBackButton: Component = () => (
     <Link
         href={"/galleri"}
         title="Tilbake til gallerisamling"
-        className={"focus:!outline-root-primary rounded-2xl focus:outline sm:aspect-square"}>
+        className={"rounded-2xl focus:outline focus:!outline-root-primary sm:aspect-square"}>
         <GalleryItem className={"flex-center bg-slate-100"}>
             <LeftArrowIcon width={75} />
         </GalleryItem>

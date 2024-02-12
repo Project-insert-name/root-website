@@ -1,4 +1,3 @@
-import SanityImage from "@/components/sanityImage"
 import { AttendeesIcon, bigIconSize, MapIcon } from "@/components/icons/icon"
 import { ExternalLinkButton } from "@/components/buttons/button"
 import Markdown from "@/components/markdown"
@@ -7,6 +6,7 @@ import type { MarkdownString, SanityImageObject } from "@/sanity/types"
 import { PortableText } from "@portabletext/react"
 import { components } from "@/sanity/lib/portabletext"
 import type { TypedObject } from "sanity"
+import ImageViewer from "@/components/imageViewer"
 
 interface SingleInfoCardProps extends ChildProps {
     image?: SanityImageObject
@@ -49,11 +49,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
 }) => (
     <div
         className={`container mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
-        {image?.asset && (
-            <div className={"relative aspect-[16/7] w-full"}>
-                <SanityImage image={image} alt={image.alt} fill className={"object-cover"} />
-            </div>
-        )}
+        {image?.asset && <ImageViewer image={image} />}
 
         {title && (
             <h1 className={"my-5 text-center text-2xl text-dark-title sm:text-4xl"}>{title}</h1>
