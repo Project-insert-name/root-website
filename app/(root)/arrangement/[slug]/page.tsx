@@ -1,4 +1,4 @@
-import { getEventBySlug } from "@/sanity/queries/event"
+import { defaultEventDuration, getEventBySlug } from "@/sanity/queries/event"
 import { isFuture, toDateTuple } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
@@ -98,7 +98,9 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
  */
 async function createIcsEvent(event: RootEvent): Promise<string | undefined> {
     let icsEvent: string | undefined = undefined
-    const end = event.end_time ? { end: toDateTuple(event.end_time) } : { duration: { hours: 2 } }
+    const end = event.end_time
+        ? { end: toDateTuple(event.end_time) }
+        : { duration: { hours: defaultEventDuration } }
     createEvent(
         {
             title: event.title,
