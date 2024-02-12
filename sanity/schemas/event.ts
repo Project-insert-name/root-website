@@ -109,14 +109,5 @@ export default defineType({
             title: "Lenke for påmelding",
             description: "Her kan du legge inn en lenke til påmeldingsskjemas",
         }),
-        defineField({
-            name: "description",
-            type: "markdown",
-            title: "Fullstendig beskrivelse",
-            description: "Inkluder brødtekst med utdypende informasjon om eventet",
-            deprecated: {
-                reason: "Bruk 'Fullstendig beskrivelse' over istedenfor",
-            },
-        }),
     ],
 })

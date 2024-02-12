@@ -5,10 +5,11 @@ import { notFound } from "next/navigation"
 import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
 import { createEvent } from "ics"
-import { getDescription, getEventTypeLabel } from "@/sanity/lib/utils"
+import { getEventTypeLabel } from "@/sanity/lib/utils"
 import type { RootEvent } from "@/sanity/types"
 import IcsButton from "@/components/buttons/icsButton"
 import { Date, Time } from "@/components/date"
+import { toPlainText } from "@portabletext/react"
 
 interface Params {
     slug: string
@@ -34,7 +35,6 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
     return (
         <SingleInfoCard
             title={event.title}
-            description={event.description}
             descriptionBlock={event.description_block}
             image={event.hero_image}
             maxParticipants={
@@ -85,7 +85,9 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
 
     return {
         title: `${event.title} | Root Linjeforening`,
-        description: await getDescription(event),
+        description: event.description_block
+            ? toPlainText(event.description_block)
+            : "Arrangement arrangert av Root Linjeforening",
     }
 }
 
@@ -96,13 +98,13 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
  * @returns En string på ics format
  * @see https://www.npmjs.com/package/ics
  */
-async function createIcsEvent(event: RootEvent): Promise<string | undefined> {
+function createIcsEvent(event: RootEvent): string | undefined {
     let icsEvent: string | undefined = undefined
 
     createEvent(
         {
             title: event.title,
-            description: await getDescription(event),
+            description: event.description_block ? toPlainText(event.description_block) : "",
             location: event.address_text,
             start: toDateTuple(event.start_time),
             duration: { hours: 2 },
