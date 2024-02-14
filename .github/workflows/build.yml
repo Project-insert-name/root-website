@@ -1,0 +1,27 @@
+# Installerer avhengigheter og bygger prosjektet
+# For mer informasjon: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI
+
+on:
+    pull_request:
+        branches: ["main"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v3
+              # https://pnpm.io/continuous-integration#github-actions
+            - uses: pnpm/action-setup@v3
+              with:
+                  version: 8
+            - name: Use Node.js 20.x
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 20.x
+                  cache: "pnpm"
+            - run: pnpm install
+            - run: pnpm build
+#            - run: pnpm test # Uncomment hvis det blir lagt til tester
