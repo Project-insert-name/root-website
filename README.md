@@ -68,6 +68,10 @@ Slik at prettier formatterer koden din automatisk når du lagrer.
 Gå til "Language & Frameworks -> JavaScript -> Prettier", sett configuration til automatic og kryss av for "Run on
 save".
 
+Pattern bør matche det som er satt i `package.json` i `format` scriptet.
+
+`{**/*,*}.{js,jsx,ts,tsx,json,yml,css,md}`
+
 ### Starte utviklingsserver
 
 Kjører i development mode på [http://localhost:3000](http://localhost:3000).
