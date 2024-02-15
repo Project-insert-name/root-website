@@ -42,12 +42,12 @@ jobs:
 
         steps:
             - name: Deploy to Remote Server
-        uses: appleboy/ssh-action@master
-        with:
-            host: ${{ secrets.REMOTE_SERVER_HOST }}
-            username: ${{ secrets.REMOTE_SERVER_USERNAME }}
-            key: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
-            script: |
-                cd root-web
-                docker-compose pull rootlinjeforening.no
-                docker-compose up -d
+            uses: appleboy/ssh-action@master
+            with:
+                host: ${{ secrets.REMOTE_SERVER_HOST }}
+                username: ${{ secrets.REMOTE_SERVER_USERNAME }}
+                key: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
+                script: |
+                    cd root-web
+                    docker-compose pull rootlinjeforening.no
+                    docker-compose up -d
