@@ -1,7 +1,7 @@
 import { defaultEventDuration, getEventBySlug } from "@/sanity/queries/event"
 import { isFuture, toDateTuple } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
 import { createEvent } from "ics"
@@ -22,6 +22,10 @@ export const revalidate = 30 // 30 sek
  * @param params Parametre fra URL
  */
 const EventPage: AsyncPage<Params> = async ({ params }) => {
+    if (params.slug.endsWith(".ics")) {
+        return redirect(`/api/arrangement/${params.slug}`)
+    }
+
     const event = await getEventBySlug(params.slug)
 
     if (!event) return notFound()
@@ -81,7 +85,7 @@ const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => (
 export async function generateMetadata({ params }: PageProps<Params>): Promise<Metadata> {
     const event = await getEventBySlug(params.slug)
 
-    if (!event) return notFound()
+    if (!event) return {}
 
     return {
         title: `${event.title} | Root Linjeforening`,
@@ -96,7 +100,7 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
  * @returns En string på ics format
  * @see https://www.npmjs.com/package/ics
  */
-async function createIcsEvent(event: RootEvent): Promise<string | undefined> {
+export async function createIcsEvent(event: RootEvent): Promise<string | undefined> {
     let icsEvent: string | undefined = undefined
     const end = event.end_time
         ? { end: toDateTuple(event.end_time) }
