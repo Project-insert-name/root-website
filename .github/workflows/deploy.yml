@@ -44,9 +44,9 @@ jobs:
             - name: Deploy to Remote Server
               uses: appleboy/ssh-action@master
               with:
-                  host: ${{ secrets.REMOTE_SERVER_HOST }}
-                  username: ${{ secrets.REMOTE_SERVER_USERNAME }}
-                  key: ${{ secrets.REMOTE_SERVER_SSH_KEY }}
+                  host: ${{ secrets.HOST }}
+                  username: ${{ secrets.USERNAME }}
+                  key: ${{ secrets.KEY }}
                   script: |
                       cd root-web
                       docker-compose pull rootlinjeforening.no
