@@ -1,1 +1,8 @@
-GET http://localhost:3000/api/arrangement/dnb-bedpress.ics
+### Hent en .ics fil for et enkelt arrangement
+GET {{url}}/api/arrangement/dnb-bedpress.ics
+
+### Hent en .ics fil for alle arrangementer
+GET {{url}}/api/arrangement
+
+### Hent en .ics fil for alle arrangementer i en kategori
+GET {{url}}/api/arrangement?type=bedpres

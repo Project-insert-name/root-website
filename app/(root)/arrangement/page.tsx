@@ -29,10 +29,10 @@ const EventsPage: AsyncPage = async () => {
                 className={className}
                 initial={future}
                 minEvents={nrOfEvents}
-                fetchMore={async (limit, lastEventStartTime) => {
+                fetchMore={async (limit, lastStartTime) => {
                     // Spesifiserer at denne funksjonen skal kjøres på serveren, selv om den blir kalt fra klienten.
                     "use server"
-                    return getFutureEvents(limit, lastEventStartTime)
+                    return getFutureEvents({ limit, lastStartTime })
                 }}
             />
             <EventCardPaginated
@@ -40,9 +40,9 @@ const EventsPage: AsyncPage = async () => {
                 className={className}
                 initial={past}
                 minEvents={nrOfEvents}
-                fetchMore={async (limit, lastEventStartTime) => {
+                fetchMore={async (limit, lastStartTime) => {
                     "use server"
-                    return getPastEvents(limit, lastEventStartTime)
+                    return getPastEvents(limit, lastStartTime)
                 }}
             />
         </div>

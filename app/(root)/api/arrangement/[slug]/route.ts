@@ -1,17 +1,22 @@
 import { getEventBySlug } from "@/sanity/queries/event"
-import { createIcsEvent } from "@/app/(root)/arrangement/[slug]/page"
+import { createIcsEvent } from "@/utils/ics"
 
 export const revalidate = 30 // 30 sek
 
-export async function GET(request: Request) {
-    if (!request.url.endsWith(".ics")) {
+interface Params {
+    params: {
+        slug: string
+    }
+}
+
+export async function GET({ params: { slug } }: Params): Promise<Response> {
+    if (!slug.endsWith(".ics")) {
         return Response.json(null, {
-            status: 500,
+            status: 400,
             statusText: "Invalid URL. Must end with .ics",
         })
     }
-    const paths = request.url.split("/")
-    const slug = paths[paths.length - 1].replace(".ics", "")
+    slug = slug.replace(".ics", "")
     const event = await getEventBySlug(slug)
 
     if (!event) {

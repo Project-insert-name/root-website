@@ -1,14 +1,13 @@
-import { defaultEventDuration, getEventBySlug } from "@/sanity/queries/event"
-import { isFuture, toDateTuple } from "@/utils/dateUtils"
+import { getEventBySlug } from "@/sanity/queries/event"
+import { isFuture } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound, redirect } from "next/navigation"
 import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
-import { createEvent } from "ics"
-import { getDescription, getEventTypeLabel } from "@/sanity/lib/utils"
-import type { RootEvent } from "@/sanity/types"
+import { getDescription } from "@/sanity/lib/utils"
 import IcsButton from "@/components/buttons/icsButton"
 import { Date, Time } from "@/components/date"
+import { createIcsEvent } from "@/utils/ics"
 
 interface Params {
     slug: string
@@ -91,38 +90,4 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
         title: `${event.title} | Root Linjeforening`,
         description: await getDescription(event),
     }
-}
-
-/**
- * Lager en string på ics format basert på et arrangement.
- * Dersom sluttidspunkt ikke er definert, settes varigheten til 2 timer.
- * @param event Arrangementet som skal konverteres til ics format
- * @returns En string på ics format
- * @see https://www.npmjs.com/package/ics
- */
-export async function createIcsEvent(event: RootEvent): Promise<string | undefined> {
-    let icsEvent: string | undefined = undefined
-    const end = event.end_time
-        ? { end: toDateTuple(event.end_time) }
-        : { duration: { hours: defaultEventDuration } }
-    createEvent(
-        {
-            title: event.title,
-            description: await getDescription(event),
-            location: event.address_text,
-            start: toDateTuple(event.start_time),
-            ...end,
-            url: `${process.env.NEXT_PUBLIC_BASE_URL}/arrangement/${event.slug.current}`,
-            organizer: { name: "Root Linjeforening", email: process.env.NEXT_PUBLIC_EMAIL },
-            categories: ["Root Linjeforening", "Arrangement", getEventTypeLabel(event.type)],
-        },
-        (error, value) => {
-            if (error) {
-                console.error(error)
-            } else {
-                icsEvent = value
-            }
-        },
-    )
-    return icsEvent
 }
