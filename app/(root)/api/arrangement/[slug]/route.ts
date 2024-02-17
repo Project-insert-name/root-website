@@ -9,7 +9,15 @@ interface Params {
     }
 }
 
-export async function GET({ params: { slug } }: Params): Promise<Response> {
+/**
+ * Henter et arrangement fra sanity og konverterer det til en ics fil.
+ * Dersom URL ikke ender med .ics, returneres en 400 feil.
+ * Hvis event ikke finnes, returneres en 404 feil.
+ * @param _ Request objektet
+ * @param slug Parametre fra URL, slugen til arrangementet. Inkluderer .ics
+ * @returns En response med ics filen, hvis alt gikk bra. Ellers en feil response.
+ */
+export async function GET(_: Request, { params: { slug } }: Params): Promise<Response> {
     if (!slug.endsWith(".ics")) {
         return Response.json(null, {
             status: 400,
@@ -30,6 +38,7 @@ export async function GET({ params: { slug } }: Params): Promise<Response> {
     return new Response(icsEvent, {
         headers: {
             "Content-Type": "text/calendar",
+            "Content-Disposition": `attachment; filename="${event.title}.ics"`,
         },
     })
 }

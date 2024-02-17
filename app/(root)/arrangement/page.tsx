@@ -32,7 +32,7 @@ const EventsPage: AsyncPage = async () => {
                 fetchMore={async (limit, lastStartTime) => {
                     // Spesifiserer at denne funksjonen skal kjøres på serveren, selv om den blir kalt fra klienten.
                     "use server"
-                    return getFutureEvents({ limit, lastStartTime })
+                    return getFutureEvents(limit, lastStartTime)
                 }}
             />
             <EventCardPaginated

@@ -52,28 +52,52 @@ export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEv
  * Ved å spesifisere lastStartTime så vil tidligere eventer bli filtrert bort.
  * @param limit Antall elementer som skal hentes ut
  * @param lastStartTime Tidspunktet til det siste eventet som ble hentet ut. Ved å la denne være tom vil alle neste eventer bli hentet ut fram til limit.
- * @param type Type event som skal hentes ut. Der type er "*" vil alle typer bli hentet ut. Default er "*"
  * @returns En liste med de neste eventene. Hvis ingen ble funnet, returneres en tom liste.
- * @example getFutureEvents({limit: 4, type: "bedpres", lastStartTime: events[events.length - 1].start_time}) // Henter de fire neste bedriftspresentasjonene
+ * @example getFutureEvents({limit: 4, lastStartTime: events[events.length - 1].start_time}) // Henter de fire neste bedriftspresentasjonene
  * @see https://www.sanity.io/docs/paginating-with-groq
  */
-export async function getFutureEvents({
+export async function getFutureEvents(
     // TODO edge case: hvis det er flere events med samme starttidspunkt, vil ikke alle bli hentet ut
     limit = 4,
     lastStartTime = "",
-    type = "*",
-} = {}): Promise<ReadonlyArray<RootEvent>> {
+): Promise<ReadonlyArray<RootEvent>> {
     return cdnClient.fetch(
         `
             *[
-                _type == "event" && type match $type && (defined(end_time) && end_time >= now() || !defined(end_time) && start_time >= $now) && start_time > $last_start_time
+                _type == "event" && (defined(end_time) && end_time >= now() || !defined(end_time) && start_time >= $now) && start_time > $last_start_time
             ] | order(start_time asc)[0...$limit]
         `,
         {
             limit,
             last_start_time: lastStartTime,
-            type,
             now: getTimeWithOffset(),
+        },
+    )
+}
+
+/**
+ * Henter ut eventer fra sanity fra et gitt tidspunkt og framover. Sortert etter starttidspunkt.
+ * Kan filtreres etter type og spesifisere antall eventer som skal hentes ut.
+ * @example getEventsFrom("2022-01-01T00:00:00Z", {limit: 5, type: "bedpres"}) // Henter de fem neste bedriftspresentasjonene fra 2022
+ * @param from Tidspunktet som eventene skal hentes fra. Default er nå.
+ * @param limit Antall elementer som skal hentes ut. Default er 10.
+ * @param type Typen event som skal hentes ut. Default er alle typer.
+ * @returns En liste med eventene som ble hentet ut. Hvis ingen ble funnet, returneres en tom liste.
+ */
+export async function getEventsFrom(
+    from = "now()",
+    { limit = 10, type = "*" } = {},
+): Promise<ReadonlyArray<RootEvent>> {
+    return cdnClient.fetch(
+        `
+            *[
+                _type == "event" && type match $type && start_time >= $from
+            ] | order(start_time asc)[0...$limit]
+        `,
+        {
+            limit,
+            from,
+            type,
         },
     )
 }

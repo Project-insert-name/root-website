@@ -6,3 +6,9 @@ GET {{url}}/api/arrangement
 
 ### Hent en .ics fil for alle arrangementer i en kategori
 GET {{url}}/api/arrangement?type=bedpres
+
+### Hent en .ics fil for alle arrangementer i en kategori fra et bestemt tidspunkt
+GET {{url}}/api/arrangement?type=bedpres&from=2024-01-01
+
+### Hent en .ics fil for alle arrangementer fra et bestemt tidspunkt
+GET {{url}}/api/arrangement?from=2024-01-01
