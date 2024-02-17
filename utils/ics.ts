@@ -8,6 +8,7 @@ import { toPlainText } from "@portabletext/react"
 /**
  * Lager en string på ics format basert på et arrangement.
  * Dersom sluttidspunkt ikke er definert, settes varigheten til 2 timer.
+ * Dersom den feiler, logges feilen og en tom string returneres.
  * @param event Arrangementet som skal konverteres til ics format
  * @returns En string på ics format
  * @see https://www.npmjs.com/package/ics
@@ -24,11 +25,18 @@ export async function createIcsEvent(event: RootEvent): Promise<string | undefin
     return icsEvent
 }
 
-export async function createIcsEvents(events: ReadonlyArray<RootEvent>): Promise<string> {
+/**
+ * Lager en string på ics format basert på en liste med arrangementer.
+ * Dersom den feiler, logges feilen og en tom string returneres.
+ * @param events Arrangementene som skal konverteres til ics format
+ * @returns En string på ics format
+ */
+export function createIcsEvents(events: ReadonlyArray<RootEvent>): string {
     let icsEvents = ""
     createEvents(events.map(getEventAttributes), (error, value) => {
         if (error) {
             console.error(error)
+            return ""
         } else {
             icsEvents += value
         }
