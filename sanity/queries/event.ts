@@ -2,6 +2,12 @@ import { cdnClient } from "@/sanity/lib/client"
 import type { RootEvent } from "@/sanity/types"
 
 /**
+ * Standard varighet for et event i antall timer.
+ * Brukes der det ikke er spesifisert en varighet.
+ */
+export const defaultEventDuration = 2
+
+/**
  * Henter ut en specifikk event fra sanity basert på slug
  * @param slug Slug til eventen
  * @returns RootEvent Eventet med den spesifikke slugen, eller null om den ikke finnes
@@ -29,11 +35,15 @@ export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEv
     return cdnClient.fetch(
         `
         {
-            "past": *[_type == "event" && start_time < now()] | order(start_time desc)[0...$limit]{..., gallery->{slug}},
-            "future": *[_type == "event" && start_time >= now()] | order(start_time asc)[0...$limit]
+            "past": *[
+                _type == "event" && (defined(end_time) && end_time < now() || !defined(end_time) && start_time < $now)
+            ] | order(start_time desc)[0...$limit]{..., gallery->{slug}},
+            "future": *[
+                _type == "event" && (defined(end_time) && end_time >= now() || !defined(end_time) && start_time >= $now)
+            ] | order(start_time asc)[0...$limit]
         }
     `,
-        { limit },
+        { limit, now: getTimeWithOffset() },
     )
 }
 
@@ -51,10 +61,15 @@ export async function getFutureEvents( // TODO edge case: hvis det er flere even
     lastStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
     return cdnClient.fetch(
-        '*[_type == "event" && start_time >= now() && start_time > $last_start_time] | order(start_time asc)[0...$limit]',
+        `
+            *[
+                _type == "event" && (defined(end_time) && end_time >= now() || !defined(end_time) && start_time >= $now) && start_time > $last_start_time
+            ] | order(start_time asc)[0...$limit]
+        `,
         {
             limit,
             last_start_time: lastStartTime,
+            now: getTimeWithOffset(),
         },
     )
 }
@@ -73,10 +88,26 @@ export async function getPastEvents(
     lastStartTime = "",
 ): Promise<ReadonlyArray<RootEvent>> {
     return cdnClient.fetch(
-        '*[_type == "event" && start_time < now() && start_time < $last_start_time] | order(start_time desc)[0...$limit]',
+        `
+            *[
+                _type == "event" && (defined(end_time) && end_time < now() || !defined(end_time) && start_time < $now)) && start_time < $last_start_time
+            ] | order(start_time desc)[0...$limit]
+        `,
         {
             limit,
             last_start_time: lastStartTime,
+            now: getTimeWithOffset(),
         },
     )
+}
+
+/**
+ * Setter en offset på tiden basert på defaultEventDuration.
+ * Det er for å kunne hente ut eventer som er i gang eller har nettopp startet.
+ * @returns En ISO 8601 formatert streng med tiden som er offset med defaultEventDuration timer.
+ */
+function getTimeWithOffset(): string {
+    const date = new Date()
+    date.setHours(date.getHours() - defaultEventDuration)
+    return date.toISOString()
 }
