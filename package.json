@@ -30,7 +30,7 @@
         "remark": "^15.0.1",
         "remark-html": "^16.0.1",
         "sanity": "^3.27.1",
-        "sanity-plugin-markdown": "^4.1.0",
+        "sanity-plugin-markdown": "^4.1.1",
         "strip-markdown": "^6.0.0",
         "styled-components": "^5.3.11"
     },
