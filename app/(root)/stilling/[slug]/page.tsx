@@ -4,7 +4,7 @@ import { notFound } from "next/navigation"
 import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
 import { Date } from "@/components/date"
-import { getDescription } from "@/sanity/lib/utils"
+import { toPlainText } from "@portabletext/react"
 
 interface Params {
     slug: string
@@ -25,7 +25,6 @@ const JobAdvertPage: AsyncPage<Params> = async ({ params }) => {
     return (
         <SingleInfoCard
             title={ad.title}
-            description={ad.description}
             descriptionBlock={ad.description_block}
             image={ad.image}
             maxParticipants={
@@ -71,6 +70,6 @@ export async function generateMetadata(props: PageProps<Params>): Promise<Metada
 
     return {
         title: `${ad.title} | Root Linjeforening`,
-        description: await getDescription(ad),
+        description: ad.description_block ? toPlainText(ad.description_block) : "Stillingsannonse",
     }
 }

@@ -72,14 +72,5 @@ export default defineType({
                 }),
             ],
         }),
-        defineField({
-            name: "description",
-            type: "markdown",
-            title: "Beskrivelse",
-            description: "Inkluder brødtekst med utdypende informasjon om stillingen",
-            deprecated: {
-                reason: "Bruk 'Fullstendig beskrivelse' over i stedet",
-            },
-        }),
     ],
 })

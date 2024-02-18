@@ -45,14 +45,5 @@ export default defineType({
             type: "array",
             of: [defineArrayMember({ type: "block" })],
         }),
-        defineField({
-            name: "info",
-            type: "markdown",
-            title: "Informasjonen",
-            description: "Tesket som blir vist på siden",
-            deprecated: {
-                reason: "Bruk heller 'Informasjon' over",
-            },
-        }),
     ],
 })
