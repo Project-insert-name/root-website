@@ -67,4 +67,5 @@ interface ButtonProps extends ChildProps {
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
     type?: "button" | "submit" | "reset"
     disabled?: boolean
+    endContent?: React.ReactNode
 }

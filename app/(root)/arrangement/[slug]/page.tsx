@@ -5,9 +5,9 @@ import { notFound, redirect } from "next/navigation"
 import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
 import { getDescription } from "@/sanity/lib/utils"
-import IcsButton from "@/components/buttons/icsButton"
 import { Date, Time } from "@/components/date"
 import { createIcsEvent } from "@/utils/ics"
+import AddToCalendarDropdown from "@/components/dropdown/addToCalendarDropdown"
 
 interface Params {
     slug: string
@@ -50,10 +50,8 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
             <>
                 <TimeAndDate startTime={event.start_time} />
                 {icsEvent && (
-                    <IcsButton
-                        filename={event.title}
-                        data={icsEvent}
-                        aria-label={"Legg til arrangement i kalender"}
+                    <AddToCalendarDropdown
+                        eventUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/api/arrangement/ical/${params.slug}`}
                     />
                 )}
             </>

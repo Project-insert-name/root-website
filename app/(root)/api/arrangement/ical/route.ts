@@ -10,7 +10,7 @@ export const revalidate = 30 // 30 sek
  * - type: Typen arrangementer som skal hentes ut. Default er alle typer.
  * - from: Tidspunktet som arrangementene skal hentes fra. Default er nå.
  * - limit: Antall arrangementer som skal hentes ut. Default er 100.
- * @example fetch("/api/arrangement?type=bedpres&from=2022-01-01&limit=5") // Henter de fem neste bedriftspresentasjonene fra 2022
+ * @example fetch("/api/arrangement/ical?type=bedpres&from=2022-01-01&limit=5") // Henter de fem neste bedriftspresentasjonene fra 2022
  * @param request Request objektet som inneholder query parametre og annen informasjon
  * @returns En response med ics filen, hvis alt gikk bra. Ellers en feil response.
  */
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest): Promise<Response> {
         type: type ?? undefined,
     })
 
-    const icsEvents = await createIcsEvents(events)
+    const icsEvents = createIcsEvents(events)
     return new Response(icsEvents, {
         headers: {
             "Content-Type": "text/calendar",

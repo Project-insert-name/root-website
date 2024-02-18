@@ -18,13 +18,6 @@ interface Params {
  * @returns En response med ics filen, hvis alt gikk bra. Ellers en feil response.
  */
 export async function GET(_: Request, { params: { slug } }: Params): Promise<Response> {
-    if (!slug.endsWith(".ics")) {
-        return Response.json(null, {
-            status: 400,
-            statusText: "Invalid URL. Must end with .ics",
-        })
-    }
-    slug = slug.replace(".ics", "")
     const event = await getEventBySlug(slug)
 
     if (!event) {

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import type { EventType } from "@/sanity/types"
 import Select from "@/components/select/select"
 import { getEventTypeLabel } from "@/sanity/lib/utils"
+import AddToCalendarDropdown from "@/components/dropdown/addToCalendarDropdown"
 
 const CalendarModal = () => (
     <Modal
@@ -26,14 +27,15 @@ interface FormData {
 
 const ModalContent = () => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+    const apiUrl = `${baseUrl}/api/arrangement/ical`
 
     const [isEdit, setIsEdit] = useState(false)
 
-    const [url, setUrl] = useState(`${baseUrl}/api/arrangement`)
+    const [url, setUrl] = useState(apiUrl)
 
     function onFormChange(form: FormData) {
         const type = form.type ? `type=${form.type}` : ""
-        setUrl(`${baseUrl}/api/arrangement?${type}`)
+        setUrl(`${apiUrl}?${type}`)
     }
 
     return (
@@ -44,6 +46,9 @@ const ModalContent = () => {
                 <Switch onChange={setIsEdit}>Rediger</Switch>
                 {isEdit && <CalendarForm onChange={onFormChange} />}
                 <Snippet>{url}</Snippet>
+                <div>
+                    <AddToCalendarDropdown eventUrl={url} />
+                </div>
             </div>
         </div>
     )
