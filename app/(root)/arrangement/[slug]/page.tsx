@@ -4,8 +4,12 @@ import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound, redirect } from "next/navigation"
 import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
-import { getDescription } from "@/sanity/lib/utils"
+import { createEvent } from "ics"
+import { getEventTypeLabel } from "@/sanity/lib/utils"
+import type { RootEvent } from "@/sanity/types"
+import IcsButton from "@/components/buttons/icsButton"
 import { Date, Time } from "@/components/date"
+import { toPlainText } from "@portabletext/react"
 import { createIcsEvent } from "@/utils/ics"
 import AddToCalendarDropdown from "@/components/dropdown/addToCalendarDropdown"
 
@@ -37,7 +41,6 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
     return (
         <SingleInfoCard
             title={event.title}
-            description={event.description}
             descriptionBlock={event.description_block}
             image={event.hero_image}
             maxParticipants={
@@ -86,6 +89,8 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
 
     return {
         title: `${event.title} | Root Linjeforening`,
-        description: await getDescription(event),
+        description: event.description_block
+            ? toPlainText(event.description_block)
+            : "Arrangement arrangert av Root Linjeforening",
     }
 }

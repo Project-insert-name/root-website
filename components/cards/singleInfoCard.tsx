@@ -1,8 +1,7 @@
 import { AttendeesIcon, bigIconSize, MapIcon } from "@/components/icons/icon"
 import { ExternalLinkButton } from "@/components/buttons/button"
-import Markdown from "@/components/markdown"
 import { ExternalLink } from "@/components/link"
-import type { MarkdownString, SanityImageObject } from "@/sanity/types"
+import type { SanityImageObject } from "@/sanity/types"
 import { PortableText } from "@portabletext/react"
 import { components } from "@/sanity/lib/portabletext"
 import type { TypedObject } from "sanity"
@@ -11,7 +10,6 @@ import ImageViewer from "@/components/imageViewer"
 interface SingleInfoCardProps extends ChildProps {
     image?: SanityImageObject
     title?: string
-    description?: MarkdownString
     descriptionBlock?: TypedObject | TypedObject[]
     addressText?: string
     addressUrl?: string
@@ -24,7 +22,6 @@ interface SingleInfoCardProps extends ChildProps {
  * En komponent som viser et enkelt arrangement, stillingsannonse eller innlegg.
  * @param image Bildet som vises på toppen av kortet. Bør være i 16:7 format. Hvis ikke vil bildet bli beskåret i høyden. Dersom bildet er for lavt kan det bli beskåret i bredden.
  * @param title Tittelen på kortet
- * @param description Beskrivelsen på kortet i Markdown format
  * @param descriptionBlock Beskrivelsen på kortet i PortableText format
  * @param addressText Teksten som vises for adressen. Dersom denne ikke er satt vil ikke adressekomponenten vises.
  * @param addressUrl URLen til adressen. Dersom den er satt vil adressen bli en lenke.
@@ -37,7 +34,6 @@ interface SingleInfoCardProps extends ChildProps {
 const SingleInfoCard: Component<SingleInfoCardProps> = ({
     image,
     title,
-    description,
     descriptionBlock,
     addressText,
     addressUrl,
@@ -63,12 +59,10 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
                 {children}
             </div>
 
-            {descriptionBlock ? (
+            {descriptionBlock && (
                 <div className={"prose my-5 max-w-none"}>
                     <PortableText value={descriptionBlock} components={components} />
                 </div>
-            ) : (
-                <Markdown className={"prose my-5 max-w-none"} markdown={description} />
             )}
         </div>
         {buttonUrl && (
