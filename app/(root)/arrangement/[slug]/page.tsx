@@ -1,4 +1,4 @@
-import { getEventBySlug } from "@/sanity/queries/event"
+import { defaultEventDuration, getEventBySlug } from "@/sanity/queries/event"
 import { isFuture, toDateTuple } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
 import { notFound } from "next/navigation"
@@ -93,21 +93,23 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
 
 /**
  * Lager en string på ics format basert på et arrangement.
- * Siden vi ikke har informasjon om sluttidspunkt eller varighet, settes varigheten til 2 timer.
+ * Dersom sluttidspunkt ikke er definert, settes varigheten til 2 timer.
  * @param event Arrangementet som skal konverteres til ics format
  * @returns En string på ics format
  * @see https://www.npmjs.com/package/ics
  */
 function createIcsEvent(event: RootEvent): string | undefined {
     let icsEvent: string | undefined = undefined
-
+    const end = event.end_time
+        ? { end: toDateTuple(event.end_time) }
+        : { duration: { hours: defaultEventDuration } }
     createEvent(
         {
             title: event.title,
             description: event.description_block ? toPlainText(event.description_block) : "",
             location: event.address_text,
             start: toDateTuple(event.start_time),
-            duration: { hours: 2 },
+            ...end,
             url: `${process.env.NEXT_PUBLIC_BASE_URL}/arrangement/${event.slug.current}`,
             organizer: { name: "Root Linjeforening", email: process.env.NEXT_PUBLIC_EMAIL },
             categories: ["Root Linjeforening", "Arrangement", getEventTypeLabel(event.type)],
