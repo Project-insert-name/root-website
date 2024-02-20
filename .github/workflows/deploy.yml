@@ -49,5 +49,5 @@ jobs:
                   key: ${{ secrets.KEY }}
                   script: |
                       cd root-web
-                      docker-compose pull rootlinjeforening.no
-                      docker-compose up -d
+                      docker compose pull rootlinjeforening.no
+                      docker compose up -d
