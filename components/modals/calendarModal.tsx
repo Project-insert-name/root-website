@@ -29,15 +29,16 @@ const ModalContent = () => {
 
     const [params, setParams] = useState<Record<string, string>>({})
 
-    const url = useMemo(
-        () =>
+    const url = useMemo(() => {
+        params["from"] = new Date().toISOString()
+        return (
             apiUrl +
             "?" +
             Object.entries(params)
                 .map(([key, value]) => `${key}=${value}`)
-                .join("&"),
-        [params],
-    )
+                .join("&")
+        )
+    }, [params])
 
     function onFormChange(form: FormData) {
         let record: Record<string, string> = {}
@@ -52,7 +53,7 @@ const ModalContent = () => {
     return (
         <div>
             <h6>Abonnere på framtidige arrangementer</h6>
-            <p className={"text-gray-600"}>Kopier lenken og lim den inn i din kalender</p>
+            <p className={"text-gray-600"}>Velg type arrangement du vil abonnere på</p>
             <div className={"flex flex-col gap-5 pt-2"}>
                 <CalendarForm onChange={onFormChange} />
                 <div>
