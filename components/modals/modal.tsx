@@ -39,7 +39,9 @@ const Modal: Component<ModalProps> = ({ label, size, modalTitle, modalContent, .
                 <ModalContent>
                     {onClose => (
                         <>
-                            <ModalHeader className="flex flex-col gap-1">{modalTitle}</ModalHeader>
+                            <ModalHeader className={"flex flex-col gap-1"} as={"h5"}>
+                                {modalTitle}
+                            </ModalHeader>
                             <ModalBody>{modalContent}</ModalBody>
                             <ModalFooter>
                                 <Button onClick={onClose} aria-label={"Lukk dialogboks"}>

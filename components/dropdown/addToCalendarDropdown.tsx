@@ -1,6 +1,6 @@
 "use client"
 import Dropdown, { type Key } from "@/components/dropdown/dropdown"
-import { ArrowDownOnSquareIcon } from "@heroicons/react/24/outline"
+import { ChevronDownIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
 
 const subscribeItems = [
@@ -20,6 +20,7 @@ const subscribeItems = [
         getLink: (url: string) => url.replace(/(http:\/\/)|(https:\/\/)/, "webcal://"),
     },
     { key: "ics", label: "iCal-fil", getLink: (url: string) => url },
+    { key: "copy", label: "Kopier lenke", getLink: (url: string) => url },
 ]
 
 interface AddToCalendarDropdownProps extends DefaultProps {
@@ -28,6 +29,10 @@ interface AddToCalendarDropdownProps extends DefaultProps {
 
 const AddToCalendarDropdown: Component<AddToCalendarDropdownProps> = ({ eventUrl, ...props }) => {
     function onAction(key: Key) {
+        if (key === "copy") {
+            void navigator.clipboard.writeText(eventUrl)
+            return
+        }
         const link = subscribeItems.find(item => item.key === key)?.getLink(eventUrl)
         if (link) {
             window.open(link, "_blank")
@@ -37,7 +42,7 @@ const AddToCalendarDropdown: Component<AddToCalendarDropdownProps> = ({ eventUrl
     return (
         <Dropdown
             buttonProps={{
-                endContent: <ArrowDownOnSquareIcon width={defaultIconSize} />,
+                endContent: <ChevronDownIcon width={defaultIconSize} />,
                 "aria-label": "Legg til i kalender",
             }}
             label={"Legg til i kalender"}

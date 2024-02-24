@@ -1,8 +1,6 @@
 "use client"
 import Modal from "@/components/modals/modal"
-import Snippet from "@/components/snippet"
-import Switch from "@/components/switches/switch"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import type { EventType } from "@/sanity/types"
 import Select from "@/components/select/select"
 import { getEventTypeLabel } from "@/sanity/lib/utils"
@@ -29,13 +27,26 @@ const ModalContent = () => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
     const apiUrl = `${baseUrl}/api/arrangement/ical`
 
-    const [isEdit, setIsEdit] = useState(false)
+    const [params, setParams] = useState<Record<string, string>>({})
 
-    const [url, setUrl] = useState(apiUrl)
+    const url = useMemo(
+        () =>
+            apiUrl +
+            "?" +
+            Object.entries(params)
+                .map(([key, value]) => `${key}=${value}`)
+                .join("&"),
+        [params],
+    )
 
     function onFormChange(form: FormData) {
-        const type = form.type ? `type=${form.type}` : ""
-        setUrl(`${apiUrl}?${type}`)
+        let record: Record<string, string> = {}
+        for (const [key, value] of Object.entries(form)) {
+            if (value) {
+                record[key] = value?.toString() ?? ""
+            }
+        }
+        setParams(record)
     }
 
     return (
@@ -43,9 +54,7 @@ const ModalContent = () => {
             <h6>Abonnere på framtidige arrangementer</h6>
             <p className={"text-gray-600"}>Kopier lenken og lim den inn i din kalender</p>
             <div className={"flex flex-col gap-5 pt-2"}>
-                <Switch onChange={setIsEdit}>Rediger</Switch>
-                {isEdit && <CalendarForm onChange={onFormChange} />}
-                <Snippet>{url}</Snippet>
+                <CalendarForm onChange={onFormChange} />
                 <div>
                     <AddToCalendarDropdown eventUrl={url} />
                 </div>

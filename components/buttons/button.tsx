@@ -12,7 +12,7 @@ const buttonClassNames = "min-w-[100px] bg-root-primary p-3 text-white"
  * @param props Props som skal sendes til button-elementet, blant annet onClick, disabled, etc.
  */
 export const Button: Component<ButtonProps> = ({ children, className, ...props }) => (
-    <_Button radius={"full"} className={`${buttonClassNames} ${className}`} {...props}>
+    <_Button radius={"lg"} className={`${buttonClassNames} ${className}`} {...props}>
         {children}
     </_Button>
 )
@@ -31,7 +31,7 @@ export const LinkButton: Component<{ href?: string } & ChildProps> = ({
 }) => (
     <_Button
         as={Link}
-        radius={"full"}
+        radius={"lg"}
         className={`flex-center hover:text-white ${buttonClassNames} ${className}`}
         {...props}>
         {children}
@@ -54,7 +54,7 @@ export const ExternalLinkButton: Component<{ href?: string; iconWidth?: number }
 }) => (
     <_Button
         as={Link}
-        radius={"full"}
+        radius={"lg"}
         className={`flex-center gap-2 hover:text-white ${buttonClassNames} ${className}`}
         isExternal
         showAnchorIcon

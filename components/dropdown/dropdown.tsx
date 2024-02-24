@@ -30,7 +30,11 @@ const Dropdown: Component<DropdownProps> = ({
     return (
         <_Dropdown className={className} {...props}>
             <DropdownTrigger>
-                <Button variant={"solid"} className={"bg-root-primary text-white"} {...buttonProps}>
+                <Button
+                    variant={"solid"}
+                    radius={"lg"}
+                    className={"bg-root-primary text-white"}
+                    {...buttonProps}>
                     {label}
                 </Button>
             </DropdownTrigger>
