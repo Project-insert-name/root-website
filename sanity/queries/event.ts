@@ -53,7 +53,7 @@ export async function getPastAndFutureEvents(limit = 6): Promise<PastAndFutureEv
  * @param limit Antall elementer som skal hentes ut
  * @param lastStartTime Tidspunktet til det siste eventet som ble hentet ut. Ved å la denne være tom vil alle neste eventer bli hentet ut fram til limit.
  * @returns En liste med de neste eventene. Hvis ingen ble funnet, returneres en tom liste.
- * @example getFutureEvents({limit: 4, lastStartTime: events[events.length - 1].start_time}) // Henter de fire neste bedriftspresentasjonene
+ * @example getFutureEvents(4, events[events.length - 1].start_time) // Henter de fire neste bedriftspresentasjonene
  * @see https://www.sanity.io/docs/paginating-with-groq
  */
 export async function getFutureEvents(
