@@ -1,20 +1,15 @@
-"use client"
+import Studio from "@/app/(sanity)/studio/[[...index]]/studio"
 
 /**
- * This route is responsible for the built-in authoring environment using Sanity Studio.
- * All routes under your studio path is handled by this file using Next.js' catch-all routes:
- * https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes
- *
- * You can learn more about the next-sanity package here:
- * https://github.com/sanity-io/next-sanity
+ * Sikrer at siden blir statisk generert under bygging.
+ * @see https://github.com/sanity-io/next-sanity/tree/main?tab=readme-ov-file#studio-route-with-app-router
  */
+export const dynamic: Dynamic = "force-static"
 
-import { NextStudio } from "next-sanity/studio"
-import config from "../../../../sanity.config"
-
-const StudioPage: Page = () => {
-    // @ts-ignore ikke støttet av @Sanity-typed
-    return <NextStudio config={config} />
-}
+/**
+ * Viser Sanity Studio.
+ * @see https://github.com/sanity-io/next-sanity/tree/main?tab=readme-ov-file#studio-route-with-app-router
+ */
+const StudioPage: Page = () => <Studio />
 
 export default StudioPage
