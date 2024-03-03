@@ -25,8 +25,8 @@ const className = "sm:w-[550px] w-full mx-1 h-min"
 const EventsPage: AsyncPage = async () => {
     const { past, future } = await getPastAndFutureEvents(nrOfEvents)
     return (
-        <div className={"px-10 pt-3"}>
-            <ButtonGroup>
+        <div className={"pt-3 sm:px-10"}>
+            <ButtonGroup className={"px-1 pb-3 sm:pb-0"}>
                 <CalendarModal />
             </ButtonGroup>
             <div className={"flex flex-wrap items-baseline justify-center gap-5 sm:p-5"}>

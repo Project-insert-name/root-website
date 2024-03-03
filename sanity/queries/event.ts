@@ -134,7 +134,7 @@ export async function getPastEvents(
  * Det er for å kunne hente ut eventer som er i gang eller har nettopp startet.
  * @returns En ISO 8601 formatert streng med tiden som er offset med defaultEventDuration timer.
  */
-function getTimeWithOffset(): string {
+export function getTimeWithOffset(): string {
     const date = new Date()
     date.setHours(date.getHours() - defaultEventDuration)
     return date.toISOString()

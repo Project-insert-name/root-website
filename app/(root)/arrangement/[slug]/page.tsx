@@ -22,7 +22,7 @@ export const revalidate = 30 // 30 sek
  */
 const EventPage: AsyncPage<Params> = async ({ params }) => {
     if (params.slug.endsWith(".ics")) {
-        return redirect(`/api/arrangement/${params.slug}`)
+        return redirect(`/api/arrangement/ical/${params.slug.replace(".ics", "")}`)
     }
 
     const event = await getEventBySlug(params.slug)

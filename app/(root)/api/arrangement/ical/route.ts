@@ -1,5 +1,5 @@
 import { type NextRequest } from "next/server"
-import { getEventsFrom } from "@/sanity/queries/event"
+import { getEventsFrom, getTimeWithOffset } from "@/sanity/queries/event"
 import { createIcsEvents } from "@/utils/ics"
 
 export const revalidate = 30 // 30 sek
@@ -17,7 +17,7 @@ export const revalidate = 30 // 30 sek
 export async function GET(request: NextRequest): Promise<Response> {
     const params = request.nextUrl.searchParams
     const type = params.get("type")
-    const time = params.get("from") ?? new Date().toISOString()
+    const time = params.get("from") ?? getTimeWithOffset()
     const limit = params.get("limit")
 
     const events = await getEventsFrom(time, {

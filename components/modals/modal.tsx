@@ -34,6 +34,7 @@ const Modal: Component<ModalProps> = ({ label, size, modalTitle, modalContent, .
                 isOpen={isOpen}
                 onClose={closeModal}
                 size={size}
+                placement={"center"}
                 classNames={{ wrapper: ["z-[150]"], backdrop: ["z-[150]"] }}
                 {...props}>
                 <ModalContent>
