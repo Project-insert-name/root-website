@@ -17,6 +17,9 @@ const config: Config = {
         "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
+        fontFamily: {
+            "cascadia-code": ["Cascadia Code", "monospace"],
+        },
         extend: {
             colors: {
                 "root-primary": "#1370A6",
