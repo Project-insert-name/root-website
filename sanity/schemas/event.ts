@@ -50,7 +50,18 @@ export default defineType({
             name: "start_time",
             type: "datetime",
             title: "Tidspunkt",
+            description: "Starttidspunkt for arrangementet",
             validation: Rule => Rule.required(),
+        }),
+        defineField({
+            name: "end_time",
+            type: "datetime",
+            title: "Sluttidspunkt",
+            description: "La stå tom hvis arrangementet ikke har en fast slutt",
+            validation: Rule =>
+                Rule.min(Rule.valueOfField("start_time")).error(
+                    "Sluttiden må være etter starttiden",
+                ),
         }),
         defineField({
             name: "max_participants",
@@ -62,6 +73,10 @@ export default defineType({
             type: "datetime",
             title: "Påmeldingsfrist",
             description: "Påmeldingsfrist for arrangementet. La stå tom for ingen frist",
+            validation: Rule =>
+                Rule.max(Rule.valueOfField("start_time")).warning(
+                    "Påmeldingsfristen bør være før starttiden",
+                ),
         }),
         defineField({
             name: "address_text",
@@ -108,15 +123,6 @@ export default defineType({
             type: "url",
             title: "Lenke for påmelding",
             description: "Her kan du legge inn en lenke til påmeldingsskjemas",
-        }),
-        defineField({
-            name: "description",
-            type: "markdown",
-            title: "Fullstendig beskrivelse",
-            description: "Inkluder brødtekst med utdypende informasjon om eventet",
-            deprecated: {
-                reason: "Bruk 'Fullstendig beskrivelse' over istedenfor",
-            },
         }),
     ],
 })
