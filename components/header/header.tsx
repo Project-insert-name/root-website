@@ -33,19 +33,19 @@ const Header: Component = () => {
             classNames={{ wrapper: ["pl-0 max-w-initial"] }}
             className={"header-gradient z-101 overflow-hidden drop-shadow-lg sm:h-20"}>
             <NavbarBrand>
-                <div className={"logo-backdrop z-10"} />
+                {/*<div className={"logo-backdrop z-10"} />*/}
                 <Link
                     href={"/"}
-                    title={"Root linjeforening sin logo"}
-                    className={"relative z-20 pl-2 focus:outline focus:outline-root-primary"}>
+                    title={"Root linjeforening logo"}
+                    className={
+                        "relative z-20 h-20 w-52 pl-2 focus:outline focus:outline-root-primary"
+                    }>
                     <Image
                         priority={true}
-                        src={"/root-logo.svg"}
+                        src={"/new-logo/logo-uten-tekst.svg"}
                         alt={"Logo for linjeforeningen root"}
-                        // Bredde og høyde må settes i className også, for å unngå advarsler
-                        className={"h-[200px] w-[200px]"}
-                        width={200}
-                        height={200}
+                        sizes={"33vw"}
+                        fill
                     />
                 </Link>
             </NavbarBrand>
