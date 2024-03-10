@@ -2,8 +2,11 @@
 import Dropdown, { type Key } from "@/components/dropdown/dropdown"
 import { ChevronDownIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
+import { useMemo } from "react"
 
-const subscribeItems = [
+type CalendarKey = "google" | "outlook" | "apple" | "ics" | "copy"
+
+const subscribeItems: { key: CalendarKey; label: string; getLink: (url: string) => string }[] = [
     {
         key: "google",
         label: "Google Kalender",
@@ -25,15 +28,25 @@ const subscribeItems = [
 
 interface AddToCalendarDropdownProps extends DefaultProps {
     eventUrl: string
+    restrict?: CalendarKey[]
 }
 
-const AddToCalendarDropdown: Component<AddToCalendarDropdownProps> = ({ eventUrl, ...props }) => {
+const AddToCalendarDropdown: Component<AddToCalendarDropdownProps> = ({
+    eventUrl,
+    restrict,
+    ...props
+}) => {
+    const items = useMemo(
+        () => subscribeItems.filter(item => !restrict || restrict?.includes(item.key)),
+        [restrict],
+    )
+
     function onAction(key: Key) {
         if (key === "copy") {
             void navigator.clipboard.writeText(eventUrl)
             return
         }
-        const link = subscribeItems.find(item => item.key === key)?.getLink(eventUrl)
+        const link = items.find(item => item.key === key)?.getLink(eventUrl)
         if (link) {
             window.open(link, "_blank")
         }
@@ -46,7 +59,7 @@ const AddToCalendarDropdown: Component<AddToCalendarDropdownProps> = ({ eventUrl
                 "aria-label": "Legg til i kalender",
             }}
             label={"Legg til i kalender"}
-            items={subscribeItems}
+            items={items}
             onAction={onAction}
             {...props}
         />
