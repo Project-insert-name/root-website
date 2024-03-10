@@ -30,7 +30,7 @@
     .logo-backdrop {
         height: calc(100% * 2);
         @apply w-64 rounded-r-full bg-white sm:w-80;
-        @apply absolute -left-10 -top-14;
+        @apply absolute -left-14 -top-14;
     }
 
     .header-gradient {
