@@ -82,7 +82,7 @@ export const SingleEventWide: Component<RootEvent & DefaultProps> = ({
             <EventMarker type={type} />
             <div>
                 <Link href={`arrangement/${slug.current}`}>
-                    <h6 className={"font-mono text-root-primary"}>{title}</h6>
+                    <h6 className={"text-root-primary dark:text-root-secondary"}>{title}</h6>
                 </Link>
                 <p>{getEventTypeLabel(type)}</p>
                 <div className={"flex flex-col gap-2 sm:flex-row"}>

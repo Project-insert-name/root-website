@@ -1,4 +1,5 @@
 import { type ReactNode } from "react"
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card"
 
 interface EventCardProps extends ChildProps {
     cardTitle: string
@@ -21,16 +22,13 @@ const InfoCard: Component<EventCardProps> = ({
     bottom,
     ...props
 }) => (
-    <div
-        className={`grid content-between rounded-2xl border bg-white px-2 pb-2 shadow-lg sm:py-2 ${className}`}
-        {...props}>
-        <div>
-            <h2 className={"my-1 text-center text-dark-title sm:my-2"}>{cardTitle}</h2>
-            <div>{children}</div>
-        </div>
-
-        <div>{bottom}</div>
-    </div>
+    <Card className={`sm:py-2 ${className}`} classNames={{ header: "p-0" }} {...props}>
+        <CardHeader>
+            <h2 className={"mx-auto text-dark-title dark:text-white sm:my-2"}>{cardTitle}</h2>
+        </CardHeader>
+        <CardBody>{children}</CardBody>
+        <CardFooter>{bottom}</CardFooter>
+    </Card>
 )
 
 export default InfoCard
