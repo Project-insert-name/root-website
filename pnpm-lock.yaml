@@ -24,8 +24,8 @@ dependencies:
     specifier: ^1.0.2
     version: 1.0.2
   '@sanity/vision':
-    specifier: ^3.19.2
-    version: 3.29.1(@babel/runtime@7.23.9)(@codemirror/lint@6.5.0)(@codemirror/state@6.4.0)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.2.1)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+    specifier: ^3.32.0
+    version: 3.32.0(@babel/runtime@7.23.9)(@codemirror/lint@6.5.0)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.2.1)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
   framer-motion:
     specifier: ^11.0.3
     version: 11.0.5(react-dom@18.2.0)(react@18.2.0)
@@ -3805,8 +3805,8 @@ packages:
       '@types/uuid': 8.3.4
       uuid: 8.3.2
 
-  /@sanity/vision@3.29.1(@babel/runtime@7.23.9)(@codemirror/lint@6.5.0)(@codemirror/state@6.4.0)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.2.1)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8):
-    resolution: {integrity: sha512-xBQy0haGbTqz+Nhqo6zCv1elEApef3jai9Wke85vNaAg2NnTKePVkjW2vhvyTUnnL5ztT5gckhovcypvP1B9mw==}
+  /@sanity/vision@3.32.0(@babel/runtime@7.23.9)(@codemirror/lint@6.5.0)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.2.1)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8):
+    resolution: {integrity: sha512-3rrzjpXAXeGKPF5Caj8p2DG5EZDhpfRVhYqC6XPObRgAiTFMcYLgTQzNAGOl15FrjOB7eRUyiXQWzv49FVQrJQ==}
     peerDependencies:
       react: ^18
       styled-components: ^5.2 || ^6
@@ -3816,6 +3816,7 @@ packages:
       '@codemirror/lang-javascript': 6.2.1
       '@codemirror/language': 6.10.1
       '@codemirror/search': 6.5.6
+      '@codemirror/state': 6.4.0
       '@codemirror/view': 6.24.0
       '@juggle/resize-observer': 3.4.0
       '@lezer/highlight': 1.2.0
@@ -3834,7 +3835,6 @@ packages:
     transitivePeerDependencies:
       - '@babel/runtime'
       - '@codemirror/lint'
-      - '@codemirror/state'
       - '@codemirror/theme-one-dark'
       - '@lezer/common'
       - codemirror
