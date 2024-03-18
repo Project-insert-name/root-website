@@ -1,5 +1,5 @@
 import { ExternalLink, MailLink } from "@/components/link"
-import { Facebook, GitHub, Instagram, LinkedIn } from "@/components/icons/socials"
+import { Facebook, GitHub, Instagram, LinkedIn, Discord } from "@/components/icons/socials"
 import { Divider } from "@/components/divider"
 import { bigIconSize, defaultIconSize, FlexIcon } from "@/components/icons/icon"
 import { BugAntIcon, ChatBubbleLeftEllipsisIcon, LinkIcon } from "@heroicons/react/24/outline"
@@ -76,6 +76,13 @@ const Socials: Component = ({ className }) => (
             className={className}
             href={"https://www.instagram.com/linjeforeningenroot/"}>
             <Instagram width={bigIconSize} />
+        </ExternalLink>
+
+        <ExternalLink
+            title={"Discord"}
+            className={className}
+            href={"https://discord.gg/RVkj2Xyt92"}>
+            <Discord width={bigIconSize} />
         </ExternalLink>
 
         <ExternalLink
