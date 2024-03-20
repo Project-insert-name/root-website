@@ -23,7 +23,7 @@ export default function manifest(): MetadataRoute.Manifest {
         orientation: "any",
         icons: [
             {
-                src: "/icon.ico",
+                src: "/icon.svg",
                 sizes: "any",
                 type: "image/x-icon",
             },

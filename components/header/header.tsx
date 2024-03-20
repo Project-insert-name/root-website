@@ -36,16 +36,15 @@ const Header: Component = () => {
                 <div className={"logo-backdrop z-10"} />
                 <Link
                     href={"/"}
-                    title={"Root linjeforening sin logo"}
-                    className={"relative z-20 pl-2 focus:outline focus:outline-root-primary"}>
+                    title={"Root linjeforening logo"}
+                    className={"relative z-20 h-20 w-48 focus:outline focus:outline-root-primary"}>
                     <Image
                         priority={true}
-                        src={"/root-logo.svg"}
+                        className={"translate-y-2 scale-125 object-contain sm:scale-150"}
+                        src={"/new-logo/Logo uten bakgrunn/logo - til hvit bakgrunn.png"}
                         alt={"Logo for linjeforeningen root"}
-                        // Bredde og høyde må settes i className også, for å unngå advarsler
-                        className={"h-[200px] w-[200px]"}
-                        width={200}
-                        height={200}
+                        sizes={"33vw"}
+                        fill
                     />
                 </Link>
             </NavbarBrand>

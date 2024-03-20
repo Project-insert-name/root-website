@@ -1,6 +1,7 @@
 "use client"
 
 import { NextUIProvider } from "@nextui-org/react"
+import { ThemeProvider } from "next-themes"
 import { type ReactNode } from "react"
 
 /**
@@ -9,6 +10,10 @@ import { type ReactNode } from "react"
  * @param children Innholdet som skal rendres i komponenten
  * @see https://nextui.org/docs/frameworks/nextjs
  */
-export function Providers({ children }: { children: ReactNode }) {
-    return <NextUIProvider>{children}</NextUIProvider>
-}
+export const Providers = ({ children }: { children: ReactNode }) => (
+    <NextUIProvider>
+        <ThemeProvider attribute={"class"} defaultTheme={"light"}>
+            {children}
+        </ThemeProvider>
+    </NextUIProvider>
+)

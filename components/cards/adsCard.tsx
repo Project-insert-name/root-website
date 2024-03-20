@@ -59,7 +59,7 @@ export const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
     <div className={`mx-2 my-5 justify-between gap-3 ${className}`}>
         <div>
             <Link href={`stilling/${slug.current}`}>
-                <h6 className={"font-mono text-root-primary"}>{title}</h6>
+                <h6 className={"text-root-primary dark:text-root-secondary"}>{title}</h6>
             </Link>
 
             <DateIcon>{deadline ? <Date deadline={deadline} /> : <p>Løpende opptak</p>}</DateIcon>
