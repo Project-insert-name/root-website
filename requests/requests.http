@@ -1,0 +1,14 @@
+### Hent en .ics fil for et enkelt arrangement
+GET {{url}}/api/arrangement/ical/dnb-bedpress
+
+### Hent en .ics fil for alle arrangementer
+GET {{url}}/api/arrangement/ical
+
+### Hent en .ics fil for alle arrangementer i en kategori
+GET {{url}}/api/arrangement/ical?type=bedpres
+
+### Hent en .ics fil for alle arrangementer i en kategori fra et bestemt tidspunkt
+GET {{url}}/api/arrangement/ical?type=bedpres&from=2024-01-01
+
+### Hent en .ics fil for alle arrangementer fra et bestemt tidspunkt
+GET {{url}}/api/arrangement/ical?from=2024-01-01
