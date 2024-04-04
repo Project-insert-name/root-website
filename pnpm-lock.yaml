@@ -4,102 +4,104 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-dependencies:
-  '@heroicons/react':
-    specifier: ^2.1.1
-    version: 2.1.1(react@18.2.0)
-  '@nextui-org/react':
-    specifier: ^2.2.9
-    version: 2.2.9(@types/react@18.2.56)(framer-motion@11.0.5)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.2.0)(tailwindcss@3.4.1)
-  '@portabletext/react':
-    specifier: ^3.0.11
-    version: 3.0.11(react@18.2.0)
-  '@sanity/asset-utils':
-    specifier: ^1.3.0
-    version: 1.3.0
-  '@sanity/client':
-    specifier: ^6.8.0
-    version: 6.13.3
-  '@sanity/image-url':
-    specifier: ^1.0.2
-    version: 1.0.2
-  '@sanity/vision':
-    specifier: ^3.19.2
-    version: 3.29.1(@babel/runtime@7.23.9)(@codemirror/lint@6.5.0)(@codemirror/state@6.4.0)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.2.1)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
-  framer-motion:
-    specifier: ^11.0.3
-    version: 11.0.5(react-dom@18.2.0)(react@18.2.0)
-  groq:
-    specifier: ^3.19.2
-    version: 3.29.1
-  ics:
-    specifier: ^3.7.2
-    version: 3.7.2
-  next:
-    specifier: ^14.1.0
-    version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
-  next-sanity:
-    specifier: ^6.0.1
-    version: 6.1.4(@sanity/client@6.13.3)(@sanity/icons@2.10.2)(@sanity/types@3.29.1)(@sanity/ui@1.9.3)(next@14.1.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8)
-  react:
-    specifier: ^18.2.0
-    version: 18.2.0
-  react-dom:
-    specifier: ^18.2.0
-    version: 18.2.0(react@18.2.0)
-  react-use-keypress:
-    specifier: ^1.3.1
-    version: 1.3.1(react@18.2.0)
-  sanity:
-    specifier: ^3.27.1
-    version: 3.29.1(@types/node@20.11.19)(@types/react@18.2.56)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
-  styled-components:
-    specifier: ^6.1.8
-    version: 6.1.8(react-dom@18.2.0)(react@18.2.0)
+importers:
 
-devDependencies:
-  '@sanity-typed/types':
-    specifier: ^6.3.2
-    version: 6.3.2(@portabletext/types@2.0.8)(sanity@3.29.1)(typescript@5.2.2)
-  '@tailwindcss/typography':
-    specifier: ^0.5.10
-    version: 0.5.10(tailwindcss@3.4.1)
-  '@types/node':
-    specifier: ^20.9.0
-    version: 20.11.19
-  '@types/react':
-    specifier: ^18.2.37
-    version: 18.2.56
-  '@types/react-dom':
-    specifier: ^18.2.15
-    version: 18.2.19
-  autoprefixer:
-    specifier: ^10.4.16
-    version: 10.4.17(postcss@8.4.35)
-  eslint:
-    specifier: ^8.53.0
-    version: 8.56.0
-  eslint-config-next:
-    specifier: ^14.1.0
-    version: 14.1.0(eslint@8.56.0)(typescript@5.2.2)
-  eslint-config-prettier:
-    specifier: ^9.1.0
-    version: 9.1.0(eslint@8.56.0)
-  postcss:
-    specifier: ^8.4.31
-    version: 8.4.35
-  prettier:
-    specifier: ^3.0.3
-    version: 3.2.5
-  prettier-plugin-tailwindcss:
-    specifier: ^0.5.7
-    version: 0.5.11(prettier@3.2.5)
-  tailwindcss:
-    specifier: ^3.4.1
-    version: 3.4.1
-  typescript:
-    specifier: ~5.2.2
-    version: 5.2.2
+  .:
+    dependencies:
+      '@heroicons/react':
+        specifier: ^2.1.1
+        version: 2.1.1(react@18.2.0)
+      '@nextui-org/react':
+        specifier: ^2.2.9
+        version: 2.2.9(@types/react@18.2.56)(framer-motion@11.0.5)(react-dom@18.2.0)(react@18.2.0)(tailwind-variants@0.2.0)(tailwindcss@3.4.1)
+      '@portabletext/react':
+        specifier: ^3.0.11
+        version: 3.0.11(react@18.2.0)
+      '@sanity/asset-utils':
+        specifier: ^1.3.0
+        version: 1.3.0
+      '@sanity/client':
+        specifier: ^6.8.0
+        version: 6.13.3
+      '@sanity/image-url':
+        specifier: ^1.0.2
+        version: 1.0.2
+      '@sanity/vision':
+        specifier: ^3.19.2
+        version: 3.29.1(@babel/runtime@7.23.9)(@codemirror/lint@6.5.0)(@codemirror/state@6.4.0)(@codemirror/theme-one-dark@6.1.2)(@lezer/common@1.2.1)(codemirror@6.0.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+      framer-motion:
+        specifier: ^11.0.3
+        version: 11.0.5(react-dom@18.2.0)(react@18.2.0)
+      groq:
+        specifier: ^3.19.2
+        version: 3.29.1
+      ics:
+        specifier: ^3.7.2
+        version: 3.7.2
+      next:
+        specifier: ^14.1.0
+        version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)
+      next-sanity:
+        specifier: ^6.0.1
+        version: 6.1.4(@sanity/client@6.13.3)(@sanity/icons@2.10.2)(@sanity/types@3.29.1)(@sanity/ui@1.9.3)(next@14.1.0)(react@18.2.0)(sanity@3.29.1)(styled-components@6.1.8)
+      react:
+        specifier: ^18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-use-keypress:
+        specifier: ^1.3.1
+        version: 1.3.1(react@18.2.0)
+      sanity:
+        specifier: ^3.27.1
+        version: 3.29.1(@types/node@20.11.19)(@types/react@18.2.56)(react-dom@18.2.0)(react@18.2.0)(styled-components@6.1.8)
+      styled-components:
+        specifier: ^6.1.8
+        version: 6.1.8(react-dom@18.2.0)(react@18.2.0)
+    devDependencies:
+      '@sanity-typed/types':
+        specifier: ^6.3.2
+        version: 6.3.2(@portabletext/types@2.0.8)(sanity@3.29.1)(typescript@5.2.2)
+      '@tailwindcss/typography':
+        specifier: ^0.5.10
+        version: 0.5.10(tailwindcss@3.4.1)
+      '@types/node':
+        specifier: ^20.9.0
+        version: 20.11.19
+      '@types/react':
+        specifier: ^18.2.37
+        version: 18.2.56
+      '@types/react-dom':
+        specifier: ^18.2.15
+        version: 18.2.19
+      autoprefixer:
+        specifier: ^10.4.16
+        version: 10.4.17(postcss@8.4.35)
+      eslint:
+        specifier: ^8.53.0
+        version: 8.56.0
+      eslint-config-next:
+        specifier: ^14.1.0
+        version: 14.1.0(eslint@8.56.0)(typescript@5.2.2)
+      eslint-config-prettier:
+        specifier: ^9.1.0
+        version: 9.1.0(eslint@8.56.0)
+      postcss:
+        specifier: ^8.4.31
+        version: 8.4.35
+      prettier:
+        specifier: ^3.0.3
+        version: 3.2.5
+      prettier-plugin-tailwindcss:
+        specifier: ^0.5.7
+        version: 0.5.11(prettier@3.2.5)
+      tailwindcss:
+        specifier: ^3.4.1
+        version: 3.4.1
+      typescript:
+        specifier: ~5.2.2
+        version: 5.2.2
 
 packages:
 
@@ -4133,7 +4135,7 @@ packages:
   /@vercel/stega@0.1.0:
     resolution: {integrity: sha512-5b0PkOJsFBX5alChuIO3qpkt5vIZBevzLPhUQ1UP8UzVjL3F1VllnZxp/thfD8R5ol7D7WHkgZHIjdUBX4tDpQ==}
 
-  /@vitejs/plugin-react@4.2.1(vite@4.5.2):
+  /@vitejs/plugin-react@4.2.1(vite@4.5.3):
     resolution: {integrity: sha512-oojO9IDc4nCUUi8qIR11KoQm0XFFLIwsRBwHRR4d/88IWghn1y6ckz/bJ8GHDCsYEJee8mDzqtJxh15/cisJNQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
@@ -4144,7 +4146,7 @@ packages:
       '@babel/plugin-transform-react-jsx-source': 7.23.3(@babel/core@7.23.9)
       '@types/babel__core': 7.20.5
       react-refresh: 0.14.0
-      vite: 4.5.2(@types/node@20.11.19)
+      vite: 4.5.3(@types/node@20.11.19)
     transitivePeerDependencies:
       - supports-color
 
@@ -7836,7 +7838,7 @@ packages:
       '@types/speakingurl': 13.0.6
       '@types/tar-stream': 3.1.3
       '@types/use-sync-external-store': 0.0.5
-      '@vitejs/plugin-react': 4.2.1(vite@4.5.2)
+      '@vitejs/plugin-react': 4.2.1(vite@4.5.3)
       archiver: 6.0.1
       arrify: 1.0.1
       async-mutex: 0.4.1
@@ -7910,7 +7912,7 @@ packages:
       use-device-pixel-ratio: 1.1.2(react@18.2.0)
       use-hot-module-reload: 1.0.3(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
-      vite: 4.5.2(@types/node@20.11.19)
+      vite: 4.5.3(@types/node@20.11.19)
       yargs: 17.7.2
     transitivePeerDependencies:
       - '@types/node'
@@ -8760,8 +8762,8 @@ packages:
       spdx-correct: 3.2.0
       spdx-expression-parse: 3.0.1
 
-  /vite@4.5.2(@types/node@20.11.19):
-    resolution: {integrity: sha512-tBCZBNSBbHQkaGyhGCDUGqeo2ph8Fstyp6FMSvTtsXeZSPpSMGlviAOav2hxVTqFcx8Hj/twtWKsMJXNY0xI8w==}
+  /vite@4.5.3(@types/node@20.11.19):
+    resolution: {integrity: sha512-kQL23kMeX92v3ph7IauVkXkikdDRsYMGTVl5KY2E9OY4ONLvkHf04MDTbnfo6NKxZiDLWzVpP5oTa8hQD8U3dg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
