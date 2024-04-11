@@ -31,7 +31,7 @@ export const LinkButton: Component<{ href?: string } & ChildProps> = ({
 }) => (
     <_Button
         as={Link}
-        className={`flex-center hover:text-white ${buttonClassNames} ${className}`}
+        className={`flex-center !text-white hover:text-white ${buttonClassNames} ${className}`}
         {...props}>
         {children}
     </_Button>

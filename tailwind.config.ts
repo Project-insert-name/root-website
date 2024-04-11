@@ -22,6 +22,7 @@ const config: Config = {
         },
         extend: {
             colors: {
+                "root-light": "#44b2e3",
                 "root-primary": "#1370A6",
                 "root-primary-dark": "#0B4B6A",
                 "root-secondary": colors.blue[500],

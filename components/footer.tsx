@@ -57,7 +57,7 @@ interface FooterSectionProps extends ChildProps {
 const FooterSection: Component<FooterSectionProps> = ({ titleNode, children, className }) => (
     <section
         className={`mx-auto flex w-fit min-w-[200px] flex-col items-center sm:items-start ${className}`}>
-        <h4 className={"text-darkTitle"}>{titleNode}</h4>
+        <h4>{titleNode}</h4>
         {children}
     </section>
 )

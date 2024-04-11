@@ -53,7 +53,7 @@ a[role="button"] {
 
 .link,
 a {
-    @apply text-root-primary no-underline hover:text-root-primary-dark;
+    @apply text-root-primary dark:text-root-light no-underline hover:text-root-primary-dark;
 }
 
 /*
@@ -77,23 +77,23 @@ br {
 }
 
 h1 {
-    @apply text-4xl font-bold text-dark-title;
+    @apply text-4xl font-bold light:text-dark-title;
 }
 
 h2 {
-    @apply text-3xl font-bold text-dark-title;
+    @apply text-3xl font-bold light:text-dark-title;
 }
 
 h3 {
-    @apply text-2xl font-bold text-dark-title;
+    @apply text-2xl font-bold light:text-dark-title;
 }
 
 h4 {
-    @apply text-xl font-bold text-dark-title;
+    @apply text-xl font-bold light:text-dark-title;
 }
 
 h5 {
-    @apply text-lg font-bold text-dark-title;
+    @apply text-lg font-bold light:text-dark-title;
 }
 
 h6 {
