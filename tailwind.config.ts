@@ -26,6 +26,7 @@ const config: Config = {
                 "root-primary-dark": "#0B4B6A",
                 "root-secondary": colors.blue[500],
                 "default-background": "#F3F3F3",
+                "default-dark-background": "#0a0a12",
                 "dark-title": "#3E3E3E",
                 bedpress: "#FFBA09",
                 social: "#09B5FF",

@@ -55,7 +55,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
                 content="ff3j07lovsouc9oLEt871sodlGdi8VtTUeiitYbQs2Q"
             />
         </head>
-        <body className="font-cascadia-code relative bg-default-background dark:bg-gray-950 dark:text-white">
+        <body className="dark:bg-default-dark-background relative bg-default-background font-cascadia-code dark:text-white">
             <Providers>
                 <div className={"flex min-h-screen flex-col"}>
                     <div>

@@ -12,7 +12,7 @@ import { type ReactNode } from "react"
  */
 export const Providers = ({ children }: { children: ReactNode }) => (
     <NextUIProvider>
-        <ThemeProvider attribute={"class"} defaultTheme={"light"}>
+        <ThemeProvider attribute={"class"} defaultTheme={"dark"}>
             {children}
         </ThemeProvider>
     </NextUIProvider>
