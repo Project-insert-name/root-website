@@ -30,8 +30,10 @@ const ImageGalleryListPage: AsyncPage = async () => {
                                 title={gallery.title}
                                 alt={gallery.images?.[0].alt}
                             />
-                            <div className="m-2 flex w-full justify-center text-black">
-                                <h3>{gallery.title}</h3>
+                            <div className="m-2 flex w-full justify-center">
+                                <h3 className={"text-dark-title dark:text-white"}>
+                                    {gallery.title}
+                                </h3>
                             </div>
                         </GalleryItem>
                     </Link>

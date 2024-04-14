@@ -94,7 +94,7 @@ const Socials: Component = ({ className }) => (
 
         <ExternalLink
             title={"GitHub"}
-            className={className}
+            className={`${className} dark:fill-white`}
             href={process.env.NEXT_PUBLIC_GITHUB_URL}>
             <GitHub width={bigIconSize} />
         </ExternalLink>

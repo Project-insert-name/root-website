@@ -6,6 +6,7 @@ import { PortableText } from "@portabletext/react"
 import { components } from "@/sanity/lib/portabletext"
 import type { TypedObject } from "sanity"
 import ImageViewer from "@/components/imageViewer"
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card"
 
 interface SingleInfoCardProps extends ChildProps {
     image?: SanityImageObject
@@ -43,14 +44,12 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
     className,
     children,
 }) => (
-    <div
-        className={`container mx-auto overflow-hidden rounded-xl bg-white pb-5 sm:w-[1000px] ${className}`}>
+    <Card
+        className={`container mx-auto overflow-hidden rounded-xl pb-5 sm:w-[1000px] ${className}`}>
         {image?.asset && <ImageViewer image={image} />}
+        {title && <h1 className={"my-5 text-center text-2xl sm:text-4xl"}>{title}</h1>}
 
-        {title && (
-            <h1 className={"my-5 text-center text-2xl text-dark-title sm:text-4xl"}>{title}</h1>
-        )}
-        <div className={"px-5 sm:px-32"}>
+        <CardBody className={"px-5 sm:px-32"}>
             <div className={"flex-center flex-wrap gap-5"}>
                 {addressText && <Address address={addressText} url={addressUrl} />}
                 {maxParticipants && (
@@ -64,15 +63,15 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
                     <PortableText value={descriptionBlock} components={components} />
                 </div>
             )}
-        </div>
+        </CardBody>
         {buttonUrl && (
-            <div className={"flex justify-center"}>
+            <CardFooter className={"flex justify-center"}>
                 <ExternalLinkButton href={buttonUrl} aria-label={`Ekstern lenke til ${buttonUrl}`}>
                     {buttonText}
                 </ExternalLinkButton>
-            </div>
+            </CardFooter>
         )}
-    </div>
+    </Card>
 )
 
 export default SingleInfoCard
