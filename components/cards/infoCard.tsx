@@ -27,7 +27,7 @@ const InfoCard: Component<EventCardProps> = ({
             <h2 className={"mx-auto text-dark-title dark:text-white sm:my-2"}>{cardTitle}</h2>
         </CardHeader>
         <CardBody>{children}</CardBody>
-        <CardFooter>{bottom}</CardFooter>
+        <CardFooter className={"flex justify-center"}>{bottom}</CardFooter>
     </Card>
 )
 

@@ -14,6 +14,7 @@ import Image from "next/image"
 import paths from "@/components/header/paths"
 import { Button } from "@/components/buttons/button"
 import { usePathname } from "next/navigation"
+import { useTheme } from "next-themes"
 
 /**
  * Headeren på nettsiden. Inneholder logo og navigasjonsmeny.
@@ -24,6 +25,7 @@ import { usePathname } from "next/navigation"
 const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const currentPath = usePathname()
+    const { theme } = useTheme()
     return (
         <Navbar
             onMenuOpenChange={setIsMenuOpen}
@@ -31,7 +33,9 @@ const Header: Component = () => {
             shouldHideOnScroll={true}
             // CSS for header komponenten
             classNames={{ wrapper: ["pl-0 max-w-initial"] }}
-            className={"header-gradient z-101 overflow-hidden drop-shadow-lg sm:h-20"}>
+            className={
+                "header-gradient dark:header-gradient-dark z-101 overflow-hidden border-b light:drop-shadow-lg dark:border-gray-700 sm:h-20"
+            }>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
                 <Link
@@ -41,7 +45,11 @@ const Header: Component = () => {
                     <Image
                         priority={true}
                         className={"translate-y-2 scale-125 object-contain sm:scale-150"}
-                        src={"/new-logo/Logo uten bakgrunn/logo - til hvit bakgrunn.png"}
+                        src={
+                            theme === "dark"
+                                ? "/new-logo/Logo uten bakgrunn/logo - til svart bakgrunn.png"
+                                : "/new-logo/Logo uten bakgrunn/logo - til hvit bakgrunn.png"
+                        }
                         alt={"Logo for linjeforeningen root"}
                         sizes={"33vw"}
                         fill
@@ -55,7 +63,7 @@ const Header: Component = () => {
                         <Link
                             className={`${
                                 item.path === currentPath && "before:content-['/']"
-                            } w-full rounded-xl bg-gray-700/20 p-2 text-white hover:text-white focus:!outline-white`}
+                            } w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white`}
                             href={item.path}
                             size={"lg"}>
                             {item.name}

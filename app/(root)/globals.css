@@ -29,12 +29,16 @@
      */
     .logo-backdrop {
         height: calc(100% * 2);
-        @apply w-64 rounded-r-full bg-white sm:w-80;
+        @apply w-64 rounded-r-full bg-white dark:bg-default-dark-background sm:w-80;
         @apply absolute -left-14 -top-14;
     }
 
     .header-gradient {
         @apply bg-gradient-to-r from-root-primary via-root-primary to-root-secondary;
+    }
+
+    .header-gradient-dark {
+        @apply bg-gradient-to-r from-root-primary-dark via-default-dark-background to-default-dark-background;
     }
 }
 
@@ -53,7 +57,7 @@ a[role="button"] {
 
 .link,
 a {
-    @apply text-root-primary dark:text-root-light no-underline hover:text-root-primary-dark;
+    @apply text-root-primary no-underline hover:text-root-primary-dark dark:text-root-light;
 }
 
 /*
