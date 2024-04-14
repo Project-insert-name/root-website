@@ -24,7 +24,7 @@ const InfoCard: Component<EventCardProps> = ({
 }) => (
     <Card className={`sm:py-2 ${className}`} classNames={{ header: "p-0" }} {...props}>
         <CardHeader>
-            <h2 className={"mx-auto text-dark-title dark:text-white sm:my-2"}>{cardTitle}</h2>
+            <h2 className={"mx-auto mt-2 text-dark-title dark:text-white"}>{cardTitle}</h2>
         </CardHeader>
         <CardBody>{children}</CardBody>
         <CardFooter className={"flex justify-center"}>{bottom}</CardFooter>

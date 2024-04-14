@@ -34,7 +34,7 @@ const Header: Component = () => {
             // CSS for header komponenten
             classNames={{ wrapper: ["pl-0 max-w-initial"] }}
             className={
-                "header-gradient dark:header-gradient-dark z-101 overflow-hidden border-b light:drop-shadow-lg dark:border-gray-700 sm:h-20"
+                "header-gradient dark:header-gradient-dark z-101 mb-5 overflow-hidden border-b light:drop-shadow-lg dark:border-gray-700 sm:h-20"
             }>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
