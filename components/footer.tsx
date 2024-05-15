@@ -26,6 +26,7 @@ const Footer: Component = ({ className, ...props }) => (
                 }>
                 <MailLink mail={process.env.NEXT_PUBLIC_EMAIL} />
                 <Socials className={"transition-all duration-100 hover:brightness-75"} />
+                Organisasjonsnummer: 913 457 692
             </FooterSection>
             <FooterSection
                 titleNode={
