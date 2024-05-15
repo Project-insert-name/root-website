@@ -29,7 +29,7 @@ const InfoCard: Component<EventCardProps> = ({
             <div>{children}</div>
         </div>
 
-        <div>{bottom}</div>
+        <div className={"flex justify-center"}>{bottom}</div>
     </div>
 )
 

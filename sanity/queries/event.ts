@@ -90,7 +90,7 @@ export async function getPastEvents(
     return cdnClient.fetch(
         `
             *[
-                _type == "event" && (defined(end_time) && end_time < now() || !defined(end_time) && start_time < $now)) && start_time < $last_start_time
+                _type == "event" && (defined(end_time) && end_time < now() || !defined(end_time) && start_time < $now) && start_time < $last_start_time
             ] | order(start_time desc)[0...$limit]
         `,
         {
