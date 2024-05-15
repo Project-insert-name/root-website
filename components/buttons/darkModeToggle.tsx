@@ -27,6 +27,8 @@ const DarkModeToggle = () => {
                 defaultSelected={theme === "light"}
                 size="md"
                 onValueChange={handleToggle}
+                aria-label={"Bytte mellom lys og mørk modus"}
+                title={"Bytte mellom lys og mørk modus"}
                 thumbIcon={({ isSelected, className }) =>
                     isSelected ? (
                         <SunIcon className={className} />

@@ -44,7 +44,7 @@ const Header: Component = () => {
                     className={"relative z-20 h-20 w-48 focus:outline focus:outline-root-primary"}>
                     <Image
                         priority={true}
-                        className={"translate-y-2 scale-125 object-contain sm:scale-150"}
+                        className={"translate-y-2 scale-125 object-contain sm:scale-[1.55]"}
                         src={
                             theme === "dark"
                                 ? "/new-logo/Logo uten bakgrunn/logo - til svart bakgrunn.png"
