@@ -4,6 +4,7 @@ import { Divider } from "@/components/divider"
 import { bigIconSize, defaultIconSize, FlexIcon } from "@/components/icons/icon"
 import { BugAntIcon, ChatBubbleLeftEllipsisIcon, LinkIcon } from "@heroicons/react/24/outline"
 import { type ReactNode } from "react"
+import DarkModeToggle from "@/components/buttons/darkModeToggle"
 
 /**
  * Footeren som vises på bunnen av nettsiden.
@@ -43,6 +44,7 @@ const Footer: Component = ({ className, ...props }) => (
                         Tilbakemeldinger
                     </FlexIcon>
                 </ExternalLink>
+                <DarkModeToggle />
             </FooterSection>
         </div>
     </footer>
