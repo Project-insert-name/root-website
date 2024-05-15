@@ -1,30 +1,30 @@
-# Root Hjemmeside
+# Root Linjeforening Hjemmeside
 
-Laget av **PIN**
+Laget av kodegruppen **PIN**
+![](public/root-logo.svg)
 
 ---
 
-## Innhold
+> [!NOTE]
+> For bugs eller forslag til forbedringer, opprett en issue i [issues](https://github.com/Project-insert-name/root-website/issues).
 
--   [Stack](#stack)
--   [Setup](#setup)
+## 📑 Innhold
+
+-   [Stack](#-stack)
+-   [Setup](#-setup)
 
     -   [Installere avhengigheter](#installere-avhengigheter)
     -   [Prettier](#prettier)
         -   [VSCode](#vscode)
         -   [Intellij / Webstorm / Annen JetBrains IDE](#intellij--webstorm--annen-jetbrains-ide)
     -   [Starte utviklingsserver](#starte-utviklingsserver)
+    -   [Starte produksjonsserver](#starte-produksjonsserver)
 
--   [Praktisk info](#praktisk-info)
-    -   [App router](#app-router)
+-   [Praktisk info](#-praktisk-info)
     -   [Mappestruktur](#mappestruktur)
-    -   [Server components](#server-components)
     -   [PNPM](#pnpm)
-    -   [Sanity](#sanity)
-        -   [Sanity Studio](#sanity-studio)
-        -   [Sanity Typed](#sanity-typed)
 
-## Stack
+## 🤖 Stack
 
 -   [Next.js](https://nextjs.org/)
 -   [NextUI](https://nextui.org/)
@@ -35,7 +35,7 @@ Laget av **PIN**
 -   [Sanity](https://www.sanity.io/)
 -   [Prettier](https://prettier.io/)
 
-## Setup
+## 💻 Setup
 
 ### Installere avhengigheter
 
@@ -68,99 +68,65 @@ Slik at prettier formatterer koden din automatisk når du lagrer.
 Gå til "Language & Frameworks -> JavaScript -> Prettier", sett configuration til automatic og kryss av for "Run on
 save".
 
+Pattern bør matche det som er satt i `package.json` i `format` scriptet.
+
+`{**/*,*}.{js,jsx,ts,tsx,json,yml,css,md}`
+
 ### Starte utviklingsserver
+
+Kjører i development mode på [http://localhost:3000](http://localhost:3000).
+
+Bruker dev datasettet fra Sanity.
 
 ```bash
 pnpm dev
-# eller
-next dev
 ```
 
-## Praktisk info
+### Starte produksjonsserver
+
+Kjører i production mode på [http://localhost:3000](http://localhost:3000).
+
+Bruker production datasettet fra Sanity.
+
+```bash
+pnpm build && pnpm start
+```
+
+## 👉 Praktisk info
 
 Se
-også [Krav til nettsiden](https://github.com/Project-insert-name/root-website-frontend/blob/main/Krav%20til%20nettsiden.md)
-og [info om de ulike sidene](https://github.com/Project-insert-name/root-website-frontend/blob/main/Sider.md).
+også [Krav til nettsiden](https://github.com/Project-insert-name/root-website-frontend/blob/main/Krav%20til%20nettsiden.md).
 
-### App router
-
-Applikasjonen bruker Next.js 13+ sin nye [App router](https://nextjs.org/docs/app/building-your-application).
-Det vil si at alle filer knyttet til de ulike sidene skal ligge under app mappen, på følgende
-format. `app/navn-paa-path/page.tsx`
-
--   For at filen skal bli til en rute <ins>må</ins> den hete `page.tsx`, dersom den heter noe annet kan den ikke nås via
-    url.
-
-Filer som heter `layout.tsx` blir automatisk wrappet rundt alle andre routes i samme mappe og nedover i mappestrukturen.
+> [!NOTE]
+> For mer info om Next.js og Sanity, se [wiki](https://github.com/Project-insert-name/root-website/wiki) eller dokumentasjonen til de respektive rammeverkene.
 
 ### Mappestruktur
 
-| Mappe      | Beskrivelse                                                         |
-| ---------- | ------------------------------------------------------------------- |
-| app        | Filer knyttet til routes/pages                                      |
-| components | React komponenter som brukes av pages eller andre komponenter       |
-| hooks      | Custom hooks som kan brukes i client components på nettsiden        |
-| public     | Bilder, fonter og andre ikke-kode filer som skal vises i nettsiden  |
-| sanity     | Filer knyttet til Sanity. Som schemas, queries, typer og andre ting |
-| utils      | Nyttige hjelpefunksjoner                                            |
+-   [.github](/.github) (GitHub actions, dependabot og templates)
+-   [app](/app) (Filer knyttet til routes/pages)
+    -   [(root)](</app/(root)>) (Hovedmappen for alle ruter som ikke tilhører sanity)
+    -   [(sanity)](</app/(sanity)>) (Hovedmappen for alle ruter som tilhører sanity)
+-   [components](/components) (React komponenter som brukes av pages eller andre komponenter)
+    -   [buttons](/components/buttons) (Diverse knapper)
+    -   [cards](/components/cards) (Kort som brukes for å vise innhold, som arrangementer, nyheter og lignende)
+    -   [header](/components/header) (Mavigasjonsbaren med lenkene)
+    -   [icons](/components/icons) (Komponenter som bygger rundt heroicons og SVG ikoner)
+    -   [imageGallery](/components/imageGallery) (Komponenter for bildegalleriet)
+    -   [omOss](/components/omOss) (Komponenter for om oss siden)
+-   [hooks](/hooks) (Custom hooks som kan brukes i client components på nettsiden)
+-   [public](/public) (Bilder, fonter og andre ikke-kode filer som skal vises i nettsiden)
+-   [sanity](/sanity) (Filer knyttet til Sanity. Som schemas, queries, typer og andre ting)
+    -   [lib](/sanity/lib) (Sanity relaterte funksjoner)
+    -   [queries](/sanity/queries) (Spørringer mot sanity)
+    -   [schemas](/sanity/schemas) (Sanity schemas)
+-   [utils](/utils) (Nyttige hjelpefunksjoner)
 
 Merk at `app` mappen er delt inn i to ulike grupper, `(root)` og `(sanity)`. Hvor filene kun eksisterer i den gruppen de er definert i.
 Hvis de er definert utenfor en gruppe, vil de eksistere i alle grupper.
 (sanity) mappen brukes bare for studio, siden studioet bruker en egen stil og trenger ikke samme layout som resten av nettsiden.
-
-### Server components
-
-**Next.js 13**+ støtter
-også [react server components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
-for å kjøre kode på en server før resultatet blir sendt til klienten.
-Det er noen begrensninger på server components, blant annet av [react hooks](https://react.dev/reference/react) ikke er
-støttet, da må man bruke client components.
-
-Alle komponenter i next.js 13+ er server components som standard, man kan gjøre de om til client components ved å
-skrive "use client" i toppen av filen.
 
 ### PNPM
 
 Hvis du skal installere en ny pakke, bruk kommandoen `pnpm -w add din-pakke`.
 
 De fleste kommandoer fra **NPM** virker også med **PNPM**
-
-### Sanity
-
-**Sanity** er et headless CMS som brukes til å administrere innholdet på nettsiden.
-
-Innhold defineres ved hjelp av [schemas](https://www.sanity.io/docs/schema-types) som er laget i `.ts` filer.
-Schemas legges i `sanity/schemas`, og importeres inn i `sanity/schema.ts` og legges til i `types` listen.
-
-#### Sanity Studio
-
-[Studio](https://www.sanity.io/studio) er et webgrensesnitt som brukes til å administrere innholdet på nettsiden.
-Studioet er tilgjengelig på `/studio`.
-
-For å bruke studioet må du først ha fått tilgang til Sanity, via en invitasjon på epost.
-
-#### Sanity Typed
-
-[Sanity typed](https://www.sanity.io/plugins/sanity-typed) er en plugin som genererer TypeScript typer basert på Sanity
-schemas.
-
-For at typene skal genereres riktig, må imports for `defineType`, `defineField` og lignende være
-fra `@sanity-typed/types` ikke `sanity`.
-Referanser i schema må også markeres med `as const` for å ikke gi en feilmelding.
-
-For å lage en type for et schema, må det legges inn i `sanity/types.ts`
-
-```ts
-// Henter ut typene fra schema som heter "event"
-export type RootEvent = SanityValues["event"]
-```
-
-Merk at typer fra plugins blir ikke oppdaget av `sanity-typed` og de vil få typen `unknown`.
-De kan bli gitt en type explicit ved å legge det til i ts typen.
-
-```ts
-export type RootEvent = SanityValues["event"] & {
-    // Overskriver eksisterende type som er "unknown"
-    description: Markdown
-}
-```

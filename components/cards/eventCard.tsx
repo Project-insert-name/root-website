@@ -27,7 +27,7 @@ const EventCard: Component<EventCardProps> = ({
         bottom={
             <LinkButton
                 href={"arrangement"}
-                className={"mx-auto w-fit"}
+                className={"w-fit"}
                 aria-label={"Vis flere arrangementer"}>
                 Vis mer
             </LinkButton>
