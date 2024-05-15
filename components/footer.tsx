@@ -26,7 +26,7 @@ const Footer: Component = ({ className, ...props }) => (
                 }>
                 <MailLink mail={process.env.NEXT_PUBLIC_EMAIL} />
                 <Socials className={"transition-all duration-100 hover:brightness-75"} />
-                Organisasjonsnummer: 913 457 692
+                <p>Organisasjonsnummer: 913 457 692</p>
             </FooterSection>
             <FooterSection
                 titleNode={
@@ -41,7 +41,7 @@ const Footer: Component = ({ className, ...props }) => (
                     className={"w-min"}>
                     <FlexIcon
                         icon={<BugAntIcon width={defaultIconSize} />}
-                        className={"text-inherit"}>
+                        className={"!text-root-primary dark:!text-root-light"}>
                         Tilbakemeldinger
                     </FlexIcon>
                 </ExternalLink>

@@ -9,7 +9,7 @@ import {
     NavbarMenu,
     NavbarMenuItem,
 } from "@nextui-org/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import paths from "@/components/header/paths"
 import { Button } from "@/components/buttons/button"
@@ -25,7 +25,16 @@ import { useTheme } from "next-themes"
 const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const currentPath = usePathname()
-    const { theme } = useTheme()
+    const { theme: initialTheme } = useTheme()
+    /**
+     * Siden theme ikke er tilgjengelig på server-side, må vi bruke useEffect for å sette temaet.
+     * For å unngå en feilmelding om at src er ulik på client og server.
+     */
+    const [theme, setTheme] = useState("light")
+    useEffect(() => {
+        if (!initialTheme) return
+        setTheme(initialTheme)
+    }, [initialTheme])
     return (
         <Navbar
             onMenuOpenChange={setIsMenuOpen}
@@ -37,14 +46,16 @@ const Header: Component = () => {
                 "header-gradient dark:header-gradient-dark z-101 mb-5 overflow-hidden border-b light:drop-shadow-lg dark:border-gray-700 sm:h-20"
             }>
             <NavbarBrand>
-                <div className={"logo-backdrop z-10"} />
+                <div className={"sm:logo-backdrop z-10"} />
                 <Link
                     href={"/"}
                     title={"Root linjeforening logo"}
-                    className={"relative z-20 h-20 w-48 focus:outline focus:outline-root-primary"}>
+                    className={
+                        "relative z-20 h-20 w-40 focus:outline focus:outline-root-primary sm:w-48"
+                    }>
                     <Image
                         priority={true}
-                        className={"translate-y-2 scale-125 object-contain sm:scale-[1.55]"}
+                        className={"translate-y-2 scale-[1.3] object-contain sm:scale-[1.55]"}
                         src={
                             theme === "dark"
                                 ? "/new-logo/Logo uten bakgrunn/logo - til svart bakgrunn.png"

@@ -44,10 +44,11 @@ export const viewport: Viewport = {
 /**
  * RootLayout er en layout-komponent som brukes av alle sidene i nettsiden.
  * HTML som blir returnert fra de andre sidene blir plassert i <main> taggen.
+ * suppresseHydrationWarning er brukt siden dark class blir lagt til i html tag client-side.
  * @param children - HTML som skal plasseres i <main> taggen.
  */
 const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
-    <html lang="nb">
+    <html lang="nb" suppressHydrationWarning>
         <head>
             {/*Gir tilgang til Google Search Console*/}
             <meta
@@ -55,7 +56,7 @@ const RootLayout: FC<{ children: ReactNode }> = ({ children }) => (
                 content="ff3j07lovsouc9oLEt871sodlGdi8VtTUeiitYbQs2Q"
             />
         </head>
-        <body className="dark:bg-default-dark-background relative bg-default-background font-cascadia-code dark:text-white">
+        <body className="relative bg-default-background font-cascadia-code dark:bg-default-dark-background dark:text-white">
             <Providers>
                 <div className={"flex min-h-screen flex-col"}>
                     <div>
