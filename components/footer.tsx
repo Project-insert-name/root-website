@@ -45,6 +45,7 @@ const Footer: Component = ({ className, ...props }) => (
                         Tilbakemeldinger
                     </FlexIcon>
                 </ExternalLink>
+                <br />
                 <DarkModeToggle />
             </FooterSection>
         </div>

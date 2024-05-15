@@ -29,6 +29,7 @@ const Header: Component = () => {
     /**
      * Siden theme ikke er tilgjengelig på server-side, må vi bruke useEffect for å sette temaet.
      * For å unngå en feilmelding om at src er ulik på client og server.
+     * @see https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch
      */
     const [theme, setTheme] = useState("light")
     useEffect(() => {
