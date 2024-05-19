@@ -9,6 +9,15 @@ interface SelectProps extends DefaultProps {
     onChange?: (value: string) => void
 }
 
+/**
+ * En dropdown meny for å velge et enkelt element fra en liste.
+ * @param label Melding som vises over dropdown valget.
+ * @param placeholder Melding som vises i dropdown valget før et element er valgt.
+ * @param items En liste med elementer som kan velges.
+ * @param defaultItem Standard valgt element.
+ * @param onChange Funksjon som kalles når et element er valgt med det valgte elementet som argument.
+ * @param props Andre props som kan sendes til Select komponenten.
+ */
 const Select: Component<SelectProps> = ({
     label,
     placeholder,

@@ -2,7 +2,8 @@
 import Dropdown, { type Key } from "@/components/dropdown/dropdown"
 import { ChevronDownIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
+import { Tooltip } from "@nextui-org/react"
 
 type CalendarKey = "google" | "outlook" | "apple" | "ics" | "copy"
 
@@ -20,7 +21,7 @@ const subscribeItems: { key: CalendarKey; label: string; getLink: (url: string) 
     {
         key: "apple",
         label: "Apple Kalender",
-        getLink: (url: string) => url.replace(/(http:\/\/)|(https:\/\/)/, "webcal://"),
+        getLink: (url: string) => url.replace(/http(s)?:\/\//i, "webcal://"),
     },
     { key: "ics", label: "iCal-fil", getLink: (url: string) => url },
     { key: "copy", label: "Kopier lenke", getLink: (url: string) => url },
@@ -36,6 +37,8 @@ const AddToCalendarDropdown: Component<AddToCalendarDropdownProps> = ({
     restrict,
     ...props
 }) => {
+    const [showTooltip, setShowTooltip] = useState(false)
+
     const items = useMemo(
         () => subscribeItems.filter(item => !restrict || restrict?.includes(item.key)),
         [restrict],
@@ -44,6 +47,8 @@ const AddToCalendarDropdown: Component<AddToCalendarDropdownProps> = ({
     function onAction(key: Key) {
         if (key === "copy") {
             void navigator.clipboard.writeText(eventUrl)
+            setShowTooltip(true)
+            setTimeout(() => setShowTooltip(false), 2000)
             return
         }
         const link = items.find(item => item.key === key)?.getLink(eventUrl)
@@ -53,16 +58,20 @@ const AddToCalendarDropdown: Component<AddToCalendarDropdownProps> = ({
     }
 
     return (
-        <Dropdown
-            buttonProps={{
-                endContent: <ChevronDownIcon width={defaultIconSize} />,
-                "aria-label": "Legg til i kalender",
-            }}
-            label={"Legg til i kalender"}
-            items={items}
-            onAction={onAction}
-            {...props}
-        />
+        <Tooltip content={"Lenke kopiert"} isOpen={showTooltip}>
+            <div className={"w-min"}>
+                <Dropdown
+                    buttonProps={{
+                        endContent: <ChevronDownIcon width={defaultIconSize} />,
+                        "aria-label": "Legg til i kalender",
+                    }}
+                    label={"Legg til i kalender"}
+                    items={items}
+                    onAction={onAction}
+                    {...props}
+                />
+            </div>
+        </Tooltip>
     )
 }
 

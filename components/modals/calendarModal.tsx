@@ -29,6 +29,9 @@ const ModalContent = () => {
 
     const [params, setParams] = useState<Record<string, string>>({})
 
+    /**
+     * Bygger en URL basert fra apiUrl, params fra form og dagens dato.
+     */
     const url = useMemo(() => {
         params["from"] = new Date().toISOString()
         return (
@@ -40,8 +43,13 @@ const ModalContent = () => {
         )
     }, [params])
 
-    function onFormChange(form: FormData) {
-        let record: Record<string, string> = {}
+    /**
+     * Bygger en Record<string, string> fra FormData og setter params til denne.
+     * Alle values blir konvertert til string. Hvis value er null | undefined, fjernes key fra record.
+     * @param form FormData objektet som skal konverteres til Record<string, string>
+     */
+    function onFormChange(form: FormData): void {
+        const record: Record<string, string> = {}
         for (const [key, value] of Object.entries(form)) {
             if (value) {
                 record[key] = value?.toString() ?? ""
@@ -64,6 +72,10 @@ const ModalContent = () => {
     )
 }
 
+/**
+ * Form for å velge type arrangementer som man vil abonnere på.
+ * @param onChange Funksjon som kalles når formen endres
+ */
 const CalendarForm: Component<{ onChange: (form: FormData) => void }> = ({ onChange }) => {
     const [form, setForm] = useState<FormData>({})
 

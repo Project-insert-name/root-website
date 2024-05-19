@@ -34,6 +34,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
         icsEvent = await createIcsEvent(event)
     }
 
+    // TODO støtte for å lagre event i kalender uten å subscribe. F.eks på samme måte som https://github.com/add2cal/add-to-calendar-button
     return (
         <SingleInfoCard
             title={event.title}
@@ -51,6 +52,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
                 {icsEvent && (
                     <AddToCalendarDropdown
                         eventUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/api/arrangement/ical/${params.slug}`}
+                        restrict={["copy", "ics"]}
                     />
                 )}
             </>
