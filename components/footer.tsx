@@ -4,6 +4,7 @@ import { Divider } from "@/components/divider"
 import { bigIconSize, defaultIconSize, FlexIcon } from "@/components/icons/icon"
 import { BugAntIcon, ChatBubbleLeftEllipsisIcon, LinkIcon } from "@heroicons/react/24/outline"
 import { type ReactNode } from "react"
+import DarkModeToggle from "@/components/buttons/darkModeToggle"
 
 /**
  * Footeren som vises på bunnen av nettsiden.
@@ -25,6 +26,7 @@ const Footer: Component = ({ className, ...props }) => (
                 }>
                 <MailLink mail={process.env.NEXT_PUBLIC_EMAIL} />
                 <Socials className={"transition-all duration-100 hover:brightness-75"} />
+                <p>Organisasjonsnummer: 913 457 692</p>
             </FooterSection>
             <FooterSection
                 titleNode={
@@ -39,10 +41,12 @@ const Footer: Component = ({ className, ...props }) => (
                     className={"w-min"}>
                     <FlexIcon
                         icon={<BugAntIcon width={defaultIconSize} />}
-                        className={"text-inherit"}>
+                        className={"!text-root-primary dark:!text-root-light"}>
                         Tilbakemeldinger
                     </FlexIcon>
                 </ExternalLink>
+                <br />
+                <DarkModeToggle />
             </FooterSection>
         </div>
     </footer>
@@ -57,7 +61,7 @@ interface FooterSectionProps extends ChildProps {
 const FooterSection: Component<FooterSectionProps> = ({ titleNode, children, className }) => (
     <section
         className={`mx-auto flex w-fit min-w-[200px] flex-col items-center sm:items-start ${className}`}>
-        <h4 className={"text-darkTitle"}>{titleNode}</h4>
+        <h4>{titleNode}</h4>
         {children}
     </section>
 )
@@ -94,7 +98,7 @@ const Socials: Component = ({ className }) => (
 
         <ExternalLink
             title={"GitHub"}
-            className={className}
+            className={`${className} dark:fill-white`}
             href={process.env.NEXT_PUBLIC_GITHUB_URL}>
             <GitHub width={bigIconSize} />
         </ExternalLink>

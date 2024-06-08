@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export const revalidate = 30 // 30 sek
 
 const Home: Page = () => (
-    <div className={"flex flex-wrap justify-center gap-5 py-5"}>
+    <div className={"flex flex-wrap justify-center gap-5 pb-5"}>
         <EventCard eventTitle={"Arrangementer"} className={"mx-2 w-full sm:w-[550px]"} />
         <div className={"flex w-full flex-col gap-5 sm:w-[550px]"}>
             <AdsCard className={"mx-2"} />

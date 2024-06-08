@@ -31,7 +31,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
 
     let icsEvent = undefined
     if (isFuture(event.start_time)) {
-        icsEvent = await createIcsEvent(event)
+        icsEvent = createIcsEvent(event)
     }
 
     // TODO støtte for å lagre event i kalender uten å subscribe. F.eks på samme måte som https://github.com/add2cal/add-to-calendar-button
