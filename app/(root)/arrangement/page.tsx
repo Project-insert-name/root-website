@@ -2,7 +2,7 @@ import { getFutureEvents, getPastAndFutureEvents, getPastEvents } from "@/sanity
 import EventCardPaginated from "@/app/(root)/arrangement/eventCardPaginated"
 import { type Metadata } from "next"
 import CalendarModal from "@/components/modals/calendarModal"
-import { ButtonGroup } from "@nextui-org/react"
+import FloatingMenu from "@/components/floatingMenu"
 
 export const metadata: Metadata = {
     title: "Arrangementer | Root Linjeforening",
@@ -26,9 +26,11 @@ const EventsPage: AsyncPage = async () => {
     const { past, future } = await getPastAndFutureEvents(nrOfEvents)
     return (
         <div className={"pt-3 sm:px-10"}>
-            <ButtonGroup className={"px-1 pb-3 sm:pb-0"}>
-                <CalendarModal />
-            </ButtonGroup>
+            <FloatingMenu>
+                <div className={"rounded-lg bg-white p-2"}>
+                    <CalendarModal />
+                </div>
+            </FloatingMenu>
             <div className={"flex flex-wrap items-baseline justify-center gap-5 sm:p-5"}>
                 <EventCardPaginated
                     cardTitle={"Kommende arrangementer"}

@@ -16,9 +16,26 @@ interface ModalProps extends DefaultProps {
     modalTitle?: string
     modalContent?: ReactNode
     size?: _ModalProps["size"]
+    trigger?: (toggle: VoidFunction) => ReactNode
 }
 
-const Modal: Component<ModalProps> = ({ label, size, modalTitle, modalContent, ...props }) => {
+/**
+ * En modal som flyter over innholdet på siden.
+ * @param label Tittelen på knappen som åpner modalen. Vises kun hvis trigger ikke er satt.
+ * @param size Størrelsen på modalen.
+ * @param modalTitle Tittelen på modalen. Vises på toppen av modalen.
+ * @param modalContent Innholdet i modalen.
+ * @param trigger En funksjon som returnerer en knapp som åpner modalen. Når denne er satt vil standard knappen ikke vises.
+ * @param props Andre props som sendes til Modal komponenten.
+ */
+const Modal: Component<ModalProps> = ({
+    label,
+    size,
+    modalTitle,
+    modalContent,
+    trigger,
+    ...props
+}) => {
     const [isOpen, toggleOpen] = useToggle()
 
     function closeModal() {
@@ -27,9 +44,13 @@ const Modal: Component<ModalProps> = ({ label, size, modalTitle, modalContent, .
 
     return (
         <>
-            <Button onClick={() => toggleOpen()} aria-label={"Åpne dialogboks"}>
-                {label}
-            </Button>
+            {trigger ? (
+                trigger(toggleOpen)
+            ) : (
+                <Button onClick={() => toggleOpen()} aria-label={"Åpne dialogboks"}>
+                    {label}
+                </Button>
+            )}
             <_Modal
                 isOpen={isOpen}
                 onClose={closeModal}

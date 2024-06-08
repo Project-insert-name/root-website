@@ -6,12 +6,17 @@ import Select from "@/components/select/select"
 import { getEventTypeLabel } from "@/sanity/lib/utils"
 import AddToCalendarDropdown from "@/components/dropdown/addToCalendarDropdown"
 
-const CalendarModal = () => (
+const CalendarModal: Component = () => (
     <Modal
         size={"xl"}
-        label={"Abonner på kalender"}
-        modalTitle={"Abonner på kalender"}
+        label={"Abonner på arrangementer"}
+        modalTitle={"Abonner på arrangementer i kalenderen din"}
         modalContent={<ModalContent />}
+        trigger={toggle => (
+            <button onClick={toggle} className={"text-root-primary"} aria-label={"Åpne meny"}>
+                Abonner på arrangementer
+            </button>
+        )}
     />
 )
 
