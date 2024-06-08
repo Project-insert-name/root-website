@@ -47,7 +47,7 @@ const Header: Component = () => {
                 "header-gradient dark:header-gradient-dark z-101 mb-5 overflow-hidden border-b light:drop-shadow-lg dark:border-gray-700 sm:h-20"
             }>
             <NavbarBrand>
-                <div className={"sm:logo-backdrop z-10"} />
+                <div className={"logo-backdrop z-10"} />
                 <Link
                     href={"/"}
                     title={"Root linjeforening logo"}
