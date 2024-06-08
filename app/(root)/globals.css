@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/cascadia-code.min.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,12 +29,16 @@
      */
     .logo-backdrop {
         height: calc(100% * 2);
-        @apply w-64 rounded-r-full bg-white sm:w-80;
-        @apply absolute -left-10 -top-14;
+        @apply w-64 rounded-r-full bg-white dark:bg-default-dark-background sm:w-80;
+        @apply absolute -left-14 -top-14;
     }
 
     .header-gradient {
         @apply bg-gradient-to-r from-root-primary via-root-primary to-root-secondary;
+    }
+
+    .header-gradient-dark {
+        @apply bg-gradient-to-r from-root-primary-dark via-default-dark-background to-default-dark-background;
     }
 }
 
@@ -51,7 +57,7 @@ a[role="button"] {
 
 .link,
 a {
-    @apply text-root-primary no-underline hover:text-root-primary-dark;
+    @apply text-root-primary no-underline hover:text-root-primary-dark dark:text-root-light;
 }
 
 /*
@@ -75,23 +81,23 @@ br {
 }
 
 h1 {
-    @apply text-4xl font-bold text-dark-title;
+    @apply text-4xl font-bold light:text-dark-title;
 }
 
 h2 {
-    @apply text-3xl font-bold text-dark-title;
+    @apply text-3xl font-bold light:text-dark-title;
 }
 
 h3 {
-    @apply text-2xl font-bold text-dark-title;
+    @apply text-2xl font-bold light:text-dark-title;
 }
 
 h4 {
-    @apply text-xl font-bold text-dark-title;
+    @apply text-xl font-bold light:text-dark-title;
 }
 
 h5 {
-    @apply text-lg font-bold text-dark-title;
+    @apply text-lg font-bold light:text-dark-title;
 }
 
 h6 {

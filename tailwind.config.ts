@@ -17,12 +17,17 @@ const config: Config = {
         "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
+        fontFamily: {
+            "cascadia-code": ["Cascadia Code", "monospace"],
+        },
         extend: {
             colors: {
+                "root-light": "#44b2e3",
                 "root-primary": "#1370A6",
                 "root-primary-dark": "#0B4B6A",
                 "root-secondary": colors.blue[500],
                 "default-background": "#F3F3F3",
+                "default-dark-background": "#0a0a12",
                 "dark-title": "#3E3E3E",
                 bedpress: "#FFBA09",
                 social: "#09B5FF",

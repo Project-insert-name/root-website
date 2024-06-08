@@ -4,6 +4,7 @@ import { LeftArrowIcon } from "../icons/icon"
 import SanityImage from "../sanityImage"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import { LinkButton } from "@/components/buttons/button"
+import { Card } from "@nextui-org/card"
 
 interface GalleryProps extends ChildProps {
     heading: string
@@ -17,7 +18,7 @@ interface GalleryProps extends ChildProps {
  * @param children Innholdet i galleriet
  */
 const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
-    <div className={"mx-auto flex flex-col justify-center rounded-2xl bg-white py-5 sm:w-[1100px]"}>
+    <Card className={"mx-auto flex flex-col justify-center rounded-2xl py-5 sm:w-[1100px]"}>
         <div className="mx-5 flex flex-row justify-center gap-5">
             <h1>{heading}</h1>
             {event && (
@@ -27,7 +28,7 @@ const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
             )}
         </div>
         <div className={"grid grid-cols-1 gap-5 p-5 sm:grid-cols-3"}>{children}</div>
-    </div>
+    </Card>
 )
 
 export default Gallery
@@ -38,7 +39,8 @@ export default Gallery
  * @param className CSS-klassene til galleriet
  */
 export const GalleryItem: Component<ChildProps> = ({ children, className }) => (
-    <div className={`${className} h-full w-full overflow-hidden rounded-2xl shadow-md`}>
+    <div
+        className={`${className} h-full w-full overflow-hidden rounded-2xl light:shadow-md dark:bg-default-dark-background`}>
         {children}
     </div>
 )

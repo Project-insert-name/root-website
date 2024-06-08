@@ -29,7 +29,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
 
     let icsEvent = undefined
     if (isFuture(event.start_time)) {
-        icsEvent = await createIcsEvent(event)
+        icsEvent = createIcsEvent(event)
     }
 
     return (
