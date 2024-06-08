@@ -29,7 +29,7 @@ const ImageViewer = ({ image }: { image?: SanityImageObject }) => {
                             />
                             <div
                                 className={
-                                    "absolute bottom-2 right-2 rounded-3xl bg-white p-1 opacity-50"
+                                    "absolute bottom-2 right-2 rounded-3xl bg-white p-1 opacity-50 dark:bg-default-dark-background"
                                 }>
                                 {openImage ? (
                                     <ArrowsPointingInIcon className={"size-7"} />

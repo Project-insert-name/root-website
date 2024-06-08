@@ -9,11 +9,12 @@ import {
     NavbarMenu,
     NavbarMenuItem,
 } from "@nextui-org/react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Image from "next/image"
 import paths from "@/components/header/paths"
 import { Button } from "@/components/buttons/button"
 import { usePathname } from "next/navigation"
+import { useTheme } from "next-themes"
 
 /**
  * Headeren på nettsiden. Inneholder logo og navigasjonsmeny.
@@ -24,6 +25,17 @@ import { usePathname } from "next/navigation"
 const Header: Component = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const currentPath = usePathname()
+    const { theme: initialTheme } = useTheme()
+    /**
+     * Siden theme ikke er tilgjengelig på server-side, må vi bruke useEffect for å sette temaet.
+     * For å unngå en feilmelding om at src er ulik på client og server.
+     * @see https://github.com/pacocoursey/next-themes?tab=readme-ov-file#avoid-hydration-mismatch
+     */
+    const [theme, setTheme] = useState("light")
+    useEffect(() => {
+        if (!initialTheme) return
+        setTheme(initialTheme)
+    }, [initialTheme])
     return (
         <Navbar
             onMenuOpenChange={setIsMenuOpen}
@@ -31,21 +43,28 @@ const Header: Component = () => {
             shouldHideOnScroll={true}
             // CSS for header komponenten
             classNames={{ wrapper: ["pl-0 max-w-initial"] }}
-            className={"header-gradient z-101 overflow-hidden drop-shadow-lg sm:h-20"}>
+            className={
+                "header-gradient dark:header-gradient-dark z-101 mb-5 overflow-hidden border-b light:drop-shadow-lg dark:border-gray-700 sm:h-20"
+            }>
             <NavbarBrand>
                 <div className={"logo-backdrop z-10"} />
                 <Link
                     href={"/"}
-                    title={"Root linjeforening sin logo"}
-                    className={"relative z-20 pl-2 focus:outline focus:outline-root-primary"}>
+                    title={"Root linjeforening logo"}
+                    className={
+                        "relative z-20 h-20 w-40 focus:outline focus:outline-root-primary sm:w-48"
+                    }>
                     <Image
                         priority={true}
-                        src={"/root-logo.svg"}
+                        className={"translate-y-2 scale-[1.3] object-contain sm:scale-[1.55]"}
+                        src={
+                            theme === "dark"
+                                ? "/new-logo/Logo uten bakgrunn/logo - til svart bakgrunn.png"
+                                : "/new-logo/Logo uten bakgrunn/logo - til hvit bakgrunn.png"
+                        }
                         alt={"Logo for linjeforeningen root"}
-                        // Bredde og høyde må settes i className også, for å unngå advarsler
-                        className={"h-[200px] w-[200px]"}
-                        width={200}
-                        height={200}
+                        sizes={"33vw"}
+                        fill
                     />
                 </Link>
             </NavbarBrand>
@@ -56,7 +75,7 @@ const Header: Component = () => {
                         <Link
                             className={`${
                                 item.path === currentPath && "before:content-['/']"
-                            } w-full rounded-xl bg-gray-700/20 p-2 text-white hover:text-white focus:!outline-white`}
+                            } w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white`}
                             href={item.path}
                             size={"lg"}>
                             {item.name}

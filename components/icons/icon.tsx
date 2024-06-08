@@ -27,7 +27,9 @@ export const FlexIcon: Component<{ icon: ReactNode } & ChildProps> = ({
     className,
     ...props
 }) => (
-    <div className={`flex-row-center gap-1 text-gray-700 ${className}`} {...props}>
+    <div
+        className={`flex-row-center gap-1 text-gray-700 dark:text-gray-400 ${className}`}
+        {...props}>
         <div>{icon}</div>
         {children}
     </div>
