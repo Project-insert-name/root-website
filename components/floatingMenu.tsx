@@ -3,8 +3,8 @@
 import { ChevronRightIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
 import useToggle from "@/hooks/useToggle"
+import { useEffect, useRef } from "react"
 
-// TODO lukk når man trykker utenfor
 /**
  * En meny som flyter over innholdet på venstre side av skjermen. Dersom skjermen er for liten, vil menyen kunne åpnes og lukkes.
  * Ellers vil menyen alltid være åpen.
@@ -14,9 +14,21 @@ import useToggle from "@/hooks/useToggle"
  */
 const FloatingMenu: Component<ChildProps> = ({ children, className, ...props }) => {
     const [isMenuOpen, toggleMenu] = useToggle()
+    const menuRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        function onClick(e: MouseEvent): void {
+            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                toggleMenu(false)
+            }
+        }
+
+        document.addEventListener("click", onClick)
+        return () => document.removeEventListener("click", onClick)
+    }, [])
 
     return (
-        <div className={`fixed left-0 z-50 ${className}`} {...props}>
+        <div ref={menuRef} className={`fixed left-0 z-50 ${className}`} {...props}>
             <div className={"2xl:hidden"}>
                 <button
                     className={`h-fit w-fit divide-y rounded-r-2xl bg-white p-2 opacity-70 dark:bg-default-dark-background`}

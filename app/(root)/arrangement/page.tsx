@@ -3,6 +3,7 @@ import EventCardPaginated from "@/app/(root)/arrangement/eventCardPaginated"
 import { type Metadata } from "next"
 import CalendarModal from "@/components/modals/calendarModal"
 import FloatingMenu from "@/components/floatingMenu"
+import { Card } from "@nextui-org/card"
 
 export const metadata: Metadata = {
     title: "Arrangementer | Root Linjeforening",
@@ -27,9 +28,9 @@ const EventsPage: AsyncPage = async () => {
     return (
         <div className={"pt-3 sm:px-10"}>
             <FloatingMenu>
-                <div className={"rounded-lg bg-white p-2"}>
+                <Card className={"rounded-lg p-2"}>
                     <CalendarModal />
-                </div>
+                </Card>
             </FloatingMenu>
             <div className={"flex flex-wrap items-baseline justify-center gap-5 sm:p-5"}>
                 <EventCardPaginated

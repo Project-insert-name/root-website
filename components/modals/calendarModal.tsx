@@ -13,7 +13,10 @@ const CalendarModal: Component = () => (
         modalTitle={"Abonner på arrangementer i kalenderen din"}
         modalContent={<ModalContent />}
         trigger={toggle => (
-            <button onClick={toggle} className={"text-root-primary"} aria-label={"Åpne meny"}>
+            <button
+                onClick={toggle}
+                className={"text-root-primary dark:text-root-light"}
+                aria-label={"Åpne meny"}>
                 Abonner på arrangementer
             </button>
         )}
