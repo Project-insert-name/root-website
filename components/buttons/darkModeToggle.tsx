@@ -31,6 +31,7 @@ const DarkModeToggle = () => {
                     key={theme}
                     onClick={() => setTheme(theme)}
                     size="sm"
+                    aria-label={text}
                     className={selectedTheme === theme ? "bg-root-primary text-white" : undefined}>
                     {icon}
                     {text}
