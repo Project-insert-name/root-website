@@ -68,8 +68,10 @@ const ModalContent = () => {
 
     return (
         <div>
-            <h6>Abonnere på framtidige arrangementer</h6>
-            <p className={"text-gray-600"}>Velg type arrangement du vil abonnere på</p>
+            <h6 className={"dark:text-white"}>Abonnere på framtidige arrangementer</h6>
+            <p className={"text-gray-600 dark:text-gray-200"}>
+                Velg type arrangement du vil abonnere på
+            </p>
             <div className={"flex flex-col gap-5 pt-2"}>
                 <CalendarForm onChange={onFormChange} />
                 <div>
