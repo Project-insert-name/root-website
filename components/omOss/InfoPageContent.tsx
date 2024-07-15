@@ -3,9 +3,8 @@ import SingleInfoCard from "@/components/cards/singleInfoCard"
 import type { InfoSide } from "@/sanity/types"
 import SideNavigator from "@/components/omOss/sideNavigator"
 import { useMemo } from "react"
-import { ChevronRightIcon } from "@heroicons/react/24/outline"
 import useToggle from "@/hooks/useToggle"
-import { defaultIconSize } from "@/components/icons/icon"
+import FloatingMenu from "@/components/floatingMenu"
 
 /**
  * Representerer klient-siden av siden som viser informasjon om Root Linjeforeningen.
@@ -49,28 +48,7 @@ export const InfoPageContent: Component<{
         <div onClick={() => isMenuOpen && toggleMenu(false)}>
             {infoSider.length > 0 ? (
                 <div className={`mt-24 flex justify-center`}>
-                    <div className={`fixed left-0 z-50 hidden h-full w-fit pr-1 2xl:flex`}>
-                        {navigator}
-                    </div>
-                    <div className={`fixed left-0 z-50 2xl:hidden`}>
-                        <button
-                            className={`h-fit w-fit divide-y rounded-r-2xl bg-white p-2 opacity-70 dark:bg-default-dark-background`}
-                            title={`${isMenuOpen ? "Lukk" : "Åpne"} meny`}
-                            onClick={() => toggleMenu()}>
-                            <ChevronRightIcon
-                                width={defaultIconSize}
-                                className={`transition-all duration-200 ${
-                                    isMenuOpen && "rotate-180"
-                                }`}
-                            />
-                        </button>
-                        <div
-                            className={`sticky h-full w-fit transition-all duration-200 ${
-                                isMenuOpen ? "translate-x-0" : "-translate-x-full"
-                            }`}>
-                            {navigator}
-                        </div>
-                    </div>
+                    <FloatingMenu>{navigator}</FloatingMenu>
                     {infoPages}
                 </div>
             ) : (

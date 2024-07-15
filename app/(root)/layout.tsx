@@ -7,7 +7,7 @@ import { Providers } from "@/app/(root)/providers"
 
 /**
  * Inneholder tittel som vises i fanen til nettleseren og beskrivelse som vises i søkeresultater.
- *
+ * Keywords brukes for å forbedre søkemotoroptimalisering.
  * @see https://nextjs.org/docs/app/building-your-application/optimizing/metadata
  * @see https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
  */
