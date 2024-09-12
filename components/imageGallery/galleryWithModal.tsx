@@ -120,7 +120,7 @@ const GalleryModal: Component<GalleryModalProps> = ({ imageGallery }) => {
                     <ModalHeader>
                         <h2>{currentImage.alt}</h2>
                     </ModalHeader>
-                    <ModalBody className="border-b-1 px-2 py-2">
+                    <ModalBody className="px-2 py-2">
                         <div className="flex justify-center sm:m-5">
                             <SanityImage image={currentImage} alt={currentImage.alt} />
                         </div>

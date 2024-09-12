@@ -23,7 +23,7 @@ const SideNavigator: Component<SideNavigatorProps> = ({ items, emptyMessage, cla
     })
     return (
         <div
-            className={`flex h-fit w-full max-w-xs flex-col divide-y rounded-r-2xl bg-white p-2 pl-1 shadow-lg ${className}`}>
+            className={`flex h-fit w-full max-w-xs flex-col divide-y rounded-r-2xl bg-white p-2 pl-1 shadow-lg dark:bg-default-dark-background ${className}`}>
             {listItems.length > 0 ? listItems : emptyMessage}
         </div>
     )

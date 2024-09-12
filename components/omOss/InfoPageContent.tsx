@@ -54,7 +54,7 @@ export const InfoPageContent: Component<{
                     </div>
                     <div className={`fixed left-0 z-50 2xl:hidden`}>
                         <button
-                            className={`h-fit w-fit divide-y rounded-r-2xl bg-white p-2 opacity-70`}
+                            className={`h-fit w-fit divide-y rounded-r-2xl bg-white p-2 opacity-70 dark:bg-default-dark-background`}
                             title={`${isMenuOpen ? "Lukk" : "Åpne"} meny`}
                             onClick={() => toggleMenu()}>
                             <ChevronRightIcon
