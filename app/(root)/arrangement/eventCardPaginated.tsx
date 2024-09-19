@@ -67,6 +67,7 @@ const EventCardPaginated: Component<EventCardPaginatedProps> = ({
     return (
         <InfoCard
             cardTitle={cardTitle}
+            className={"w-full sm:w-[550px]"}
             bottom={
                 showButton ? (
                     <ButtonAndProgress loading={loading} onClick={fetchMoreEvents} />

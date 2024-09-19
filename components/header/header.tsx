@@ -57,11 +57,7 @@ const Header: Component = () => {
                     <Image
                         priority={true}
                         className={"translate-y-2 scale-[1.3] object-contain sm:scale-[1.55]"}
-                        src={
-                            theme === "dark"
-                                ? "/new-logo/Logo uten bakgrunn/logo - til svart bakgrunn.png"
-                                : "/new-logo/Logo uten bakgrunn/logo - til hvit bakgrunn.png"
-                        }
+                        src={theme === "dark" ? "/root-logo-dark.png" : "/root-logo-light.png"}
                         alt={"Logo for linjeforeningen root"}
                         sizes={"33vw"}
                         fill

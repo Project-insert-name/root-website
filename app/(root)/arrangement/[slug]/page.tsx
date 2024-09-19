@@ -1,15 +1,13 @@
-import { defaultEventDuration, getEventBySlug } from "@/sanity/queries/event"
-import { isFuture, toDateTuple } from "@/utils/dateUtils"
+import { getEventBySlug } from "@/sanity/queries/event"
+import { isFuture } from "@/utils/dateUtils"
 import { bigIconSize, DateIcon, TimeIcon } from "@/components/icons/icon"
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import SingleInfoCard from "@/components/cards/singleInfoCard"
 import { type Metadata } from "next"
-import { createEvent } from "ics"
-import { getEventTypeLabel } from "@/sanity/lib/utils"
-import type { RootEvent } from "@/sanity/types"
-import IcsButton from "@/components/buttons/icsButton"
 import { Date, Time } from "@/components/date"
 import { toPlainText } from "@portabletext/react"
+import { createIcsEvent } from "@/utils/ics"
+import AddToCalendarDropdown from "@/components/dropdown/addToCalendarDropdown"
 
 interface Params {
     slug: string
@@ -23,6 +21,10 @@ export const revalidate = 30 // 30 sek
  * @param params Parametre fra URL
  */
 const EventPage: AsyncPage<Params> = async ({ params }) => {
+    if (params.slug.endsWith(".ics")) {
+        return redirect(`/api/arrangement/ical/${params.slug.replace(".ics", "")}`)
+    }
+
     const event = await getEventBySlug(params.slug)
 
     if (!event) return notFound()
@@ -32,6 +34,7 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
         icsEvent = createIcsEvent(event)
     }
 
+    // TODO støtte for å lagre event i kalender uten å subscribe. F.eks på samme måte som https://github.com/add2cal/add-to-calendar-button
     return (
         <SingleInfoCard
             title={event.title}
@@ -47,10 +50,9 @@ const EventPage: AsyncPage<Params> = async ({ params }) => {
             <>
                 <TimeAndDate startTime={event.start_time} />
                 {icsEvent && (
-                    <IcsButton
-                        filename={event.title}
-                        data={icsEvent}
-                        aria-label={"Legg til arrangement i kalender"}
+                    <AddToCalendarDropdown
+                        eventUrl={`${process.env.NEXT_PUBLIC_BASE_URL}/api/arrangement/ical/${params.slug}`}
+                        restrict={["copy", "ics"]}
                     />
                 )}
             </>
@@ -81,7 +83,7 @@ const TimeAndDate: Component<{ startTime: string }> = ({ startTime }) => (
 export async function generateMetadata({ params }: PageProps<Params>): Promise<Metadata> {
     const event = await getEventBySlug(params.slug)
 
-    if (!event) return notFound()
+    if (!event) return {}
 
     return {
         title: `${event.title} | Root Linjeforening`,
@@ -89,38 +91,4 @@ export async function generateMetadata({ params }: PageProps<Params>): Promise<M
             ? toPlainText(event.description_block)
             : "Arrangement arrangert av Root Linjeforening",
     }
-}
-
-/**
- * Lager en string på ics format basert på et arrangement.
- * Dersom sluttidspunkt ikke er definert, settes varigheten til 2 timer.
- * @param event Arrangementet som skal konverteres til ics format
- * @returns En string på ics format
- * @see https://www.npmjs.com/package/ics
- */
-function createIcsEvent(event: RootEvent): string | undefined {
-    let icsEvent: string | undefined = undefined
-    const end = event.end_time
-        ? { end: toDateTuple(event.end_time) }
-        : { duration: { hours: defaultEventDuration } }
-    createEvent(
-        {
-            title: event.title,
-            description: event.description_block ? toPlainText(event.description_block) : "",
-            location: event.address_text,
-            start: toDateTuple(event.start_time),
-            ...end,
-            url: `${process.env.NEXT_PUBLIC_BASE_URL}/arrangement/${event.slug.current}`,
-            organizer: { name: "Root Linjeforening", email: process.env.NEXT_PUBLIC_EMAIL },
-            categories: ["Root Linjeforening", "Arrangement", getEventTypeLabel(event.type)],
-        },
-        (error, value) => {
-            if (error) {
-                console.error(error)
-            } else {
-                icsEvent = value
-            }
-        },
-    )
-    return icsEvent
 }
