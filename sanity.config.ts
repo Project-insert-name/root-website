@@ -9,6 +9,8 @@ import { defineConfig } from "@sanity-typed/types"
 import { apiVersion, dataset, projectId } from "./sanity/env"
 import { schema } from "./sanity/schema"
 import { structureTool } from "sanity/structure"
+import type { SanityDocuments } from "@/sanity/types"
+import SanityToolMenu from "@/app/(sanity)/studio/[[...index]]/navbar"
 
 /**
  * Oppretter et config objekt som brukes til å konfigurere sanity studio
@@ -30,4 +32,35 @@ export default defineConfig({
         // https://www.sanity.io/docs/the-vision-plugin
         visionTool({ defaultApiVersion: apiVersion }),
     ],
+    studio: {
+        components: {
+            toolMenu: SanityToolMenu,
+        },
+    },
+    document: {
+        /**
+         * Definerer en lenke til root-nettsiden fra Sanity Studio.
+         * Lenken bruker slugen til dokumentet for å generere en lenke. Alle slugs må hete "slug" for at dette skal fungere.
+         * Lenken finnes i ... menyen i top høyre hjørne av dokumentet. Kalt "Open preview". Eller ved å trykke CTRL + ALT + O.
+         * @param _
+         * @param document Dokumentet brukeren er i.
+         */
+        productionUrl: async (_, { document }) => {
+            if (!(typeof document.slug === "object" && document.slug && "current" in document.slug))
+                return "/"
+            let path = ""
+            switch (document._type as SanityDocuments["_type"]) {
+                case "event":
+                    path = "/arrangement"
+                    break
+                case "job_advert":
+                    path = "/stilling"
+                    break
+                case "image_gallery":
+                    path = "/galleri"
+                    break
+            }
+            return `${path}/${document.slug.current ?? "/"}`
+        },
+    },
 })
