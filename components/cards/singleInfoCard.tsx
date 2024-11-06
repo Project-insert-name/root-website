@@ -59,7 +59,7 @@ const SingleInfoCard: Component<SingleInfoCardProps> = ({
             </div>
 
             {descriptionBlock && (
-                <div className={"prose my-5 max-w-none"}>
+                <div className={"prose dark:prose-invert my-5 max-w-none"}>
                     <PortableText value={descriptionBlock} components={components} />
                 </div>
             )}
