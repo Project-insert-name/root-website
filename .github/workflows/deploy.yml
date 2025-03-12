@@ -8,7 +8,11 @@ jobs:
     push_to_registry:
         name: Build then push image to Docker Hub
         runs-on: ubuntu-latest
+        
         steps:
+            - name: Set alternate npm integrity keys
+              run: |
+                echo COREPACK_INTEGRITY_KEYS="$(curl https://registry.npmjs.org/-/npm/v1/keys | jq -c '{npm: .keys}')" >> $GITHUB_ENV
             - name: Check out the repo
               uses: actions/checkout@v3
 
