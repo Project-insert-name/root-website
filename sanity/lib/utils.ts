@@ -14,6 +14,7 @@ export function getEventTypeLabel(eventType: EventType) {
         case "social":
             return "Sosialt"
         case "other":
+        default:
             return "Annet"
     }
 }
