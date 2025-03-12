@@ -99,7 +99,7 @@ const CalendarForm: Component<{ onChange: (form: FormData) => void }> = ({ onCha
         eventTypes.map(type => ({
             value: type,
             label: getEventTypeLabel(type),
-        })),
+        })), 
     )
     return (
         <Select
