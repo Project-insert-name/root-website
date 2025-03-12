@@ -1,5 +1,5 @@
 import { type ReactNode } from "react"
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card"
+import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card"
 
 interface EventCardProps extends ChildProps {
     cardTitle: string

@@ -3,7 +3,7 @@
 import { useTheme } from "next-themes"
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline"
 import { useEffect, useState } from "react"
-import { Button, ButtonGroup } from "@nextui-org/button"
+import { Button, ButtonGroup } from "@heroui/button"
 import { defaultIconSize } from "@/components/icons/icon"
 
 const buttons = [

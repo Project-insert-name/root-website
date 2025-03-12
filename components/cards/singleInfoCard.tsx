@@ -6,7 +6,7 @@ import { PortableText } from "@portabletext/react"
 import { components } from "@/sanity/lib/portabletext"
 import type { TypedObject } from "sanity"
 import ImageViewer from "@/components/imageViewer"
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card"
+import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card"
 
 interface SingleInfoCardProps extends ChildProps {
     image?: SanityImageObject

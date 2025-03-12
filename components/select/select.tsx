@@ -1,5 +1,5 @@
 "use client"
-import { Select as _Select, SelectItem } from "@nextui-org/react"
+import { Select as _Select, SelectItem } from "@heroui/react"
 
 interface SelectProps extends DefaultProps {
     label?: string

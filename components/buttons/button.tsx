@@ -1,5 +1,5 @@
 "use client"
-import { Button as _Button, Link } from "@nextui-org/react"
+import { Button as _Button, Link } from "@heroui/react"
 import { LinkIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
 

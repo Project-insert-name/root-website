@@ -6,7 +6,7 @@ import {
     ModalFooter,
     ModalHeader,
     ModalProps as _ModalProps,
-} from "@nextui-org/react"
+} from "@heroui/react"
 import { Button } from "@/components/buttons/button"
 import useToggle from "@/hooks/useToggle"
 import { type ReactNode } from "react"
