@@ -12,7 +12,6 @@ import useToggle from "@/hooks/useToggle"
 import { type ReactNode } from "react"
 
 interface ModalProps extends DefaultProps {
-    initialState?: boolean
     label?: string
     modalTitle?: string
     modalContent?: ReactNode
@@ -22,7 +21,6 @@ interface ModalProps extends DefaultProps {
 
 /**
  * En modal som flyter over innholdet på siden.
- * @param initialState
  * @param label Tittelen på knappen som åpner modalen. Vises kun hvis trigger ikke er satt.
  * @param size Størrelsen på modalen.
  * @param modalTitle Tittelen på modalen. Vises på toppen av modalen.
@@ -31,7 +29,6 @@ interface ModalProps extends DefaultProps {
  * @param props Andre props som sendes til Modal komponenten.
  */
 const Modal: Component<ModalProps> = ({
-    initialState,
     label,
     size,
     modalTitle,
@@ -39,7 +36,7 @@ const Modal: Component<ModalProps> = ({
     trigger,
     ...props
 }) => {
-    const [isOpen, toggleOpen] = useToggle(initialState ?? false)
+    const [isOpen, toggleOpen] = useToggle()
 
     function closeModal() {
         toggleOpen(false)
