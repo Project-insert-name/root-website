@@ -3,7 +3,7 @@ import EventCardPaginated from "@/app/(root)/arrangement/eventCardPaginated"
 import { type Metadata } from "next"
 import CalendarModal from "@/components/modals/calendarModal"
 import FloatingMenu from "@/components/floatingMenu"
-import { Card } from "@nextui-org/card"
+import { Card } from "@heroui/card"
 
 export const metadata: Metadata = {
     title: "Arrangementer | Root Linjeforening",

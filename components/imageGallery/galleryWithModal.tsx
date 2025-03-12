@@ -1,6 +1,6 @@
 "use client"
 
-import { Modal, ModalContent, ModalHeader, ModalBody } from "@nextui-org/react"
+import { Modal, ModalContent, ModalHeader, ModalBody } from "@heroui/react"
 import type { ImageGallery } from "@/sanity/types"
 import { useMemo, useState } from "react"
 import { useSearchParams, useRouter, usePathname } from "next/navigation"

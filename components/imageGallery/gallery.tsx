@@ -4,7 +4,7 @@ import { LeftArrowIcon } from "../icons/icon"
 import SanityImage from "../sanityImage"
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import { LinkButton } from "@/components/buttons/button"
-import { Card } from "@nextui-org/card"
+import { Card } from "@heroui/card"
 
 interface GalleryProps extends ChildProps {
     heading: string

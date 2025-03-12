@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss"
-import { nextui } from "@nextui-org/react"
+import { heroui } from "@heroui/react"
 import colors from "tailwindcss/colors"
 import typography from "@tailwindcss/typography"
 
@@ -14,7 +14,7 @@ const config: Config = {
     content: [
         "./components/**/*.{js,ts,jsx,tsx,mdx}",
         "./app/**/*.{js,ts,jsx,tsx,mdx}",
-        "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
+        "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
         fontFamily: {
@@ -43,6 +43,6 @@ const config: Config = {
         },
     },
     darkMode: "class",
-    plugins: [nextui(), typography()],
+    plugins: [heroui(), typography()],
 }
 export default config

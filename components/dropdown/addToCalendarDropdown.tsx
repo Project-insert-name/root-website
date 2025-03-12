@@ -3,7 +3,7 @@ import Dropdown, { type Key } from "@/components/dropdown/dropdown"
 import { ChevronDownIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
 import { useMemo, useState } from "react"
-import { Tooltip } from "@nextui-org/react"
+import { Tooltip } from "@heroui/react"
 
 type CalendarKey = "google" | "outlook" | "apple" | "ics" | "copy"
 

@@ -1,5 +1,5 @@
 "use client"
-import { CircularProgress } from "@nextui-org/react"
+import { CircularProgress } from "@heroui/react"
 
 /**
  * En sirkulær progress bar som roterer.

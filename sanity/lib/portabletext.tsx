@@ -1,6 +1,6 @@
 import { type PortableTextComponents } from "@portabletext/react"
 import { ExternalLink } from "@/components/link"
-import { Code } from "@nextui-org/code"
+import { Code } from "@heroui/code"
 
 const className = "text-dark-title dark:text-white"
 
