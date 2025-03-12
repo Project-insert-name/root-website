@@ -34,7 +34,7 @@ const Select: Component<SelectProps> = ({
             defaultSelectedKeys={defaultItem}
             {...props}>
             {items.map(({ value, label }) => (
-                <SelectItem key={value} value={value}>
+                <SelectItem key={value}>
                     {label}
                 </SelectItem>
             ))}

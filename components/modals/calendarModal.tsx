@@ -91,7 +91,7 @@ const CalendarForm: Component<{ onChange: (form: FormData) => void }> = ({ onCha
 
     useEffect(() => {
         onChange(form)
-    }, [form])
+    }, [form, onChange])
 
     const defaultType = { value: "*", label: "Alle" }
     const eventTypes: EventType[] = ["bedpres", "social", "workshop", "other"]
