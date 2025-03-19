@@ -5,23 +5,30 @@ import type { EventType } from "@/sanity/types"
 import Select from "@/components/select/select"
 import { getEventTypeLabel } from "@/sanity/lib/utils"
 import AddToCalendarDropdown from "@/components/dropdown/addToCalendarDropdown"
+import { useSearchParams } from "next/navigation"
 
-const CalendarModal: Component = () => (
-    <Modal
-        size={"xl"}
-        label={"Abonner på arrangementer"}
-        modalTitle={"Abonner på arrangementer i kalenderen din"}
-        modalContent={<ModalContent />}
-        trigger={toggle => (
-            <button
-                onClick={toggle}
-                className={"text-root-primary dark:text-root-light"}
-                aria-label={"Åpne meny"}>
-                Abonner på arrangementer
-            </button>
-        )}
-    />
-)
+const CalendarModal: Component = () => {
+    const searchParams = useSearchParams()
+    // Parameter for å åpne modal når side laster
+    const startOpen = searchParams.has("abonner")
+    return (
+        <Modal
+            initialState={startOpen}
+            size={"xl"}
+            label={"Abonner på arrangementer"}
+            modalTitle={"Abonner på arrangementer i kalenderen din"}
+            modalContent={<ModalContent />}
+            trigger={toggle => (
+                <button
+                    onClick={toggle}
+                    className={"text-root-primary dark:text-root-light"}
+                    aria-label={"Åpne meny"}>
+                    Abonner på arrangementer
+                </button>
+            )}
+        />
+    )
+}
 
 export default CalendarModal
 
