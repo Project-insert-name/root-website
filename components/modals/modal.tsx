@@ -6,9 +6,9 @@ import {
     ModalFooter,
     ModalHeader,
     ModalProps as _ModalProps,
+    useDisclosure,
 } from "@heroui/react"
 import { Button } from "@/components/buttons/button"
-import useToggle from "@/hooks/useToggle"
 import { type ReactNode } from "react"
 
 interface ModalProps extends DefaultProps {
@@ -39,24 +39,20 @@ const Modal: Component<ModalProps> = ({
     trigger,
     ...props
 }) => {
-    const [isOpen, toggleOpen] = useToggle(initialState)
-
-    function closeModal() {
-        toggleOpen(false)
-    }
+    const { isOpen, onOpen, onOpenChange } = useDisclosure({defaultOpen: initialState})
 
     return (
         <>
             {trigger ? (
-                trigger(toggleOpen)
+                trigger(onOpen)
             ) : (
-                <Button onClick={() => toggleOpen()} aria-label={"Åpne dialogboks"}>
+                <Button onClick={() => onOpen()} aria-label={"Åpne dialogboks"}>
                     {label}
                 </Button>
             )}
             <_Modal
                 isOpen={isOpen}
-                onClose={closeModal}
+                onOpenChange={onOpenChange}
                 size={size}
                 placement={"center"}
                 classNames={{ wrapper: ["z-[150]"], backdrop: ["z-[150]"] }}
