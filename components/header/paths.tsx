@@ -13,6 +13,7 @@ export interface Path {
     name: string
     path: string
     icon?: ReactNode
+    subpaths?: Path[]
 }
 
 /**
@@ -30,22 +31,28 @@ const paths: Path[] = [
     {
         name: "Hjem",
         path: "/",
-        icon: <HomeIcon width={iconSize} />,
     },
     {
         name: "Arrangementer",
         path: "/arrangement",
-        icon: <CalendarDaysIcon width={iconSize} />,
     },
     {
         name: "Galleri",
         path: "/galleri",
-        icon: <PhotoIcon width={iconSize} />,
     },
     {
-        name: "Om oss",
-        path: "/om-oss",
-        icon: <UsersIcon width={iconSize} />,
+        name: "For bedrifter",
+        path: "/bedrifter",
+        subpaths: [
+            {
+                "name": "Bedriftspresentasjoner",
+                "path": "/bedrifter/bedriftspresentasjon"
+            },
+            {
+                "name": "Workshops",
+                "path": "/bedrifter/workshops"
+            },
+        ]
     },
     ...devPaths,
 ]
