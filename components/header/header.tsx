@@ -71,9 +71,9 @@ const Header: Component = () => {
             </NavbarBrand>
             {/*Vanlig meny - Vises ikke på små skjermer*/}
             <NavbarContent className={"hidden gap-4 md:flex"} justify={"end"}>
-                {paths.map(item => {
+                {paths.map((item, index) => {
                     if (item.subpaths === undefined) {
-                        return <NavbarItem key={item.path} isActive={item.path === currentPath}>
+                        return <NavbarItem key={`${item}-${index}`} isActive={item.path === currentPath}>
                                 <Link
                                     className={`${
                                         item.path === currentPath && "before:content-['/']"
@@ -85,22 +85,30 @@ const Header: Component = () => {
                             </NavbarItem>
                     } else {
                         // eslint-disable-next-line react/jsx-key
-                        return <Dropdown>
-                        <NavbarItem>
-                          <DropdownTrigger>
-                            <HeroUIButton className="p-0 bg-transparent data-[hover=true]:bg-transparent" >
-                              {item.name}
-                            </HeroUIButton>
-                          </DropdownTrigger>
-                        </NavbarItem>
-                        <DropdownMenu>
-                            {item.subpaths.map(subitem => 
-                                <DropdownItem key={subitem.name} description="">
-                                    {subitem.name}
-                                </DropdownItem>
-                            )}
-                        </DropdownMenu>
-                      </Dropdown>
+                        return <Dropdown key={`${item}-${index}`}>
+                                    <NavbarItem>
+                                        <DropdownTrigger className="cursor-pointer">
+                                            <Link
+                                                className={"w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"}
+                                                size={"lg"}>
+                                                {item.name}
+                                            </Link>
+                                        </DropdownTrigger>
+                                    </NavbarItem>
+                                    <DropdownMenu>
+                                        {item.subpaths.map(subitem => 
+                                            <DropdownItem key={subitem.name} description={subitem.description} className={"w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"}>
+                                                <Link 
+                                                    className="!text-white hover:text-white focus:!outline-white"
+                                                    size={"lg"}
+                                                    href={subitem.path}
+                                                >
+                                                    {subitem.name}
+                                                </Link>
+                                            </DropdownItem>
+                                        )}
+                                    </DropdownMenu>
+                                </Dropdown>
                     }
                 })}
             </NavbarContent>

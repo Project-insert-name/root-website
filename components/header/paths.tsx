@@ -12,6 +12,7 @@ const iconSize = 25
 export interface Path {
     name: string
     path: string
+    description?: string
     icon?: ReactNode
     subpaths?: Path[]
 }
@@ -46,11 +47,13 @@ const paths: Path[] = [
         subpaths: [
             {
                 "name": "Bedriftspresentasjoner",
-                "path": "/bedrifter/bedriftspresentasjon"
+                "path": "/bedrifter/bedriftspresentasjon",
+                "description": "Bedriftspresentasjoner hos Root"
             },
             {
                 "name": "Workshops",
-                "path": "/bedrifter/workshops"
+                "path": "/bedrifter/workshops",
+                "description": "Workshops hos Root"
             },
         ]
     },
