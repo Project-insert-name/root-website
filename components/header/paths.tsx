@@ -75,6 +75,23 @@ const paths: Path[] = [
             
         ]
     },
+        {
+        name: "Styret",
+        path: "/styret",
+        subpaths: [
+            {
+                "name": "Medlem1",
+                "path": "/styret/medlem1",
+                "description": "medlem1 hos Root"
+            },
+            {
+                "name": "Medlem2",
+                "path": "/studenter/medlem2",
+                "description": "medlem2 hos Root"
+            },
+
+        ]
+    },
 
     ...devPaths,
 ]
