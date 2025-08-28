@@ -86,7 +86,7 @@ const paths: Path[] = [
             },
             {
                 "name": "Medlem2",
-                "path": "/studenter/medlem2",
+                "path": "/styret/medlem2",
                 "description": "medlem2 hos Root"
             },
 
