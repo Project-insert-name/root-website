@@ -34,14 +34,6 @@ const paths: Path[] = [
         path: "/",
     },
     {
-        name: "Arrangementer",
-        path: "/arrangement",
-    },
-    {
-        name: "Galleri",
-        path: "/galleri",
-    },
-    {
         name: "For bedrifter",
         path: "/bedrifter",
         subpaths: [
@@ -63,16 +55,15 @@ const paths: Path[] = [
         path: "/studenter",
         subpaths: [
             {
-                "name": "Studenter1",
-                "path": "/studenter/studenter1",
-                "description": "Studenter1 hos Root"
+                "name": "Arrangementer",
+                "path": "/studenter/arrangementer",
+                "description": "Arrangementer hos Root"
             },
             {
-                "name": "Studenter2",
-                "path": "/studenter/studenter2",
-                "description": "Studenter2 hos Root"
+                "name": "Galleri",
+                "path": "/studenter/galleri",
+                "description": "Galleri hos Root"
             },
-            
         ]
     },
         {
@@ -82,12 +73,12 @@ const paths: Path[] = [
             {
                 "name": "Medlem1",
                 "path": "/styret/medlem1",
-                "description": "medlem1 hos Root"
+                "description": "Medlem1 hos Root"
             },
             {
                 "name": "Medlem2",
                 "path": "/styret/medlem2",
-                "description": "medlem2 hos Root"
+                "description": "Medlem2 hos Root"
             },
 
         ]
