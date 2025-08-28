@@ -55,8 +55,27 @@ const paths: Path[] = [
                 "path": "/bedrifter/workshops",
                 "description": "Workshops hos Root"
             },
+            
         ]
     },
+        {
+        name: "For studenter",
+        path: "/studenter",
+        subpaths: [
+            {
+                "name": "Bedriftspresentasjoner",
+                "path": "/bedrifter/bedriftspresentasjon",
+                "description": "Bedriftspresentasjoner hos Root"
+            },
+            {
+                "name": "Workshops",
+                "path": "/bedrifter/workshops",
+                "description": "Workshops hos Root"
+            },
+            
+        ]
+    },
+
     ...devPaths,
 ]
 
