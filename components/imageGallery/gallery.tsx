@@ -22,7 +22,7 @@ const Gallery: Component<GalleryProps> = ({ heading, event, children }) => (
         <div className="mx-5 flex flex-row justify-center gap-5">
             <h1>{heading}</h1>
             {event && (
-                <LinkButton href={`/arrangement/${event.slug.current}`} title="Se tilhørende event">
+                <LinkButton href={`/studenter/arrangement/${event.slug.current}`} title="Se tilhørende event">
                     Se event
                 </LinkButton>
             )}
@@ -47,7 +47,7 @@ export const GalleryItem: Component<ChildProps> = ({ children, className }) => (
 
 export const GalleryBackButton: Component = () => (
     <Link
-        href={"/galleri"}
+        href={"/studenter/galleri"}
         title="Tilbake til gallerisamling"
         className={"rounded-2xl focus:outline focus:!outline-root-primary sm:aspect-square"}>
         <GalleryItem className={"flex-center bg-slate-100"}>

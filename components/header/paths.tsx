@@ -55,8 +55,8 @@ const paths: Path[] = [
         path: "/studenter",
         subpaths: [
             {
-                "name": "Arrangementer",
-                "path": "/studenter/arrangementer",
+                "name": "Arrangement",
+                "path": "/studenter/arrangement",
                 "description": "Arrangementer hos Root"
             },
             {
