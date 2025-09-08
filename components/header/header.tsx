@@ -137,7 +137,7 @@ const Header: Component = () => {
                     ))}
                 </div>
 
-                <Button className={"mx-auto w-fit"} onClick={() => setIsMenuOpen(false)}>
+                <Button className={"mx-auto w-fit"} onPress={() => setIsMenuOpen(false)}>
                     Lukk
                 </Button>
             </NavbarMenu>

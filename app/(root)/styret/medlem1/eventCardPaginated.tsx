@@ -89,7 +89,7 @@ const ButtonAndProgress: Component<{ loading: boolean; onPress: VoidFunction }> 
         return <CircularProgressIndicator aria-label={"Laster inn flere arrangementer"} />
     }
     return (
-        <Button className={"w-fit"} onClick={onPress}>
+        <Button className={"w-fit"} onPress={onPress}>
             Se mer
         </Button>
     )

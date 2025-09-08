@@ -46,7 +46,7 @@ const Modal: Component<ModalProps> = ({
             {trigger ? (
                 trigger(onOpen)
             ) : (
-                <Button onClick={() => onOpen()} aria-label={"Åpne dialogboks"}>
+                <Button onPress={() => onOpen()} aria-label={"Åpne dialogboks"}>
                     {label}
                 </Button>
             )}
@@ -65,7 +65,7 @@ const Modal: Component<ModalProps> = ({
                             </ModalHeader>
                             <ModalBody>{modalContent}</ModalBody>
                             <ModalFooter>
-                                <Button onClick={onClose} aria-label={"Lukk dialogboks"}>
+                                <Button onPress={onClose} aria-label={"Lukk dialogboks"}>
                                     Lukk
                                 </Button>
                             </ModalFooter>
