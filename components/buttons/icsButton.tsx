@@ -31,7 +31,7 @@ const IcsButton: Component<IcsButtonProps> = ({
     }
 
     return (
-        <Button onClick={download} {...props}>
+        <Button onPress={download} {...props}>
             Legg til i kalender
             <ArrowDownOnSquareIcon width={defaultIconSize} />
         </Button>
