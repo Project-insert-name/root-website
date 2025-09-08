@@ -64,23 +64,11 @@ const paths: Path[] = [
                 "path": "/galleri",
                 "description": "Galleri hos Root"
             },
-        ]
-    },
-        {
-        name: "Styret",
-        path: "/styret",
-        subpaths: [
             {
-                "name": "Medlem1",
-                "path": "/styret/medlem1",
-                "description": "Medlem1 hos Root"
+                "name": "Styret",
+                "path": "/styret",
+                "description": "Styret til Root"
             },
-            {
-                "name": "Medlem2",
-                "path": "/styret/medlem2",
-                "description": "Medlem2 hos Root"
-            },
-
         ]
     },
 
