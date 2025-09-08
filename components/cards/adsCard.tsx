@@ -58,7 +58,7 @@ export const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
 }) => (
     <div className={`mx-2 my-5 justify-between gap-3 ${className}`}>
         <div>
-            <Link href={`stilling/${slug.current}`}>
+            <Link href={`bedrifter/stillingsannonser/${slug.current}`}>
                 <h3 className={"text-base text-root-primary dark:text-root-light"}>{title}</h3>
             </Link>
 
@@ -66,7 +66,7 @@ export const SingleAdWide: Component<JobAdvert & DefaultProps> = ({
         </div>
 
         {image && (
-            <Link href={`stilling/${slug.current}`}>
+            <Link href={`bedrifter/stillingsannonser/${slug.current}`}>
                 <Thumbnail image={image} />
             </Link>
         )}
@@ -81,7 +81,7 @@ export const SingleAdNarrow: Component<JobAdvert & DefaultProps> = ({
     slug,
 }) => (
     <div className={`mx-1 my-5 w-full flex-col ${className}`}>
-        <Link href={`stilling/${slug.current}`}>
+        <Link href={`bedrifter/stillingsannonser/${slug.current}`}>
             <h3 className={"text-base text-root-primary dark:text-root-light"}>{title}</h3>
         </Link>
         <div className={"flex justify-between"}>

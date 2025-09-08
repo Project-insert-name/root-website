@@ -43,9 +43,9 @@ const paths: Path[] = [
                 "description": "Bedriftspresentasjoner hos Root"
             },
             {
-                "name": "Workshops",
-                "path": "/bedrifter/workshops",
-                "description": "Workshops hos Root"
+                "name": "Stillingsannonser",
+                "path": "/bedrifter/stillingsannonser",
+                "description": "Stillingsannonser hos Root"
             },
             
         ]
@@ -63,6 +63,11 @@ const paths: Path[] = [
                 "name": "Galleri",
                 "path": "/galleri",
                 "description": "Galleri hos Root"
+            },
+            {
+                "name": "Om oss",
+                "path": "/om-oss",
+                "description": "Om Root"
             },
             {
                 "name": "Styret",
