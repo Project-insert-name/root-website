@@ -6,7 +6,7 @@ import FloatingMenu from "@/components/floatingMenu"
 import { Card } from "@heroui/card"
 
 export const metadata: Metadata = {
-    title: "Bedriftspresentasjoner | Root Linjeforening",
+    title: "Stillingsannonser | Root Linjeforening",
     description: "Oversikt over tidligere og planlagte arrangementer hos Root Linjeforening",
 }
 
