@@ -38,7 +38,7 @@ const paths: Path[] = [
         path: "/studenter",
         subpaths: [
             {
-                "name": "Arrangement",
+                "name": "Arrangementer",
                 "path": "/arrangement",
                 "description": "Arrangementer hos Root"
             },
@@ -48,27 +48,30 @@ const paths: Path[] = [
                 "description": "Galleri hos Root"
             },
             {
-                "name": "Om oss",
-                "path": "/om-oss",
-                "description": "Styret til Root"
+                "name": "Soundboks utleie",
+                "path": "/soundboks-utleie",
+                "description": "Utleie av soundboks"
             },
         ]
     },
     {
         name: "For bedrifter",
         path: "/bedrifter",
+    },
+    {
+        name: "Om oss",
+        path: "/om-oss",
         subpaths: [
             {
-                "name": "Bedriftspresentasjoner",
-                "path": "/bedrifter/bedriftspresentasjon",
-                "description": "Ha bedriftspresentasjon hos Root"
+                "name": "Om Root",
+                "path": "/om-root",
+                "description": "Om Root Linjeforening"
             },
             {
-                "name": "Stillingsannonser",
-                "path": "/bedrifter/stillingsannonser",
-                "description": "Ha stillingsannonse hos Root"
+                "name": "Styret",
+                "path": "/styret",
+                "description": "Styret til Root"
             },
-            
         ]
     },
 

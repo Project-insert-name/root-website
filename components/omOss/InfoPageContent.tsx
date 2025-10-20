@@ -48,7 +48,6 @@ export const InfoPageContent: Component<{
         <div onClick={() => isMenuOpen && toggleMenu(false)}>
             {infoSider.length > 0 ? (
                 <div className={`mt-24 flex justify-center`}>
-                    <FloatingMenu>{navigator}</FloatingMenu>
                     {infoPages}
                 </div>
             ) : (
