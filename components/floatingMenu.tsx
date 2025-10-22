@@ -25,7 +25,7 @@ const FloatingMenu: Component<ChildProps> = ({ children, className, ...props }) 
 
         document.addEventListener("click", onPress)
         return () => document.removeEventListener("click", onPress)
-    }, [])
+    }, [toggleMenu])
 
     return (
         <div ref={menuRef} className={`fixed left-0 z-50 ${className}`} {...props}>

@@ -16,7 +16,7 @@ const StyretPage: AsyncPage = async () => {
     const StyretPage = await getInfoSiderBySlug("styret")
 
     if (!StyretPage) {
-        return <div className="p-10 text-center">Fant ikke siden "Styret".</div>
+        return <div className="p-10 text-center">Fant ikke siden &quot;Styret&quot;.</div>
     }
 
     return <InfoPageContent infoSider={[StyretPage]} />

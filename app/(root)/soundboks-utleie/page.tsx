@@ -16,7 +16,7 @@ const SoundboksUtleiePage: AsyncPage = async () => {
     const SoundboksUtleiePage = await getInfoSiderBySlug("soundboks-utleie")
 
     if (!SoundboksUtleiePage) {
-        return <div className="p-10 text-center">Fant ikke siden "Soundboks utleie".</div>
+        return <div className="p-10 text-center">Fant ikke siden &quot;Soundboks utleie&quot;.</div>
     }
 
     return <InfoPageContent infoSider={[SoundboksUtleiePage]} />

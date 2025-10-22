@@ -56,7 +56,7 @@ const ModalContent = () => {
                 .map(([key, value]) => `${key}=${value}`)
                 .join("&")
         )
-    }, [params])
+    }, [params, apiUrl])
 
     /**
      * Bygger en Record<string, string> fra FormData og setter params til denne.

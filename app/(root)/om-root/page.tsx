@@ -16,7 +16,7 @@ const OmRootPage: AsyncPage = async () => {
     const omRootPage = await getInfoSiderBySlug("om-root")
 
     if (!omRootPage) {
-        return <div className="p-10 text-center">Fant ikke siden "Om Root".</div>
+        return <div className="p-10 text-center">Fant ikke siden &quot;Om Root&quot;.</div>
     }
 
     return <InfoPageContent infoSider={[omRootPage]} />

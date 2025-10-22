@@ -16,7 +16,7 @@ const BedrifterPage: AsyncPage = async () => {
     const BedrifterPage = await getInfoSiderBySlug("for-bedrifter")
 
     if (!BedrifterPage) {
-        return <div className="p-10 text-center">Fant ikke siden "For bedrifter".</div>
+        return <div className="p-10 text-center">Fant ikke siden &quot;For bedrifter&quot;.</div>
     }
 
     return <InfoPageContent infoSider={[BedrifterPage]} />
