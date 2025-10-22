@@ -6,6 +6,7 @@ import {
     DropdownMenu,
     DropdownItem,
     Button,
+    type ButtonProps as HeroUIButtonProps,
 } from "@heroui/react"
 
 export type Key = string | number
@@ -16,7 +17,7 @@ interface DropdownProps extends DefaultProps {
     items?: Item[]
     label?: string
     onAction?: (key: Key) => void
-    buttonProps?: ButtonProps
+    buttonProps?: HeroUIButtonProps
 }
 
 const Dropdown: Component<DropdownProps> = ({
