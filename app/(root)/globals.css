@@ -68,13 +68,13 @@ p:empty + p:empty {
     @apply min-h-[1px];
 }
 
-ul {
+/* ul {
     @apply list-disc pl-3.5;
-}
+} */
 
-ol {
+/* ol {
     @apply list-decimal pl-3.5;
-}
+} */
 
 br {
     @apply my-2 block;
