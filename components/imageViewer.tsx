@@ -12,7 +12,6 @@ const ImageViewer = ({ image }: { image?: SanityImageObject }) => {
 
     if (!image?.asset) return null
 
-    // ✅ Detect if image is an SVG (Sanity asset ref ends in -svg)
     const isSVG = image.asset._ref?.includes("-svg")
 
     const imageUrl = urlFor(image).url()
