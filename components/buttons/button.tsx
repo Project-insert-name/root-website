@@ -1,5 +1,5 @@
 "use client"
-import { Button as _Button, Link } from "@heroui/react"
+import { Button as _Button, Link, type ButtonProps as HeroUIButtonProps, type PressEvent } from "@heroui/react"
 import { LinkIcon } from "@heroicons/react/24/outline"
 import { defaultIconSize } from "@/components/icons/icon"
 
@@ -11,7 +11,12 @@ const buttonClassNames = "min-w-[100px] bg-root-primary p-3 text-white"
  * @param className CSS-klassen til knappen
  * @param props Props som skal sendes til button-elementet, blant annet onClick, disabled, etc.
  */
-export const Button: Component<ButtonProps> = ({ children, className, ...props }) => (
+
+type RootButtonProps = HeroUIButtonProps & {
+    onPress?: (e: PressEvent) => void
+}
+
+export const Button: Component<RootButtonProps> = ({ children, className, ...props }) => (
     <_Button radius={"lg"} className={`${buttonClassNames} ${className}`} {...props}>
         {children}
     </_Button>

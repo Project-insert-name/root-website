@@ -18,6 +18,7 @@ const ImageViewer = ({ image }: { image?: SanityImageObject }) => {
 
     if (isSVG) {
         return (
+            // eslint-disable-next-line @next/next/no-img-element
             <img
                 src={imageUrl}
                 alt={image.alt ?? ""}
