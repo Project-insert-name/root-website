@@ -96,15 +96,15 @@ const Header: Component = () => {
                                         </DropdownTrigger>
                                     </NavbarItem>
                                     <DropdownMenu>
-                                        {item.subpaths.map(subitem => 
-                                            <DropdownItem key={subitem.name} description={subitem.description} className={"w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"}>
-                                                <Link 
-                                                    className="!text-white hover:text-white focus:!outline-white"
-                                                    size={"lg"}
-                                                    href={subitem.path}
-                                                >
-                                                    {subitem.name}
-                                                </Link>
+                                        {item.subpaths.map(subitem =>
+                                            <DropdownItem
+                                                key={subitem.name}
+                                                description={subitem.description}
+                                                as={Link}
+                                                href={subitem.path}
+                                                className="w-full rounded-xl  bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"
+                                            >
+                                                {subitem.name}
                                             </DropdownItem>
                                         )}
                                     </DropdownMenu>
