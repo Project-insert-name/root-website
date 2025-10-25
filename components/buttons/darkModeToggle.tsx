@@ -29,7 +29,7 @@ const DarkModeToggle = () => {
             {buttons.map(({ text, theme, icon }) => (
                 <Button
                     key={theme}
-                    onClick={() => setTheme(theme)}
+                    onPress={() => setTheme(theme)}
                     size="sm"
                     aria-label={text}
                     className={selectedTheme === theme ? "bg-root-primary text-white" : undefined}>

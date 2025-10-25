@@ -8,6 +8,11 @@ import {
     NavbarMenuToggle,
     NavbarMenu,
     NavbarMenuItem,
+    Dropdown,
+    DropdownTrigger,
+    DropdownMenu,
+    DropdownItem,
+    Button as HeroUIButton
 } from "@heroui/react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
@@ -66,18 +71,46 @@ const Header: Component = () => {
             </NavbarBrand>
             {/*Vanlig meny - Vises ikke på små skjermer*/}
             <NavbarContent className={"hidden gap-4 md:flex"} justify={"end"}>
-                {paths.map(item => (
-                    <NavbarItem key={item.path} isActive={item.path === currentPath}>
-                        <Link
-                            className={`${
-                                item.path === currentPath && "before:content-['/']"
-                            } w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white`}
-                            href={item.path}
-                            size={"lg"}>
-                            {item.name}
-                        </Link>
-                    </NavbarItem>
-                ))}
+                {paths.map((item, index) => {
+                    if (item.subpaths === undefined) {
+                        return <NavbarItem key={`${item}-${index}`} isActive={item.path === currentPath}>
+                                <Link
+                                    className={`${
+                                        item.path === currentPath && "before:content-['/']"
+                                    } w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white`}
+                                    href={item.path}
+                                    size={"lg"}>
+                                    {item.name}
+                                </Link>
+                            </NavbarItem>
+                    } else {
+                        // eslint-disable-next-line react/jsx-key
+                        return <Dropdown key={`${item}-${index}`}>
+                                    <NavbarItem>
+                                        <DropdownTrigger className="cursor-pointer">
+                                            <Link
+                                                className={"w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"}
+                                                size={"lg"}>
+                                                {item.name}
+                                            </Link>
+                                        </DropdownTrigger>
+                                    </NavbarItem>
+                                    <DropdownMenu>
+                                        {item.subpaths.map(subitem =>
+                                            <DropdownItem
+                                                key={subitem.name}
+                                                description={subitem.description}
+                                                as={Link}
+                                                href={subitem.path}
+                                                className="w-full rounded-xl  bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"
+                                            >
+                                                {subitem.name}
+                                            </DropdownItem>
+                                        )}
+                                    </DropdownMenu>
+                                </Dropdown>
+                    }
+                })}
             </NavbarContent>
             {/*Hamburgermeny - Vises bare på små skjermer*/}
             <NavbarContent className={"md:hidden"} justify={"end"} as={"div"}>
@@ -104,7 +137,7 @@ const Header: Component = () => {
                     ))}
                 </div>
 
-                <Button className={"mx-auto w-fit"} onClick={() => setIsMenuOpen(false)}>
+                <Button className={"mx-auto w-fit"} onPress={() => setIsMenuOpen(false)}>
                     Lukk
                 </Button>
             </NavbarMenu>

@@ -17,15 +17,15 @@ const FloatingMenu: Component<ChildProps> = ({ children, className, ...props }) 
     const menuRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        function onClick(e: MouseEvent): void {
+        function onPress(e: MouseEvent): void {
             if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
                 toggleMenu(false)
             }
         }
 
-        document.addEventListener("click", onClick)
-        return () => document.removeEventListener("click", onClick)
-    }, [])
+        document.addEventListener("click", onPress)
+        return () => document.removeEventListener("click", onPress)
+    }, [toggleMenu])
 
     return (
         <div ref={menuRef} className={`fixed left-0 z-50 ${className}`} {...props}>

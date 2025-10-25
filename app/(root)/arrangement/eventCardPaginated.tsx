@@ -70,7 +70,7 @@ const EventCardPaginated: Component<EventCardPaginatedProps> = ({
             className={"w-full sm:w-[550px]"}
             bottom={
                 showButton ? (
-                    <ButtonAndProgress loading={loading} onClick={fetchMoreEvents} />
+                    <ButtonAndProgress loading={loading} onPress={fetchMoreEvents} />
                 ) : undefined
             }
             {...props}>
@@ -81,15 +81,15 @@ const EventCardPaginated: Component<EventCardPaginatedProps> = ({
 
 export default EventCardPaginated
 
-const ButtonAndProgress: Component<{ loading: boolean; onClick: VoidFunction }> = ({
+const ButtonAndProgress: Component<{ loading: boolean; onPress: VoidFunction }> = ({
     loading,
-    onClick,
+    onPress,
 }) => {
     if (loading) {
         return <CircularProgressIndicator aria-label={"Laster inn flere arrangementer"} />
     }
     return (
-        <Button className={"w-fit"} onClick={onClick}>
+        <Button className={"w-fit"} onPress={onPress}>
             Se mer
         </Button>
     )

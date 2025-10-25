@@ -12,16 +12,10 @@ const iconSize = 25
 export interface Path {
     name: string
     path: string
+    description?: string
     icon?: ReactNode
+    subpaths?: Path[]
 }
-
-/**
- * En liste over alle lenkene i header som vises kun i development-modus.
- */
-const devPaths =
-    process.env.NODE_ENV === "development"
-        ? [{ name: "Studio", path: "/studio", icon: <FilmIcon width={iconSize} /> }]
-        : []
 
 /**
  * En liste over alle lenkene i header, som alltid vises.
@@ -30,24 +24,48 @@ const paths: Path[] = [
     {
         name: "Hjem",
         path: "/",
-        icon: <HomeIcon width={iconSize} />,
     },
     {
-        name: "Arrangementer",
-        path: "/arrangement",
-        icon: <CalendarDaysIcon width={iconSize} />,
+        name: "For studenter",
+        path: "/studenter",
+        subpaths: [
+            {
+                "name": "Arrangementer",
+                "path": "/arrangement",
+                "description": "Arrangementer hos Root"
+            },
+            {
+                "name": "Galleri",
+                "path": "/galleri",
+                "description": "Galleri hos Root"
+            },
+            {
+                "name": "Soundboks utleie",
+                "path": "/soundboks-utleie",
+                "description": "Utleie av soundboks"
+            },
+        ]
     },
     {
-        name: "Galleri",
-        path: "/galleri",
-        icon: <PhotoIcon width={iconSize} />,
+        name: "For bedrifter",
+        path: "/bedrifter",
     },
     {
         name: "Om oss",
         path: "/om-oss",
-        icon: <UsersIcon width={iconSize} />,
+        subpaths: [
+            {
+                "name": "Om Root",
+                "path": "/om-root",
+                "description": "Om Root Linjeforening"
+            },
+            {
+                "name": "Styret",
+                "path": "/styret",
+                "description": "Styret til Root"
+            },
+        ]
     },
-    ...devPaths,
 ]
 
 export default paths

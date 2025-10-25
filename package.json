@@ -14,7 +14,7 @@
     },
     "dependencies": {
         "@heroicons/react": "^2.2.0",
-        "@heroui/react": "2.7.5",
+        "@heroui/react": "2.8.5",
         "@portabletext/react": "^3.2.1",
         "@sanity/asset-utils": "^1.3.2",
         "@sanity/client": "^6.8.0",
@@ -60,7 +60,8 @@
         ],
         "onlyBuiltDependencies": [
             "@heroui/shared-utils",
-            "esbuild"
+            "esbuild",
+            "unrs-resolver"
         ]
     }
 }

@@ -15,6 +15,16 @@ export default defineType({
             validation: Rule => Rule.required(),
         }),
         defineField({
+            name: "slug",
+            type: "slug",
+            title: "Lenke slug",
+            description: "Dette er en unik streng som definerer url-en på nettsiden, bruk generate knappen for å lage",
+            validation: Rule => Rule.required(),
+            options: {
+                source: "title",
+            },
+        }),
+        defineField({
             name: "priority",
             type: "number",
             title: "Prioritet",

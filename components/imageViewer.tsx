@@ -10,6 +10,23 @@ import { ArrowsPointingInIcon, ArrowsPointingOutIcon } from "@heroicons/react/24
 const ImageViewer = ({ image }: { image?: SanityImageObject }) => {
     const [openImage, toggleOpenImage] = useToggle()
 
+    if (!image?.asset) return null
+
+    const isSVG = image.asset._ref?.includes("-svg")
+
+    const imageUrl = urlFor(image).url()
+
+    if (isSVG) {
+        return (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+                src={imageUrl}
+                alt={image.alt ?? ""}
+                className="w-full object-contain max-h-[500px]"
+            />
+        )
+    }
+
     const showFullImage = (image ? getImageDimensions(urlFor(image).url()).aspectRatio : 0) > 16 / 7
 
     return (
