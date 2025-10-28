@@ -12,7 +12,7 @@ import {
     DropdownTrigger,
     DropdownMenu,
     DropdownItem,
-    Button as HeroUIButton
+    Button as HeroUIButton,
 } from "@heroui/react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
@@ -73,7 +73,10 @@ const Header: Component = () => {
             <NavbarContent className={"hidden gap-4 md:flex"} justify={"end"}>
                 {paths.map((item, index) => {
                     if (item.subpaths === undefined) {
-                        return <NavbarItem key={`${item}-${index}`} isActive={item.path === currentPath}>
+                        return (
+                            <NavbarItem
+                                key={`${item}-${index}`}
+                                isActive={item.path === currentPath}>
                                 <Link
                                     className={`${
                                         item.path === currentPath && "before:content-['/']"
@@ -83,32 +86,36 @@ const Header: Component = () => {
                                     {item.name}
                                 </Link>
                             </NavbarItem>
+                        )
                     } else {
                         // eslint-disable-next-line react/jsx-key
-                        return <Dropdown key={`${item}-${index}`}>
-                                    <NavbarItem>
-                                        <DropdownTrigger className="cursor-pointer">
-                                            <Link
-                                                className={"w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"}
-                                                size={"lg"}>
-                                                {item.name}
-                                            </Link>
-                                        </DropdownTrigger>
-                                    </NavbarItem>
-                                    <DropdownMenu>
-                                        {item.subpaths.map(subitem =>
-                                            <DropdownItem
-                                                key={subitem.name}
-                                                description={subitem.description}
-                                                as={Link}
-                                                href={subitem.path}
-                                                className="w-full rounded-xl  bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"
-                                            >
-                                                {subitem.name}
-                                            </DropdownItem>
-                                        )}
-                                    </DropdownMenu>
-                                </Dropdown>
+                        return (
+                            <Dropdown key={`${item}-${index}`}>
+                                <NavbarItem>
+                                    <DropdownTrigger className="cursor-pointer">
+                                        <Link
+                                            className={
+                                                "w-full rounded-xl bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white"
+                                            }
+                                            size={"lg"}>
+                                            {item.name}
+                                        </Link>
+                                    </DropdownTrigger>
+                                </NavbarItem>
+                                <DropdownMenu>
+                                    {item.subpaths.map(subitem => (
+                                        <DropdownItem
+                                            key={subitem.name}
+                                            description={subitem.description}
+                                            as={Link}
+                                            href={subitem.path}
+                                            className="w-full rounded-xl  bg-gray-700/20 p-2 !text-white hover:text-white focus:!outline-white">
+                                            {subitem.name}
+                                        </DropdownItem>
+                                    ))}
+                                </DropdownMenu>
+                            </Dropdown>
+                        )
                     }
                 })}
             </NavbarContent>
@@ -121,20 +128,59 @@ const Header: Component = () => {
             </NavbarContent>
             {/*Innholdet i hamburgermeny - Vises bare på små skjermer*/}
             <NavbarMenu className={"z-101 flex h-3/4 flex-col justify-between py-20"}>
-                <div>
-                    {paths.map((item, index) => (
-                        <NavbarMenuItem key={`${item}-${index}`} className={"my-1 w-fit list-none"}>
-                            <Link
-                                color={item.path === currentPath ? "primary" : "foreground"}
-                                className={"flex w-full items-center gap-2 text-2xl"}
-                                href={item.path}
-                                size={"lg"}>
-                                {item.icon}
+                <div className="flex flex-col gap-2 px-4">
+                    {paths.map((item, index) => {
+                        if (!item.subpaths) {
+                            return (
+                                <NavbarMenuItem key={`${item.name}-${index}`} className="my-1">
+                                    <Link
+                                        href={item.path}
+                                        className="flex w-full items-center gap-2 text-2xl text-white hover:text-root-primary"
+                                        onPress={() => setIsMenuOpen(false)}>
+                                        {item.icon}
+                                        {item.name}
+                                    </Link>
+                                </NavbarMenuItem>
+                            )
+                        }
+                        return (
+                            <div key={`${item.name}-${index}`} className="my-1">
+                                <details className="group [&_summary::-webkit-details-marker]:hidden">
+                                    <summary className="flex cursor-pointer items-center justify-between text-2xl font-semibold text-white hover:text-root-primary">
+                                        <span className="flex items-center gap-2">
+                                            {item.icon}
+                                            {item.name}
+                                        </span>
+                                        <svg
+                                            className="h-5 w-5 transform transition-transform group-open:rotate-180"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor">
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth={2}
+                                                d="M19 9l-7 7-7-7"
+                                            />
+                                        </svg>
+                                    </summary>
 
-                                {item.name}
-                            </Link>
-                        </NavbarMenuItem>
-                    ))}
+                                    <div className="ml-6 mt-2 flex flex-col gap-1">
+                                        {item.subpaths.map(subitem => (
+                                            <Link
+                                                key={subitem.name}
+                                                href={subitem.path}
+                                                className="text-lg text-gray-300 hover:text-white"
+                                                onPress={() => setIsMenuOpen(false)}>
+                                                {subitem.name}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </details>
+                            </div>
+                        )
+                    })}
                 </div>
 
                 <Button className={"mx-auto w-fit"} onPress={() => setIsMenuOpen(false)}>
